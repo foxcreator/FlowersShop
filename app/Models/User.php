@@ -19,8 +19,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'last_name',
+        'phone',
         'email',
         'password',
+        'is_admin'
     ];
 
     /**
@@ -42,4 +45,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function isAdmin()
+    {
+        if ($this->is_admin) {
+            return true;
+        }
+
+        return false;
+    }
 }
