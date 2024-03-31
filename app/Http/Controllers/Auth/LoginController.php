@@ -17,7 +17,11 @@ class LoginController extends Controller
     public function store(CreateLoginRequest $request)
     {
         if (Auth::attempt($request->validated())) {
-            return redirect()->route('home');
+            if (\auth()->user()->isAdmin()) {
+                return redirect()->route('admin.dashboard');
+            } else {
+                return redirect()->route('home');
+            }
         }
 
         return response()->json(['error' => 'Credentials not found']);
