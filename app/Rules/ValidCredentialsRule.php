@@ -16,7 +16,9 @@ class ValidCredentialsRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $user = User::where('phone', request('phone'))->first();
+        if (request('credential')) {
+            $user = User::where('phone', request('credential'))->orWhere('email', request('credential'))->first();
+        }
 
         if (!$user || !Hash::check(request('password'), $user->password)) {
             $fail('Невірні облікові дані');

@@ -24,5 +24,5 @@ Route::post('/login/store', [\App\Http\Controllers\Auth\LoginController::class, 
 Route::get('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-   Route::get('/auth', [\App\Http\Controllers\HomeController::class, 'index']);
+   Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('admin.dashboard');
 });

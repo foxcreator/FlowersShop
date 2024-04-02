@@ -22,7 +22,7 @@ class CreateLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => ['required', 'max:20', new \App\Rules\ValidCredentialsRule],
+            'credential' => ['required', 'max:250', new \App\Rules\ValidCredentialsRule],
             'password' => ['required','string', new \App\Rules\ValidCredentialsRule],
         ];
     }
