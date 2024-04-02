@@ -16,12 +16,19 @@
     <form class="col-6" action="{{ route('login.store') }}" method="POST">
         @csrf
         <div class="input-group flex-nowrap">
+            {{ $errors->first('credential') }}
             <span class="input-group-text" id="addon-wrapping">@</span>
-            <input type="text" name="phone" class="form-control" placeholder="Phone">
+            <input type="text" name="credential" class="form-control" placeholder="Phone">
+            @error('credential')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="input-group flex-nowrap">
             <span class="input-group-text" id="addon-wrapping">@</span>
             <input type="password" name="password" class="form-control" placeholder="Password">
+            @error('password')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <button class="btn btn-success">Submit</button>
