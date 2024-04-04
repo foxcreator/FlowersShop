@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->string('title');
+            $table->string('title_ua');
+            $table->string('title_ru')->nullable();
+            $table->string('link');
+            $table->string('btn_text')->default('Детальніше');
             $table->string('image');
             $table->boolean('isActive')->default(true);
             $table->timestamps();

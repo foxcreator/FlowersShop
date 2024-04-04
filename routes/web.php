@@ -23,6 +23,12 @@ Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'
 Route::post('/login/store', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('login.store');
 Route::get('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
 
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-   Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('admin.dashboard');
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+   Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+   Route::resource('products', \App\Http\Controllers\Admin\ProductsController::class);
+   Route::resource('categories', \App\Http\Controllers\Admin\CategoriesController::class);
+
+   Route::post('/sort-product-images', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'sortPhoto'])->name('sort.photo');
+   Route::post('/delete-image', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'delete'])->name('delete.photo');
+   Route::post('/upload-image', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'uploadPhotos'])->name('upload.photo');
 });

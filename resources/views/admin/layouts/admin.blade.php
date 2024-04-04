@@ -24,7 +24,10 @@
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('main.css') }}">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -38,7 +41,9 @@
 
     @include('admin.layouts.aside')
 
-    @yield('content')
+    <div class="content-wrapper">
+        @yield('content')
+    </div>
 
     <!-- /.content-wrapper -->
     <footer class="main-footer">
