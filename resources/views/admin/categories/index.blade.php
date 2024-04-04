@@ -17,18 +17,6 @@
                     <div class="card">
                         <div class="card-header">
                             <a href="{{ route('admin.categories.create') }}" class="btn btn-info btn-sm">Добавить категорию</a>
-
-                            <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="card-body table-responsive p-0">
@@ -38,6 +26,7 @@
                                     <th>Изображение</th>
                                     <th>Название UA</th>
                                     <th>Название RU</th>
+                                    <th class="text-center">На главной</th>
                                     <th class="text-right">Действия</th>
                                 </tr>
                                 </thead>
@@ -49,9 +38,17 @@
                                         </td>
                                         <td>{{ $category->title_ua }}</td>
                                         <td>{{ $category->title_ru }}</td>
+                                        <td class="text-center">
+                                            @if($category->is_show_on_homepage)
+                                                <i class="fas fa-check-square text-success"></i>
+                                            @else
+                                                <i class="fas fa-window-close text-danger"></i>
+                                            @endif
+                                        </td>
 
                                         <td class="text-right">
-                                            <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-info btn-xs">Edit</a>
+                                            <a href="{{ route('admin.categories.show', $category->id) }}" class="btn btn-secondary btn-xs">Информация</a>
+                                            <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-info btn-xs">Редактировать</a>
                                         </td>
                                     </tr>
                                 @endforeach

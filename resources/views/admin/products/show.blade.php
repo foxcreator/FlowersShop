@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ $product->title_ua }}</h1>
+                    <h1 class="m-0">{{ $product->title_ua }} @if($product->badge) <span class="text-success">({{ $product->badgeName }})</span> @endif</h1>
                 </div>
             </div>
         </div>

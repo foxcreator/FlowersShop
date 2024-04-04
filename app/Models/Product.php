@@ -48,4 +48,9 @@ class Product extends Model
             get: fn() => Storage::url($this->attributes['thumbnail'])
         );
     }
+
+    public function getBadgeNameAttribute(): string
+    {
+        return self::BADGES[$this->attributes['badge']] ?? '';
+    }
 }

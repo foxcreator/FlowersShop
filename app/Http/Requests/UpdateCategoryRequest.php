@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCategoryRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class CreateCategoryRequest extends FormRequest
             'title_ru' => 'nullable|min:4|max:255',
             'description_ua' => 'required|min:20|max:65535',
             'description_ru' => 'nullable|min:20|max:65535',
-            'thumbnail' => 'required|image:jpeg,png,jpg',
+            'thumbnail' => 'nullable|image:jpeg,png,jpg',
             'is_show_on_homepage' => 'nullable',
         ];
     }
@@ -46,7 +46,6 @@ class CreateCategoryRequest extends FormRequest
             'description_ru.required' => 'Поле обязательно для заполнения.',
             'description_ru.min' => 'Описание должно содержать минимум :min символов.',
             'description_ru.max' => 'Описание должно содержать не более :max символов.',
-            'thumbnail.required' => 'Поле изображения не может быть пустым.',
         ];
     }
 }

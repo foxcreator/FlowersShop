@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Http\Services\FileStorageService;
 use App\Http\Services\ImagesService;
 use App\Models\Category;
@@ -74,9 +75,9 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProductRequest $request, string $id)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $product = Product::find($id);
         if (isset($data['thumbnail'])) {
             FileStorageService::remove($data['thumbnail']);

@@ -16,7 +16,8 @@ class Category extends Model
         'title_ru',
         'description_ua',
         'description_ru',
-        'thumbnail'
+        'thumbnail',
+        'is_show_on_homepage',
     ];
 
     public function thumbnailUrl(): Attribute

@@ -105,6 +105,20 @@
 
                     <div id="thumbnail-preview"></div>
 
+                    <div class="form-group mt-4">
+                        <div class="icheck-success d-inline">
+                            <input type="checkbox"
+                                   id="checkboxPrimary1"
+                                   name="is_show_on_homepage"
+                                   value="{{ old('is_show_on_homepage', true) }}"
+                                   @if($countShowCategory >= 3) disabled @endif
+                            >
+                            <label for="checkboxPrimary1">Отображать категорию на главной странице</label>
+                        </div>
+                        @if($countShowCategory >= 3)
+                            <p class="text-info">Количество категорий на главной странице равно 3, если хотите добавить новую, отключите уже сущесвующую</p>
+                        @endif
+                    </div>
                 </div>
 
                 <div class="card-footer d-flex justify-content-between gap-2">
