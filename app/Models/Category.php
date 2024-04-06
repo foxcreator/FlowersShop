@@ -20,6 +20,11 @@ class Category extends Model
         'is_show_on_homepage',
     ];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public function thumbnailUrl(): Attribute
     {
         return new Attribute(

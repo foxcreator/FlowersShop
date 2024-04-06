@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateBannerRequest;
+use App\Models\Banner;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class BannersController extends Controller
@@ -12,7 +15,8 @@ class BannersController extends Controller
      */
     public function index()
     {
-        //
+        $banners = Banner::all();
+        return view('admin.banners.index', compact('banners'));
     }
 
     /**
@@ -20,23 +24,16 @@ class BannersController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::all();
+        return view('admin.banners.create', compact('products'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateBannerRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        dd($request->validated());
     }
 
     /**
@@ -44,7 +41,9 @@ class BannersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $banner = Banner::find($id);
+        $products = Product::all();
+        return view('admin.banners.edit', compact('products', 'banner'));
     }
 
     /**

@@ -58,6 +58,10 @@
                                                 <p>Количество на складе</p>
                                                 <h5 class="text-gray-dark">{{ $product->quantity }} шт</h5>
                                             </div>
+                                            <div class="d-flex justify-content-between mb-3" style="border-bottom: 1px solid #4a5568">
+                                                <p>Категория</p>
+                                                <h5 class="text-gray-dark">{{ $product->category->title_ua }}</h5>
+                                            </div>
                                         </div>
                                         <div class="col-md-6 mt-5">
                                             <h5>Описание UA</h5>

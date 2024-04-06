@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('admin.banners.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-images"></i>
                         <p>Постеры</p>
                     </a>
@@ -51,7 +51,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('admin.users.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-user-friends"></i>
                         <p>Пользователи</p>
                     </a>
@@ -59,7 +59,7 @@
 
                 <li class="nav-header">Аккаунт</li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('admin.users.show', auth()->user()->id) }}" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>Настройки</p>
                     </a>

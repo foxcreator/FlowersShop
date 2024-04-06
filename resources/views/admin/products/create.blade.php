@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="category_id">Категория</label>
-                        <select class="form-control custom-select @error('category') is-invalid @enderror"
+                        <select class="form-control select2bs4 @error('category') is-invalid @enderror"
                                 id="category_id"
                                 name="category_id"
                                 style="width: 100%;"

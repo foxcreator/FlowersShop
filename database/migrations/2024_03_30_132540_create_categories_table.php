@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('title_ua');
+            $table->string('title_ru')->nullable();
+            $table->text('description_ua')->nullable();
+            $table->text('description_ru')->nullable();
+            $table->string('thumbnail');
             $table->boolean('is_show_on_homepage')->default(false);
+            $table->timestamps();
         });
     }
 
@@ -21,8 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->dropColumn('is_show_on_homepage');
-        });
+        Schema::dropIfExists('categories');
     }
 };

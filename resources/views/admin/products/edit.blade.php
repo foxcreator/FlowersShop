@@ -18,8 +18,8 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <label>Категория</label>
-                        <select class="form-control custom-select" name="category_id" style="width: 100%;">
+                        <label for="category_id">Категория</label>
+                        <select class="form-control select2bs4" name="category_id" id="category_id" style="width: 100%;">
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" @if($product->category_id == $category->id) selected @endif>{{ $category->title_ua }}</option>
                             @endforeach

@@ -27,6 +27,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
    Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
    Route::resource('products', \App\Http\Controllers\Admin\ProductsController::class);
    Route::resource('categories', \App\Http\Controllers\Admin\CategoriesController::class);
+   Route::resource('users', \App\Http\Controllers\Admin\UsersController::class);
+   Route::resource('banners', \App\Http\Controllers\Admin\BannersController::class);
+   Route::post('/change-role', [\App\Http\Controllers\Admin\UsersController::class, 'changeRole'])->name('users.change-role');
+   Route::post('/update-password', [\App\Http\Controllers\Admin\UsersController::class, 'updatePassword'])->name('users.update.password');
 
    Route::post('/sort-product-images', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'sortPhoto'])->name('sort.photo');
    Route::post('/delete-image', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'delete'])->name('delete.photo');
