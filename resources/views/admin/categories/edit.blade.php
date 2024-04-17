@@ -13,10 +13,11 @@
     <section class="content">
         <div class="container-fluid">
 
-            <form action="{{ route('admin.categories.store') }}" method="POST" class="col-md-6" enctype="multipart/form-data">
+            <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" class="col-md-6" enctype="multipart/form-data">
+                @method('PUT')
                 @csrf
+                {{ $errors }}
                 <div class="card-body">
-
                     <div class="form-group">
                         <label for="title_ua">Наименование UA</label>
                         <input type="text"
@@ -104,7 +105,7 @@
                     </div>
 
                     <div id="thumbnail-preview">
-                        <img src="{{ $category->thumbnailUrl }}" alt="">
+                        <img class="img-thumbnail" src="{{ $category->thumbnailUrl }}" alt="">
                     </div>
 
                     <div class="form-group mt-4">

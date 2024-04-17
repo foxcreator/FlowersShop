@@ -16,7 +16,8 @@ class Banner extends Model
         'title_ua',
         'title_ru',
         'link',
-        'btn_text',
+        'btn_text_ua',
+        'btn_text_ru',
         'image',
         'is_active',
     ];

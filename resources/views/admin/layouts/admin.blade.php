@@ -27,6 +27,8 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('main.css') }}">
 
@@ -35,11 +37,6 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-    </div>
 
     @include('admin.layouts.navbar')
 
@@ -94,6 +91,8 @@
 <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 <!-- Select2 -->
 <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+<!-- SweetAlert2 -->
+<script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
 
 <script>
@@ -105,7 +104,54 @@
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         })
+
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+            // $('.swalDefaultSuccess').click(function() {
+            // Toast.fire({
+            //     icon: 'success',
+            //     title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            // });
     });
 </script>
+
+@if (session('status'))
+    <script>
+        $(document).ready(function() {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000
+            });
+
+            Toast.fire({
+                icon: 'success',
+                title: "{{ session('status') }}"
+            });
+        });
+    </script>
+@endif
+@if (session('error'))
+    <script>
+        $(document).ready(function() {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000
+            });
+            Toast.fire({
+                icon: 'success',
+                title: "{{ session('error') }}"
+            });
+        });
+    </script>
+@endif
 </body>
 </html>

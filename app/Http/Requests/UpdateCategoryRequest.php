@@ -26,7 +26,7 @@ class UpdateCategoryRequest extends FormRequest
             'title_ru' => 'nullable|min:4|max:255',
             'description_ua' => 'required|min:20|max:65535',
             'description_ru' => 'nullable|min:20|max:65535',
-            'thumbnail' => 'nullable|image:jpeg,png,jpg',
+            'thumbnail' => 'nullable',
             'is_show_on_homepage' => 'nullable',
         ];
     }

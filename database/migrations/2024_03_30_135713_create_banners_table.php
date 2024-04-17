@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('btn_text_ua')->nullable();
             $table->string('btn_text_ru')->nullable();
             $table->string('image');
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

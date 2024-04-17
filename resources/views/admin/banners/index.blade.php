@@ -25,9 +25,8 @@
                                 <tr>
                                     <th>Изображение</th>
                                     <th>Название UA</th>
-                                    <th>Название RU</th>
                                     <th>Ссылка</th>
-                                    <th>Текст кнопки</th>
+                                    <th class="text-center">Отображаеться</th>
                                     <th class="text-right">Действия</th>
                                 </tr>
                                 </thead>
@@ -35,17 +34,25 @@
                                 @foreach($banners as $banner)
                                     <tr>
                                         <td class="table-image">
-                                            <img class="img-thumbnail" src="{{ $banner->image }}" alt="" style="width: 70px;">
+                                            <img class="img-thumbnail" src="{{ $banner->imageUrl }}" alt="" style="width: 120px;">
                                         </td>
-                                        <td>{{ $banner->title_ua }}</td>
-                                        <td>{{ $banner->title_ru }}</td>
-                                        <td>{{ $banner->link }}</td>
-                                        <td>{{ $banner->btn_text }}</td>
+                                        <td class="custom-text-overflow">{{ $banner->title_ua }}</td>
                                         <td>
-                                            @if($banner->is_active)
-                                                Показываеться
+                                            <a target="_blank" class="list-link" href="
+                                            @if($banner->product_id)
+                                                {{ route('admin.products.show', $banner->product_id) }}
                                             @else
-                                                Не показывается
+                                                {{ $banner->link }}
+                                            @endif"
+                                            >
+                                                Перейти
+                                            </a>
+                                        </td>
+                                        <td class="text-center">
+                                            @if($banner->is_active)
+                                                <i class="fas fa-check-square text-success"></i>
+                                            @else
+                                                <i class="fas fa-window-close text-danger"></i>
                                             @endif
                                         </td>
 

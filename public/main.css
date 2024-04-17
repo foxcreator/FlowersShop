@@ -9,3 +9,14 @@
     font-size: 25px;
     cursor: pointer;
 }
+
+.m-height {
+    max-height: 80px;
+}
+
+.custom-text-overflow {
+    max-width: 150px;
+    max-height: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

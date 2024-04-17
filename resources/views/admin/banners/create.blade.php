@@ -14,6 +14,7 @@
         <div class="container-fluid">
             <form action="{{ route('admin.banners.store') }}" method="POST" class="col-md-6" enctype="multipart/form-data">
                 @csrf
+                {{ $errors }}
                 <div class="card-body">
                     <p>* - обязательные поля</p>
                     <div class="form-group">
@@ -29,7 +30,7 @@
                             @endforeach
                         </select>
 
-                        @error('category_id')
+                        @error('product_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -74,7 +75,7 @@
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file"
-                                       class="custom-file-input"
+                                       class="custom-file-input @error('image') is-invalid @enderror"
                                        id="image"
                                        name="image"
                                        accept="image/jpeg, image/png, image/jpg"
@@ -83,7 +84,7 @@
                             </div>
                         </div>
                         @error('image')
-                        <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -143,7 +144,8 @@
                         <input type="checkbox"
                                id="is_active"
                                name="is_active"
-                               value="{{ old('is_active', true) }}"
+                               value="1"
+                               checked
                         >
                         <label for="is_active">Отображать постер на главной странице</label>
                     </div>

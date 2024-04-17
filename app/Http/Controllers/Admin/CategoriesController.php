@@ -74,13 +74,13 @@ class CategoriesController extends Controller
     {
         $data = $request->validated();
         $category = Category::find($id);
-        if ($data['thumbnail']) {
+        if (isset($data['thumbnail'])) {
             FileStorageService::remove($data['thumbnail']);
             $data['thumbnail'] = FileStorageService::upload($data['thumbnail']);
         }
 
         if ($category->update($data)) {
-            return redirect()->back()->with(['success' => 'Категория успешно обновлена!']);
+            return redirect()->route('admin.categories.index')->with(['status' => 'Категория успешно обновлена!']);
         }
         return redirect()->back()->with(['error' => 'Что то пошло не так, повторите попытку']);
     }

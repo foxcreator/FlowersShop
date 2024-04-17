@@ -18,8 +18,31 @@
                         <div class="card-header">
                             <a href="{{ route('admin.products.create') }}" class="btn btn-info btn-sm">Добавить товар</a>
 
-                            <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
+
+                            {{--                                    <a href="{{ route('admin.products.index', ['sort' => 'outInStock']) }}" class="btn btn-secondary btn-sm">Нет в наличии</a>--}}
+                            <div class="card-tools d-flex">
+                                <div class="input-group input-group-sm mr-3">
+                                    <select class="form-control"
+                                            id="sort"
+                                            name="sort"
+                                    >
+                                        <option value="all">Весь товар</option>
+                                        <option value="out_in_stock">Нет в наличии</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-group input-group-sm mr-3">
+                                    <select class="form-control"
+                                            id="count_on_page"
+                                            name="count_on_page"
+                                    >
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div class="input-group input-group-sm">
                                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
                                     <div class="input-group-append">
@@ -31,40 +54,8 @@
                             </div>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
-                                <thead>
-                                <tr>
-                                    <th>Изображение</th>
-                                    <th>Артикул</th>
-                                    <th>Название UA</th>
-                                    <th>Название RU</th>
-                                    <th>Цена</th>
-                                    <th>Количество</th>
-                                    <th class="text-right">Действия</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($products as $product)
-                                    <tr>
-                                        <td class="table-image">
-                                            <img class="img-thumbnail" src="{{ $product->thumbnailUrl }}" alt="">
-                                        </td>
-                                        <td>{{ $product->article }}</td>
-                                        <td>{{ $product->title_ua }}</td>
-                                        <td>{{ $product->title_ru }}</td>
-                                        <td>{{ $product->price }}</td>
-                                        <td>{{ $product->quantity }}</td>
-
-                                        <td class="text-right">
-                                            <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-secondary btn-xs">Информация</a>
-                                            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-info btn-xs">Редактировать</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                                </tbody>
-                            </table>
+                        <div id="products-table" class="card-body table-responsive p-0">
+                            @include('admin.products.blocks.table')
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -73,4 +64,33 @@
 
         </div>
     </section>
+    <script>
+        $('#sort').on('change', function() {
+            fetchData();
+        });
+
+        // Событие изменения селектора для количества на странице
+        $('#count_on_page').on('change', function() {
+            fetchData();
+        });
+
+        function fetchData() {
+            var sort = $('#sort').val();
+            var countOnPage = $('#count_on_page').val();
+
+            // Отправляем AJAX запрос на сервер
+                $.ajax({
+                    url: '{{ route('admin.products.fetch') }}',
+                    type: 'GET',
+                    data: { sort: sort, count: countOnPage },
+                    success: function(response) {
+                        // Обновляем данные на странице с помощью полученного ответа
+                        $('#products-table').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+    </script>
 @endsection

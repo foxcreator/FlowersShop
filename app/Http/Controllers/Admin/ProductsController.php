@@ -17,9 +17,14 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
+        $sortBy = $request->get('sort');
+        if ($sortBy) {
+            $products = Product::where('quantity', 0)->get();
+        } else {
+            $products = Product::where(null, null)->paginate(10);
+        }
         return view('admin.products.index', compact('products'));
     }
 
@@ -46,7 +51,7 @@ class ProductsController extends Controller
         ImagesService::attach($product, 'productPhotos', $images, 1);
         if ($product) {
             return redirect()->route('admin.products.index')
-                ->with(['status' => "Товар {$product->title_ua} успешно создан!"]);
+                ->with(['status' => "Товар '{$product->title_ua}' успешно создан!"]);
         }
 
         return redirect()->back()->with(['error' => 'Что то пошло не так, попробуйте снова']);
@@ -91,7 +96,7 @@ class ProductsController extends Controller
 
         if ($product->update($data)) {
             return redirect()->route('admin.products.index')
-                ->with(['status' => "Товар {$product->title_ua} успешно изменен!"]);
+                ->with(['status' => "Товар '{$product->title_ua}' успешно изменен!"]);
         }
 
         return redirect()->back()->with(['error' => 'Что то пошло не так, попробуйте снова']);
@@ -119,5 +124,19 @@ class ProductsController extends Controller
         }
 
         return '0000001';
+    }
+
+    public function fetchData(Request $request)
+    {
+        $sort = $request->input('sort');
+        $count = $request->input('count');
+        if($sort === 'all') {
+            $products = Product::paginate($count);
+        } else {
+            $products = Product::where('quantity', 0)->paginate($count);
+        }
+
+        // Верните HTML содержимое таблицы
+        return view('admin.products.blocks.table', compact('products'))->render();
     }
 }

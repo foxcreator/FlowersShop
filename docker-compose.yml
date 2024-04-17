@@ -24,7 +24,7 @@ services:
             - 33061:3306
         environment:
             - MYSQL_ROOT_PASSWORD=root
-            - MYSQL_DATABASE=paybacksagelocal
+            - MYSQL_DATABASE=flowershop
     composer:
         build:
             context: .

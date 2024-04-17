@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import svgSpritePlugin from 'vite-plugin-svg-sprite'
 
 export default defineConfig({
     plugins: [
@@ -9,6 +10,11 @@ export default defineConfig({
                 'resources/js/app.js',
             ],
             refresh: true,
+        }),
+        svgSpritePlugin({
+            symbolId: 'icon-[name]', // Префикс для id каждого символа
+            include: 'resources/svg/*.svg', // Путь к SVG файлам
+            svgoConfig: {}, // Опционально: настройки оптимизации SVG
         }),
     ],
 });

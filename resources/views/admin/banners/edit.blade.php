@@ -12,8 +12,10 @@
 
     <section class="content">
         <div class="container-fluid">
-            <form action="{{ route('admin.banners.store') }}" method="POST" class="col-md-6" enctype="multipart/form-data">
+            {{ $errors }}
+            <form action="{{ route('admin.banners.update', $banner->id) }}" method="POST" class="col-md-6" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="card-body">
                     <p>* - обязательные поля</p>
                     <div class="form-group">
@@ -90,7 +92,7 @@
                     </div>
 
                     <div id="image-preview">
-                        <img src="{{  }}" alt="">
+                        <img class="img-thumbnail" src="{{ $banner->imageUrl }}" alt="">
                     </div>
 
                     <div class="form-group">
@@ -145,7 +147,7 @@
                         <input type="checkbox"
                                id="is_active"
                                name="is_active"
-                               value="{{ old('is_active', true) }}"
+                               value="1"
                                @if($banner->is_active) checked @endif
                         >
                         <label for="is_active">Отображать постер на главной странице</label>

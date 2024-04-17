@@ -115,7 +115,7 @@
                                             </div>
                                             <div class="d-flex justify-content-between mb-3" style="border-bottom: 1px solid #4a5568">
                                                 <p>Дата регистрации</p>
-                                                <h5 class="text-gray-dark">{{ $user->created_at }}</h5>
+                                                <h5 class="text-gray-dark">{{ \Carbon\Carbon::make($user->created_at)->format('d-m-Y') }}</h5>
                                             </div>
                                         </div>
                                     </div>
