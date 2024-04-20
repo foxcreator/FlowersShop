@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->string('title');
+            $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('title_ua');
+            $table->string('title_ru')->nullable();
+            $table->string('link')->nullable();
+            $table->string('btn_text_ua')->nullable();
+            $table->string('btn_text_ru')->nullable();
             $table->string('image');
-            $table->boolean('isActive')->default(true);
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

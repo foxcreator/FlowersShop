@@ -19,7 +19,6 @@ class RegisterController extends Controller
 
     public function store(CreateRegisterRequest $request)
     {
-//        dd($request->validated());
         $user = User::create([
             'name' => $request->validated('name'),
             'last_name' => $request->validated('last_name'),
@@ -29,7 +28,7 @@ class RegisterController extends Controller
         ]);
 
         if ($user) {
-//            event(new Registered($user));
+            event(new Registered($user));
             Auth::login($user);
             return redirect()->route('home');
         }

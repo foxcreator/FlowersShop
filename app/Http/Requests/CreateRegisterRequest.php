@@ -24,7 +24,7 @@ class CreateRegisterRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            'phone' => 'required|string|max:20|unique:users,phone',
             'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|string|min:8|confirmed',
         ];
@@ -40,6 +40,7 @@ class CreateRegisterRequest extends FormRequest
             'last_name.string' => 'Поле "Прізвище" повинно бути рядком.',
             'last_name.max' => 'Поле "Прізвище" не може бути довшим за 255 символів.',
             'phone.required' => 'Поле "Телефон" є обов\'язковим.',
+            'phone.unique' => 'Користувач з таким номером вже існує.',
             'phone.string' => 'Поле "Телефон" повинно бути рядком.',
             'phone.max' => 'Поле "Телефон" не може бути довшим за 20 символів.',
             'email.required' => 'Поле "Електронна пошта" є обов\'язковим.',

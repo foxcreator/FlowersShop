@@ -1,0 +1,225 @@
+.catalog {
+    &__wrapper {
+
+    }
+
+    &__filter {
+        height: 700px;
+        margin-top: 30px;
+
+        .price {
+            font-size: 24px;
+            font-weight: 100;
+            cursor: pointer;
+            color: $night-green;
+            padding: 40px 0;
+            border-bottom: 1px solid $main-gray;
+            user-select: none;
+
+            p {
+                display: flex;
+                align-items: center;
+                margin: 0;
+            }
+
+            span {
+                display: inline-block;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background-color: $night-green;
+                margin-right: 10px;
+            }
+        }
+        .accordion-item {
+            border: none;
+            background: none;
+        }
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 100;
+            cursor: pointer;
+            padding: 40px 0;
+            color: $night-green;
+            border-bottom: 1px solid $main-gray;
+            user-select: none;
+
+            p {
+                display: flex;
+                align-items: center;
+                margin: 0;
+            }
+
+            span {
+                display: inline-block;
+                width: 5px; /* Задайте нужный вам размер */
+                height: 5px; /* Задайте нужный вам размер */
+                border-radius: 50%; /* Делаем круглый */
+                background-color: $night-green;
+                margin-right: 10px;
+            }
+
+            .icon {
+                stroke: $night-green;
+                width: 32px;
+                height: 32px;
+                transition: transform 0.3s ease;
+            }
+        }
+
+        .accordion-item.active .icon-circle-arrow {
+            transform: rotate(180deg); /* Поворачиваем иконку при активации */
+        }
+
+        .accordion-content {
+            display: none;
+            overflow: hidden;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            transition: max-height 0.4s ease;
+
+            .form-check-input {
+                border-color: $main-green;
+                box-shadow: none;
+
+            }
+            .form-check-input:checked {
+                background: none;
+                border: $main-green 3px solid;
+                outline: none;
+            }
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+            max-height: 150px;
+            overflow: auto;
+            transition: display 0.4s ease;
+        }
+    }
+
+    &__product-card {
+        margin-top: 30px;
+        width: 100%;
+        height: 350px;
+        flex-wrap: wrap;
+        cursor: pointer;
+        position: relative;
+        transition: transform 0.3s ease;
+
+        img {
+            width: 100%;
+            height: 314px;
+        }
+
+        &:hover {
+            transform: scale(1.05);
+
+            button {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__product-name {
+        font-family: 'montserrat', serif;
+        font-style: italic;
+        font-size: 16px;
+        margin: 0;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 155px;
+    }
+
+    &__product-price {
+        font-size: 20px;
+        font-weight: 400;
+        margin: 0;
+        max-width: 100px;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+        white-space: nowrap;
+
+        p {
+            color: $night-green;
+        }
+    }
+
+    &__buy-btn {
+        display: flex;
+        visibility: hidden;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        background-color: $main-white;
+        color: $night-green;
+        font-size: 20px;
+        gap: 12px;
+        opacity: 0;
+        padding: 15px;
+        transition: opacity 0.4s ease, background-color 0.4s ease, color 0.4s ease;
+
+        &:active {
+            background-color: $dark-green;
+            color: $main-white;
+        }
+
+        .icon {
+            stroke: $night-green;
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    &__paginate {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 120px;
+    }
+}
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loader {
+    position: fixed;
+    display: none;
+    color: $light-green;
+    width: 100px;
+    height: 100px;
+    z-index: 5;
+    border-width: 13px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 1s linear infinite; /* Добавьте анимацию */
+}
+
+.overflow {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    width: 100%;
+    height: 200%;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5)
+}

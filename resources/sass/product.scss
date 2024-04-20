@@ -1,0 +1,335 @@
+.product-show {
+    &__top {
+        display: flex;
+        margin-top: 30px;
+        margin-bottom: 50px;
+        gap: 30px;
+    }
+
+    &__gallery {
+        max-height: 432px;
+    }
+
+    &__thumbnail {
+        width: 445px;
+        height: 330px;
+        margin-bottom: 17px;
+        transition: opacity 0.5s ease-in-out;
+
+    }
+
+    &__images {
+        width: 445px;
+        height: 85px;
+        display: flex;
+        gap: 17px;
+        overflow-x: scroll;
+    }
+
+    &__preview {
+        max-width: 137px;
+        height: auto;
+        cursor: pointer;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__quantity {
+        display: flex;
+        gap: 30px;
+        p {
+            font-size: 40px;
+            font-weight: 100;
+            color: #282828;
+        }
+
+        .quantity-input {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px $main-green solid;
+            width: 255px;
+            height: 70px;
+            font-size: 36px;
+
+        }
+
+        .quantity-field {
+            width: 50px;
+            font-weight: 400;
+            text-align: center;
+            border: none;
+            margin: 0;
+            outline: none;
+            background: none;
+        }
+
+        .quantity-field::-webkit-inner-spin-button,
+        .quantity-field::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .plus-btn,
+        .minus-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            border: none;
+            cursor: pointer;
+            font-weight: 200;
+            font-size: 48px;
+
+            .icon-plus {
+                stroke: $night-green;
+                width: 44px;
+                height: 44px;
+            }
+
+
+
+            .icon-minus {
+                stroke: $night-green;
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        .plus-btn.disabled,
+        .minus-btn.disabled {
+            .icon-plus {
+                stroke: $disabled;
+            }
+
+            .icon-minus {
+                stroke: $disabled;
+            }
+        }
+
+        .plus-btn:hover,
+        .minus-btn:hover {
+            color: $main-green;
+        }
+    }
+
+    &__text {
+        margin-top: 30px;
+        h1 {
+            font-size: 48px;
+            font-weight: 200;
+        }
+        p {
+            font-size: 16px;
+        }
+
+        .article {
+            color: $text-gray;
+            font-weight: 200;
+        }
+
+    }
+
+    &__btn {
+        width: 540px;
+        background-color: $main-green;
+        color: $main-white;
+        margin-top: 32px;
+        padding: 25px;
+        font-size: 20px;
+        transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease;
+
+        &:hover {
+            background-color: $light-green;
+            color: $main-green;
+            transform: scale(1.03);
+        }
+    }
+
+    &__tabs {
+        display: flex;
+        .tab {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            width: 33.333%;
+            height: 80px;
+            padding: 5px 10px;
+            background-color: $light-green;
+            transition: background-color 0.5s ease-in-out;
+
+            span {
+                width: 100%;
+                color: $text-green;
+                font-size: 20px;
+                font-weight: 200;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .tab.active {
+        background: $dark-green;
+        span {
+            color: $main-white;
+        }
+    }
+
+    .tab-content {
+        display: none;
+        margin-top: 24px;
+
+        img {
+            width: 33.333%;
+        }
+
+        li {
+            margin-top: 15px;
+        }
+
+        .comments {
+            width: 100%;
+            display: flex;
+            gap: 100px;
+            form {
+                width: 40%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+            input {
+                width: 100%;
+                background: none;
+                font-size: 18px;
+                color: $text-green;
+                border: 1px solid $text-green;
+                outline: none;
+                padding: 25px 15px;
+            }
+
+            textarea {
+                width: 100%;
+                height: 200px;
+                background: none;
+                font-size: 18px;
+                color: $text-green;
+                border: 1px solid $text-green;
+                outline: none;
+                padding: 25px 15px;
+            }
+
+            button {
+                width: 100%;
+                background-color: $dark-green;
+                color: $main-white;
+                margin-top: 32px;
+                padding: 25px;
+                font-size: 20px;
+                transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease;
+
+                &:hover {
+                    background-color: $light-green;
+                    color: $dark-green;
+                    transform: scale(1.03);
+                }
+            }
+
+            .nothing {
+                color: $dark-green;
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    .tab-content.active {
+        display: flex;
+        gap: 30px;
+        animation: fade-in 0.5s ease-in-out;
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    &__recommendation {
+        display: flex;
+        width: 100%;
+        gap: 30px;
+        overflow: scroll;
+        margin-right: 30px;
+        margin-top: 200px;
+        padding-bottom: 20px;
+    }
+
+    &__for-you {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px;
+        h1 {
+            font-size: 40px;
+            font-weight: 100;
+        }
+    }
+
+    .all-comments {
+        width: 60%;
+        position: relative;
+        p {
+            color: $dark-green;
+        }
+
+        .custom-overlay {
+            display: none;
+            background: $main-gray;
+            opacity: 0.5;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .loader {
+            position: absolute;
+            display: none;
+            color: $dark-green;
+            top: 35%;
+            left: 40%;
+        }
+    }
+
+    .comment-header {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        color: $main-green;
+
+
+    }
+
+    .comments-paginate {
+        display: flex;
+        justify-content: center;
+    }
+}
+.fade-out {
+    opacity: 0.2;
+    transition: opacity 0.3s ease-in-out;
+}
+
+
+

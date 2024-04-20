@@ -1,3 +1,13 @@
+@php
+$ordersCount = \App\Models\Order::where('status', 'received')->count();
+$outProductCount = \App\Models\Product::where('quantity', 0)->count();
+$notificationCount = $ordersCount + $outProductCount;
+
+$productText = $outProductCount == 1 ? 'товар закончился' : ($outProductCount > 1 && $outProductCount < 5 ? 'товара закончилось' : 'товаров закончилось');
+$orderText = $ordersCount == 1 ? 'новый заказ' : ($ordersCount > 1 && $ordersCount < 5 ? 'новых заказа' : 'новых заказов');
+
+@endphp
+
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -34,18 +44,22 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge">15</span>
+                <span class="badge badge-warning navbar-badge">{{ $notificationCount ?: '' }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-item dropdown-header">15 Уведомлений</span>
+                <span class="dropdown-item dropdown-header">{{ $notificationCount }} Уведомлений</span>
+                @if($outProductCount >= 1)
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> 8 товаров закончилось
+                <a href="{{ route('admin.products.index', ['sort' => 'outInStock']) }}" class="dropdown-item">
+                    <i class="fas fa-users mr-2"></i> {{ $outProductCount }} {{ $productText }}
                 </a>
+                @endif
+                @if($ordersCount >= 1)
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-file mr-2"></i> 3 новых заказа
+                <a href="{{ route('admin.orders.index') }}" class="dropdown-item">
+                    <i class="fas fa-file mr-3"></i> {{ $ordersCount }} {{ $orderText }}
                 </a>
+                @endif
                 <div class="dropdown-divider"></div>
             </div>
         </li>

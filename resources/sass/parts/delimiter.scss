@@ -1,0 +1,41 @@
+.delimiter {
+    display: flex;
+    max-width: 100%;
+    padding: 40px 40px;
+    border-bottom: $light-green solid 1px;
+    border-top: $light-green solid 1px;
+    overflow: hidden;
+    position: relative;
+
+    p {
+        color: $dark-green;
+        font-family: 'KyivType', serif ;
+        font-size: 32px;
+    }
+
+    img {
+        margin-right: 20px;
+    }
+
+    &__wrapper {
+        display: flex;
+        width: 150%;
+        gap: 40px;
+        animation: ticker 10s linear infinite;
+    }
+}
+
+.running-text {
+    white-space: nowrap;
+    width: 20%;
+}
+
+
+@keyframes ticker {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-15%);
+    }
+}
