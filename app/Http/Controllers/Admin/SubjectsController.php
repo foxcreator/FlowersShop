@@ -14,17 +14,11 @@ class SubjectsController extends Controller
 		return view('admin.categories.subjects.index', compact('subjects'));
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 */
 	public function create()
 	{
 		return view('admin.categories.subjects.create');
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 */
 	public function store(Request $request)
 	{
 		$request->validate([
@@ -44,18 +38,12 @@ class SubjectsController extends Controller
 		return redirect()->back()->with(['error' => 'Smth as wrong']);
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 */
 	public function edit(string $id)
 	{
 		$subject = Subject::findOrFail($id);
 		return view('admin.categories.subjects.edit', compact('subject'));
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 */
 	public function update(Request $request, string $id)
 	{
 		$request->validate([
@@ -75,9 +63,6 @@ class SubjectsController extends Controller
 		return redirect()->back()->with(['error' => 'Smth as wrong']);
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 */
 	public function destroy(string $id)
 	{
 		$subject = Subject::finOrFail($id);

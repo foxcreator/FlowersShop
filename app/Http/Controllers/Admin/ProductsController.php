@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $sortBy = $request->get('sort');
@@ -30,9 +27,6 @@ class ProductsController extends Controller
         return view('admin.products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Category::all();
@@ -47,9 +41,6 @@ class ProductsController extends Controller
 		));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(CreateProductRequest $request)
     {
         $data = $request->validated();
@@ -70,9 +61,6 @@ class ProductsController extends Controller
 		return redirect()->back()->with(['error' => 'Что то пошло не так, попробуйте снова']);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $product = Product::find($id);
@@ -80,9 +68,6 @@ class ProductsController extends Controller
         return view('admin.products.show', compact('product', 'productPhotos'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
 		$subjects = Subject::all();
@@ -97,9 +82,6 @@ class ProductsController extends Controller
 		));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateProductRequest $request, string $id)
     {
 		$data = $request->validated();
@@ -172,7 +154,6 @@ class ProductsController extends Controller
             $products = Product::where('quantity', 0)->paginate($count);
         }
 
-        // Верните HTML содержимое таблицы
         return view('admin.products.blocks.table', compact('products'))->render();
     }
 }

@@ -23,11 +23,9 @@ class SearchController extends Controller
 				'thumbnailUrl' => $product->thumbnailUrl,
 				'title_ua' => $product->title_ua,
 				'title_ru' => $product->title_ru,
-				// Добавьте другие необходимые поля продукта
 			];
 		});
 
-		// Возвращаем результаты поиска в формате JSON
 		return response()->json($productsArray);
 	}
 }
