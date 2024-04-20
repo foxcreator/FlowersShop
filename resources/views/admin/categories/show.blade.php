@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ $category->title_ua }}</h1>
+                    <h1 class="m-0">{{ $category->title_uk }}</h1>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                                         <div class="post col-md-9" style="border: none">
                                             <div class="d-flex justify-content-between mb-3" style="border-bottom: 1px solid #4a5568">
                                                 <p>Наименование UA</p>
-                                                <h5 class="text-gray-dark">{{ $category->title_ua }}</h5>
+                                                <h5 class="text-gray-dark">{{ $category->title_uk }}</h5>
                                             </div>
                                             <div class="d-flex justify-content-between mb-3" style="border-bottom: 1px solid #4a5568">
                                                 <p>Наименование RU</p>
@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="col-md-6 mt-5">
                                             <h5>Описание UA</h5>
-                                            <p>{{ $category->description_ua }}</p>
+                                            <p>{{ $category->description_uk }}</p>
                                         </div>
                                         <div class="col-md-6 mt-5">
                                             <h5>Описание RU</h5>
@@ -67,7 +67,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body text-center">
-                        <h5>Удалить категорию - {{ $category->title_ua }}?</h5>
+                        <h5>Удалить категорию - {{ $category->title_uk }}?</h5>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Вернуться</button>

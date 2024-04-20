@@ -1,41 +1,48 @@
 @php
-    $products = \App\Models\Product::all()->take(4);
+    $products = \App\Models\Product::all()->take(5);
 @endphp
 <div class="container mt-200">
     <section class="novelty">
         <div class="novelty__header">
-            <h1>Новинки</h1>
+            <h1>{{ __('homepage.novelty') }}</h1>
         </div>
 
         <div class="novelty__products">
-                <div class="novelty__product-card--first">
-                    <div class="novelty__card-img">
-                        <a href="{{ route('admin.products.index') }}">
-                            <img src="{{ asset('front/images/test-product.png') }}" alt="">
-                        </a>
-                        <div class="novelty__favorite"></div>
-                        <button type="button" class="novelty__buy-btn">
-                            В кошик
-                            @svg('cart')
-                        </button>
-                    </div>
-                    <a href="{{ route('admin.products.index') }}">
-                        <div class="novelty__info">
-                            <p class="novelty__product-name">Рожеві троянди</p>
-                            <p class="novelty__product-price">₴ 1200</p>
+            @foreach($products as $product)
+                @if($loop->first)
+                    <div class="novelty__product-card--first">
+                        <div class="novelty__card-img">
+                            <a href="{{ route('front.product', $product->id) }}">
+                                <img src="{{ $product->thumbnailUrl }}" alt="{{ $product->title }}">
+                            </a>
+                            <div class="novelty__favorite"></div>
+                            <button type="button" class="novelty__buy-btn">
+                                {{ __('homepage.add_to_cart') }}
+                                @svg('cart')
+                            </button>
                         </div>
-                    </a>
-                </div>
+                        <a href="{{ route('admin.products.index') }}">
+                            <div class="novelty__info">
+                                <p class="novelty__product-name">{{ $product->title }}</p>
+                                <p class="novelty__product-price">₴ {{ $product->price }}</p>
+                            </div>
+                        </a>
+                    </div>
+                @endif
+            @endforeach
+
             <div class="novelty__product-cards">
                 @foreach($products as $product)
-                    @include('components.product-card', ['product' => $product, 'style' => 'novelty'])
+                    @if(!$loop->first)
+                        @include('components.product-card', ['product' => $product, 'style' => 'novelty'])
+                    @endif
                 @endforeach
             </div>
         </div>
 
         <div class="novelty__link-block">
-            <a href="#" class="novelty__link">
-                <span>Все новинки</span>
+            <a href="{{ route('front.catalog') }}" class="novelty__link">
+                <span>{{ __('homepage.all_novelty') }}</span>
                 @svg('arrow-circle-right')
             </a>
         </div>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('flowers', function (Blueprint $table) {
             $table->id();
-			$table->string('name_ua');
+			$table->string('name_uk');
 			$table->string('name_ru');
             $table->timestamps();
         });

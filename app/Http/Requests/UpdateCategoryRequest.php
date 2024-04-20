@@ -22,9 +22,9 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title_ua' => 'required|min:4|max:255',
+            'title_uk' => 'required|min:4|max:255',
             'title_ru' => 'nullable|min:4|max:255',
-            'description_ua' => 'required|min:20|max:65535',
+            'description_uk' => 'required|min:20|max:65535',
             'description_ru' => 'nullable|min:20|max:65535',
             'thumbnail' => 'nullable',
             'is_show_on_homepage' => 'nullable',
@@ -34,15 +34,15 @@ class UpdateCategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'title_ua.required' => 'Поле заголовка обязательно для заполнения.',
-            'title_ua.min' => 'Наименование должен содержать минимум :min символов.',
-            'title_ua.max' => 'Наименование должен содержать не более :max символов.',
+            'title_uk.required' => 'Поле заголовка обязательно для заполнения.',
+            'title_uk.min' => 'Наименование должен содержать минимум :min символов.',
+            'title_uk.max' => 'Наименование должен содержать не более :max символов.',
             'title_ru.required' => 'Поле обязательно для заполнения.',
             'title_ru.min' => 'Наименование должен содержать минимум :min символов.',
             'title_ru.max' => 'Наименование должен содержать не более :max символов.',
-            'description_ua.required' => 'Поле обязательно для заполнения.',
-            'description_ua.min' => 'Описание должно содержать минимум :min символов.',
-            'description_ua.max' => 'Описание должно содержать не более :max символов.',
+            'description_uk.required' => 'Поле обязательно для заполнения.',
+            'description_uk.min' => 'Описание должно содержать минимум :min символов.',
+            'description_uk.max' => 'Описание должно содержать не более :max символов.',
             'description_ru.required' => 'Поле обязательно для заполнения.',
             'description_ru.min' => 'Описание должно содержать минимум :min символов.',
             'description_ru.max' => 'Описание должно содержать не более :max символов.',

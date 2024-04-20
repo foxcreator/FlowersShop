@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Flower;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -22,12 +23,12 @@ class SubjectsController extends Controller
 	public function store(Request $request)
 	{
 		$request->validate([
-			'name_ua' => 'required',
+			'name_uk' => 'required',
 			'name_ru' => 'required'
 		]);
 
 		$subject = Subject::create([
-			'name_ua' => $request->name_ua,
+			'name_uk' => $request->name_uk,
 			'name_ru' => $request->name_ru,
 		]);
 
@@ -46,13 +47,14 @@ class SubjectsController extends Controller
 
 	public function update(Request $request, string $id)
 	{
+		$subject = Subject::find($id);
 		$request->validate([
-			'name_ua' => 'required',
+			'name_uk' => 'required',
 			'name_ru' => 'required'
 		]);
 
-		$subject = Subject::update([
-			'name_ua' => $request->name_ua,
+		$subject->update([
+			'name_uk' => $request->name_uk,
 			'name_ru' => $request->name_ru,
 		]);
 

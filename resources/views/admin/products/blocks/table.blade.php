@@ -17,7 +17,7 @@
                 <img class="img-thumbnail m-height" src="{{ $product->thumbnailUrl }}" alt="">
             </td>
             <td>{{ $product->article }}</td>
-            <td class="custom-text-overflow">{{ $product->title_ua }}</td>
+            <td class="custom-text-overflow">{{ $product->title_uk }}</td>
             <td class="custom-text-overflow">{{ $product->title_ru }}</td>
             <td>{{ $product->price }}</td>
             <td>{{ $product->quantity }}</td>

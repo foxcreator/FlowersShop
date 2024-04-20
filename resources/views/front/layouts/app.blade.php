@@ -6,6 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The Lotus</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
@@ -21,25 +24,25 @@
             <div class="footer__about">
                 <h3>Про компанию</h3>
                 <ul>
-                    <li><a href="#">Про нас</a></li>
+                    <li><a href="#">{{ __('homepage.about_us') }}</a></li>
                     <li><a href="#">Услуги</a></li>
-                    <li><a href="#">Контакты</a></li>
+                    <li><a href="#">{{ __('homepage.contacts') }}</a></li>
                     <li><a href="#">Обратная связь</a></li>
                     <li><a href="#">Политика конфеденциальности</a></li>
                 </ul>
             </div>
             <div class="footer__catalog">
-                <h3>Каталог</h3>
+                <h3>{{ __('homepage.catalog') }}</h3>
                 <ul>
-                    <li><a href="#">Свадебные букеты</a></li>
-                    <li><a href="#">Троянды</a></li>
-                    <li><a href="#">Цветы в горшках</a></li>
-                    <li><a href="#">Эксклюзивные букеты</a></li>
-                    <li><a href="#">Подарки</a></li>
+                    @foreach(\App\Models\Category::all() as $category)
+                        <li>
+                            <a href="{{ route('front.catalog', ['category' => $category->id]) }}">{{ $category->title }}</a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="footer__contacts">
-                <h3>Контакты</h3>
+                <h3>{{ __('homepage.contacts') }}</h3>
                 <ul>
                     <li>+38 (063) 787 5888</li>
                     <li>+38 (098) 220 0673</li>
@@ -57,30 +60,29 @@
         </div>
     </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var dropdownToggles = document.querySelectorAll('.custom-header__dropdown-toggle');
-        var dropdowns = document.querySelectorAll('.custom-header__dropdown');
-
-        // Функция для закрытия всех дропдаунов
-        function closeAllDropdowns() {
-            dropdowns.forEach(function(dropdown) {
-                dropdown.classList.remove('open');
-            });
-
-        }
-
-        dropdownToggles.forEach(function(toggle) {
-            toggle.addEventListener('click', function(event) {
-                event.preventDefault();
-                var dropdown = this.parentNode;
+        function handleDropdownToggleClick(event) {
+            event.preventDefault();
+            var dropdown = event.target.closest('.custom-header__dropdown');
+            if (dropdown) {
                 dropdown.classList.toggle('open');
                 event.stopPropagation();
-            });
-        });
+            }
+        }
 
         document.addEventListener('click', function(event) {
-            closeAllDropdowns();
+            if (event.target.classList.contains('custom-header__dropdown-toggle')) {
+                handleDropdownToggleClick(event);
+            } else {
+                // Закрываем все dropdowns при клике вне dropdown
+                var dropdowns = document.querySelectorAll('.custom-header__dropdown.open');
+                dropdowns.forEach(function(dropdown) {
+                    dropdown.classList.remove('open');
+                });
+            }
         });
     });
 

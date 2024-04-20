@@ -12,9 +12,6 @@
 
     <section class="content">
         <div class="container-fluid">
-            @foreach($errors->all() as $error)
-                {{ $error }}
-            @endforeach
             <form action="{{ route('admin.products.store') }}" method="POST" class="col-md-6" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
@@ -27,7 +24,7 @@
                         >
                             <option value="" selected>------</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->title_ua }}</option>
+                                <option value="{{ $category->id }}">{{ $category->title_uk }}</option>
                             @endforeach
                         </select>
 
@@ -47,7 +44,7 @@
                                 style="width: 100%;"
                         >
                             @foreach($flowers as $flower)
-                                <option value="{{ $flower->id }}">{{ $flower->name_ua }}</option>
+                                <option value="{{ $flower->id }}">{{ $flower->name_uk }}</option>
                             @endforeach
                         </select>
 
@@ -67,7 +64,7 @@
                                 style="width: 100%;"
                         >
                             @foreach($subjects as $subject)
-                                <option value="{{ $subject->id }}">{{ $subject->name_ua }}</option>
+                                <option value="{{ $subject->id }}">{{ $subject->name_uk }}</option>
                             @endforeach
                         </select>
 
@@ -95,16 +92,16 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="title_ua">Наименование UA</label>
+                        <label for="title_uk">Наименование UA</label>
                         <input type="text"
-                               class="form-control @error('title_ua') is-invalid @enderror"
-                               id="title_ua"
-                               name="title_ua"
-                               value="{{ old('title_ua') }}"
+                               class="form-control @error('title_uk') is-invalid @enderror"
+                               id="title_uk"
+                               name="title_uk"
+                               value="{{ old('title_uk') }}"
                                placeholder="Введите наименование товара на украинском"
                                required
                         >
-                        @error('title_ua')
+                        @error('title_uk')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -127,16 +124,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="description_ua">Описание UA</label>
-                        <textarea id="description_ua"
-                                  name="description_ua"
-                                  class="form-control @error('description_ua') is-invalid @enderror"
+                        <label for="description_uk">Описание UA</label>
+                        <textarea id="description_uk"
+                                  name="description_uk"
+                                  class="form-control @error('description_uk') is-invalid @enderror"
                                   rows="10"
                                   required
                         >
-                            {{ old('description_ua') }}
+                            {{ old('description_uk') }}
                         </textarea>
-                        @error('description_ua')
+                        @error('description_uk')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

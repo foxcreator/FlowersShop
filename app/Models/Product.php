@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
@@ -26,10 +27,10 @@ class Product extends Model
 
     protected $fillable = [
         'category_id',
-        'title_ua',
+        'title_uk',
         'title_ru',
         'price',
-        'description_ua',
+        'description_uk',
         'description_ru',
         'quantity',
         'article',
@@ -73,6 +74,22 @@ class Product extends Model
             get: fn() => Storage::url($this->attributes['thumbnail'])
         );
     }
+
+	public function title():Attribute
+	{
+		$locale = App::getLocale();
+		return new Attribute(
+			get: fn() => $this->attributes['title' . '_' . $locale] ?? $this->attributes['title_uk']
+		);
+	}
+
+	public function description():Attribute
+	{
+		$locale = App::getLocale();
+		return new Attribute(
+			get: fn() => $this->attributes['description' . '_' . $locale] ?? $this->attributes['description_uk']
+		);
+	}
 
     public function getBadgeNameAttribute(): string
     {

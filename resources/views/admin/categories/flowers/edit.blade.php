@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1 class="m-0">Редактирование категории цветка - {{ $flower->name_ua }}</h1>
+                    <h1 class="m-0">Редактирование категории цветка - {{ $flower->name_uk }}</h1>
                 </div>
             </div>
         </div>
@@ -13,22 +13,21 @@
     <section class="content">
         <div class="container-fluid">
 
-            <form action="{{ route('admin.categories.update', $flower->id) }}" method="POST" class="col-md-6" enctype="multipart/form-data">
+            <form action="{{ route('admin.flowers.update', $flower->id) }}" method="POST" class="col-md-6" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
-                {{ $errors }}
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name_ua">Наименование UA</label>
+                        <label for="name_uk">Наименование UA</label>
                         <input type="text"
-                               class="form-control @error('name_ua') is-invalid @enderror"
-                               id="name_ua"
-                               name="name_ua"
-                               value="{{ old('name_ua', $flower->name_ua) }}"
+                               class="form-control @error('name_uk') is-invalid @enderror"
+                               id="name_uk"
+                               name="name_uk"
+                               value="{{ old('name_uk', $flower->name_uk) }}"
                                placeholder="Введите наименование категории на украинском"
                                required
                         >
-                        @error('name_ua')
+                        @error('name_uk')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

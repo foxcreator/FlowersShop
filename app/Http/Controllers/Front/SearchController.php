@@ -13,7 +13,7 @@ class SearchController extends Controller
 		$keyword = $request->query('keyword');
 
 		$products = Product::where(function($query) use ($keyword) {
-			$query->where('title_ua', 'like', "%$keyword%")
+			$query->where('title_uk', 'like', "%$keyword%")
 				->orWhere('title_ru', 'like', "%$keyword%");
 		})->take(5)->get();
 
@@ -21,7 +21,7 @@ class SearchController extends Controller
 			return [
 				'url' => route('front.product', $product->id),
 				'thumbnailUrl' => $product->thumbnailUrl,
-				'title_ua' => $product->title_ua,
+				'title_uk' => $product->title_uk,
 				'title_ru' => $product->title_ru,
 			];
 		});

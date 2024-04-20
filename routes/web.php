@@ -2,26 +2,28 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/locale/{locale}', \App\Http\Controllers\LocaleController::class)->name('locale');
 
-Route::get('/', [\App\Http\Controllers\Front\PagesController::class, 'index'])->name('home');
+Route::middleware(['set_locale'])->group(function () {
+	Route::get('/', [\App\Http\Controllers\Front\PagesController::class, 'index'])->name('home');
+	Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
+	Route::post('/register/store', [\App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('register.store');
+	Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+	Route::post('/login/store', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('login.store');
+	Route::get('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
+	Route::get('/email/verify/{id}/{hash}', [\App\Http\Controllers\Auth\EmailVerifyController::class, 'verificationEmailLink'])
+		->middleware(['auth', 'signed'])->name('verification.verify');
 
-Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
-Route::post('/register/store', [\App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('register.store');
-Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
-Route::post('/login/store', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('login.store');
-Route::get('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
-Route::get('/email/verify/{id}/{hash}', [\App\Http\Controllers\Auth\EmailVerifyController::class, 'verificationEmailLink'])
-    ->middleware(['auth', 'signed'])->name('verification.verify');
+	Route::name('front.')->group(function () {
+		Route::get('/catalog', [\App\Http\Controllers\Front\PagesController::class, 'catalog'])->name('catalog');
+		Route::get('/delivery', [\App\Http\Controllers\Front\PagesController::class, 'delivery'])->name('delivery');
+		Route::get('/about', [\App\Http\Controllers\Front\PagesController::class, 'about'])->name('about');
+		Route::get('/contacts', [\App\Http\Controllers\Front\PagesController::class, 'contacts'])->name('contacts');
+		Route::get('/product/{id}', [\App\Http\Controllers\Front\PagesController::class, 'productShow'])->name('product');
+		Route::post('/comments/create', [\App\Http\Controllers\Front\CommentsController::class, 'store'])->name('comments.store');
+		Route::get('/search', [\App\Http\Controllers\Front\SearchController::class, 'search'])->name('search');
 
-Route::name('front.')->group(function () {
-    Route::get('/catalog', [\App\Http\Controllers\Front\PagesController::class, 'catalog'])->name('catalog');
-    Route::get('/delivery', [\App\Http\Controllers\Front\PagesController::class, 'delivery'])->name('delivery');
-    Route::get('/about', [\App\Http\Controllers\Front\PagesController::class, 'about'])->name('about');
-    Route::get('/contacts', [\App\Http\Controllers\Front\PagesController::class, 'contacts'])->name('contacts');
-    Route::get('/product/{id}', [\App\Http\Controllers\Front\PagesController::class, 'productShow'])->name('product');
-    Route::post('/comments/create', [\App\Http\Controllers\Front\CommentsController::class, 'store'])->name('comments.store');
-	Route::get('/search', [\App\Http\Controllers\Front\SearchController::class, 'search'])->name('search');
-
+	});
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
