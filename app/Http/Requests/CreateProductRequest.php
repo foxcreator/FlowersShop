@@ -24,6 +24,10 @@ class CreateProductRequest extends FormRequest
     {
         return [
             'category_id' => 'required',
+			'subjects' => 'nullable|array',
+			'subjects.*' => 'integer',
+			'flowers' => 'nullable|array',
+			'flowers.*' => 'integer',
             'title_ua' => 'required|min:8|max:255|unique:products,title_ua',
             'title_ru' => 'nullable|min:8|max:255|unique:products,title_ru',
             'price' => 'required|numeric',

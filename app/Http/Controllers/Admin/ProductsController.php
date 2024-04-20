@@ -8,7 +8,9 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Http\Services\FileStorageService;
 use App\Http\Services\ImagesService;
 use App\Models\Category;
+use App\Models\Flower;
 use App\Models\Product;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -34,8 +36,15 @@ class ProductsController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $flowers = Flower::all();
+        $subjects = Subject::all();
         $article = $this->getArticle();
-        return view('admin.products.create', compact('categories', 'article'));
+        return view('admin.products.create', compact(
+			'categories',
+			'article',
+			'subjects',
+			'flowers'
+		));
     }
 
     /**
@@ -44,17 +53,21 @@ class ProductsController extends Controller
     public function store(CreateProductRequest $request)
     {
         $data = $request->validated();
+
         $thumbnail = FileStorageService::upload($data['thumbnail']);
         $images = $data['product_photos'] ?? [];
         $data['thumbnail'] = $thumbnail;
         $product = Product::create($data);
-        ImagesService::attach($product, 'productPhotos', $images, 1);
-        if ($product) {
-            return redirect()->route('admin.products.index')
-                ->with(['status' => "Товар '{$product->title_ua}' успешно создан!"]);
-        }
+		ImagesService::attach($product, 'productPhotos', $images, 1);
+		$product->subjects()->attach($data['subjects']);
+		$product->flowers()->attach($data['flowers']);
+		if ($product) {
 
-        return redirect()->back()->with(['error' => 'Что то пошло не так, попробуйте снова']);
+			return redirect()->route('admin.products.index')
+				->with(['status' => "Товар '{$product->title_ua}' успешно создан!"]);
+		}
+
+		return redirect()->back()->with(['error' => 'Что то пошло не так, попробуйте снова']);
     }
 
     /**
@@ -72,9 +85,16 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
+		$subjects = Subject::all();
+		$flowers = Flower::all();
         $product = Product::find($id);
         $categories = Category::all();
-        return view('admin.products.edit', compact('product', 'categories'));
+        return view('admin.products.edit', compact(
+			'product',
+			'categories',
+			'flowers',
+			'subjects'
+		));
     }
 
     /**
@@ -82,9 +102,28 @@ class ProductsController extends Controller
      */
     public function update(UpdateProductRequest $request, string $id)
     {
-        $data = $request->validated();
-        $product = Product::find($id);
-        if (isset($data['thumbnail'])) {
+		$data = $request->validated();
+		$product = Product::find($id);
+		$flowers = $data['flowers'] ?? [];
+		$currentFlowers = $product->flowers()->pluck('flowers.id')->toArray();
+		$flowersToRemove = array_diff($currentFlowers, $flowers);
+
+		$subjects = $data['subjects'] ?? [];
+		$currentSubjects = $product->subjects()->pluck('subjects.id')->toArray();
+		$subjectsToRemove = array_diff($currentSubjects, $subjects);
+
+		if ($flowersToRemove) {
+			$product->flowers()->detach($flowersToRemove);
+		}
+
+		if ($subjectsToRemove) {
+			$product->subjects()->detach($subjectsToRemove);
+		}
+
+		$product->flowers()->attach($flowers);
+		$product->subjects()->attach($subjects);
+
+		if (isset($data['thumbnail'])) {
             FileStorageService::remove($data['thumbnail']);
             $thumbnail = FileStorageService::upload($data['thumbnail']);
             $data['thumbnail'] = $thumbnail;
@@ -102,9 +141,6 @@ class ProductsController extends Controller
         return redirect()->back()->with(['error' => 'Что то пошло не так, попробуйте снова']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $product = Product::find($id);

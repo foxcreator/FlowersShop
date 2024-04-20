@@ -39,6 +39,46 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="flowers">Цветок (можно несколько)</label>
+                        <select class="form-control select2bs4 @error('flowers') is-invalid @enderror"
+                                id="flowers"
+                                name="flowers[]"
+                                multiple="multiple"
+                                style="width: 100%;"
+                        >
+                            @foreach($flowers as $flower)
+                                <option value="{{ $flower->id }}">{{ $flower->name_ua }}</option>
+                            @endforeach
+                        </select>
+
+                        @error('flowers')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subjects">Тематика (можно несколько)</label>
+                        <select class="form-control select2bs4 @error('subjects') is-invalid @enderror"
+                                id="subjects"
+                                name="subjects[]"
+                                multiple="multiple"
+                                style="width: 100%;"
+                        >
+                            @foreach($subjects as $subject)
+                                <option value="{{ $subject->id }}">{{ $subject->name_ua }}</option>
+                            @endforeach
+                        </select>
+
+                        @error('subjects')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label for="article">Артикул</label>
                         <input type="text"
                                class="form-control @error('article') is-invalid @enderror"

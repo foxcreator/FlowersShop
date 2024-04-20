@@ -2,16 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 Route::get('/', [\App\Http\Controllers\Front\PagesController::class, 'index'])->name('home');
 
 Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
@@ -24,16 +15,21 @@ Route::get('/email/verify/{id}/{hash}', [\App\Http\Controllers\Auth\EmailVerifyC
 
 Route::name('front.')->group(function () {
     Route::get('/catalog', [\App\Http\Controllers\Front\PagesController::class, 'catalog'])->name('catalog');
-//    Route::get('/catalog', [\App\Http\Controllers\Front\PagesController::class, 'getProductsByCategory'])->name('catalog');
     Route::get('/delivery', [\App\Http\Controllers\Front\PagesController::class, 'delivery'])->name('delivery');
     Route::get('/about', [\App\Http\Controllers\Front\PagesController::class, 'about'])->name('about');
     Route::get('/contacts', [\App\Http\Controllers\Front\PagesController::class, 'contacts'])->name('contacts');
+    Route::get('/product/{id}', [\App\Http\Controllers\Front\PagesController::class, 'productShow'])->name('product');
+    Route::post('/comments/create', [\App\Http\Controllers\Front\CommentsController::class, 'store'])->name('comments.store');
+	Route::get('/search', [\App\Http\Controllers\Front\SearchController::class, 'search'])->name('search');
+
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
    Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
    Route::resource('products', \App\Http\Controllers\Admin\ProductsController::class);
    Route::resource('categories', \App\Http\Controllers\Admin\CategoriesController::class);
+   Route::resource('flowers', \App\Http\Controllers\Admin\FlowersController::class);
+   Route::resource('subjects', \App\Http\Controllers\Admin\SubjectsController::class);
    Route::resource('users', \App\Http\Controllers\Admin\UsersController::class);
    Route::resource('banners', \App\Http\Controllers\Admin\BannersController::class);
    Route::resource('orders', \App\Http\Controllers\Admin\OrdersController::class);

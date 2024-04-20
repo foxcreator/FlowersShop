@@ -27,22 +27,48 @@
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var dropdownToggle = document.querySelector('.search-toggle');
-        var dropdown = document.querySelector('.search');
-        var close = document.querySelector('.close-icon');
+    // Функция для выполнения AJAX-запроса
+    function searchProducts(keyword) {
+        // Очищаем результаты поиска
+        document.querySelector('.search__result').innerHTML = '';
 
-        dropdownToggle.addEventListener('click', function (event) {
-            event.preventDefault(); // Предотвращаем переход по ссылке
-            dropdown.classList.toggle('open');
-            document.body.classList.toggle('fix');
-            event.stopPropagation(); // Остановить всплытие события, чтобы клик на кнопке не вызывал закрытие всех дропдаунов
-        });
+        // Выполняем AJAX-запрос
+        fetch(`/search?keyword=${keyword}`)
+            .then(response => response.json())
+            .then(data => {
+                // Обработка полученных данных
+                data.forEach(product => {
+                    // Создаем элементы для отображения каждого продукта
+                    const productLink = document.createElement('a');
+                    productLink.href = product.url;
 
-        // Обработчик события click на документе для закрытия всех дропдаунов при клике в любом месте страницы
-        close.addEventListener('click', function (event) {
-            dropdown.classList.remove('open');
-            document.body.classList.remove('fix');
-        });
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('search__card');
+
+                    const productImage = document.createElement('img');
+                    productImage.src = product.thumbnailUrl;
+                    productImage.alt = product.title_ua;
+
+                    const productName = document.createElement('p');
+                    productName.textContent = product.title_ua;
+
+                    // Добавляем элементы на страницу
+                    productCard.appendChild(productImage);
+                    productCard.appendChild(productName);
+                    productLink.appendChild(productCard);
+                    document.querySelector('.search__result').appendChild(productLink);
+                });
+            })
+            .catch(error => console.error(error));
+    }
+
+    // Обработчик события input для поля ввода поиска
+    document.querySelector('.search__input input').addEventListener('input', function() {
+        const keyword = this.value.trim(); // Получаем введенный текст
+
+        if (keyword.length > 0) {
+            searchProducts(keyword); // Выполняем поиск только если введен текст
+        }
     });
 </script>
+

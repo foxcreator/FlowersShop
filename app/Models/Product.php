@@ -52,6 +52,21 @@ class Product extends Model
         return $this->belongsToMany(Order::class, 'order_products');
     }
 
+	public function subjects()
+    {
+		return $this->belongsToMany(Subject::class);
+	}
+
+	public function flowers()
+    {
+		return $this->belongsToMany(Flower::class);
+	}
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function thumbnailUrl(): Attribute
     {
         return new Attribute(

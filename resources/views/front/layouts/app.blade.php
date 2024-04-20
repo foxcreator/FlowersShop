@@ -57,5 +57,52 @@
         </div>
     </div>
 </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var dropdownToggles = document.querySelectorAll('.custom-header__dropdown-toggle');
+        var dropdowns = document.querySelectorAll('.custom-header__dropdown');
+
+        // Функция для закрытия всех дропдаунов
+        function closeAllDropdowns() {
+            dropdowns.forEach(function(dropdown) {
+                dropdown.classList.remove('open');
+            });
+
+        }
+
+        dropdownToggles.forEach(function(toggle) {
+            toggle.addEventListener('click', function(event) {
+                event.preventDefault();
+                var dropdown = this.parentNode;
+                dropdown.classList.toggle('open');
+                event.stopPropagation();
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+            closeAllDropdowns();
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var dropdownToggle = document.querySelector('.search-toggle');
+        var dropdown = document.querySelector('.search');
+        var close = document.querySelector('.close-icon');
+
+        dropdownToggle.addEventListener('click', function (event) {
+            event.preventDefault(); // Предотвращаем переход по ссылке
+            dropdown.classList.toggle('open');
+            document.body.classList.toggle('fix');
+            event.stopPropagation(); // Остановить всплытие события, чтобы клик на кнопке не вызывал закрытие всех дропдаунов
+        });
+
+        // Обработчик события click на документе для закрытия всех дропдаунов при клике в любом месте страницы
+        close.addEventListener('click', function (event) {
+            dropdown.classList.remove('open');
+            document.body.classList.remove('fix');
+        });
+    });
+</script>
 </body>
 </html>

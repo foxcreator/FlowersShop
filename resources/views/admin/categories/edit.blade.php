@@ -113,7 +113,7 @@
                             <input type="checkbox"
                                    id="checkboxPrimary1"
                                    name="is_show_on_homepage"
-                                   value="{{ old('is_show_on_homepage', $category->is_show_on_homepage) }}"
+                                   value="{{ old('is_show_on_homepage', true) }}"
                                    @if($countShowCategory >= 3) disabled @endif
                             >
                             <label for="checkboxPrimary1">Отображать категорию на главной странице</label>
