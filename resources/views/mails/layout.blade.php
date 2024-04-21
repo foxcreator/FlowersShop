@@ -77,7 +77,6 @@
 </head>
 <body>
 
-@php $url = 'catalog'; @endphp
 <table class="container">
     <tr>
         <td>
@@ -85,32 +84,12 @@
             <table class="header" width="100%" >
                 <tr>
                     <td align="center">
-                        <h1>@svg('lotus-logo')</h1>
+                        <a href="{{ env('APP_URL') }}"><img src="{{ asset('front/images/Logo-mail.png') }}" alt="Telegram"></a>
                     </td>
                 </tr>
             </table>
             <!-- Контент -->
-            <table class="content" width="100%">
-                <tr>
-                    <td>
-                        <p>Ви отримали цей лист, тому що ми отримали запит на скидання пароля для вашого облікового запису.</p>
-                    </td>
-                </tr>
-                <tr style="height: 40px"></tr>
-                <tr>
-                    <td class="button">
-                        <p><a href="{{ $url }}">Скинути пароль</a></p>
-                    </td>
-                </tr>
-                <tr style="height: 40px"></tr>
-                <tr>
-                    <td class="button">
-                        <p>Це посилання для скидання пароля стане недійсним через {{ config('auth.passwords.'.config('auth.defaults.passwords').'.expire') }} хвилин.</p>
-                        <p>Якщо ви не надсилали запит на скидання пароля, то інші дії не потрібні.</p>
-                    </td>
-                </tr>
-
-            </table>
+            @yield('content')
             <!-- Футер -->
             <table class="footer" width="100%" cellpadding="0" cellspacing="0">
 
@@ -119,23 +98,12 @@
                         <p style="font-size: 20px; font-weight: bold; color: #98A88F; text-align: left">З любов'ю, {{ config('app.name') }}</p>
                     </td>
                     <td>
-                        <a style="margin-left: 10px" href="#">@svg('instagram')</a>
-                        <a style="margin-left: 10px" href="#">@svg('facebook')</a>
-                        <a style="margin-left: 10px" href="#">@svg('telegram')</a>
+                        <a style="margin-left: 10px" href="#"><img src="{{ asset('front/images/instagram-logo.png') }}" alt="Instagram"></a>
+                        <a style="margin-left: 10px" href="#"><img src="{{ asset('front/images/facebook-logo.png') }}" alt="Facebook"></a>
+                        <a style="margin-left: 10px" href="#"><img src="{{ asset('front/images/telegram-logo.png') }}" alt="Telegram"></a>
 
                     </td>
                 </tr>
-{{--                <tr style="width: 100%">--}}
-{{--                    <td align="center">--}}
-{{--                        <a href="#">@svg('instagram')</a>--}}
-{{--                    </td>--}}
-{{--                    <td align="center">--}}
-{{--                        <a href="#">@svg('facebook')</a>--}}
-{{--                    </td>--}}
-{{--                    <td align="center">--}}
-{{--                        <a href="#">@svg('telegram')</a>--}}
-{{--                    </td>--}}
-{{--                </tr>--}}
             </table>
         </td>
     </tr>

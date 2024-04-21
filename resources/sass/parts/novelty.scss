@@ -59,9 +59,13 @@
                     opacity: 1;
                 }
             }
-            img{
+            img {
                 width: 540px;
                 height: 580px;
+            }
+
+            .novelty__product-name {
+                max-width: 250px;
             }
         }
     }

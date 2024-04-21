@@ -7,11 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The Lotus</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+
+
 @include('front.layouts.nav')
 
 @yield('content')
@@ -22,13 +25,13 @@
         </div>
         <div class="footer__info">
             <div class="footer__about">
-                <h3>Про компанию</h3>
+                <h3>{{ __('homepage.about_company') }}</h3>
                 <ul>
                     <li><a href="#">{{ __('homepage.about_us') }}</a></li>
-                    <li><a href="#">Услуги</a></li>
+                    <li><a href="#">{{ __('homepage.services') }}</a></li>
                     <li><a href="#">{{ __('homepage.contacts') }}</a></li>
-                    <li><a href="#">Обратная связь</a></li>
-                    <li><a href="#">Политика конфеденциальности</a></li>
+                    <li><a href="#">{{ __('homepage.feedback') }}</a></li>
+                    <li><a href="#">{{ __('homepage.privacy_policy') }}</a></li>
                 </ul>
             </div>
             <div class="footer__catalog">
@@ -60,10 +63,28 @@
         </div>
     </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    function showToast(id, text) {
+        var toast = document.getElementById(id);
+        toast.innerHTML = text + ` @svg('alert-success')`;
+        toast.classList.add('show-toast');
+        setTimeout(function() {
+            toast.classList.remove('show-toast');
+        }, 10000);
+
+        toast.addEventListener('click', function () {
+            toast.classList.remove('show-toast');
+        })
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
         function handleDropdownToggleClick(event) {
             event.preventDefault();
             var dropdown = event.target.closest('.custom-header__dropdown');
@@ -73,13 +94,13 @@
             }
         }
 
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             if (event.target.classList.contains('custom-header__dropdown-toggle')) {
                 handleDropdownToggleClick(event);
             } else {
                 // Закрываем все dropdowns при клике вне dropdown
                 var dropdowns = document.querySelectorAll('.custom-header__dropdown.open');
-                dropdowns.forEach(function(dropdown) {
+                dropdowns.forEach(function (dropdown) {
                     dropdown.classList.remove('open');
                 });
             }
@@ -105,6 +126,16 @@
             document.body.classList.remove('fix');
         });
     });
+
 </script>
+@if(session()->has('success'))
+    <script>
+        showToast('toast-success', '{{ session('success') }}')
+    </script>
+@elseif(session()->has('error'))
+    <script>
+        showToast('toast-error', '{{ session('error') }}')
+    </script>
+@endif
 </body>
 </html>

@@ -1,4 +1,6 @@
 <div class="container">
+    <div id="toast-success" class="toast-success"></div>
+    <div id="toast-error" class="toast-error"></div>
     <nav class="custom-header @if (request()->route()->getName() !== 'home') white-theme @endif">
         <div class="custom-header__logo">
             <a href="{{ route('home') }}">@svg('logo-min')</a>
@@ -66,7 +68,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('login') }}">
                         @svg('user')
                     </a>
                 </li>

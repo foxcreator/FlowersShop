@@ -19,7 +19,7 @@
                 <a href="">
                     <div class="search__card">
                         <img src="{{ $product->thumbnailUrl }}" alt="{{ $product->name }}">
-                        <p>{{ $product->title_uk }}</p>
+                        <p>{{ $product->title }}</p>
                     </div>
                 </a>
             @endforeach
@@ -27,18 +27,13 @@
     </div>
 </div>
 <script>
-    // Функция для выполнения AJAX-запроса
     function searchProducts(keyword) {
-        // Очищаем результаты поиска
         document.querySelector('.search__result').innerHTML = '';
 
-        // Выполняем AJAX-запрос
         fetch(`/search?keyword=${keyword}`)
             .then(response => response.json())
             .then(data => {
-                // Обработка полученных данных
                 data.forEach(product => {
-                    // Создаем элементы для отображения каждого продукта
                     const productLink = document.createElement('a');
                     productLink.href = product.url;
 
@@ -52,7 +47,6 @@
                     const productName = document.createElement('p');
                     productName.textContent = product.title_uk;
 
-                    // Добавляем элементы на страницу
                     productCard.appendChild(productImage);
                     productCard.appendChild(productName);
                     productLink.appendChild(productCard);
@@ -62,13 +56,16 @@
             .catch(error => console.error(error));
     }
 
-    // Обработчик события input для поля ввода поиска
-    document.querySelector('.search__input input').addEventListener('input', function() {
-        const keyword = this.value.trim(); // Получаем введенный текст
+    let timer;
 
-        if (keyword.length > 0) {
-            searchProducts(keyword); // Выполняем поиск только если введен текст
-        }
+    document.querySelector('.search__input input').addEventListener('input', function() {
+        const keyword = this.value.trim();
+
+        clearTimeout(timer);
+
+        timer = setTimeout(function() {
+            searchProducts(keyword); // Запускаем функцию поиска после задержки
+        }, 1000);
     });
 </script>
 

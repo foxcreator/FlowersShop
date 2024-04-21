@@ -53,9 +53,19 @@
         display: flex;
         flex-direction: column;
         gap: 32px;
-        img {
+
+        a {
             width: 24px;
             height: 24px;
+        }
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: $main-white;
+            transition: transform 0.2s ease;
+            &:hover {
+                transform: scale(1.05);
+            }
         }
     }
 }

@@ -1,17 +1,34 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\UpdatePasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/locale/{locale}', \App\Http\Controllers\LocaleController::class)->name('locale');
-
+Route::get('/test', function () {
+    return view('welcome');
+});
 Route::middleware(['set_locale'])->group(function () {
 	Route::get('/', [\App\Http\Controllers\Front\PagesController::class, 'index'])->name('home');
-	Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
-	Route::post('/register/store', [\App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('register.store');
-	Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
-	Route::post('/login/store', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('login.store');
-	Route::get('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
-	Route::get('/email/verify/{id}/{hash}', [\App\Http\Controllers\Auth\EmailVerifyController::class, 'verificationEmailLink'])
+
+    Route::middleware(['guest'])->group(function () {
+        Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
+        Route::post('/register/store', [\App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('register.store');
+        Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+        Route::post('/login/store', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('login.store');
+    });
+    Route::get('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout')->middleware(['auth']);
+
+    Route::post('forgot-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'store'])
+        ->name('password.email');
+
+    Route::get('/reset-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'create'])
+        ->name('password.reset');
+
+    Route::post('/update-password', [UpdatePasswordController::class, 'store']);
+
+    Route::get('/email/verify/{id}/{hash}', [\App\Http\Controllers\Auth\EmailVerifyController::class, 'verificationEmailLink'])
+
 		->middleware(['auth', 'signed'])->name('verification.verify');
 
 	Route::name('front.')->group(function () {

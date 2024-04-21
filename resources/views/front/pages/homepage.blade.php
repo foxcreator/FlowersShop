@@ -27,9 +27,9 @@
                                 @svg('arrow-circle-right')
                             </a>
                             <div class="banner__social">
-                                <a href=""><img src="{{ asset('front/icons/instagram.svg') }}" alt=""></a>
-                                <a href=""><img src="{{ asset('front/icons/facebook.svg') }}" alt=""></a>
-                                <a href=""><img src="{{ asset('front/icons/telegram.svg') }}" alt=""></a>
+                                <a href="">@svg('instagram')</a>
+                                <a href="">@svg('facebook')</a>
+                                <a href="">@svg('telegram')</a>
                             </div>
                         </div>
                     </div>
