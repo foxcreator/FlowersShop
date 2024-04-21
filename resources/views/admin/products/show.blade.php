@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ $product->title_ua }} @if($product->badge) <span class="text-success">({{ $product->badgeName }})</span> @endif</h1>
+                    <h1 class="m-0">{{ $product->title_uk }} @if($product->badge) <span class="text-success">({{ $product->badgeName }})</span> @endif</h1>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                                             </div>
                                             <div class="d-flex justify-content-between mb-3" style="border-bottom: 1px solid #4a5568">
                                                 <p>Наименование UA</p>
-                                                <h5 class="text-gray-dark">{{ $product->title_ua }}</h5>
+                                                <h5 class="text-gray-dark">{{ $product->title_uk }}</h5>
                                             </div>
                                             <div class="d-flex justify-content-between mb-3" style="border-bottom: 1px solid #4a5568">
                                                 <p>Наименование RU</p>
@@ -60,12 +60,12 @@
                                             </div>
                                             <div class="d-flex justify-content-between mb-3" style="border-bottom: 1px solid #4a5568">
                                                 <p>Категория</p>
-                                                <h5 class="text-gray-dark">{{ $product->category->title_ua }}</h5>
+                                                <h5 class="text-gray-dark">{{ $product->category->title_uk }}</h5>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mt-5">
                                             <h5>Описание UA</h5>
-                                            <p>{{ $product->description_ua }}</p>
+                                            <p>{{ $product->description_uk }}</p>
                                         </div>
                                         <div class="col-md-6 mt-5">
                                             <h5>Описание RU</h5>
@@ -98,7 +98,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body text-center">
-                        <h5>Удалить безвозвратно товар - {{ $product->title_ua }}?</h5>
+                        <h5>Удалить безвозвратно товар - {{ $product->title_uk }}?</h5>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Вернуться</button>

@@ -1,18 +1,24 @@
+@php
+$subjects = \App\Models\Subject::all();
+$flowers = \App\Models\Flower::all();
+@endphp
+
+
 <div class="quote">
     <h1>Квіти не вирішують усіх проблем.</h1>
     <h1>Але вони – хороший початок.</h1>
 </div>
 
 <div class="change-flower">
-    <h1>Допоможемо тобі</h1>
-    <h1>обрати особливий букет</h1>
+    <h1>{{ __('homepage.help_change_flower') }}</h1>
     <form action="">
         <div class="change-flower__select-block">
             {{--        Повод       --}}
             <div class="change-flower__select-wrapper">
                 <select name="reason" id="reason">
-                    <option value="">Свадьба</option>
-                    <option value="">День рождение</option>
+                    @foreach($subjects as $subject)
+                        <option value="">{{ $subject->name }}</option>
+                    @endforeach
                 </select>
             </div>
             {{--        Для кого       --}}
@@ -26,10 +32,9 @@
             {{--        Повод       --}}
             <div class="change-flower__select-wrapper">
                 <select name="flower" id="flower">
-                    <option value="">Тюльпан</option>
-                    <option value="">Роза</option>
-                    <option value="">Гортензия</option>
-                    <option value="">Рамункулюс</option>
+                    @foreach($flowers as $flower)
+                        <option value="">{{ $flower->name }}</option>
+                    @endforeach
                 </select>
             </div>
             {{--        Повод       --}}
@@ -42,39 +47,38 @@
                 </select>
             </div>
         </div>
-        <button class="change-flower__btn">Обрати букет</button>
+        <button class="change-flower__btn">{{ __('homepage.change_bouquet') }}</button>
     </form>
 </div>
 
 <div class="about">
-    <h1>Про нас</h1>
+    <h1>{{ __('homepage.about_us') }}</h1>
     <p><b><i>The Lotus</i></b> завжди готова запропонувати вам різноманітні варіанти доставки букетів квітів, розуміючи, що квіти завжди є ідеальним рішенням для кожного випадку.
         Тому ми створили кілька додаткових категорій доставки по Харкову, щоб ви могли порадувати своїх близьких і при цьому уникнути стандартних рішень.</p>
 </div>
 
 <div class="coffee">
-    <h1>Наша
-        Кавʼярня</h1>
+    <h1>{{ __('homepage.coffee_shop') }}</h1>
     <p><b><i>The Lotus</i></b> завжди готова запропонувати вам різноманітні варіанти доставки букетів квітів, розуміючи, що квіти завжди є ідеальним рішенням для кожного випадку.
         Тому ми створили кілька додаткових категорій доставки по Харкову, щоб ви могли порадувати своїх близьких і при цьому уникнути стандартних рішень.</p>
 </div>
 
 <div class="questions">
-    <h3>Є питання?</h3>
-    <h3>Залиш свої контакти і ми з тобою звʼяжемося</h3>
+    <h3>{{ __('homepage.any_questions') }}</h3>
+    <h3>{{ __('homepage.leave_contacts') }}</h3>
 
     <form action="" class="questions__form">
-        <input type="text" name="name" id="name" placeholder="Ваше имя">
-        <input type="text" name="phone" id="phone" placeholder="Номер телефона">
-        <input type="text" name="question" id="question" placeholder="Ваше питання">
+        <input type="text" name="name" id="name" placeholder="{{ __('homepage.your_name') }}">
+        <input type="text" name="phone" id="phone" placeholder="{{ __('homepage.your_phone') }}">
+        <input type="text" name="question" id="question" placeholder="{{ __('homepage.your_question') }}">
 
-        <button type="submit" class="questions__btn">Отправить</button>
+        <button type="submit" class="questions__btn">{{ __('homepage.send') }}</button>
     </form>
 </div>
 
 <div class="contacts">
     <div class="contacts__info">
-        <h1>Контакты</h1>
+        <h1>{{ __('homepage.contacts') }}</h1>
         <p>+38 (063) 787 5888</p>
         <p>+38 (098) 220 0673</p>
         <p>+38 (063) 787 5888</p>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Rules\IssetEmailRule;
@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Password;
 
 class ForgotPasswordController extends Controller
 {
+
+    public function create()
+    {
+        return view('auth.forgot-password');
+    }
     public function store(Request $request)
     {
         $request->validate([
@@ -21,9 +26,9 @@ class ForgotPasswordController extends Controller
         );
 
         if ($status === Password::RESET_LINK_SENT) {
-            return response()->json(['status' => 'ok']);
+            return back()->with(['success' => "Посилання для відновлення паролю надіслано на пошту $request->email"]);
         }
 
-        return response()->json($status);
+        return back()->with(['error' => $status])->withInput($request->only('email'));
     }
 }

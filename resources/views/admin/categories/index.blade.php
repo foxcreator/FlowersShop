@@ -36,7 +36,7 @@
                                         <td class="table-image">
                                             <img class="img-thumbnail" src="{{ $category->thumbnailUrl }}" alt="" style="width: 70px;">
                                         </td>
-                                        <td>{{ $category->title_ua }}</td>
+                                        <td>{{ $category->title_uk }}</td>
                                         <td>{{ $category->title_ru }}</td>
                                         <td class="text-center">
                                             @if($category->is_show_on_homepage)

@@ -23,10 +23,10 @@ class UpdateBannerRequest extends FormRequest
     {
         return [
             'product_id' => 'nullable|exists:products,id',
-            'title_ua' => 'required|string|max:255',
+            'title_uk' => 'required|string|max:255',
             'title_ru' => 'nullable|string|max:255',
             'image' => 'nullable',
-            'btn_text_ua' => 'nullable|string|max:255',
+            'btn_text_uk' => 'nullable|string|max:255',
             'btn_text_ru' => 'nullable|string|max:255',
             'link' => 'nullable|string|max:255',
             'is_active' => 'nullable|boolean',
@@ -37,10 +37,10 @@ class UpdateBannerRequest extends FormRequest
     {
         return [
             'product_id.exists' => 'Выбранный продукт не существует.',
-            'title_ua.required' => 'Поле "Наименование UA" обязательно для заполнения.',
-            'title_ua.max' => 'Поле "Наименование UA" не должно превышать 255 символов.',
+            'title_uk.required' => 'Поле "Наименование UA" обязательно для заполнения.',
+            'title_uk.max' => 'Поле "Наименование UA" не должно превышать 255 символов.',
             'title_ru.max' => 'Поле "Наименование RU" не должно превышать 255 символов.',
-            'btn_text_ua.max' => 'Поле "Текст кнопки UA" не должно превышать 255 символов.',
+            'btn_text_uk.max' => 'Поле "Текст кнопки UA" не должно превышать 255 символов.',
             'btn_text_ru.max' => 'Поле "Текст кнопки RU" не должно превышать 255 символов.',
             'link.max' => 'Поле "Ссылка на страницу" не должно превышать 255 символов.',
             'is_active.boolean' => 'Поле "Отображать постер на главной странице" должно быть логического типа.',

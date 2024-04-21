@@ -80,3 +80,44 @@ button {
 .close-icon::after {
     transform: translate(-50%, -50%) rotate(-45deg);
 }
+
+.toast-success {
+    position: fixed;
+    top: 20px;
+    right: 0;
+    transform: translateX(-50%);
+    background-color: $main-green;
+    color: $main-white;
+    padding: 20px 50px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 10;
+
+    .icon {
+        stroke: $main-white;
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.toast-error {
+    position: fixed;
+    top: 20px;
+    right: 0;
+    transform: translateX(-50%);
+    background-color: #9f1313;
+    color: $main-white;
+    padding: 20px 50px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 10;
+
+    .icon {
+        stroke: none;
+        width: 24px;
+        height: 24px;
+    }
+}
+.show-toast {
+    opacity: 1;
+}

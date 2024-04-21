@@ -31,7 +31,7 @@
                                 <tbody>
                                 @foreach($flowers as $flower)
                                     <tr>
-                                        <td>{{ $flower->name_ua }}</td>
+                                        <td>{{ $flower->name_uk }}</td>
                                         <td>{{ $flower->name_ru }}</td>
 
                                         <td class="text-right d-flex justify-content-end align-content-center">

@@ -14,7 +14,7 @@
                         <div class="accordion">
                             <div class="accordion-item active">
                                 <div class="accordion-header">
-                                    <p><span></span>Категории</p>
+                                    <p><span></span>{{ __('homepage.categories') }}</p>
                                     @svg('circle-arrow')
                                 </div>
                                 <div class="accordion-content">
@@ -22,16 +22,20 @@
                                         <input class="form-check-input" type="radio" name="category" value="all"
                                                id="categories_all" checked>
                                         <label class="form-check-label" for="categories_all">
-                                            Все
+                                            {{ __('homepage.all') }}
                                         </label>
                                     </div>
                                     @foreach($categories as $category)
                                         <div class="form-check">
+
                                             <input class="form-check-input" type="radio" name="category"
                                                    value="{{ $category->id }}"
-                                                   id="categories_{{ $category->id }}">
+                                                   id="categories_{{ $category->id }}"
+                                                   @if(request()->query('category') == $category->id) checked @endif
+
+                                            >
                                             <label class="form-check-label" for="categories_{{ $category->id }}">
-                                                {{ $category->title_ua }}
+                                                {{ $category->title }}
                                             </label>
                                         </div>
                                     @endforeach
@@ -40,7 +44,7 @@
                             <div class="accordion-item">
                                 <div class="accordion-item">
                                     <div class="accordion-header">
-                                        <p><span></span>Цветок</p>
+                                        <p><span></span>{{ __('homepage.flower') }}</p>
                                         @svg('circle-arrow')
                                     </div>
                                     <div class="accordion-content">
@@ -48,7 +52,7 @@
                                             <input class="form-check-input" type="radio" name="flower" value="all"
                                                    id="flowers_all" checked>
                                             <label class="form-check-label" for="flowers_all">
-                                                Все
+                                                {{ __('homepage.all') }}
                                             </label>
                                         </div>
                                         @foreach($flowers as $flower)
@@ -57,10 +61,12 @@
                                                        type="radio"
                                                        name="flower"
                                                        value="{{$flower->id}}"
-                                                       id="flowers_{{ $flower->id }}">
+                                                       id="flowers_{{ $flower->id }}"
+                                                       @if(request()->query('flower') === $flower->id) checked @endif
+                                                >
                                                 <label class="form-check-label"
                                                        for="flowers_{{ $flower->id }}">
-                                                    {{ $flower->name_ua }}
+                                                    {{ $flower->name }}
                                                 </label>
                                             </div>
                                         @endforeach
@@ -78,7 +84,7 @@
                                             <input class="form-check-input" type="radio" name="subject" value="all"
                                                    id="subjects_all" checked>
                                             <label class="form-check-label" for="subjects_all">
-                                                Все
+                                                {{ __('homepage.all') }}
                                             </label>
                                         </div>
                                         @foreach($subjects as $subject)
@@ -87,10 +93,12 @@
                                                        type="radio"
                                                        name="subject"
                                                        value="{{$subject->id}}"
-                                                       id="subjects_{{ $subject->id }}">
+                                                       id="subjects_{{ $subject->id }}"
+                                                       @if(request()->query('subject') === $subject->id) checked @endif
+                                                >
                                                 <label class="form-check-label"
                                                        for="subjects_{{ $subject->id }}">
-                                                    {{ $subject->name_ua }}
+                                                    {{ $subject->name }}
                                                 </label>
                                             </div>
                                         @endforeach
@@ -234,6 +242,7 @@
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
             },
         })
             .then(response => response.json())

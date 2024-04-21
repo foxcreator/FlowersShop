@@ -1,6 +1,6 @@
-@if(!$comments)
+@if(!$comments->count())
     <div class="nothing">
-        <p>Пока нет отзывов про этот товар</p>
+        <p>{{ __('product_show.not_reviews') }}</p>
         <p>Оставте свой отзыв и вы будете первым</p>
     </div>
 @else

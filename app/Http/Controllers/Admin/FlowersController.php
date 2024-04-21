@@ -22,12 +22,12 @@ class FlowersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-			'name_ua' => 'required',
+			'name_uk' => 'required',
 			'name_ru' => 'required'
 		]);
 
 		$flower = Flower::create([
-			'name_ua' => $request->name_ua,
+			'name_uk' => $request->name_uk,
 			'name_ru' => $request->name_ru,
 		]);
 
@@ -46,13 +46,14 @@ class FlowersController extends Controller
 
     public function update(Request $request, string $id)
     {
+		$flower = Flower::find($id);
 		$request->validate([
-			'name_ua' => 'required',
+			'name_uk' => 'required',
 			'name_ru' => 'required'
 		]);
 
-		$flower = Flower::update([
-			'name_ua' => $request->name_ua,
+		$flower->update([
+			'name_uk' => $request->name_uk,
 			'name_ru' => $request->name_ru,
 		]);
 

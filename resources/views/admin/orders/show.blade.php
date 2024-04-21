@@ -103,7 +103,7 @@
                                                 @foreach($order->orderProducts()->with('product')->get() as $orderProduct)
                                                     <tr>
                                                         <td>{{ $orderProduct->product->article }}</td>
-                                                        <td>{{ $orderProduct->product->title_ua }}</td>
+                                                        <td>{{ $orderProduct->product->title_uk }}</td>
                                                         <td class="text-center">{{ $orderProduct->product->price }}</td>
                                                         <td class="text-center">{{ $orderProduct->quantity }}</td>
                                                         <td class="text-right text-bold">{{ $orderProduct->product->price * $orderProduct->quantity }}</td>

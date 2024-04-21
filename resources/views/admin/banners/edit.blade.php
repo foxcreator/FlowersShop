@@ -12,7 +12,6 @@
 
     <section class="content">
         <div class="container-fluid">
-            {{ $errors }}
             <form action="{{ route('admin.banners.update', $banner->id) }}" method="POST" class="col-md-6" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -27,7 +26,7 @@
                         >
                             <option value="{{ null }}" selected>------</option>
                             @foreach($products as $product)
-                                <option value="{{ $product->id }}" @if($product->id === $banner->product_id) selected @endif>{{ $product->title_ua }}</option>
+                                <option value="{{ $product->id }}" @if($product->id === $banner->product_id) selected @endif>{{ $product->title_uk }}</option>
                             @endforeach
                         </select>
 
@@ -39,16 +38,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="title_ua">Наименование UA*</label>
+                        <label for="title_uk">Наименование UA*</label>
                         <input type="text"
-                               class="form-control @error('title_ua') is-invalid @enderror"
-                               id="title_ua"
-                               name="title_ua"
-                               value="{{ old('title_ua', $banner->title_ua) }}"
+                               class="form-control @error('title_uk') is-invalid @enderror"
+                               id="title_uk"
+                               name="title_uk"
+                               value="{{ old('title_uk', $banner->title_uk) }}"
                                placeholder="Введите наименование"
                                required
                         >
-                        @error('title_ua')
+                        @error('title_uk')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -96,15 +95,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="btn_text_ua">Текст кнопки UA</label>
+                        <label for="btn_text_uk">Текст кнопки UA</label>
                         <input type="text"
-                               class="form-control @error('btn_text_ua') is-invalid @enderror"
-                               id="btn_text_ua"
-                               name="btn_text_ua"
-                               value="{{ old('btn_text_ua', $banner->btn_text_ua) }}"
+                               class="form-control @error('btn_text_uk') is-invalid @enderror"
+                               id="btn_text_uk"
+                               name="btn_text_uk"
+                               value="{{ old('btn_text_uk', $banner->btn_text_uk) }}"
                                placeholder="Введите наименование"
                         >
-                        @error('btn_text_ua')
+                        @error('btn_text_uk')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -117,7 +116,7 @@
                                class="form-control @error('btn_text_ru') is-invalid @enderror"
                                id="btn_text_ru"
                                name="btn_text_ru"
-                               value="{{ old('btn_text_ru', $banner->btn_text_ua) }}"
+                               value="{{ old('btn_text_ru', $banner->btn_text_uk) }}"
                                placeholder="Введите наименование"
                         >
                         @error('btn_text_ru')

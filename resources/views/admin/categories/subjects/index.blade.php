@@ -31,7 +31,7 @@
                                 <tbody>
                                 @foreach($subjects as $subject)
                                     <tr>
-                                        <td>{{ $subject->name_ua }}</td>
+                                        <td>{{ $subject->name_uk }}</td>
                                         <td>{{ $subject->name_ru }}</td>
 
                                         <td class="text-right d-flex justify-content-end align-content-center">

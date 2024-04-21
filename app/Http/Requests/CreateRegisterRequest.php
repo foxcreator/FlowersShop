@@ -22,10 +22,7 @@ class CreateRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20|unique:users,phone',
-            'email' => 'required|email|unique:users,email|max:255',
+            'phone' => 'required|numeric|digits:10|unique:users,phone',
             'password' => 'required|string|min:8|confirmed',
         ];
     }
@@ -33,20 +30,10 @@ class CreateRegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Поле "Ім\'я" є обов\'язковим.',
-            'name.string' => 'Поле "Ім\'я" повинно бути рядком.',
-            'name.max' => 'Поле "Ім\'я" не може бути довшим за 255 символів.',
-            'last_name.required' => 'Поле "Прізвище" є обов\'язковим.',
-            'last_name.string' => 'Поле "Прізвище" повинно бути рядком.',
-            'last_name.max' => 'Поле "Прізвище" не може бути довшим за 255 символів.',
             'phone.required' => 'Поле "Телефон" є обов\'язковим.',
             'phone.unique' => 'Користувач з таким номером вже існує.',
-            'phone.string' => 'Поле "Телефон" повинно бути рядком.',
-            'phone.max' => 'Поле "Телефон" не може бути довшим за 20 символів.',
-            'email.required' => 'Поле "Електронна пошта" є обов\'язковим.',
-            'email.email' => 'Поле "Електронна пошта" повинно бути дійсною адресою електронної пошти.',
-            'email.unique' => 'Користувач з такою адресою електронної пошти вже існує.',
-            'email.max' => 'Поле "Електронна пошта" не може бути довшим за 255 символів.',
+            'phone.numeric' => 'Поле номера телефону повинно містити тільки числові значення.',
+            'phone.digits' => 'Поле номера телефону повинно містити рівно 10 цифр.',
             'password.required' => 'Поле "Пароль" є обов\'язковим.',
             'password.string' => 'Поле "Пароль" повинно бути рядком.',
             'password.min' => 'Пароль повинен містити щонайменше 8 символів.',

@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1 class="m-0">Редактирование категории - {{ $category->title_ua }}</h1>
+                    <h1 class="m-0">Редактирование категории - {{ $category->title_uk }}</h1>
                 </div>
             </div>
         </div>
@@ -16,19 +16,18 @@
             <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" class="col-md-6" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
-                {{ $errors }}
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="title_ua">Наименование UA</label>
+                        <label for="title_uk">Наименование UA</label>
                         <input type="text"
-                               class="form-control @error('title_ua') is-invalid @enderror"
-                               id="title_ua"
-                               name="title_ua"
-                               value="{{ old('title_ua', $category->title_ua) }}"
+                               class="form-control @error('title_uk') is-invalid @enderror"
+                               id="title_uk"
+                               name="title_uk"
+                               value="{{ old('title_uk', $category->title_uk) }}"
                                placeholder="Введите наименование категории на украинском"
                                required
                         >
-                        @error('title_ua')
+                        @error('title_uk')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -52,14 +51,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="description_ua">Описание UA</label>
-                        <textarea id="description_ua"
-                                  name="description_ua"
-                                  class="form-control @error('description_ua') is-invalid @enderror"
+                        <label for="description_uk">Описание UA</label>
+                        <textarea id="description_uk"
+                                  name="description_uk"
+                                  class="form-control @error('description_uk') is-invalid @enderror"
                                   rows="10"
                                   required
                         >
-                            {{ old('description_ua', $category->description_ua) }}
+                            {{ old('description_uk', $category->description_uk) }}
                         </textarea>
                         @error('description')
                         <span class="invalid-feedback" role="alert">
@@ -75,7 +74,7 @@
                                   class="form-control @error('description_ru') is-invalid @enderror"
                                   rows="10"
                         >
-                            {{ old('description_ru', $category->description_ua) }}
+                            {{ old('description_ru', $category->description_uk) }}
                         </textarea>
                         @error('description_ru')
                         <span class="invalid-feedback" role="alert">

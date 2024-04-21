@@ -17,16 +17,16 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name_ua">Наименование UA</label>
+                        <label for="name_uk">Наименование UA</label>
                         <input type="text"
-                               class="form-control @error('name_ua') is-invalid @enderror"
-                               id="name_ua"
-                               name="name_ua"
-                               value="{{ old('name_ua') }}"
+                               class="form-control @error('name_uk') is-invalid @enderror"
+                               id="name_uk"
+                               name="name_uk"
+                               value="{{ old('name_uk') }}"
                                placeholder="Введите наименование категории на украинском"
                                required
                         >
-                        @error('name_ua')
+                        @error('name_uk')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

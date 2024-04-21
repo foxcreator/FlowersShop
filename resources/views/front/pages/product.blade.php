@@ -4,7 +4,7 @@
 
         <div class="product-show__top">
             <div class="product-show__gallery">
-                <img class="product-show__thumbnail" src="{{ $product->thumbnailUrl }}" alt="{{ $product->title_ua }}">
+                <img class="product-show__thumbnail" src="{{ $product->thumbnailUrl }}" alt="{{ $product->title_uk }}">
                 <div class="product-show__images">
                     @foreach($product->productPhotos as $photo)
                         <img class="product-show__preview" src="{{ $photo->fileNameUrl }}" alt="">
@@ -13,7 +13,7 @@
             </div>
             <div class="product-show__info">
                 <div class="product-show__text">
-                    <h1>{{ $product->title_ua }}</h1>
+                    <h1>{{ $product->title }}</h1>
                     <p class="article">Артикул {{ $product->article }}</p>
                 </div>
                 <form class="product-show__buy-block">
@@ -26,21 +26,21 @@
 
                         <p>₴ <span class="price">{{ intval($product->price) }}</span></p>
                     </div>
-                    <button type="submit" class="product-show__btn">Добавить в корзину</button>
+                    <button type="submit" class="product-show__btn">{{ __('product_show.add_to_cart') }}</button>
                 </form>
             </div>
         </div>
 
         <div class="product-show__bottom">
             <div class="product-show__tabs">
-                <div class="tab active" data-tab="tab1"><span>История цветка</span></div>
-                <div class="tab" data-tab="tab2"><span>Оплата и доставка</span></div>
-                <div class="tab" data-tab="tab3"><span>Отзывы</span></div>
+                <div class="tab active" data-tab="tab1"><span>{{ __('product_show.flower_story') }}</span></div>
+                <div class="tab" data-tab="tab2"><span>{{ __('product_show.delivery_payment') }}</span></div>
+                <div class="tab" data-tab="tab3"><span>{{ __('product_show.reviews') }}</span></div>
             </div>
 
             <div class="tab-content active" id="tab1">
-                <img src="{{ $product->thumbnailUrl }}" alt="{{ $product->title_ru }}">
-                <p>{{ $product->description_ua }}</p>
+                <img src="{{ $product->thumbnailUrl }}" alt="{{ $product->title }}">
+                <p>{{ $product->description }}</p>
             </div>
 
             <div class="tab-content" id="tab2">
@@ -48,15 +48,15 @@
                     <h3>Оплата</h3>
                     <ul>
                         <li>LiqPay</li>
-                        <li>На расчетный счет</li>
-                        <li>При получении</li>
+                        <li>{{ __('product_show.checking_account') }}</li>
+                        <li>{{ __('product_show.on_receiving') }}</li>
                     </ul>
                 </div>
                 <div style="width: 33.333%">
                     <h3>Доставка</h3>
                     <ul>
-                        <li>Курьером по адресу</li>
-                        <li>Самовывоз</li>
+                        <li>{{ __('product_show.courier') }}</li>
+                        <li>{{ __('product_show.self_delivery') }}</li>
                     </ul>
                 </div>
             </div>
@@ -65,10 +65,10 @@
                 <div class="comments">
                     <form action="{{ route('front.comments.store') }}" method="POST">
                         @csrf
-                        <input type="text" name="user_name" placeholder="Введите имя" @if(auth()->user()) value="{{ auth()->user()->name }} @endif ">
+                        <input type="text" name="user_name" placeholder="{{ __('homepage.your_name') }}" @if(auth()->user()) value="{{ auth()->user()->name }} @endif ">
                         <textarea name="content"></textarea>
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <button type="submit">Отправить</button>
+                        <button type="submit">{{ __('product_show.send') }}</button>
                     </form>
                     <div class="all-comments">
 
@@ -78,7 +78,7 @@
                             </div>
                         </div>
 
-                        @include('components.comments')
+                        @include('components.comments', ['comments' => $comments])
                     </div>
                 </div>
             </div>

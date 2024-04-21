@@ -55,7 +55,7 @@ class ProductsController extends Controller
 		if ($product) {
 
 			return redirect()->route('admin.products.index')
-				->with(['status' => "Товар '{$product->title_ua}' успешно создан!"]);
+				->with(['status' => "Товар '{$product->title_uk}' успешно создан!"]);
 		}
 
 		return redirect()->back()->with(['error' => 'Что то пошло не так, попробуйте снова']);
@@ -117,7 +117,7 @@ class ProductsController extends Controller
 
         if ($product->update($data)) {
             return redirect()->route('admin.products.index')
-                ->with(['status' => "Товар '{$product->title_ua}' успешно изменен!"]);
+                ->with(['status' => "Товар '{$product->title_uk}' успешно изменен!"]);
         }
 
         return redirect()->back()->with(['error' => 'Что то пошло не так, попробуйте снова']);
@@ -126,7 +126,7 @@ class ProductsController extends Controller
     public function destroy(string $id)
     {
         $product = Product::find($id);
-        $name = $product->title_ua;
+        $name = $product->title_uk;
         $product->delete();
         return redirect()->route('admin.products.index')
             ->with(['status' => "Товар {$name} успешно удален!"]);

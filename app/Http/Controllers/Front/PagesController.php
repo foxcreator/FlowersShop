@@ -14,6 +14,9 @@ class PagesController extends Controller
 {
     public function index()
     {
+
+		$product = Product::find(103);
+//		dd($product->title);
         return view('front.pages.homepage');
     }
 
@@ -54,7 +57,7 @@ class PagesController extends Controller
 
         $products = $products->get();
 
-        if ($request->query('category') || $request->query('category') == 'all') {
+        if ($request->ajax()) {
 			$firstBlock = view('front.pages.catalog.parts.first-products-block', compact('products'))->render();
 			$secondBlock = view('front.pages.catalog.parts.second-products-block', compact('products'))->render();
 			$paginate = view('components.pagination', compact('currentPage', 'countPages'))->render();
