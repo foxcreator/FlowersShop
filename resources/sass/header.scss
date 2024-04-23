@@ -172,3 +172,41 @@
         }
     }
 }
+
+.cart-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+
+    &__btn-back {
+        display: flex;
+        align-items: center;
+        color: $dark-green;
+
+        .icon {
+            stroke: $dark-green;
+        }
+    }
+
+    &__logo {
+        .icon {
+            width: 60px;
+            height: 85px;
+            fill: $night-green;
+        }
+    }
+
+    &__contacts {
+        user-select: none;
+        .number {
+            color: $main-green;
+            margin: 0;
+        }
+
+        .worktime {
+            color: $text-gray;
+            margin: 0;
+        }
+    }
+}
