@@ -331,5 +331,10 @@
     transition: opacity 0.3s ease-in-out;
 }
 
+.max-quantity {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
 

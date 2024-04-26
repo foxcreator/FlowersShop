@@ -16,29 +16,32 @@ Route::middleware(['set_locale'])->group(function () {
         Route::post('/register/store', [\App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('register.store');
         Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
         Route::post('/login/store', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('login.store');
+        Route::post('forgot-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'store'])
+            ->name('password.email');
+        Route::get('/reset-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'create'])
+            ->name('password.reset');
+        Route::post('/update-password', [UpdatePasswordController::class, 'store']);
     });
     Route::get('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout')->middleware(['auth']);
 
-    Route::post('forgot-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'store'])
-        ->name('password.email');
-
-    Route::get('/reset-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'create'])
-        ->name('password.reset');
-
-    Route::post('/update-password', [UpdatePasswordController::class, 'store']);
 
     Route::get('/email/verify/{id}/{hash}', [\App\Http\Controllers\Auth\EmailVerifyController::class, 'verificationEmailLink'])
 
 		->middleware(['auth', 'signed'])->name('verification.verify');
 
-	Route::name('front.')->group(function () {
+    Route::name('front.')->group(function () {
 		Route::get('/catalog', [\App\Http\Controllers\Front\PagesController::class, 'catalog'])->name('catalog');
 		Route::get('/delivery', [\App\Http\Controllers\Front\PagesController::class, 'delivery'])->name('delivery');
 		Route::get('/about', [\App\Http\Controllers\Front\PagesController::class, 'about'])->name('about');
 		Route::get('/contacts', [\App\Http\Controllers\Front\PagesController::class, 'contacts'])->name('contacts');
 		Route::get('/product/{id}', [\App\Http\Controllers\Front\PagesController::class, 'productShow'])->name('product');
+		Route::get('/purchase/order-page', [\App\Http\Controllers\Front\PagesController::class, 'orderPage'])->name('orderPage');
 		Route::post('/comments/create', [\App\Http\Controllers\Front\CommentsController::class, 'store'])->name('comments.store');
 		Route::get('/search', [\App\Http\Controllers\Front\SearchController::class, 'search'])->name('search');
+        Route::get('/purchase/cart', [\App\Http\Controllers\Front\CartController::class, 'index'])->name('cart');
+        Route::post('/add-to-cart', [\App\Http\Controllers\Front\CartController::class, 'addToCart'])->name('addToCart');
+        Route::post('/remove-from-cart/{id}', [\App\Http\Controllers\Front\CartController::class, 'removeItem'])->name('removeItem');
+        Route::post('/update-cart-quantity', [\App\Http\Controllers\Front\CartController::class, 'updateQuantity'])->name('updateQuantity');
 
 	});
 });
