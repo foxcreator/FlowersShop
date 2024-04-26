@@ -35,7 +35,7 @@
             },
             success: (data) => {
                 console.log('success')
-                showToast('toast-success', 'Товар добавлен в корзину');
+                showToast('toast-success', data.data);
             },
             error: (xhr) => {
                 showToast('toast-error', xhr.responseJSON.error);
