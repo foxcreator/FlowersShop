@@ -12,7 +12,6 @@ class CartController extends Controller
 {
     public function index()
     {
-//        \Cart::session($_COOKIE['cart_id'])->clear();
         $cartData = \Cart::session($_COOKIE['cart_id'])->getContent();
         return view('front.purchase.cart', compact('cartData'));
     }
@@ -33,7 +32,7 @@ class CartController extends Controller
         foreach ($cartContent as $cartItem) {
             if ((int) $cartItem->id === (int) $request->id) {
                 if (($cartItem->quantity + $request->quantity) > $product->quantity)
-                return response()->json(['error' => 'Вы выбрали максимальное количество товара'], 422);
+                return response()->json(['error' => __('cart.max-quantity')], 422);
             }
         }
 
@@ -47,7 +46,7 @@ class CartController extends Controller
             ],
         ]);
 
-        return response()->json(['status' => 200]);
+        return response()->json(['data' => __('cart.add-product')]);
     }
 
     public function removeItem($id)
@@ -65,7 +64,7 @@ class CartController extends Controller
 
 
         if (($cartItem->quantity + $request->quantity) > $product->quantity) {
-            return response()->json(['error' => 'Вы выбрали максимальное количество товара'], 422);
+            return response()->json(['error' => __('cart.max-quantity')], 422);
         }
 
         if ($cartItem) {
@@ -82,6 +81,6 @@ class CartController extends Controller
             ],
         ]);
 
-        return response()->json(['status' => 200]);
+        return response()->json(['data' => __('cart.change-quantity')]);
     }
 }

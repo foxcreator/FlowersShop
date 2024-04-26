@@ -3,7 +3,6 @@
 
     @php $randomProducts = \App\Models\Product::take(5)->get(); @endphp
     <div class="cart container">
-        {{--        @dd($cartData)--}}
         @if(!$cartData->isEmpty())
             <h1>{{ __('cart.your-order') }}</h1>
             <div class="cart__items">
@@ -57,39 +56,35 @@
 <script>
     $(document).ready(function () {
         $('.cart__item').each(function () {
-            // Определение максимального количества и цены для каждого продукта
             const maxQuantity = parseInt($(this).find('.quantity-field').data('max'));
             const pricePerUnit = parseInt($(this).find('.cart__sum').text().replace('₴ ', ''));
 
-            // Обработчик события клика на кнопку минус
             $(this).find('.minus-btn').click(function () {
                 let quantityField = $(this).siblings('.quantity-field');
                 let currentValue = parseInt(quantityField.val());
                 if (currentValue > 1) {
                     quantityField.val(currentValue - 1);
                     $(this).siblings('.plus-btn').removeClass('disabled');
-                    updateQuantity(quantityField.data('id'), currentValue - 1); // Передача productId и нового количества в addToCart
+                    updateQuantity(quantityField.data('id'), currentValue - 1);
                 }
                 if (quantityField.val() === "1") {
                     $(this).addClass('disabled');
                 }
             });
 
-            // Обработчик события клика на кнопку плюс
             $(this).find('.plus-btn').click(function () {
                 let quantityField = $(this).siblings('.quantity-field');
                 let currentValue = parseInt(quantityField.val());
                 if (currentValue < maxQuantity) {
                     quantityField.val(currentValue + 1);
                     $(this).siblings('.minus-btn').removeClass('disabled');
-                    updateQuantity(quantityField.data('id'), currentValue + 1); // Передача productId и нового количества в addToCart
+                    updateQuantity(quantityField.data('id'), currentValue + 1);
                 }
                 if (quantityField.val() === maxQuantity.toString()) {
                     $(this).addClass('disabled');
                 }
             });
 
-            // Обработчик события изменения значения в поле ввода количества
             $(this).find('.quantity-field').on('input', function () {
                 let currentValue = parseInt($(this).val());
                 if (isNaN(currentValue) || currentValue < 1) {
@@ -106,7 +101,7 @@
                 } else {
                     $(this).siblings('.minus-btn, .plus-btn').removeClass('disabled');
                 }
-                updateQuantity($(this).data('id'), currentValue); // Передача productId и текущего количества в addToCart
+                updateQuantity($(this).data('id'), currentValue);
             });
         });
     });
@@ -128,7 +123,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: (data) => {
-                showToast('toast-success', 'Товар добавлен в корзину');
+                showToast('toast-success', data.data);
                 setTimeout(function () {
                     window.location.reload();
                 }, 500)
@@ -156,7 +151,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: (data) => {
-                showToast('toast-success', 'Товар добавлен в корзину');
+                showToast('toast-success', data.data);
                 setTimeout(function () {
                     window.location.reload();
                 }, 1000)
