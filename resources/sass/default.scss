@@ -90,6 +90,7 @@ button {
     color: $main-white;
     padding: 20px 50px;
     opacity: 0;
+    visibility: hidden;
     transition: opacity 0.5s ease-in-out;
     z-index: 10;
 
@@ -109,6 +110,7 @@ button {
     color: $main-white;
     padding: 20px 50px;
     opacity: 0;
+    visibility: hidden;
     transition: opacity 0.5s ease-in-out;
     z-index: 10;
 
@@ -120,6 +122,7 @@ button {
 }
 .show-toast {
     opacity: 1;
+    visibility: visible;
 }
 
 .bg-success {

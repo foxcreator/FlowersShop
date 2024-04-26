@@ -3,144 +3,168 @@
 
     @php $randomProducts = \App\Models\Product::take(5)->get(); @endphp
     <div class="cart container">
-{{--        @dd($cartData)--}}
+        {{--        @dd($cartData)--}}
         @if(!$cartData->isEmpty())
-        <h1>Ваш заказ</h1>
-        <div class="cart__items">
-            @foreach($cartData as $product)
-                <div class="cart__item">
-                    <div class="cart__product">
-                        <img src="{{ $product->attributes->img }}" alt="{{ $product->name }}">
-                        <div class="cart__product-info">
-                            <h4>{{ $product->name }}</h4>
-                            <p>Упаковка: Крафт</p>
+            <h1>{{ __('cart.your-order') }}</h1>
+            <div class="cart__items">
+                @foreach($cartData as $product)
+                    <div class="cart__item">
+                        <div class="cart__product">
+                            <img src="{{ $product->attributes->img }}" alt="{{ $product->name }}">
+                            <div class="cart__product-info">
+                                <h4>{{ $product->name }}</h4>
+                                <p>{{ __('cart.package') }}: Крафт</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="cart__count">
-                        <div class="quantity-input">
-                            <button type="button" class="minus-btn">@svg('minus')</button>
-                            <input type="number" class="quantity-field" value="{{ $product->quantity }}">
-                            <button type="button" class="plus-btn">@svg('plus')</button>
+                        <div class="cart__count">
+                            <div class="quantity-input">
+                                <button type="button" class="minus-btn">@svg('minus')</button>
+                                <input type="number" class="quantity-field" value="{{ $product->quantity }}" data-max="23" data-id="{{ $product->id }}">
+                                <button type="button" class="plus-btn">@svg('plus')</button>
+                            </div>
+                            <h5 class="cart__sum">₴ {{ intval($product->price) * $product->quantity }}</h5>
                         </div>
-                        <h5 class="cart__sum">₴ {{ intval($product->price) * $product->quantity }}</h5>
+                        <form action="{{ route('front.removeItem', $product->id) }}" method="POST" class="cart__item-delete">
+                            @csrf
+                            <button type="submit">@svg('bin')</button>
+                        </form>
                     </div>
-                    <div class="cart__item-delete">
-                        <a href="#">@svg('bin')</a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-        <div class="cart__promo-code">
-{{--            <input type="text">--}}
-{{--            <button type="submit"></button>--}}
-        </div>
-        <div class="cart__bottom">
-            <div class="total-amount">
-                <p>Всего к оплате: </p>
-                <span>₴ {{ \Cart::getTotal() }}</span>
+                @endforeach
             </div>
-            <a href="#" class="cart__btn-submit">Оформить заказ</a>
-            <a href="{{ route('front.catalog') }}" class="cart__btn-back">Продолжить покупки</a>
-            @include('components.recommendation', ['randomProducts' => $randomProducts])
-        </div>
+            <div class="cart__promo-code">
+                {{--            <input type="text">--}}
+                {{--            <button type="submit"></button>--}}
+            </div>
+            <div class="cart__bottom">
+                <div class="total-amount">
+                    <p>{{ __('cart.total-sum') }}: </p>
+                    <span class="price">₴ {{ \Cart::getTotal() }}</span>
+                </div>
+                <a href="{{ route('front.orderPage') }}" class="cart__btn-submit">{{ __('cart.get-order') }}</a>
+                <a href="{{ route('front.catalog') }}" class="cart__btn-back">{{ __('cart.continue-shop') }}</a>
+                @include('components.recommendation', ['randomProducts' => $randomProducts])
+            </div>
         @else
             <div class="cart__is-empty">
-                <h2 class="text-center">Корзина пуста</h2>
+                <h2 class="text-center">{{ __('cart.cart-empty') }}</h2>
             </div>
             @include('components.recommendation', ['randomProducts' => $randomProducts])
         @endif
     </div>
 @endsection
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const quantityInput = document.querySelector('.quantity-field');
-        const minusBtn = document.querySelector('.minus-btn');
-        const plusBtn = document.querySelector('.plus-btn');
-        {{--const maxQuantity = parseInt("{{ $product->quantity }}");--}}
-        {{--const pricePerUnit = <?php echo intval($product->price); ?>;--}}
-        const totalPrice = document.querySelector('.price');
+    $(document).ready(function () {
+        $('.cart__item').each(function () {
+            // Определение максимального количества и цены для каждого продукта
+            const maxQuantity = parseInt($(this).find('.quantity-field').data('max'));
+            const pricePerUnit = parseInt($(this).find('.cart__sum').text().replace('₴ ', ''));
 
-        if (quantityInput.value === "1") {
-            minusBtn.classList.add('disabled');
-        }
-        // Уменьшение количества
-        minusBtn.addEventListener('click', function () {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-                plusBtn.classList.remove('disabled');
-            }
-            if (quantityInput.value === "1") {
-                minusBtn.classList.add('disabled');
-            }
-            updateTotalPrice()
+            // Обработчик события клика на кнопку минус
+            $(this).find('.minus-btn').click(function () {
+                let quantityField = $(this).siblings('.quantity-field');
+                let currentValue = parseInt(quantityField.val());
+                if (currentValue > 1) {
+                    quantityField.val(currentValue - 1);
+                    $(this).siblings('.plus-btn').removeClass('disabled');
+                    updateQuantity(quantityField.data('id'), currentValue - 1); // Передача productId и нового количества в addToCart
+                }
+                if (quantityField.val() === "1") {
+                    $(this).addClass('disabled');
+                }
+            });
 
-        });
+            // Обработчик события клика на кнопку плюс
+            $(this).find('.plus-btn').click(function () {
+                let quantityField = $(this).siblings('.quantity-field');
+                let currentValue = parseInt(quantityField.val());
+                if (currentValue < maxQuantity) {
+                    quantityField.val(currentValue + 1);
+                    $(this).siblings('.minus-btn').removeClass('disabled');
+                    updateQuantity(quantityField.data('id'), currentValue + 1); // Передача productId и нового количества в addToCart
+                }
+                if (quantityField.val() === maxQuantity.toString()) {
+                    $(this).addClass('disabled');
+                }
+            });
 
-        // Увеличение количества
-        plusBtn.addEventListener('click', function () {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue < maxQuantity) {
-                quantityInput.value = currentValue + 1;
-
-                minusBtn.classList.remove('disabled');
-            }
-            if (quantityInput.value === maxQuantity.toString()) {
-                plusBtn.classList.add('disabled');
-            }
-            updateTotalPrice()
-
-        });
-
-        // Ограничение ввода вручную
-        quantityInput.addEventListener('input', function () {
-            let currentValue = parseInt(quantityInput.value);
-            if (isNaN(currentValue) || currentValue < 1) {
-                quantityInput.value = 1;
-            } else if (currentValue > maxQuantity) {
-                quantityInput.value = maxQuantity;
-            }
-            if (quantityInput.value === "1") {
-                minusBtn.classList.add('disabled');
-                plusBtn.classList.remove('disabled');
-            } else if (quantityInput.value === maxQuantity.toString()) {
-                plusBtn.classList.add('disabled');
-                minusBtn.classList.remove('disabled');
-            } else {
-                minusBtn.classList.remove('disabled');
-                plusBtn.classList.remove('disabled');
-            }
-            updateTotalPrice()
-        });
-
-        function updateTotalPrice() {
-            console.log('update')
-            const quantity = parseInt(quantityInput.value);
-            totalPrice.textContent = quantity * pricePerUnit;
-        }
-
-
-
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const tabId = tab.getAttribute('data-tab');
-                tabs.forEach(t => {
-                    t.classList.remove('active');
-                });
-                // Hide all tab contents
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                });
-
-                // Show the selected tab content
-                const selectedTabContent = document.getElementById(tabId);
-                selectedTabContent.classList.add('active');
-                tab.classList.add('active');
+            // Обработчик события изменения значения в поле ввода количества
+            $(this).find('.quantity-field').on('input', function () {
+                let currentValue = parseInt($(this).val());
+                if (isNaN(currentValue) || currentValue < 1) {
+                    $(this).val(1);
+                } else if (currentValue > maxQuantity) {
+                    $(this).val(maxQuantity);
+                }
+                if ($(this).val() === "1") {
+                    $(this).siblings('.minus-btn').addClass('disabled');
+                    $(this).siblings('.plus-btn').removeClass('disabled');
+                } else if ($(this).val() === maxQuantity.toString()) {
+                    $(this).siblings('.plus-btn').addClass('disabled');
+                    $(this).siblings('.minus-btn').removeClass('disabled');
+                } else {
+                    $(this).siblings('.minus-btn, .plus-btn').removeClass('disabled');
+                }
+                updateQuantity($(this).data('id'), currentValue); // Передача productId и текущего количества в addToCart
             });
         });
     });
+
+
+    function addToCart(productId, quantity) {
+        let cartCount = parseInt($('.cart-count').text());
+
+        $('.cart-count').text(cartCount += quantity);
+
+        $.ajax({
+            url: "{{ route('front.addToCart') }}",
+            type: "POST",
+            data: {
+                id: productId,
+                quantity: quantity
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: (data) => {
+                showToast('toast-success', 'Товар добавлен в корзину');
+                setTimeout(function () {
+                    window.location.reload();
+                }, 500)
+            },
+            error: (xhr) => {
+                showToast('toast-error', xhr.responseJSON.error);
+            }
+
+        })
+    }
+
+    function updateQuantity(productId, quantity) {
+        let cartCount = parseInt($('.cart-count').text());
+
+        $('.cart-count').text(cartCount += quantity);
+
+        $.ajax({
+            url: "{{ route('front.updateQuantity') }}",
+            type: "POST",
+            data: {
+                id: productId,
+                quantity: quantity
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: (data) => {
+                showToast('toast-success', 'Товар добавлен в корзину');
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000)
+            },
+            error: (xhr) => {
+                showToast('toast-error', xhr.responseJSON.error);
+            }
+
+        })
+    }
 </script>

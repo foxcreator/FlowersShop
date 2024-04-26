@@ -26,7 +26,12 @@
 
                         <p>₴ <span class="price">{{ intval($product->price) }}</span></p>
                     </div>
-                    <button type="submit" class="product-show__btn">{{ __('product_show.add_to_cart') }}</button>
+                    <button type="button"
+                            onclick="addToCart('{{ $product->id }}')"
+                            class="product-show__btn"
+                    >
+                        {{ __('product_show.add_to_cart') }}
+                    </button>
                 </form>
             </div>
         </div>
@@ -65,7 +70,8 @@
                 <div class="comments">
                     <form action="{{ route('front.comments.store') }}" method="POST">
                         @csrf
-                        <input type="text" name="user_name" placeholder="{{ __('homepage.your_name') }}" @if(auth()->user()) value="{{ auth()->user()->name }} @endif ">
+                        <input type="text" name="user_name" placeholder="{{ __('homepage.your_name') }}"
+                               @if(auth()->user()) value="{{ auth()->user()->name }} @endif ">
                         <textarea name="content"></textarea>
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <button type="submit">{{ __('product_show.send') }}</button>
@@ -86,155 +92,129 @@
 
         @include('components.recommendation', ['randomProducts' => $randomProducts])
     </section>
-@endsection
+    <script>
+        function addToCart(productId) {
+            let cartCount = parseInt($('.cart-count').text());
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const thumbnail = document.querySelector('.product-show__thumbnail');
-        const previews = document.querySelectorAll('.product-show__preview');
+            let quantity = parseInt($('.quantity-field').val());
+            $('.cart-count').text(cartCount += quantity);
 
-        previews.forEach(image => {
-            image.addEventListener('click', function() {
-                const newSrc = this.src;
-                thumbnail.classList.add('fade-out');
-
-                setTimeout(function() {
-                    thumbnail.src = newSrc;
-                    thumbnail.classList.remove('fade-out');
-                }, 300); // Задержка, чтобы анимация завершилась перед изменением src
-            });
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const quantityInput = document.querySelector('.quantity-field');
-        const minusBtn = document.querySelector('.minus-btn');
-        const plusBtn = document.querySelector('.plus-btn');
-        const maxQuantity = parseInt("{{ $product->quantity }}");
-        const pricePerUnit = <?php echo intval($product->price); ?>;
-        const totalPrice = document.querySelector('.price');
-
-        if (quantityInput.value === "1") {
-            minusBtn.classList.add('disabled');
-        }
-        // Уменьшение количества
-        minusBtn.addEventListener('click', function () {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-                plusBtn.classList.remove('disabled');
-            }
-            if (quantityInput.value === "1") {
-                minusBtn.classList.add('disabled');
-            }
-            updateTotalPrice()
-
-        });
-
-        // Увеличение количества
-        plusBtn.addEventListener('click', function () {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue < maxQuantity) {
-                quantityInput.value = currentValue + 1;
-
-                minusBtn.classList.remove('disabled');
-            }
-            if (quantityInput.value === maxQuantity.toString()) {
-                plusBtn.classList.add('disabled');
-            }
-            updateTotalPrice()
-
-        });
-
-        // Ограничение ввода вручную
-        quantityInput.addEventListener('input', function () {
-            let currentValue = parseInt(quantityInput.value);
-            if (isNaN(currentValue) || currentValue < 1) {
-                quantityInput.value = 1;
-            } else if (currentValue > maxQuantity) {
-                quantityInput.value = maxQuantity;
-            }
-            if (quantityInput.value === "1") {
-                minusBtn.classList.add('disabled');
-                plusBtn.classList.remove('disabled');
-            } else if (quantityInput.value === maxQuantity.toString()) {
-                plusBtn.classList.add('disabled');
-                minusBtn.classList.remove('disabled');
-            } else {
-                minusBtn.classList.remove('disabled');
-                plusBtn.classList.remove('disabled');
-            }
-            updateTotalPrice()
-        });
-
-        function updateTotalPrice() {
-            console.log('update')
-            const quantity = parseInt(quantityInput.value);
-            totalPrice.textContent = quantity * pricePerUnit;
-        }
-
-
-
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const tabId = tab.getAttribute('data-tab');
-                tabs.forEach(t => {
-                    t.classList.remove('active');
-                });
-                // Hide all tab contents
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                });
-
-                // Show the selected tab content
-                const selectedTabContent = document.getElementById(tabId);
-                selectedTabContent.classList.add('active');
-                tab.classList.add('active');
-            });
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-
-
-        document.addEventListener('click', function (event) {
-            if (event.target.classList.contains('custom-pagination__page-link')) {
-                event.preventDefault();
-                const page = event.target.textContent;
-                console.log(page);
-                fetchComments(page);
-            }
-        });
-
-        function fetchComments(page = 1) {
-
-            let url = `/product/{{$product->id}}?page=${page}`;
-
-            fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
+            $.ajax({
+                url: "{{ route('front.addToCart') }}",
+                type: "POST",
+                data: {
+                    id: productId,
+                    quantity: quantity
                 },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: (data) => {
+                    showToast('toast-success', 'Товар добавлен в корзину');
+                },
+                error: (xhr) => {
+                    showToast('toast-error', xhr.responseJSON.error);
+                }
             })
-                .then(response => response.json())
-                .then(data => {
-                    updateCommentsList(data);
-                })
-                .catch(error => console.error(error));
         }
-    });
 
+        $(document).ready(function () {
+            $('.product-show__preview').click(function () {
+                var newSrc = $(this).attr('src');
+                $('.product-show__thumbnail').addClass('fade-out');
+                setTimeout(function () {
+                    $('.product-show__thumbnail').attr('src', newSrc).removeClass('fade-out');
+                }, 300);
+            });
 
-    function updateCommentsList(data) {
-        const paginate = document.querySelector('.comments-paginate');
-        const comments = document.querySelector('.all-comments');
+            var maxQuantity = parseInt("{{ $product->quantity - $cartQuantity }}");
+            var pricePerUnit = parseInt("{{ $product->price }}");
 
-        comments.innerHTML = data.html.comments;
-        paginate.innerHTML = data.html.paginate;
-    }
+            if (maxQuantity === 0) {
+                $('.quantity-field').val(0);
+                $('.product-show__btn').addClass('max-quantity');
+                updateTotalPrice()
+            }
 
+            $('.minus-btn').click(function () {
+                var currentValue = parseInt($('.quantity-field').val());
+                if (currentValue > 1) {
+                    $('.quantity-field').val(currentValue - 1);
+                    $('.plus-btn').removeClass('disabled');
+                }
+                if ($('.quantity-field').val() === "1") {
+                    $(this).addClass('disabled');
+                }
+                updateTotalPrice();
+            });
 
-</script>
+            $('.plus-btn').click(function () {
+                var currentValue = parseInt($('.quantity-field').val());
+                if (currentValue < maxQuantity) {
+                    $('.quantity-field').val(currentValue + 1);
+                    $('.minus-btn').removeClass('disabled');
+                }
+                if ($('.quantity-field').val() === maxQuantity.toString()) {
+                    $(this).addClass('disabled');
+                }
+                updateTotalPrice();
+            });
+
+            $('.quantity-field').on('input', function () {
+                var currentValue = parseInt($(this).val());
+                if (isNaN(currentValue) || currentValue < 1) {
+                    $(this).val(1);
+                } else if (currentValue > maxQuantity) {
+                    $(this).val(maxQuantity);
+                }
+                if ($(this).val() === "1") {
+                    $('.minus-btn').addClass('disabled');
+                    $('.plus-btn').removeClass('disabled');
+                } else if ($(this).val() === maxQuantity.toString()) {
+                    $('.plus-btn').addClass('disabled');
+                    $('.minus-btn').removeClass('disabled');
+                } else {
+                    $('.minus-btn, .plus-btn').removeClass('disabled');
+                }
+                updateTotalPrice();
+            });
+
+            $('.tab').click(function () {
+                var tabId = $(this).data('tab');
+                $(this).addClass('active').siblings().removeClass('active');
+                $('#' + tabId).addClass('active').siblings().removeClass('active');
+            });
+
+            $(document).on('click', '.custom-pagination__page-link', function (event) {
+                event.preventDefault();
+                var page = $(this).text();
+                fetchComments(page);
+            });
+
+            function fetchComments(page = 1) {
+                var url = `/product/{{$product->id}}?page=${page}`;
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        updateCommentsList(data);
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            }
+
+            function updateCommentsList(data) {
+                $('.all-comments').html(data.html.comments);
+                $('.comments-paginate').html(data.html.paginate);
+            }
+
+            function updateTotalPrice() {
+                var quantity = parseInt($('.quantity-field').val());
+                $('.price').text(quantity * pricePerUnit);
+            }
+        });
+    </script>
+@endsection

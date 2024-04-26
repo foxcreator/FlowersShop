@@ -23,7 +23,6 @@
 
         $('.cart-count').text(cartCount += 1);
 
-        console.log(cartCount);
         $.ajax({
             url: "{{ route('front.addToCart') }}",
             type: "POST",
@@ -35,8 +34,13 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: (data) => {
-
+                console.log('success')
+                showToast('toast-success', 'Товар добавлен в корзину');
+            },
+            error: (xhr) => {
+                showToast('toast-error', xhr.responseJSON.error);
             }
+
         })
     }
 </script>

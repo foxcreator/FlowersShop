@@ -16,6 +16,8 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+<div id="toast-success" class="toast-success"></div>
+<div id="toast-error" class="toast-error"></div>
 
 @if(str_contains(request()->getPathInfo(), 'purchase'))
     @include('front.layouts.cart-nav')
