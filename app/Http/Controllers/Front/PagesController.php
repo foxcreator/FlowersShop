@@ -139,10 +139,4 @@ class PagesController extends Controller
     {
         return view('front.pages.contacts');
     }
-
-
-    public function orderPage()
-    {
-        return view('front.purchase.order');
-    }
 }

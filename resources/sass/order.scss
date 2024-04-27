@@ -1,0 +1,284 @@
+.order {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+	margin-bottom: 200px;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        padding-top: 40px;
+    }
+
+    &__tabs {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__order-form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 40px 0;
+
+        .delivery {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .delivery-tabs {
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+        }
+
+        .delivery-tab {
+            cursor: pointer;
+        }
+
+        .recipient-tabs {
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+        }
+
+        .recipient-tab {
+            cursor: pointer;
+        }
+
+        .default-input {
+            width: 540px;
+            height: 80px;
+        }
+
+        .input-min {
+            width: 260px;
+        }
+
+        .input-block {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .recipient {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    &__delivery {
+    }
+
+    &__gifts {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        max-width: 540px;
+
+        .add-products {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+
+            .product-img {
+                cursor: pointer;
+            }
+
+            .add-product-img {
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .gift {
+                .carousel {
+                    .carousel-control-prev,
+                    .carousel-control-next {
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 100%;
+                        background: $main-white;
+                        top: 40%;
+                        margin: 10px;
+
+                        .icon {
+                            stroke: $night-green;
+                        }
+                    }
+                }
+            }
+            .postcard {
+                .carousel {
+                    .carousel-control-prev,
+                    .carousel-control-next {
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 100%;
+                        background: $main-white;
+                        top: 32%;
+                        margin: 10px;
+
+                        .icon {
+                            stroke: $night-green;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+        .default-input {
+            height: 70px;
+        }
+    }
+
+    .card-info {
+        display: flex;
+        justify-content: space-between;
+        p {
+            max-width: 30%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            &:first-child {
+                max-width: 70%;
+            }
+        }
+    }
+
+    &__pay {
+        display: flex;
+        flex-direction: column;
+
+        .pay-block {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+
+            .form-check {
+                margin-top: 15px;
+            }
+
+            .form-check-input {
+                border-color: $main-green;
+                box-shadow: none;
+
+            }
+            .form-check-input:checked {
+                background: none;
+                border: $main-green 3px solid;
+                outline: none;
+            }
+        }
+
+    }
+
+    .tab {
+        cursor: pointer;
+    }
+
+    .tab-content {
+        display: none;
+    }
+
+    .is-active {
+        visibility: visible;
+        height: auto;
+        padding: 40px 0;
+    }
+
+    .show-tab {
+        display: block;
+    }
+
+    .current-tab {
+        color: $main-green;
+        border-bottom: $main-green 1px solid;
+    }
+
+    .user-success {
+        display: none;
+    }
+
+    .edit-btn {
+        color: $edit-btn;
+        font-size: 16px;
+        font-weight: 400;
+        height: 20px;
+        transition: transform 0.5s ease;
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.air-datepicker-cell.-selected- {
+    background: $main-green;
+    border-radius: 100%;
+    &:hover {
+        background: $main-green;
+    }
+}
+.air-datepicker-cell.-selected-.-current- {
+    background: $main-green;
+    color: $text-green;
+}
+.air-datepicker-cell.-current- {
+    color: $text-green;
+}
+
+.air-datepicker-body--day-name {
+    color: $text-gray;
+}
+
+.air-datepicker-cell.-focus- {
+    border-radius: 100%;
+    background: $text-green;
+    color: $main-white;
+}
+
+.air-datepicker {
+    border-radius: 13px;
+    width: 250px;
+}
+
+.choices {
+    width: 260px;
+    height: 80px;
+    &__inner {
+        height: 80px;
+    }
+
+    &__list {
+
+    }
+
+    &__item--selectable {
+        height: 80px;
+        font-size: 20px;
+        color: $night-green;
+    }
+
+    &__list--single {
+        padding: 15px 16px 4px 8px;
+    }
+}
+
+.choices__list--dropdown .choices__item--selectable, .choices__list[aria-expanded] .choices__item--selectable {
+    height: 60px;
+    font-size: 23px;
+    color: $night-green;
+}
+
+.choices__list--dropdown .choices__item--selectable.is-highlighted, .choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
+
+    background-color: $main-green;
+    color: $main-white;
+}
