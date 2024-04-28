@@ -6,12 +6,28 @@ $(document).ready(function() {
         $('.tab').removeClass('current-tab');
         $(this).addClass('current-tab');
     });
+
+    $('#comment-text').click(function() {
+
+        var input = $('<input>').attr({
+            type: 'text',
+            placeholder: 'Введите комментарий',
+            name: 'comment',
+            class: 'default-input'
+        });
+
+        $(this).replaceWith(input);
+
+        input.focus();
+    });
 });
 
 $(document).ready(function() {
     $('.delivery-block').hide();
     $('.add-products').hide();
     $('.pay-block').hide();
+    $('.delivery-success').hide();
+    $('.gifts-success').hide();
 
     $('.submit-user').on('click', function() {
         var phone = $('[name="customer_phone"]').val();
@@ -46,6 +62,7 @@ $(document).ready(function() {
         $('.delivery-success').show();
         $('.add-products').show();
         $('.gifts-success').hide();
+        $('.delivery-header').hide();
         $('.delivery-address').text(deliveryAddress);
 
     });
@@ -57,22 +74,27 @@ $(document).ready(function() {
         $('.gifts-success').show();
         $('.pay-block').show();
         $('.pay-success').hide();
+        $('.gifts-header').hide();
         $('.text-postcard').text(postcard);
 
     });
 
     $('.edit-btn').on('click', function() {
-        $('.order__order-form-group').show();
+        $('.user-data').show();
         $('.user-success').hide();
         $('.order__tabs').show();
         $('.delivery-block').hide();
+        $('.add-products').hide();
+        $('.pay-block').hide();
     });
 
     $('.edit-btn-delivery').on('click', function() {
         $('.delivery-block').show();
+        $('.user-data').hide();
         $('.delivery-success').hide();
         $('.add-products').hide();
         $('.gifts-success').show();
+        $('.pay-block').hide();
     });
 
     $('#delivery').on('click', function () {

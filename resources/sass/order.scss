@@ -104,7 +104,7 @@
                         height: 32px;
                         border-radius: 100%;
                         background: $main-white;
-                        top: 40%;
+                        top: 33%;
                         margin: 10px;
 
                         .icon {
@@ -121,7 +121,7 @@
                         height: 32px;
                         border-radius: 100%;
                         background: $main-white;
-                        top: 32%;
+                        top: 33%;
                         margin: 10px;
 
                         .icon {
@@ -176,8 +176,28 @@
                 border: $main-green 3px solid;
                 outline: none;
             }
+
+            #comment-text {
+                cursor: pointer;
+                color: $dark-green;
+
+                &:hover {
+                    color: $main-green;
+                }
+            }
         }
 
+
+    }
+
+    .customer-info {
+        color: $dark-green;
+        font-size: 16px;
+        font-weight: 300;
+        span {
+            margin-left: 10px;
+            color: $night-green;
+        }
     }
 
     .tab {
@@ -207,7 +227,9 @@
         display: none;
     }
 
-    .edit-btn {
+    .edit-btn,
+    .edit-btn-delivery,
+    .edit-btn-gifts {
         color: $edit-btn;
         font-size: 16px;
         font-weight: 400;

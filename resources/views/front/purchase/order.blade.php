@@ -15,12 +15,12 @@
                                 <div>
                                     <h4>1. Личные данные</h4>
                                     <p class="customer-info">Имя: <span class="customer-name"></span></p>
-                                    <p> Телефон: <span class="customer-phone"></span></p>
+                                    <p class="customer-info"> Телефон: <span class="customer-phone"></span></p>
                                 </div>
                                 <button class="edit-btn" type="button">Редактировать</button>
                             </div>
                         </div>
-                        <div class="order__order-form-group">
+                        <div class="order__order-form-group user-data">
                             <h4>1. Личные данные</h4>
                             <input class="default-input" type="text" name="customer_phone">
                             <input class="default-input" type="text" name="customer_name">
@@ -46,8 +46,8 @@
                             <button class="edit-btn-delivery" type="button">Редактировать</button>
                         </div>
                     </div>
+                    <h4 class="delivery-header">2. Доставка</h4>
                     <div class="order__order-form-group delivery-block">
-                        <h4>2. Доставка</h4>
 
                         <div class="d-flex">
                             <div class="delivery-tabs">
@@ -96,8 +96,8 @@
                         </div>
                     </div>
 
+                    <h4 class="gifts-header">3. Открытка и подарки</h4>
                     <div class="add-products">
-                        <h4>3. Открытка и подарки</h4>
                         <div class="gift">
                             <div id="giftCarousel" class="carousel slide carousel-fade">
                                 <div class="carousel-inner">
@@ -195,7 +195,7 @@
                             </div>
                         </div>
                         <div class="comment">
-                            <p>+ Добавить коментарий к заказу</p>
+                            <p id="comment-text">+ Добавить комментарий к заказу</p>
                         </div>
                         <div>
                             <input id="switch-call" class="custom-switch" type="checkbox" name="call">
