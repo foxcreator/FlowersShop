@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\UpdatePasswordController;
+use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +35,8 @@ Route::middleware(['set_locale'])->group(function () {
 		Route::get('/about', [\App\Http\Controllers\Front\PagesController::class, 'about'])->name('about');
 		Route::get('/contacts', [\App\Http\Controllers\Front\PagesController::class, 'contacts'])->name('contacts');
 		Route::get('/product/{id}', [\App\Http\Controllers\Front\PagesController::class, 'productShow'])->name('product');
-		Route::get('/purchase/order-page', [\App\Http\Controllers\Front\PagesController::class, 'orderPage'])->name('orderPage');
+		Route::get('/purchase/order-page', [\App\Http\Controllers\OrderController::class, 'index'])->name('orderPage');
+		Route::post('/purchase/order-store', [\App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
 		Route::post('/comments/create', [\App\Http\Controllers\Front\CommentsController::class, 'store'])->name('comments.store');
 		Route::get('/search', [\App\Http\Controllers\Front\SearchController::class, 'search'])->name('search');
         Route::get('/purchase/cart', [\App\Http\Controllers\Front\CartController::class, 'index'])->name('cart');

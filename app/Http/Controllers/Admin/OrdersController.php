@@ -10,13 +10,8 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::query()->orderBy('created_at', 'DESC')->get();
         return view('admin.orders.index', compact('orders'));
-    }
-
-    public function store(Request $request)
-    {
-        //ToDo make functionality for add order and get this order to crm
     }
 
     public function show(string $id)

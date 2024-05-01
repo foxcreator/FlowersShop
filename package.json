@@ -17,6 +17,7 @@
         "vite-plugin-svg-sprite": "^0.5.1"
     },
     "dependencies": {
+        "air-datepicker": "^3.5.0",
         "jquery": "^3.7.1",
         "nouislider": "^15.7.1"
     }

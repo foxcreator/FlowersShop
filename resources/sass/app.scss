@@ -11,6 +11,7 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+@import "air-datepicker/air-datepicker.css";
 @import "default";
 @import "header";
 @import "footer";
@@ -19,6 +20,7 @@
 @import "product";
 @import "login";
 @import "cart";
+@import "order";
 @import "parts/delimiter";
 @import "parts/novelty";
 @import "parts/categories";

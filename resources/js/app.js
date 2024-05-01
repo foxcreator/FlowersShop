@@ -6,3 +6,6 @@ import "./nav.js";
 
 import './cart';
 import './product-show.js';
+import 'air-datepicker';
+
+
