@@ -9,6 +9,21 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'customer_name',
+        'customer_phone',
+        'email',
+        'delivery_address',
+        'delivery_option',
+        'delivery_date',
+        'delivery_time',
+        'payment_method',
+        'amount',
+        'status',
+        'recipient_name',
+        'recipient_phone',
+    ];
+
     const DELIVERY_SELF = 'self';
     const DELIVERY_COURIER = 'courier';
 

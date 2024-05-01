@@ -31,6 +31,9 @@ class LoginController extends Controller
         }
 
         if (Auth::attempt($credentials)) {
+            if ($request->ajax()) {
+                return response(['login' => true]);
+            }
             if (\auth()->user()->isAdmin()) {
                 return redirect()->route('admin.dashboard');
             } else {

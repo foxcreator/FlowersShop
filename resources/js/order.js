@@ -97,17 +97,46 @@ $(document).ready(function() {
         $('.pay-block').hide();
     });
 
+    $('.edit-btn-gifts').on('click', function() {
+        $('.delivery-block').hide();
+        $('.user-data').hide();
+        $('.delivery-success').hide();
+        $('.add-products').show();
+        $('.gifts-success').hide();
+        $('.pay-block').hide();
+    });
+
     $('#delivery').on('click', function () {
-        $('#delivery-content').show()
+        $('#delivery-content').show();
         $('#self-delivery').removeClass('current-tab');
         $('#delivery').addClass('current-tab');
-    })
+
+        // Перевірка наявності прихованого поля і видалення його
+        if ($('#delivery_option').length > 0) {
+            $('#delivery_option').remove();
+        }
+    });
 
     $('#self-delivery').on('click', function () {
-        $('#delivery-content').hide()
+        $('#delivery-content').hide();
         $('#self-delivery').addClass('current-tab');
         $('#delivery').removeClass('current-tab');
-    })
+
+        // Перевірка наявності прихованого поля і видалення його
+        if ($('#delivery_option').length > 0) {
+            $('#delivery_option').remove();
+        }
+
+        // Створення та додавання нового прихованого поля для варіанту доставки "Самовивіз"
+        var hiddenInput = $('<input>').attr({
+            type: 'hidden',
+            id: 'delivery_option',
+            name: 'delivery_option',
+            value: 'self' // Значення для варіанту "Самовивіз"
+        });
+
+        $('#delivery-content').append(hiddenInput);
+    });
 
     $('#recipient').on('click', function () {
         $('.recipient').show()
@@ -120,5 +149,6 @@ $(document).ready(function() {
         $('#customer').addClass('current-tab');
         $('#recipient').removeClass('current-tab');
     })
+
 });
 

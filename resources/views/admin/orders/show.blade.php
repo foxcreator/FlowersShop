@@ -69,13 +69,12 @@
                                             </div>
                                             <div class="d-flex justify-content-between mb-3" style="border-bottom: 1px solid #4a5568">
                                                 <p>Дата доставки</p>
-                                                <h5 class="text-gray-dark">{{ \Carbon\Carbon::make($order->delivery_date)->format('d-m-Y') }}</h5>
+                                                <h5 class="text-gray-dark">{{ \Carbon\Carbon::make($order->delivery_date)->format('d.m.Y') }}</h5>
                                             </div>
                                             <div class="d-flex justify-content-between mb-3" style="border-bottom: 1px solid #4a5568">
                                                 <p>Время доставки</p>
                                                 <h5 class="text-gray-dark">
-                                                    {{ \Carbon\Carbon::make($order->delivery_time_from)->format('H:i') }}
-                                                    - {{ \Carbon\Carbon::make($order->delivery_time_to)->format('H:i') }}
+                                                    {{ $order->delivery_time }}
                                                 </h5>
                                             </div>
                                             <div class="d-flex justify-content-between mb-3" style="border-bottom: 1px solid #4a5568">
