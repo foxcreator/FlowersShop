@@ -200,6 +200,9 @@ button {
 
 .default-btn {
     width: 540px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: $main-green;
     color: $main-white;
     border: $main-green 1px solid;
@@ -212,5 +215,19 @@ button {
         background-color: $main-white;
         color: $main-green;
         transform: scale(1.03);
+    }
+}
+
+.logout-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: $main-danger;
+    &:hover {
+        background-color: $main-danger;
+        opacity: 0.9;
+        color: $main-white;
+        transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease, opacity 0.4s ease;
     }
 }

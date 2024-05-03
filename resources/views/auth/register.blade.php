@@ -8,9 +8,9 @@
             <form action="{{ route('register.store') }}" method="POST">
 
                 @csrf
-                <input type="email"
+                <input type="text"
                        name="phone"
-                       placeholder="Номер телефона или email"
+                       placeholder="Номер телефона"
                        value="{{ old('phone') }}"
                 >
                 @error('phone')

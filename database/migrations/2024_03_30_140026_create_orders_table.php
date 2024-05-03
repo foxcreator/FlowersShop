@@ -22,7 +22,7 @@ return new class extends Migration
             $table->time('delivery_time_from');
             $table->time('delivery_time_to');
             $table->enum('payment_method', ['cash', 'bank']);
-            $table->enum('status', ['received', 'progress', 'awaiting', 'executed'])->default('received');
+            $table->enum('status', ['received', 'progress', 'awaiting', 'executed', 'decline'])->default('received');
             $table->timestamps();
         });
     }
