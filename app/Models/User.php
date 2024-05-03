@@ -64,6 +64,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Order::class);
     }
 
+    public function favoriteProducts()
+    {
+        return $this->belongsToMany(Product::class, 'user_favorite_products', 'user_id', 'product_id');
+    }
+
     public function sendEmailVerificationNotification()
     {
         $this->notify(new EmailVerificationNotification());

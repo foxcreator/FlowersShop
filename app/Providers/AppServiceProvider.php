@@ -31,5 +31,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app['validator']->extend('password_check', function ($attribute, $value, $parameters, $validator) {
             return Hash::check($value, $parameters[0]);
         });
+
+        if (!isset($_COOKIE['cart_id'])) {
+            setcookie('cart_id', uniqid());
+        }
     }
 }
