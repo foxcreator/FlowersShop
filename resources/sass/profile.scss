@@ -1,0 +1,69 @@
+.profile {
+    &__wrapper {
+        padding: 30px 0 400px 0;
+    }
+
+    &__tabs {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 64px;
+        border-bottom: $border-tabs 1px solid;
+        font-size: 20px;
+        color: $text-green;
+        text-transform: uppercase;
+        max-width: 60%;
+
+        .tab {
+            position: relative;
+            top: 1px;
+            padding-bottom: 16px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+
+            &:hover {
+                color: $main-green;
+            }
+        }
+
+        .tab.active {
+            border-bottom: $dark-green 1px solid;
+        }
+    }
+
+    &__current-tab {
+        display: none;
+        flex-direction: column;
+        padding: 32px 0;
+
+        .change-data {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .change-password {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        button {
+            align-self: flex-end;
+        }
+    }
+
+    &__inner {
+        display: flex;
+        gap: 30px;
+    }
+
+    &__current-tab.active {
+        display: flex;
+    }
+
+
+}

@@ -10,5 +10,9 @@ return [
     'recipient_name' => 'Ім\'я одержувача',
     'text_postcard' => 'Текст листівки',
     'date' => 'Дата',
+    'current_password' => 'Поточний пароль',
+    'password' => 'Новий пароль',
+    'password_confirmation' => 'Повторіть новий пароль',
+    'save' => 'Зберегти',
 ];
 

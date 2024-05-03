@@ -71,9 +71,15 @@
                     </a>
                 </li>
                 <li>
+                    @auth()
+                        <a href="{{ route('front.user.profile') }}">
+                            @svg('user')
+                        </a>
+                    @else
                     <a href="{{ route('login') }}">
                         @svg('user')
                     </a>
+                    @endauth
                 </li>
             </ul>
         </div>
