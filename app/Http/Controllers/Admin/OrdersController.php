@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -25,6 +26,12 @@ class OrdersController extends Controller
         $order = Order::find($id);
         $order->status = $request->status;
         $order->save();
+
+        if ($order->user_id && $order->status === Order::ORDER_STATUS_EXECUTED) {
+            $user = User::find($order->user_id);
+            $user->balance =+ ($order->amount / 100) * 3;
+            $user->save();
+        }
         return redirect()->back()->with(['status' => 'Статус изменен']);
     }
 }

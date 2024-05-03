@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Order extends Model
 {
@@ -44,12 +45,22 @@ class Order extends Model
     const ORDER_STATUS_PROGRESS = 'progress';
     const ORDER_STATUS_AWAITING = 'awaiting';
     const ORDER_STATUS_EXECUTED = 'executed';
+    const ORDER_STATUS_DECLINE = 'decline';
 
     const ORDER_STATUSES = [
-        self::ORDER_STATUS_RECEIVED => 'Получен',
-        self::ORDER_STATUS_PROGRESS => 'В работе',
+        self::ORDER_STATUS_RECEIVED => 'Принят',
+        self::ORDER_STATUS_PROGRESS => 'В обработке',
         self::ORDER_STATUS_AWAITING => 'Ожидает доставки',
         self::ORDER_STATUS_EXECUTED => 'Выполнен',
+        self::ORDER_STATUS_DECLINE => 'Отменен',
+    ];
+
+    const ORDER_STATUSES_UA = [
+        self::ORDER_STATUS_RECEIVED => 'Прийнятий',
+        self::ORDER_STATUS_PROGRESS => 'Опрацьовується',
+        self::ORDER_STATUS_AWAITING => 'Очикує доставки',
+        self::ORDER_STATUS_EXECUTED => 'Виконаний',
+        self::ORDER_STATUS_DECLINE => 'Відхилено',
     ];
 
     public function orderProducts()
@@ -65,6 +76,15 @@ class Order extends Model
     public function getStatusNameAttribute(): string
     {
         return self::ORDER_STATUSES[$this->attributes['status']] ?? '';
+    }
+
+    public function getStatusNameMultiLangAttribute(): string
+    {
+        if (App::getLocale() === 'ru') {
+            return self::ORDER_STATUSES[$this->attributes['status']] ?? '';
+        }
+        return self::ORDER_STATUSES_UA[$this->attributes['status']] ?? '';
+
     }
 
     public function getPaymentMethodNameAttribute(): string

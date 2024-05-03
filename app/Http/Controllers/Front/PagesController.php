@@ -14,9 +14,6 @@ class PagesController extends Controller
 {
     public function index()
     {
-
-		$product = Product::find(103);
-//		dd($product->title);
         return view('front.pages.homepage');
     }
 

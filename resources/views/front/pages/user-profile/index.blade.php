@@ -8,9 +8,16 @@
                 <div class="tab active" data-tab="profile"><span>{{ __('profile.profile') }}</span></div>
                 <div class="tab" data-tab="orders"><span>{{ __('profile.orders') }}</span></div>
                 <div class="tab" data-tab="favorite"><span>{{ __('profile.favorite') }}</span></div>
+                <div class="tab" data-tab="bonus"><span>{{ __('profile.bonus') }}</span></div>
                 <div class="tab" data-tab="logout"><span>{{ __('profile.logout') }}</span></div>
             </div>
-            <form action="{{ route('front.update.profile', auth()->user()->getAuthIdentifier()) }}" method="POST" class="profile__current-tab active" id="profile">
+            <form action="{{ route('front.update.profile', auth()->user()->getAuthIdentifier()) }}"
+                  method="POST"
+                  class="profile__current-tab"
+                  id="profile"
+                  autocomplete="off"
+                  autocomplete="new-password"
+            >
                 <div class="profile__inner">
                     @csrf
 
@@ -48,6 +55,7 @@
                                placeholder="{{ __('placeholders.email') }}"
                                value="{{ old('email') ?: auth()->user()->email }}"
                                required
+                               autocomplete="new-password"
                         >
                         @if ($errors->has('email'))
                             <span class="invalid-feedback" role="alert">
@@ -94,31 +102,55 @@
                 <button type="submit" class="default-btn">{{ __('placeholders.save') }}</button>
 
             </form>
-            <div class="profile__current-tab" id="orders">
-                <div class="profile__inner">
+            <div class="profile__current-tab active" id="orders">
+                @if(auth()->user()->orders->isEmpty())
+                    <h4>У вас еще не было офрмлено ни одного заказа</h4>
+                    <a href="{{ route('front.catalog') }}" class="default-btn">Просмотр товаров</a>
+                @else
                     <h4>Мои заказы</h4>
-                    @foreach(auth()->user()->orders as $order)
-                        @dd($order->orderProducts)
-                    @endforeach
-                </div>
+                    <div class="profile__order-inner">
+                        @foreach(auth()->user()->orders as $order)
+                            <div class="profile__order">
+                                <div class="col-md-6">
+                                    <p>№ {{ $order->id }} от {{ \Carbon\Carbon::create($order->created_at)->format('d.m.y') }}</p>
+                                    @foreach($order->orderProducts as $item)
+                                        <h5>{{ $item->product->title }}</h5>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-4">
+                                    <p>Сумма заказа</p>
+                                    <h5>₴ {{ intval($order->amount) }}</h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <p>Статус</p>
+                                    <h5>{{ $order->statusNameMultiLang }}</h5>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
             <div class="profile__current-tab" id="favorite">3</div>
-            <div class="profile__current-tab" id="logout">4</div>
+            <div class="profile__current-tab" id="bonus">
+                <h4>Мои бонусы</h4>
+                <div class="profile__inner">
+                    <h1 class="profile__balance">₴ {{ auth()->user()->balance }}</h1>
+                </div>
+            </div>
+            <div class="profile__current-tab" id="logout">
+                <h4>Вы уверены что хотите выйти из личного кабинета?</h4>
+                <a href="{{ route('logout') }}" class="default-btn logout-btn">Выйти @svg('logout')</a>
+            </div>
         </div>
     </div>
     <script>
         $(document).ready(function () {
             $('.tab').click(function () {
-                // Знаходимо ID поточного таба
                 var currentTabId = $(this).data('tab');
 
-                // Приховуємо всі поточні вкладки
                 $('.profile__current-tab').hide();
-
-                // Відображаємо поточну вкладку, пов'язану з вибраним табом
                 $('#' + currentTabId).fadeIn();
 
-                // Позначаємо вибраний таб як активний
                 $('.tab').removeClass('active');
                 $(this).addClass('active');
             });

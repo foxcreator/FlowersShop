@@ -12,7 +12,7 @@
         font-size: 20px;
         color: $text-green;
         text-transform: uppercase;
-        max-width: 60%;
+        max-width: 80%;
 
         .tab {
             position: relative;
@@ -61,9 +61,37 @@
         gap: 30px;
     }
 
+    &__order-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 16px;
+    }
+
+    &__order {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        border: $dark-green 1px solid;
+        padding: 32px;
+
+        p {
+            color: $text-gray;
+        }
+    }
+
+    &__balance {
+        font-size: 64px;
+        color: $main-green;
+    }
+
     &__current-tab.active {
         display: flex;
     }
 
+    .icon-logout {
+        stroke: $main-white;
+        width: 20px;
+    }
 
 }

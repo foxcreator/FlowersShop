@@ -8,4 +8,5 @@ return [
     'logout' => 'Выйти',
     'my_data' => 'Мои данные',
     'change_password' => 'Смена пароля',
+    'bonus' => 'Бонусы'
 ];
