@@ -184,6 +184,21 @@
         }
     }
 
+    &__favorite {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        .icon {
+            stroke: $main-white;
+        }
+
+        &:hover {
+            .icon {
+                stroke: $main-green;
+            }
+        }
+    }
+
     &__paginate {
         display: flex;
         justify-content: center;
@@ -192,6 +207,18 @@
     }
 }
 
+.is-favorite {
+    .icon {
+        fill: $main-green;
+        stroke: none;
+    }
+
+    &:hover {
+        .icon {
+            stroke: $main-white;
+        }
+    }
+}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }

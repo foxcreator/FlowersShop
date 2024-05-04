@@ -52,7 +52,7 @@ class OrderController extends Controller
         DB::commit();
         if ($order) {
             \Cart::clear();
-            return redirect()->back()->with(['success' => 'Заказ в обработке']);
+            return redirect()->back()->with(['success' => __('statuses.order-create')]);
         }
 
         return redirect()->back();

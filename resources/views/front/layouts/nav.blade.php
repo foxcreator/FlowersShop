@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('front.favorites') }}">
                         @svg('heart')
                     </a>
                 </li>

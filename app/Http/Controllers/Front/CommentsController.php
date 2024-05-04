@@ -12,6 +12,6 @@ class CommentsController extends Controller
     {
         Comment::create($request->validated());
 
-        return redirect()->back();
+        return redirect()->back()->with(['success' => __('statuses.comment-add')]);
     }
 }

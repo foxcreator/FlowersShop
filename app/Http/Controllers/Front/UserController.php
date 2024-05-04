@@ -21,7 +21,7 @@ class UserController extends Controller
         unset($data['current_password']);
 
         if ($user->update($data)) {
-            return redirect()->back()->with(['success' => 'Данные успешно обновлены']);
+            return redirect()->back()->with(['success' => __('statuses.data-update')]);
         }
         return redirect()->back()-with(['error' => ' Something went wrong']);
     }

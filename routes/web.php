@@ -43,6 +43,8 @@ Route::middleware(['set_locale'])->group(function () {
         Route::post('/add-to-cart', [\App\Http\Controllers\Front\CartController::class, 'addToCart'])->name('addToCart');
         Route::post('/remove-from-cart/{id}', [\App\Http\Controllers\Front\CartController::class, 'removeItem'])->name('removeItem');
         Route::post('/update-cart-quantity', [\App\Http\Controllers\Front\CartController::class, 'updateQuantity'])->name('updateQuantity');
+        Route::post('/toggle-favorite', [\App\Http\Controllers\Front\FavoriteProductController::class, 'toggleFavorite']);
+        Route::get('/favorites', [\App\Http\Controllers\Front\FavoriteProductController::class, 'index'])->name('favorites')->middleware('auth');
 
         Route::get('/user/profile', [\App\Http\Controllers\Front\UserController::class, 'index'])->name('user.profile')->middleware('auth');
         Route::post('/user/update-profile/{id}', [\App\Http\Controllers\Front\UserController::class, 'update'])->name('update.profile')->middleware('auth');

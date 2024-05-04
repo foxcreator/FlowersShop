@@ -13,10 +13,9 @@
             </div>
             <form action="{{ route('front.update.profile', auth()->user()->getAuthIdentifier()) }}"
                   method="POST"
-                  class="profile__current-tab"
+                  class="profile__current-tab active"
                   id="profile"
                   autocomplete="off"
-                  autocomplete="new-password"
             >
                 <div class="profile__inner">
                     @csrf
@@ -102,7 +101,7 @@
                 <button type="submit" class="default-btn">{{ __('placeholders.save') }}</button>
 
             </form>
-            <div class="profile__current-tab active" id="orders">
+            <div class="profile__current-tab" id="orders">
                 @if(auth()->user()->orders->isEmpty())
                     <h4>У вас еще не было офрмлено ни одного заказа</h4>
                     <a href="{{ route('front.catalog') }}" class="default-btn">Просмотр товаров</a>
@@ -130,7 +129,11 @@
                     </div>
                 @endif
             </div>
-            <div class="profile__current-tab" id="favorite">3</div>
+            <div class="profile__current-tab" id="favorite">
+                @include('front.pages.favorites.parts.favorites', ['products' => auth()->user()->favoriteProducts()->get()])
+
+                <a href="{{ route('front.catalog') }}" class="default-btn">Просмотр товаров</a>
+            </div>
             <div class="profile__current-tab" id="bonus">
                 <h4>Мои бонусы</h4>
                 <div class="profile__inner">
