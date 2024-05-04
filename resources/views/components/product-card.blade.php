@@ -1,5 +1,8 @@
 @php
+$isFavorite = false;
+if (auth()->hasUser()) {
     $isFavorite = auth()->user()->favoriteProducts()->where('product_id', $product->id)->exists();
+}
 @endphp
 
 <div class="{{ $style }}__product-card">
@@ -38,6 +41,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: (data) => {
+                console.log(data)
                 showToast('toast-success', data.data);
             },
             error: (xhr) => {

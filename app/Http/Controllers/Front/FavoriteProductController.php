@@ -26,7 +26,6 @@ class FavoriteProductController extends Controller
             $user->favoriteProducts()->detach($product->id);
             return response()->json(['status' => 'delete']);
         } else {
-            // Если связь не существует, добавляем её
             $user->favoriteProducts()->attach($product->id);
             return response()->json(['status' => 'add']);
         }

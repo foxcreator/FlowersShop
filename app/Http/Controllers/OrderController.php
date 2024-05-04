@@ -18,7 +18,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        \Cart::session($_COOKIE['cart_id']);
+        \Cart::session(session('cart_id'));
         $total = \Cart::getTotal();
         $cart = \Cart::getContent();
 

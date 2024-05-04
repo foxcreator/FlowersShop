@@ -235,7 +235,7 @@
                     <a href="{{ route('front.cart') }}">Редактировать</a>
                 </div>
                 <div class="order__sum--cart">
-                    @foreach(\Cart::session($_COOKIE['cart_id'])->getContent() as $product)
+                    @foreach(\Cart::session(session('cart_id'))->getContent() as $product)
                         <div class="order__sum--product">
                             <div class="d-flex gap-2">
                                 <img src="{{ $product->attributes->img }}" alt="{{ $product->title }}">
@@ -256,7 +256,7 @@
                     </div>
                     <div class="block">
                         <p>Всего к оплате:</p>
-                        <h3>₴ {{ \Cart::session($_COOKIE['cart_id'])->getTotal() }}</h3>
+                        <h3>₴ {{ \Cart::session(session('cart_id'))->getTotal() }}</h3>
                     </div>
                 </div>
             </div>

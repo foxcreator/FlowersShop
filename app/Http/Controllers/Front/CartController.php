@@ -7,24 +7,24 @@ use App\Models\Product;
 use Darryldecode\Cart\Cart;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
     public function index()
     {
-        $cartData = \Cart::session($_COOKIE['cart_id'])->getContent();
+        $cartData = \Cart::session(session('cart_id'))->getContent();
         return view('front.purchase.cart', compact('cartData'));
     }
 
     public function addToCart(Request $request)
     {
-
-        if (!isset($_COOKIE['cart_id'])) {
-            setcookie('cart_id', uniqid());
+        if (session('cart_id') === null) {
+            Session::put('cart_id', uniqid());
         }
 
         $product = Product::find($request->id);
-        $cartId = $_COOKIE['cart_id'];
+        $cartId = session('cart_id');
 
         \Cart::session($cartId);
 
@@ -45,20 +45,23 @@ class CartController extends Controller
                 'img' => $product->thumbnailUrl,
             ],
         ]);
+        if (\Cart::get($product->id)) {
+            return response()->json(['data' => __('cart.add-product')]);
+        }
 
-        return response()->json(['data' => __('cart.add-product')]);
+        return \response()->json(['error' => 'Smth went wrong'], 422);
     }
 
     public function removeItem($id)
     {
-        \Cart::session($_COOKIE['cart_id'])->remove($id);
+        \Cart::session(session('cart_id'))->remove($id);
 
         return redirect()->back();
     }
 
     public function updateQuantity(Request $request)
     {
-        \Cart::session($_COOKIE['cart_id']);
+        \Cart::session(session('cart_id'));
         $cartItem = \Cart::get($request->id);
         $product = Product::find($request->id);
 
