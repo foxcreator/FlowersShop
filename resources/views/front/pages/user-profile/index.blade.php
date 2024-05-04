@@ -16,7 +16,6 @@
                   class="profile__current-tab active"
                   id="profile"
                   autocomplete="off"
-                  autocomplete="new-password"
             >
                 <div class="profile__inner">
                     @csrf

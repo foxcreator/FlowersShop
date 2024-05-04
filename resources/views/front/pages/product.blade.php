@@ -1,6 +1,9 @@
 @extends('front.layouts.app')
 @section('content')
-    <section class="product-show" style="padding: 150px">
+    @php
+        $isFavorite = auth()->user()->favoriteProducts()->where('product_id', $product->id)->exists();
+    @endphp
+    <section class="product-show container" style="padding-top: 150px">
 
         <div class="product-show__top">
             <div class="product-show__gallery">
@@ -13,7 +16,10 @@
             </div>
             <div class="product-show__info">
                 <div class="product-show__text">
-                    <h1>{{ $product->title }}</h1>
+                    <div class="d-flex justify-content-between align-items-center gap-3">
+                        <h1>{{ $product->title }}</h1>
+                        <div class="product-show__favorite @if($isFavorite) is-favorite @endif" id="favorite_{{ $product->id }}" data-product-id="{{ $product->id }}">@svg('heart')</div>
+                    </div>
                     <p class="article">Артикул {{ $product->article }}</p>
                 </div>
                 <form class="product-show__buy-block">
@@ -110,7 +116,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: (data) => {
-                    showToast('toast-success', 'Товар добавлен в корзину');
+                    showToast('toast-success', '{{ __('statuses.cart_add') }}');
                 },
                 error: (xhr) => {
                     showToast('toast-error', xhr.responseJSON.error);
@@ -215,6 +221,34 @@
                 var quantity = parseInt($('.quantity-field').val());
                 $('.price').text(quantity * pricePerUnit);
             }
+        });
+
+        $('#favorite_{{ $product->id }}').on('click', function() {
+            var productId = $(this).data('product-id');
+            var $button = $(this);
+
+            $.ajax({
+                url: '/toggle-favorite',
+                type: 'POST',
+                data: {
+                    id: productId
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if (response.status === 'add') {
+                        $button.addClass('is-favorite');
+                        showToast('toast-success', '{{ __('statuses.favorite_add') }}');
+                    } else if (response.status === 'delete') {
+                        $button.removeClass('is-favorite');
+                        showToast('toast-success', '{{ __('statuses.favorite_delete') }}');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
         });
     </script>
 @endsection

@@ -32,8 +32,7 @@ $(document).ready(function() {
     $('.submit-user').on('click', function() {
         var phone = $('[name="customer_phone"]').val();
         var name = $('[name="customer_name"]').val();
-        console.log(name, phone)
-        // Валидация формы
+
         if (phone && name) {
             $('.order__order-form-group').hide();
             $('.user-success').show();

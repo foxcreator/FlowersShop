@@ -38,7 +38,6 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: (data) => {
-                console.log('success')
                 showToast('toast-success', data.data);
             },
             error: (xhr) => {
@@ -49,8 +48,8 @@
     }
 
     $('#favorite_{{ $product->id }}').on('click', function() {
-        var productId = $(this).data('product-id'); // Получаем ID продукта из data-атрибута кнопки
-        var $button = $(this); // Сохраняем ссылку на кнопку в переменной
+        var productId = $(this).data('product-id');
+        var $button = $(this);
 
         $.ajax({
             url: '/toggle-favorite',
@@ -63,9 +62,11 @@
             },
             success: function(response) {
                 if (response.status === 'add') {
-                    $button.addClass('is-favorite'); // Добавляем класс is-favorite только к кнопке, на которую был произведен клик
+                    $button.addClass('is-favorite');
+                    showToast('toast-success', '{{ __('statuses.favorite_add') }}');
                 } else if (response.status === 'delete') {
-                    $button.removeClass('is-favorite'); // Удаляем класс is-favorite только у кнопки, на которую был произведен клик
+                    $button.removeClass('is-favorite');
+                    showToast('toast-success', '{{ __('statuses.favorite_delete') }}');
                 }
             },
             error: function(xhr, status, error) {
