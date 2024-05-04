@@ -214,8 +214,8 @@
                         </div>
                         @auth
                         <div class="bonus">
-                            <p>Списать баллы</p>
-                            <input class="default-input" type="text" name="bonus" placeholder="Введите сумму">
+                            <input class="default-input" type="text" name="bonus" id="bonus" placeholder="Введите сумму">
+                            <a id="pay-bonus" href="#">Оплатить балами</a>
                         </div>
                         @endauth
                         <div class="comment">
@@ -256,7 +256,7 @@
                     </div>
                     <div class="block">
                         <p>Всего к оплате:</p>
-                        <h3>₴ {{ \Cart::session(session('cart_id'))->getTotal() }}</h3>
+                        <h3>₴ <span id="total">{{ \Cart::session(session('cart_id'))->getTotal() }}</span></h3>
                     </div>
                 </div>
             </div>
@@ -319,6 +319,41 @@
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
                         alert('Произошла ошибка при авторизации. Пожалуйста, попробуйте еще раз.');
+                    }
+                });
+            });
+
+            $('#pay-bonus').click(function(event) {
+                // Предотвращаем переход по ссылке по умолчанию
+                event.preventDefault();
+
+                // Получаем значение из поля ввода
+                var bonusValue = $('#bonus').val();
+                var total = $('#total').text();
+                console.log(total);
+
+                // Отправляем AJAX-запрос на сервер
+                $.ajax({
+                    url: '{{ route('front.order.bonus') }}',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-Token': "{{ csrf_token() }}"
+                    },
+                    data: { bonus: bonusValue }, // Передаем значение поля ввода на сервер
+                    success: function(response) {
+                        if (response.status === 200) {
+                            $('#total').text(total - bonusValue)
+                            $('#bonus').prop('readonly', true);
+                            $('#pay-bonus').removeAttr('href').css('cursor', 'default').addClass('no-active');
+                            showToast('toast-success', 'Бонус применен');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr);
+                        if (xhr.status === 422) {
+                            showToast('toast-error', xhr.responseJSON.message);
+                        }
+                        console.error('Произошла ошибка при отправке запроса:', status, error);
                     }
                 });
             });

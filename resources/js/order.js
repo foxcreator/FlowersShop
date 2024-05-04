@@ -25,7 +25,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('.delivery-block').hide();
     $('.add-products').hide();
-    $('.pay-block').hide();
+    $('.pay-block').show();
     $('.delivery-success').hide();
     $('.gifts-success').hide();
 

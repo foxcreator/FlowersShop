@@ -18,9 +18,15 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
         \Cart::session(session('cart_id'));
         $total = \Cart::getTotal();
         $cart = \Cart::getContent();
+        if (isset($data['bonus'])) {
+            $total = \Cart::getTotal() - $data['bonus'];
+            $newBalance = auth()->user()->balance - $data['bonus'];
+            auth()->user()->update(['balance' => $newBalance]);
+        }
 
         $entityToDb['customer_name'] = $data['customer_name'];
         $entityToDb['customer_phone'] = $data['customer_phone'];
@@ -56,5 +62,23 @@ class OrderController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function payWithBonuses(Request $request)
+    {
+        $validatedData = $request->validate([
+            'bonus' => 'required|numeric', // Поле 'bonus' должно быть обязательным и числовым
+        ],
+        [
+            'bonus.required' => 'Поле сумма обязательно для заполнения.',
+            'bonus.numeric' => 'Поле сумма должно быть числовым.',
+        ]);
+
+        $user = auth()->user();
+        if ($user->balance < $validatedData['bonus']) {
+            return response()->json(['message' => "Недостаточно бонусов для списания. Доступно: $user->balance"], 422);
+        }
+
+        return response()->json(['status' => 200]);
     }
 }
