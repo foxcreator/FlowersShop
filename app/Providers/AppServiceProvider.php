@@ -7,6 +7,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,8 +33,6 @@ class AppServiceProvider extends ServiceProvider
             return Hash::check($value, $parameters[0]);
         });
 
-        if (!isset($_COOKIE['cart_id'])) {
-            setcookie('cart_id', uniqid());
-        }
+        Session::put('cart_id', uniqid());
     }
 }

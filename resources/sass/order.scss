@@ -194,14 +194,26 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                position: relative;
 
                 p{
                     font-size: 18px;
 
                 }
                 input {
-                    width: 50%;
+                    width: 100%;
                     height: 50px;
+                }
+
+                a {
+                    color: $main-green;
+                    position: absolute;
+                    font-size: 20px;
+                    right: 15px;
+                }
+
+                .no-active {
+                    color: $text-green;
                 }
             }
         }
@@ -358,6 +370,23 @@
                 }
             }
         }
+    }
+}
+
+.success-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 400px;
+    background-color: $main-white;
+    padding: 200px 110px;
+
+    h1 {
+        font-size: 48px;
+        font-weight: 200;
+        color: $night-green;
     }
 }
 

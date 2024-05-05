@@ -1,5 +1,8 @@
 @extends('front.layouts.app')
 @section('content')
+    @php
+    $userBalance = isset(auth()->user()->balance) ? auth()->user()->balance : 0;
+    @endphp
     <div class="container">
         <h1>Оформление заказа</h1>
         <div class="order">
@@ -214,8 +217,8 @@
                         </div>
                         @auth
                         <div class="bonus">
-                            <p>Списать баллы</p>
-                            <input class="default-input" type="text" name="bonus" placeholder="Введите сумму">
+                            <input class="default-input" type="text" name="bonus" id="bonus" placeholder="Введите сумму">
+                            <a id="pay-bonus" href="#">Оплатить балами</a>
                         </div>
                         @endauth
                         <div class="comment">
@@ -225,40 +228,15 @@
                             <input id="switch-call" class="custom-switch" type="checkbox" name="call" value="1">
                             <label for="switch-call">Не звонить для подтверждения</label>
                         </div>
+                        @auth
+                        <input type="hidden" name="user_id" value="{{ auth()->user()->getAuthIdentifier() }}">
+                        @endauth
                         <button type="submit" class="default-btn">Оформить заказ</button>
                     </div>
                 </div>
             </form>
             <div class="order__sum">
-                <div class="order__sum--header">
-                    <h3>Ваш заказ</h3>
-                    <a href="{{ route('front.cart') }}">Редактировать</a>
-                </div>
-                <div class="order__sum--cart">
-                    @foreach(\Cart::session($_COOKIE['cart_id'])->getContent() as $product)
-                        <div class="order__sum--product">
-                            <div class="d-flex gap-2">
-                                <img src="{{ $product->attributes->img }}" alt="{{ $product->title }}">
-                                <div class="text-block">
-                                    <h4>{{ $product->name }}</h4>
-                                    <p>Количество: {{ $product->quantity }}</p>
-                                    <p>Упаковка: крафт</p>
-                                </div>
-                            </div>
-                            <p>₴ {{ $product->getPriceSum() }}</p>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="order__sum--total">
-                    <div class="block">
-                        <p>Доставка:</p>
-                        <p>Бесплатно</p>
-                    </div>
-                    <div class="block">
-                        <p>Всего к оплате:</p>
-                        <h3>₴ {{ \Cart::session($_COOKIE['cart_id'])->getTotal() }}</h3>
-                    </div>
-                </div>
+                @include('front.purchase.parts.order-cart')
             </div>
         </div>
     </div>
@@ -285,23 +263,22 @@
                         .attr('src', '{{ asset('front/images/ok.png') }}')
                         .addClass('d-block add-product-img')
                         .attr('data-product-id', response.productId)
-
                     $currentImg.before($newImg);
+                    $('.order__sum').html(response.html)
                 },
-                error: function (xhr, status, error) {
+                error: function (xhr) {
                     console.error(xhr.responseText);
                 }
             });
         });
 
         $(document).ready(function () {
-
             $('.submit-login').click(function () {
                 var credential = $('input[name="credential"]').val();
                 var password = $('input[name="password"]').val();
 
                 $.ajax({
-                    url: "{{ route('login.store') }}", // Замените на URL вашего обработчика авторизации
+                    url: "{{ route('login.store') }}",
                     type: 'POST',
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest',
@@ -322,7 +299,43 @@
                     }
                 });
             });
-        });
 
+            $('#bonus').on('input', function() {
+                var max = "{{ $userBalance }}";
+                if (parseInt($(this).val()) > max) {
+                    $(this).val(parseInt(max));
+                }
+            });
+
+            $('#pay-bonus').click(function(event) {
+                event.preventDefault();
+
+                var bonusValue = $('#bonus').val();
+                var total = $('#total').text();
+                console.log(total);
+
+                $.ajax({
+                    url: '{{ route('front.order.bonus') }}',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-Token': "{{ csrf_token() }}"
+                    },
+                    data: { bonus: bonusValue },
+                    success: function(response) {
+                        if (response.status === 200) {
+                            $('#total').text(total - bonusValue)
+                            $('#bonus').prop('readonly', true);
+                            $('#pay-bonus').removeAttr('href').css('cursor', 'default').addClass('no-active');
+                            showToast('toast-success', 'Бонус применен');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        if (xhr.status === 422) {
+                            showToast('toast-error', xhr.responseJSON.message);
+                        }
+                    }
+                });
+            });
+        });
     </script>
 @endsection

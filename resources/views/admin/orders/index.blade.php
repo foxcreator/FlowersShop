@@ -24,6 +24,7 @@
                                     <th>Телефон</th>
                                     <th>Метод оплаты</th>
                                     <th>Статус заказа</th>
+                                    <th>Оплачен</th>
                                     <th class="text-right">Действия</th>
                                 </tr>
                                 </thead>
@@ -35,6 +36,11 @@
                                         <td>{{ $order->customer_phone }}</td>
                                         <td>{{ $order->payment_method_name }}</td>
                                         <td>{{ $order->statusName }}</td>
+                                        @if($order->is_paid)
+                                            <td>Оплачен</td>
+                                        @else
+                                            <td>Не оплачен</td>
+                                        @endif
 
                                         <td class="text-right">
                                             <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-secondary btn-xs">Информация</a>

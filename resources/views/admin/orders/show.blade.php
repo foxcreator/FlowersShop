@@ -106,8 +106,13 @@
                                             </div>
                                             <div class="d-flex justify-content-between mb-3"
                                                  style="border-bottom: 1px solid #4a5568">
-                                                <p>Сумма заказа</p>
+                                                <p>Всего к оплате</p>
                                                 <h5 class="text-gray-dark">{{ $order->amount }}</h5>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-3"
+                                                 style="border-bottom: 1px solid #4a5568">
+                                                <p>Оплачено бонусами</p>
+                                                <h5 class="text-gray-dark">{{ $order->pay_with_bonus }}</h5>
                                             </div>
                                         </div>
                                         <div class="col-md-12">

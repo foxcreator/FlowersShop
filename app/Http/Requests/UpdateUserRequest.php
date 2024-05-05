@@ -27,8 +27,8 @@ class UpdateUserRequest extends FormRequest
             'full_name' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-            'current_password' => 'required|string|min:8|password_check:' . $user->password,
-            'password' => 'required|string|min:8|confirmed',
+            'current_password' => 'nullable|string|min:8|password_check:' . $user->password,
+            'password' => 'nullable|string|min:8|confirmed',
         ];
     }
 

@@ -82,8 +82,8 @@ class PagesController extends Controller
 
         $randomProducts = Product::inRandomOrder()->limit(5)->get();
 		$product = Product::find($id);
-        $cartQuantity = isset(\Cart::session($_COOKIE['cart_id'])->getContent()[$id]) ?
-            \Cart::session($_COOKIE['cart_id'])->getContent()[$id]->quantity : 0;
+        $cartQuantity = isset(\Cart::session(session('cart_id'))->getContent()[$id]) ?
+            \Cart::session(session('cart_id'))->getContent()[$id]->quantity : 0;
 
         $comments = Comment::query()->where('product_id', $id);
         $currentPage = $request->query('page') ?: 1;
