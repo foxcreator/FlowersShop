@@ -263,7 +263,6 @@
                         .attr('src', '{{ asset('front/images/ok.png') }}')
                         .addClass('d-block add-product-img')
                         .attr('data-product-id', response.productId)
-                    console.log(response);
                     $currentImg.before($newImg);
                     $('.order__sum').html(response.html)
                 },
@@ -279,7 +278,7 @@
                 var password = $('input[name="password"]').val();
 
                 $.ajax({
-                    url: "{{ route('login.store') }}", // Замените на URL вашего обработчика авторизации
+                    url: "{{ route('login.store') }}",
                     type: 'POST',
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest',
@@ -309,22 +308,19 @@
             });
 
             $('#pay-bonus').click(function(event) {
-                // Предотвращаем переход по ссылке по умолчанию
                 event.preventDefault();
 
-                // Получаем значение из поля ввода
                 var bonusValue = $('#bonus').val();
                 var total = $('#total').text();
                 console.log(total);
 
-                // Отправляем AJAX-запрос на сервер
                 $.ajax({
                     url: '{{ route('front.order.bonus') }}',
                     method: 'POST',
                     headers: {
                         'X-CSRF-Token': "{{ csrf_token() }}"
                     },
-                    data: { bonus: bonusValue }, // Передаем значение поля ввода на сервер
+                    data: { bonus: bonusValue },
                     success: function(response) {
                         if (response.status === 200) {
                             $('#total').text(total - bonusValue)
@@ -334,15 +330,12 @@
                         }
                     },
                     error: function(xhr, status, error) {
-                        console.log(xhr);
                         if (xhr.status === 422) {
                             showToast('toast-error', xhr.responseJSON.message);
                         }
-                        console.error('Произошла ошибка при отправке запроса:', status, error);
                     }
                 });
             });
         });
-
     </script>
 @endsection

@@ -72,7 +72,7 @@ class OrderController extends Controller
     public function payWithBonuses(Request $request)
     {
         $validatedData = $request->validate([
-            'bonus' => 'required|numeric', // Поле 'bonus' должно быть обязательным и числовым
+            'bonus' => 'required|numeric',
         ],
         [
             'bonus.required' => 'Поле сумма обязательно для заполнения.',
