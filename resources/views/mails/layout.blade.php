@@ -95,7 +95,7 @@
 
                 <tr style="width: 100%">
                     <td>
-                        <p style="font-size: 20px; font-weight: bold; color: #98A88F; text-align: left">З любов'ю, {{ config('app.name') }}</p>
+                        <p style="font-size: 20px; font-weight: bold; color: #98A88F; text-align: left">З любов'ю, The Lotus</p>
                     </td>
                     <td>
                         <a style="margin-left: 10px" href="#"><img src="{{ asset('front/images/instagram-logo.png') }}" alt="Instagram"></a>

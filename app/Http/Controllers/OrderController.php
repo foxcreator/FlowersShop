@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Notifications\OrderConfirmationNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class OrderController extends Controller
 {
@@ -17,6 +20,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+
         $data = $request->all();
 
         \Cart::session(session('cart_id'));
@@ -50,6 +54,7 @@ class OrderController extends Controller
         $entityToDb['pay_with_bonus'] = $data['bonus'];
         $entityToDb['delivery_address'] = $data['city'].', '.$data['street'].' '.$data['house'].', '.$data['flat'];
 
+
         DB::beginTransaction();
         $order = Order::create($entityToDb);
         foreach ($cart as $product) {
@@ -62,6 +67,7 @@ class OrderController extends Controller
         }
         DB::commit();
         if ($order) {
+            Mail::to($entityToDb['email'])->send(new OrderConfirmationNotification($order));
             \Cart::clear();
             return redirect()->route('front.order.success')->with(['success' => __('statuses.order-create')]);
         }
