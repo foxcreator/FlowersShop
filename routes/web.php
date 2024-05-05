@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/locale/{locale}', \App\Http\Controllers\LocaleController::class)->name('locale');
 Route::get('/test', function () {
-    return view('welcome');
+    $order = \App\Models\Order::find(27);
+    return view('mails.order-success', compact('order'));
 });
 Route::middleware(['set_locale'])->group(function () {
 	Route::get('/', [\App\Http\Controllers\Front\PagesController::class, 'index'])->name('home');
