@@ -105,7 +105,7 @@
                 @else
                     <h4>Мои заказы</h4>
                     <div class="profile__order-inner">
-                        @foreach(auth()->user()->orders as $order)
+                        @foreach(auth()->user()->orders()->orderByDesc('id')->get() as $order)
                             <div class="profile__order">
                                 <div class="col-md-6">
                                     <p>№ {{ $order->id }} от {{ \Carbon\Carbon::create($order->created_at)->format('d.m.y') }}</p>
