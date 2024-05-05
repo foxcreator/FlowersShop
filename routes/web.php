@@ -37,6 +37,7 @@ Route::middleware(['set_locale'])->group(function () {
 		Route::get('/product/{id}', [\App\Http\Controllers\Front\PagesController::class, 'productShow'])->name('product');
 		Route::get('/purchase/order-page', [\App\Http\Controllers\OrderController::class, 'index'])->name('orderPage');
 		Route::post('/purchase/order-store', [\App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
+		Route::get('/purchase/order-success', [\App\Http\Controllers\OrderController::class, 'orderSuccess'])->name('order.success');
 		Route::post('/comments/create', [\App\Http\Controllers\Front\CommentsController::class, 'store'])->name('comments.store');
 		Route::get('/search', [\App\Http\Controllers\Front\SearchController::class, 'search'])->name('search');
         Route::get('/purchase/cart', [\App\Http\Controllers\Front\CartController::class, 'index'])->name('cart');

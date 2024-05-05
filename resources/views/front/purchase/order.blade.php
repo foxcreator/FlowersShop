@@ -1,5 +1,8 @@
 @extends('front.layouts.app')
 @section('content')
+    @php
+    $userBalance = isset(auth()->user()->balance) ? auth()->user()->balance : 0;
+    @endphp
     <div class="container">
         <h1>Оформление заказа</h1>
         <div class="order">
@@ -225,40 +228,15 @@
                             <input id="switch-call" class="custom-switch" type="checkbox" name="call" value="1">
                             <label for="switch-call">Не звонить для подтверждения</label>
                         </div>
+                        @auth
+                        <input type="hidden" name="user_id" value="{{ auth()->user()->getAuthIdentifier() }}">
+                        @endauth
                         <button type="submit" class="default-btn">Оформить заказ</button>
                     </div>
                 </div>
             </form>
             <div class="order__sum">
-                <div class="order__sum--header">
-                    <h3>Ваш заказ</h3>
-                    <a href="{{ route('front.cart') }}">Редактировать</a>
-                </div>
-                <div class="order__sum--cart">
-                    @foreach(\Cart::session(session('cart_id'))->getContent() as $product)
-                        <div class="order__sum--product">
-                            <div class="d-flex gap-2">
-                                <img src="{{ $product->attributes->img }}" alt="{{ $product->title }}">
-                                <div class="text-block">
-                                    <h4>{{ $product->name }}</h4>
-                                    <p>Количество: {{ $product->quantity }}</p>
-                                    <p>Упаковка: крафт</p>
-                                </div>
-                            </div>
-                            <p>₴ {{ $product->getPriceSum() }}</p>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="order__sum--total">
-                    <div class="block">
-                        <p>Доставка:</p>
-                        <p>Бесплатно</p>
-                    </div>
-                    <div class="block">
-                        <p>Всего к оплате:</p>
-                        <h3>₴ <span id="total">{{ \Cart::session(session('cart_id'))->getTotal() }}</span></h3>
-                    </div>
-                </div>
+                @include('front.purchase.parts.order-cart')
             </div>
         </div>
     </div>
@@ -285,17 +263,17 @@
                         .attr('src', '{{ asset('front/images/ok.png') }}')
                         .addClass('d-block add-product-img')
                         .attr('data-product-id', response.productId)
-
+                    console.log(response);
                     $currentImg.before($newImg);
+                    $('.order__sum').html(response.html)
                 },
-                error: function (xhr, status, error) {
+                error: function (xhr) {
                     console.error(xhr.responseText);
                 }
             });
         });
 
         $(document).ready(function () {
-
             $('.submit-login').click(function () {
                 var credential = $('input[name="credential"]').val();
                 var password = $('input[name="password"]').val();
@@ -321,6 +299,13 @@
                         alert('Произошла ошибка при авторизации. Пожалуйста, попробуйте еще раз.');
                     }
                 });
+            });
+
+            $('#bonus').on('input', function() {
+                var max = "{{ $userBalance }}";
+                if (parseInt($(this).val()) > max) {
+                    $(this).val(parseInt(max));
+                }
             });
 
             $('#pay-bonus').click(function(event) {

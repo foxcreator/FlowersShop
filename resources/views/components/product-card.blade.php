@@ -1,6 +1,6 @@
 @php
 $isFavorite = false;
-if (auth()->hasUser()) {
+if (auth()->user()) {
     $isFavorite = auth()->user()->favoriteProducts()->where('product_id', $product->id)->exists();
 }
 @endphp

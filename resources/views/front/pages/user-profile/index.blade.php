@@ -69,7 +69,6 @@
                                class="default-input {{ $errors->has('current_password') ? 'is-invalid' : '' }}"
                                name="current_password"
                                placeholder="{{ __('placeholders.current_password') }}"
-                               required
                         >
                         @if ($errors->has('current_password'))
                             <span class="invalid-feedback" role="alert">
@@ -81,7 +80,6 @@
                                class="default-input {{ $errors->has('password') ? 'is-invalid' : '' }}"
                                name="password"
                                placeholder="{{ __('placeholders.password') }}"
-                               required
                         >
                         @if ($errors->has('password'))
                             <span class="invalid-feedback" role="alert">
@@ -93,7 +91,6 @@
                                class="default-input"
                                name="password_confirmation"
                                placeholder="{{ __('placeholders.password_confirmation') }}"
-                               required
                         >
                     </div>
 

@@ -46,7 +46,11 @@ class CartController extends Controller
             ],
         ]);
         if (\Cart::get($product->id)) {
-            return response()->json(['data' => __('cart.add-product')]);
+            return response()->json([
+                'data' => __('cart.add-product'),
+                'html' => view('front.purchase.parts.order-cart')->render(),
+                'productId' => $product->id,
+            ]);
         }
 
         return \response()->json(['error' => 'Smth went wrong'], 422);
@@ -55,7 +59,6 @@ class CartController extends Controller
     public function removeItem($id)
     {
         \Cart::session(session('cart_id'))->remove($id);
-
         return redirect()->back();
     }
 

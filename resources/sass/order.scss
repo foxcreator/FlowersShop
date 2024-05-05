@@ -373,6 +373,23 @@
     }
 }
 
+.success-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 400px;
+    background-color: $main-white;
+    padding: 200px 110px;
+
+    h1 {
+        font-size: 48px;
+        font-weight: 200;
+        color: $night-green;
+    }
+}
+
 .air-datepicker-cell.-selected- {
     background: $main-green;
     border-radius: 100%;

@@ -1,6 +1,6 @@
 <div class="product-show__recommendation">
     <div class="product-show__for-you col-md-2">
-        <h3>Рекомендуем лично для тебя</h3>
+        <h3>Специально для вас</h3>
     </div>
     @foreach($randomProducts as $item)
         <div class="col-md-4">
