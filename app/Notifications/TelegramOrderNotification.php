@@ -33,7 +33,8 @@ class TelegramOrderNotification extends Notification
 
     public function toTelegram($notifiable)
     {
-        $message = "*Новый заказ!!* \n\n";
+        $message = "*Новый заказ!!* \n";
+        $message .= "#{$this->order->id}\n\n";
 
         foreach ($this->order->orderProducts as $product) {
             $message .= "$product->product_name $product->quantity шт \n";
@@ -44,10 +45,6 @@ class TelegramOrderNotification extends Notification
         return TelegramMessage::create()
             ->content($message)
             ->button('Просмотреть заказ', $url);
-
-            // (Optional) Blade template for the content.
-//             ->view('notification', ['url' => $url])
-
     }
 
     /**
