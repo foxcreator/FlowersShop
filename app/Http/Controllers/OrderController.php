@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Notifications\OrderConfirmationNotification;
+use App\Notifications\TelegramOrderNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -68,6 +69,9 @@ class OrderController extends Controller
         DB::commit();
         if ($order) {
             Mail::to($entityToDb['email'])->send(new OrderConfirmationNotification($order));
+            Notification::route('telegram', -4219102586)
+                ->notify(new TelegramOrderNotification($order));
+            
             \Cart::clear();
             return redirect()->route('front.order.success')->with(['success' => __('statuses.order-create')]);
         }
