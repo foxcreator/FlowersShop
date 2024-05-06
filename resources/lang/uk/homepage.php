@@ -2,6 +2,7 @@
 
 
 return [
+    'home' => 'Головна',
 	'catalog' => 'Каталог',
 	'delivery' => 'Доставка',
 	'about_us' => 'О нас',

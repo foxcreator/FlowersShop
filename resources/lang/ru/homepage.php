@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'home' => 'Главная',
 	'catalog' => 'Каталог',
 	'delivery' => 'Доставка',
 	'about_us' => 'О нас',

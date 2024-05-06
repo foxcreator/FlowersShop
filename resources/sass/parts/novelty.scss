@@ -70,6 +70,34 @@
         }
     }
 
+    &__favorite {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        .icon {
+            stroke: $main-white;
+        }
+
+        &:hover {
+            .icon {
+                stroke: $main-green;
+            }
+        }
+    }
+
+    .is-favorite {
+        .icon {
+            fill: $main-green;
+            stroke: none;
+        }
+
+        &:hover {
+            .icon {
+                stroke: $main-white;
+            }
+        }
+    }
+
     &__product-name {
         font-family: 'montserrat', serif;
         font-style: italic;
