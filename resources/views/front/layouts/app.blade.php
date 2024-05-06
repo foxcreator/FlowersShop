@@ -42,11 +42,11 @@
             <div class="footer__about">
                 <h3>{{ __('homepage.about_company') }}</h3>
                 <ul>
-                    <li><a href="#">{{ __('homepage.about_us') }}</a></li>
-                    <li><a href="#">{{ __('homepage.services') }}</a></li>
-                    <li><a href="#">{{ __('homepage.contacts') }}</a></li>
-                    <li><a href="#">{{ __('homepage.feedback') }}</a></li>
-                    <li><a href="#">{{ __('homepage.privacy_policy') }}</a></li>
+                    <li><a href="{{ route('front.about') }}">{{ __('homepage.about_us') }}</a></li>
+                    <li><a href="{{ route('front.delivery') }}">{{ __('homepage.services') }}</a></li>
+                    <li><a href="{{ route('front.contacts') }}">{{ __('homepage.contacts') }}</a></li>
+                    <li><a href="{{ route('front.contacts') }}">{{ __('homepage.feedback') }}</a></li>
+                    <li><a href="{{ route('front.about') }}">{{ __('homepage.privacy_policy') }}</a></li>
                 </ul>
             </div>
             <div class="footer__catalog">

@@ -231,3 +231,36 @@ button {
         transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease, opacity 0.4s ease;
     }
 }
+
+.custom-breadcrumb {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    gap: 16px;
+    padding: 0;
+    margin: 25px 0 40px 0;
+
+    &__item {
+        a {
+            color: $text-gray;
+        }
+    }
+
+    .active {
+        color: $night-green;
+    }
+}
+
+.breadcrumb-item a{
+    color: $text-gray;
+    font-size: 16px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.breadcrumb-item.active {
+    color: $main-green;
+}
