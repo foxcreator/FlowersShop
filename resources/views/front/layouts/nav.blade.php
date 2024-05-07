@@ -44,11 +44,8 @@
                     <ul class="custom-header__dropdown-menu">
                         <div class="custom-input">
                             @svg('search')
-                            <input type="text" name="city_search">
+                            <input type="text" id="cityName" name="city_search">
                         </div>
-                        <li class="custom-header__dropdown-item">Киев</li>
-                        <li class="custom-header__dropdown-item">Львов</li>
-                        <li class="custom-header__dropdown-item">Хмельницкий</li>
                     </ul>
                 </li>
                 <li>
@@ -88,4 +85,47 @@
     </nav>
 </div>
 @include('components.search')
+<script>
 
+    $(document).ready(function() {
+        $('#cityName').on('input', function() {
+            var searchValue = $(this).val().trim();
+            if (searchValue.length > 0) {
+                // Отправляем запрос к API для поиска городов
+                $.ajax({
+                    url: 'https://api.novaposhta.ua/v2.0/json/',
+                    method: 'POST',
+                    contentType: 'text/plain',
+                    data: JSON.stringify({
+                        apiKey: "[ВАШ КЛЮЧ]",
+                        modelName: "Address",
+                        calledMethod: "searchSettlements",
+                        methodProperties: {
+                            CityName: searchValue,
+                            Limit: 5
+                        }
+                    }),
+                    success: function(response) {
+                        var addresses = response.data[0].Addresses;
+                        $('.custom-header__dropdown-item').each(function() {
+                            var cityName = $(this).text().trim();
+                            var cityExists = addresses.some(function(address) {
+                                return address.Present === cityName;
+                            });
+                            if (cityExists) {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            } else {
+                $('.custom-header__dropdown-item').hide();
+            }
+        });
+    });
+</script>
