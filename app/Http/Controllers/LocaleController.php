@@ -14,6 +14,9 @@ class LocaleController extends Controller
     {
 		App::setLocale($locale);
 		session(['locale' => $locale]);
+        if (auth()->user()) {
+            auth()->user()->update(['lang' => $locale]);
+        }
 		return redirect()->back();
     }
 }

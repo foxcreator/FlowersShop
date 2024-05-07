@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
 
 class UserController extends Controller
 {
@@ -26,5 +28,16 @@ class UserController extends Controller
             return redirect()->back()->with(['success' => __('statuses.data-update')]);
         }
         return redirect()->back()-with(['error' => ' Something went wrong']);
+    }
+
+    public function saveCity(Request $request)
+    {
+        if (auth()->user()) {
+            auth()->user()->update(['city' => $request->city, 'city_ref' => $request->ref]);
+        } else {
+            Session::put(['city' => $request->city, 'city_ref' => $request->ref]);
+        }
+
+        return response()->json(['success' => __('statuses.save-success')]);
     }
 }

@@ -2,6 +2,12 @@
 @section('content')
     @php
     $userBalance = isset(auth()->user()->balance) ? auth()->user()->balance : 0;
+    $defaultCity = '';
+    if (auth()->user() && auth()->user()->city) {
+        $defaultCity = auth()->user()->city;
+    } elseif (session('city') !== null) {
+        $defaultCity = session('city');
+    }
     @endphp
     <div class="container">
         <h1>Оформление заказа</h1>
@@ -9,8 +15,10 @@
             <form action="{{ route('front.order.store') }}" method="POST" class="order__form">
                 @csrf
                 <div class="order__tabs">
+                    @guest
                     <div class="tab current-tab" data-tab="new"><span>Новый покупатель</span></div>
                     <div class="tab" data-tab="regular"><span>Постоянный покупатель</span></div>
+                    @endguest
                 </div>
                 <div class="tab-content show-tab" id="new">
                     <div class="order__user">
@@ -75,8 +83,15 @@
                             </div>
                         </div>
                         <div class="delivery" id="delivery-content">
-                            <input class="default-input" type="text" name="city">
-                            <input class="default-input" type="text" name="street" placeholder="{{ __('placeholders.street') }}">
+                            <div class="input-block">
+                            <input class="default-input" type="text" id="selectedCity" name="city"
+                                   value="{{$defaultCity}}">
+                                <ul id="cities_menu" class="delivery-dropdown-menu"></ul>
+                            </div>
+                            <div class="input-block">
+                                <input class="default-input" type="text" name="street" id="selectedStreet" placeholder="{{ __('placeholders.street') }}">
+                                <ul id="streets_menu" class="delivery-dropdown-menu"></ul>
+                            </div>
                             <div class="input-block">
                                 <input class="default-input input-min" type="text" name="house" placeholder="{{ __('placeholders.house') }}">
                                 <input class="default-input input-min" type="text" name="flat" placeholder="{{ __('placeholders.flat') }}">
@@ -246,6 +261,115 @@
         new AirDatepicker('#datepicker', {
             autoClose: false
         });
+
+
+        var currentCityRef; // Переменная для хранения текущего города
+        var currentStreetRef; // Переменная для хранения текущей улицы
+
+        $(document).ready(function() {
+            $('#cities_menu').hide();
+            $('#streets_menu').hide();
+
+            $('#selectedCity').on('input', function() {
+                var searchValue = $(this).val().trim();
+                if (searchValue.length > 0) {
+                    fetchCities(searchValue);
+                } else {
+                    $('.delivery-dropdown-item').remove();
+                }
+            });
+
+            $('#selectedStreet').on('input', function() {
+                var searchValue = $(this).val().trim();
+                if (searchValue.length > 0) {
+                    fetchStreets(searchValue);
+                } else {
+                    $('.delivery-dropdown-item').remove();
+                }
+            });
+
+            // Функция для запроса городов
+            function fetchCities(searchValue) {
+                $('.delivery-dropdown-item').remove();
+
+                $.ajax({
+                    url: 'https://api.novaposhta.ua/v2.0/json/',
+                    method: 'POST',
+                    contentType: 'text/plain',
+                    data: JSON.stringify({
+                        apiKey: "",
+                        modelName: "Address",
+                        calledMethod: "searchSettlements",
+                        methodProperties: {
+                            CityName: searchValue,
+                            Limit: 5
+                        }
+                    }),
+                    success: function(response) {
+                        renderItems(response.data[0].Addresses, '#cities', '#cities_menu');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
+            // Функция для запроса улиц
+            function fetchStreets(searchValue) {
+                $('.delivery-dropdown-item').remove();
+
+                console.log(currentCityRef);
+                $.ajax({
+                    url: 'https://api.novaposhta.ua/v2.0/json/',
+                    method: 'POST',
+                    contentType: 'text/plain',
+                    data: JSON.stringify({
+                        apiKey: "",
+                        modelName: "Address",
+                        calledMethod: "searchSettlementStreets",
+                        methodProperties: {
+                            StreetName: searchValue,
+                            SettlementRef: currentCityRef,
+                            Limit: "5"
+                        }
+                    }),
+                    success: function(response) {
+                        renderItems(response.data[0].Addresses, '#streets', '#streets_menu');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
+            function renderItems(addresses, blockId, menuId) {
+                $(blockId+'_item').remove();
+                $(menuId).show();
+                addresses.forEach(function(address) {
+                    var itemName;
+                    if (blockId === '#cities') {
+                        itemName = address.MainDescription;
+                    } else if (blockId === '#streets') {
+                        itemName = address.Present;
+                    }
+                    var listItem = $('<li class="delivery-dropdown-item"></li>').text(itemName);
+                    listItem.on('click', function() {
+                        if (blockId === '#cities') {
+                            $('#selectedCity').val(itemName);
+                            currentCityRef = address.Ref;
+                        } else if (blockId === '#streets') {
+                            $('#selectedStreet').val(itemName);
+                            currentStreetRef = address.Ref;
+                        }
+                        $(blockId+'_item').remove();
+                        $(menuId).hide();
+                    });
+                    $('.delivery-dropdown-menu').append(listItem);
+                });
+            }
+
+        });
+
 
         $('.product-img').on('click', function () {
             var productId = $(this).data('product-id');

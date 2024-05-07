@@ -101,6 +101,13 @@
                                             </div>
                                             <div class="d-flex justify-content-between mb-3"
                                                  style="border-bottom: 1px solid #4a5568">
+                                                <p>Адрес доставки</p>
+                                                <h5 class="text-gray-dark">
+                                                    {{ $order->delivery_address }}
+                                                </h5>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-3"
+                                                 style="border-bottom: 1px solid #4a5568">
                                                 <p>Метод оплаты</p>
                                                 <h5 class="text-gray-dark">{{ $order->paymentMethodName }}</h5>
                                             </div>

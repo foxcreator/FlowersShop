@@ -16,7 +16,7 @@
             <ul class="items">
                 <li class="custom-header__dropdown">
                     <a href="#" class="custom-header__dropdown-toggle">
-                        @if(session('locale') === 'uk')
+                        @if(session('locale') === 'uk' || auth()->user()->lang === 'uk')
                             Укр
                         @else
                             рус
@@ -37,8 +37,14 @@
                     </ul>
                 </li>
                 <li class="custom-header__dropdown">
-                    <a href="#" class="custom-header__dropdown-toggle">
-                        Днипро
+                    <a href="#" id="selectedCity" class="custom-header__dropdown-toggle">
+                        @if(auth()->user() && auth()->user()->city)
+                        {{ auth()->user()->city }}
+                        @elseif(!auth()->user())
+                            {{ session('city') }}
+                        @else
+                            Дніпро
+                        @endif
                         @svg('arrow-down')
                     </a>
                     <ul class="custom-header__dropdown-menu">
@@ -46,6 +52,7 @@
                             @svg('search')
                             <input type="text" id="cityName" name="city_search">
                         </div>
+                        <li class="custom-header__dropdown-item"></li>
                     </ul>
                 </li>
                 <li>
@@ -91,41 +98,70 @@
         $('#cityName').on('input', function() {
             var searchValue = $(this).val().trim();
             if (searchValue.length > 0) {
-                // Отправляем запрос к API для поиска городов
-                $.ajax({
-                    url: 'https://api.novaposhta.ua/v2.0/json/',
-                    method: 'POST',
-                    contentType: 'text/plain',
-                    data: JSON.stringify({
-                        apiKey: "[ВАШ КЛЮЧ]",
-                        modelName: "Address",
-                        calledMethod: "searchSettlements",
-                        methodProperties: {
-                            CityName: searchValue,
-                            Limit: 5
-                        }
-                    }),
-                    success: function(response) {
-                        var addresses = response.data[0].Addresses;
-                        $('.custom-header__dropdown-item').each(function() {
-                            var cityName = $(this).text().trim();
-                            var cityExists = addresses.some(function(address) {
-                                return address.Present === cityName;
-                            });
-                            if (cityExists) {
-                                $(this).show();
-                            } else {
-                                $(this).hide();
-                            }
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error:', error);
-                    }
-                });
+                searchCities(searchValue);
             } else {
-                $('.custom-header__dropdown-item').hide();
+                $('.custom-header__dropdown-item').remove();
             }
         });
+
+        // Функция для отправки запроса к API
+        function searchCities(searchValue) {
+            $.ajax({
+                url: 'https://api.novaposhta.ua/v2.0/json/',
+                method: 'POST',
+                contentType: 'text/plain',
+                data: JSON.stringify({
+                    apiKey: "",
+                    modelName: "Address",
+                    calledMethod: "searchSettlements",
+                    methodProperties: {
+                        CityName: searchValue,
+                        Limit: 5
+                    }
+                }),
+                success: function(response) {
+                    console.log(response);
+                    var addresses = response.data[0].Addresses;
+                    $('.custom-header__dropdown-item').remove();
+                    addresses.forEach(function(address) {
+                        var cityName = address.MainDescription;
+                        var listItem = $('<li class="custom-header__dropdown-item"></li>').text(cityName);
+                        listItem.on('click', function() {
+                            $('#selectedCity').text(cityName);
+                            var dropdowns = document.querySelectorAll('.custom-header__dropdown.open');
+                            dropdowns.forEach(function (dropdown) {
+                                dropdown.classList.remove('open');
+                            });
+                            saveCityToSession(cityName, address.Ref); // Сохраняем город в сессии
+                        });
+                        $('.custom-header__dropdown-menu').append(listItem); // Добавляем новый элемент списка
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+        function saveCityToSession(cityName, cityRef) {
+            $.ajax({
+                url: '/save-city',
+                method: 'POST',
+                headers: {
+                    'X-CSRF-Token': "{{ csrf_token() }}"
+                },
+                data: {
+                    city: cityName,
+                    ref: cityRef
+                },
+                success: function(response) {
+
+                },
+                error: function(xhr, status, error) {
+
+                }
+            });
+        }
     });
+
 </script>

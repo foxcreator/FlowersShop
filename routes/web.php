@@ -47,6 +47,7 @@ Route::middleware(['set_locale'])->group(function () {
         Route::post('/update-cart-quantity', [\App\Http\Controllers\Front\CartController::class, 'updateQuantity'])->name('updateQuantity');
         Route::post('/toggle-favorite', [\App\Http\Controllers\Front\FavoriteProductController::class, 'toggleFavorite']);
         Route::get('/favorites', [\App\Http\Controllers\Front\FavoriteProductController::class, 'index'])->name('favorites')->middleware('auth');
+        Route::post('/save-city', [\App\Http\Controllers\Front\UserController::class, 'saveCity'])->name('save-city');
 
         Route::get('/user/profile', [\App\Http\Controllers\Front\UserController::class, 'index'])->name('user.profile')->middleware('auth');
         Route::post('/user/update-profile/{id}', [\App\Http\Controllers\Front\UserController::class, 'update'])->name('update.profile')->middleware('auth');
