@@ -42,6 +42,8 @@ class UpdateUserRequest extends FormRequest
             'email.unique' => 'Цей email вже використовується.',
             'current_password.required' => 'Поле "Поточний пароль" обов\'язкове для заповнення.',
             'current_password.password_check' => 'Поточний пароль не відповідає збереженому паролю користувача.',
+            'current_password.min' => 'Пароль повинен містити мінімум 8 символів.',
+            'current_password.confirmed' => 'Паролі не співпадають.',
             'password.required' => 'Поле "Пароль" обов\'язкове для заповнення.',
             'password.min' => 'Пароль повинен містити мінімум 8 символів.',
             'password.confirmed' => 'Паролі не співпадають.',
