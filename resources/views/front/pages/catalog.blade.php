@@ -106,7 +106,7 @@
                                 </div>
                             </div>
                             <div class="price">
-                                <p><span></span>Цена</p>
+                                <p><span></span>{{ __('homepage.price') }}</p>
                                 @svg('circle-arrow')
                             </div>
                             <div id="slider"></div>

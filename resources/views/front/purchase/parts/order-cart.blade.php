@@ -1,6 +1,6 @@
 <div class="order__sum--header">
-    <h3>Ваш заказ</h3>
-    <a href="{{ route('front.cart') }}">Редактировать</a>
+    <h3>{{ __('order.your_order') }}</h3>
+    <a href="{{ route('front.cart') }}">{{ __('order.edit') }}</a>
 </div>
 <div class="order__sum--cart">
     @foreach(\Cart::session(session('cart_id'))->getContent() as $product)
@@ -9,8 +9,8 @@
                 <img src="{{ $product->attributes->img }}" alt="{{ $product->title }}">
                 <div class="text-block">
                     <h4>{{ $product->name }}</h4>
-                    <p>Количество: {{ $product->quantity }}</p>
-                    <p>Упаковка: крафт</p>
+                    <p>{{ __('order.count') }}: {{ $product->quantity }}</p>
+                    <p>{{ __('order.package') }}</p>
                 </div>
             </div>
             <p>₴ {{ $product->getPriceSum() }}</p>
@@ -19,11 +19,11 @@
 </div>
 <div class="order__sum--total">
     <div class="block">
-        <p>Доставка:</p>
-        <p>Бесплатно</p>
+        <p>{{ __('order.delivery') }}:</p>
+        <p>{{ __('order.free') }}</p>
     </div>
     <div class="block">
-        <p>Всего к оплате:</p>
+        <p>{{ __('order.total') }}:</p>
         <h3>₴ <span id="total">{{ \Cart::session(session('cart_id'))->getTotal() }}</span></h3>
     </div>
 </div>

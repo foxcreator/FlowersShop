@@ -5,7 +5,7 @@ return [
     'home' => 'Головна',
 	'catalog' => 'Каталог',
 	'delivery' => 'Доставка',
-	'about_us' => 'О нас',
+	'about_us' => 'Про нас',
 	'contacts' => 'Контакти',
 	'add_to_cart' => 'В кошик',
 	'novelty' => 'Новинки',

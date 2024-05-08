@@ -4,12 +4,12 @@
         @include('front.parts.breadcrumbs', ['pageName' => __('homepage.contacts')])
         <div class="contact-page__info-blocks">
         <div class="contact-page__block">
-            <h2>Контакты</h2>
+            <h2>{{ __('homepage.contacts') }}</h2>
             <a href="tel:0939998877">+38 (063) 787 5888</a>
             <a href="tel:0939998877">+38 (063) 787 5888</a>
             <a href="tel:0939998877">+38 (063) 787 5888</a>
-            <p>г. Днепр ул. Короленко 10а</p>
-            <p>открыто с 09:00 до 19:00 каждый день</p>
+            <p>{{ __('texts.address') }}</p>
+            <p>{{ __('texts.open_hours') }}</p>
             <div class="contact-page__social">
                 <a href="#">@svg('instagram')</a>
                 <a href="#">@svg('facebook')</a>
@@ -17,11 +17,11 @@
             </div>
         </div>
         <form class="contact-page__block">
-            <h2>Обратная связь</h2>
+            <h2>{{ __('homepage.feedback') }}</h2>
             <input type="text" class="default-input" name="name" placeholder="{{ __('placeholders.name') }}">
             <input type="text" class="default-input" name="phone" placeholder="{{ __('placeholders.phone') }}">
             <input type="text" class="default-input" name="question" placeholder="{{ __('placeholders.question') }}">
-            <button type="submit" class="default-btn">Отправить</button>
+            <button type="submit" class="default-btn">{{ __('homepage.send') }}</button>
         </form>
         </div>
         <div class="contact-page__map">

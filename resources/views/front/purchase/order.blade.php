@@ -17,7 +17,7 @@
     }
     @endphp
     <div class="container">
-        <h1>Оформление заказа</h1>
+        <h1>{{ __('order.order_placement') }}</h1>
         <div class="order">
             <form action="{{ route('front.order.store') }}" method="POST" class="order__form">
                 @csrf
@@ -32,15 +32,15 @@
                         <div class="user-success">
                             <div class="d-flex justify-content-between align-content-start">
                                 <div>
-                                    <h4>1. Личные данные</h4>
+                                    <h4>1. {{ __('order.personal_data') }}</h4>
                                     <p class="customer-info">Имя: <span class="customer-name"></span></p>
                                     <p class="customer-info"> Телефон: <span class="customer-phone"></span></p>
                                 </div>
-                                <button class="edit-btn" type="button">Редактировать</button>
+                                <button class="edit-btn" type="button">{{ __('order.edit') }}</button>
                             </div>
                         </div>
                         <div class="order__order-form-group user-data">
-                            <h4>1. Личные данные</h4>
+                            <h4>1. {{ __('order.personal_data') }}</h4>
                             <input class="default-input" type="text" name="customer_phone"
                                    value="{{ auth()->user()?->phone }}" placeholder="{{ __('placeholders.phone') }}">
                             <input class="default-input" type="text" name="customer_name"
@@ -49,9 +49,9 @@
                                    placeholder="{{ __('placeholders.email') }}">
                             <div>
                                 <input id="switch" class="custom-switch" type="checkbox" name="anonymously" value="1">
-                                <label for="switch">Отправить анонимно</label>
+                                <label for="switch">{{ __('order.send_anonymously') }}</label>
                             </div>
-                            <button class="default-btn submit-user" type="button">Подтвердить</button>
+                            <button class="default-btn submit-user" type="button">{{ __('order.success') }}</button>
                         </div>
                     </div>
                 </div>
@@ -59,12 +59,12 @@
                     <div class="order__user">
                         @guest()
                             <div class="order__order-form-group user-data">
-                                <h4>1. Авторизация</h4>
+                                <h4>1. {{ __('auth.login') }}</h4>
                                 <input class="default-input" type="text" name="credential"
-                                       placeholder="Номер телефона или email">
-                                <input class="default-input" type="password" name="password" placeholder="Пароль">
+                                       placeholder="{{ __('auth.credential') }}">
+                                <input class="default-input" type="password" name="password" placeholder="{{ __('auth.password') }}">
 
-                                <button class="default-btn submit-login" type="button">Войти</button>
+                                <button class="default-btn submit-login" type="button">{{ __('auth.sign_in') }}</button>
                             </div>
                         @endguest
                     </div>
@@ -74,19 +74,19 @@
                     <div class="delivery-success">
                         <div class="d-flex justify-content-between align-content-start">
                             <div>
-                                <h4>2. Доставка</h4>
-                                <p class="customer-info">Доставка: <span class="delivery-address"></span></p>
+                                <h4>2. {{ __('order.delivery') }}</h4>
+                                <p class="customer-info">{{ __('order.delivery') }}: <span class="delivery-address"></span></p>
                             </div>
-                            <button class="edit-btn-delivery" type="button">Редактировать</button>
+                            <button class="edit-btn-delivery" type="button">{{ __('order.edit') }}</button>
                         </div>
                     </div>
-                    <h4 class="delivery-header">2. Доставка</h4>
+                    <h4 class="delivery-header">2. {{ __('order.delivery') }}</h4>
                     <div class="order__order-form-group delivery-block">
 
                         <div class="d-flex">
                             <div class="delivery-tabs">
-                                <div class="delivery-tab current-tab" id="delivery"><span>Доставка</span></div>
-                                <div class="delivery-tab" id="self-delivery"><span>Самовывоз</span></div>
+                                <div class="delivery-tab current-tab" id="delivery"><span>{{ __('order.delivery') }}</span></div>
+                                <div class="delivery-tab" id="self-delivery"><span>{{ __('order.self_delivery') }}</span></div>
                             </div>
                         </div>
                         <div class="delivery" id="delivery-content">
@@ -115,30 +115,30 @@
                             <input type="hidden" id="delivery_option" name="delivery_option" value="courier">
                         </div>
                         <div class="recipient-tabs">
-                            <p class="recipient-tab current-tab" id="recipient">В подарок</p>
-                            <p class="recipient-tab" id="customer">Я получатель</p>
+                            <p class="recipient-tab current-tab" id="recipient">{{ __('order.is_gift') }}</p>
+                            <p class="recipient-tab" id="customer">{{ __('order.i_am_recipient') }}</p>
                         </div>
                         <div class="recipient">
                             <input class="default-input" type="text" name="name" placeholder="{{ __('placeholders.recipient_name') }}">
                             <input class="default-input" type="text" name="phone" placeholder="{{ __('placeholders.phone') }}">
                         </div>
 
-                        <button class="default-btn submit-delivery" type="button">Подтвердить</button>
+                        <button class="default-btn submit-delivery" type="button">{{ __('order.success') }}</button>
                     </div>
                 </div>
                 <div class="order__gifts">
                     <div class="gifts-success">
                         <div class="d-flex justify-content-between align-content-start">
                             <div>
-                                <h4>3. Открытка и подарки</h4>
+                                <h4>3. {{ __('order.postcard_gifts') }}</h4>
 
-                                <p class="customer-info">Текст открытки: <span class="text-postcard"></span></p>
+                                <p class="customer-info">{{ __('order.postcard_text') }}: <span class="text-postcard"></span></p>
                             </div>
-                            <button class="edit-btn-gifts" type="button">Редактировать</button>
+                            <button class="edit-btn-gifts" type="button">{{ __('order.edit') }}</button>
                         </div>
                     </div>
 
-                    <h4 class="gifts-header">3. Открытка и подарки</h4>
+                    <h4 class="gifts-header">3. {{ __('order.postcard_gifts') }}</h4>
                     <div class="add-products">
                         <div class="gift">
                             <div id="giftCarousel" class="carousel slide carousel-fade">
@@ -210,17 +210,17 @@
                             </div>
 
                             <input class="default-input" type="text" name="text_postcard" placeholder="{{ __('placeholders.text_postcard') }}">
-                            <button class="default-btn submit-gifts" type="button">Подтвердить</button>
+                            <button class="default-btn submit-gifts" type="button">{{ __('order.success') }}</button>
 
                         </div>
                     </div>
                 </div>
                 <div class="order__pay">
                     <div class="pay-success">
-                        <h4>4. Оплата</h4>
+                        <h4>4. {{ __('order.payment') }}</h4>
                     </div>
                     <div class="pay-block">
-                        <h4>4. Оплата</h4>
+                        <h4>4. {{ __('order.payment') }}</h4>
                         <div class="payment">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="payment_method" value="bank"
@@ -233,27 +233,27 @@
                                 <input class="form-check-input" type="radio" name="payment_method" value="cash"
                                        id="cash" checked>
                                 <label class="form-check-label" for="cash">
-                                    При получении
+                                    {{ __('order.pay_in_shop') }}
                                 </label>
                             </div>
                         </div>
                         @auth
                         <div class="bonus">
-                            <input class="default-input" type="text" name="bonus" id="bonus" placeholder="Введите сумму">
-                            <a id="pay-bonus" href="#">Оплатить балами</a>
+                            <input class="default-input" type="text" name="bonus" id="bonus" placeholder="{{ __('order.input_sum') }}">
+                            <a id="pay-bonus" href="#">{{ __('order.pay_with_bonus') }}</a>
                         </div>
                         @endauth
                         <div class="comment">
-                            <p id="comment-text">+ Добавить комментарий к заказу</p>
+                            <p id="comment-text">+ {{ __('order.add_comment') }}</p>
                         </div>
                         <div>
                             <input id="switch-call" class="custom-switch" type="checkbox" name="call" value="1">
-                            <label for="switch-call">Не звонить для подтверждения</label>
+                            <label for="switch-call">{{ __('order.not_call') }}</label>
                         </div>
                         @auth
                         <input type="hidden" name="user_id" value="{{ auth()->user()->getAuthIdentifier() }}">
                         @endauth
-                        <button type="submit" class="default-btn">Оформить заказ</button>
+                        <button type="submit" class="default-btn">{{ __('order.order_place') }}</button>
                     </div>
                 </div>
             </form>
