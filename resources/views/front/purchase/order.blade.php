@@ -8,6 +8,13 @@
     } elseif (session('city') !== null) {
         $defaultCity = session('city');
     }
+
+    $cityRef = '';
+    if (auth()->user()->city_ref) {
+        $cityRef = auth()->user()->city_ref;
+    } elseif (session('city_ref') !== null) {
+        $cityRef = session('city_ref');
+    }
     @endphp
     <div class="container">
         <h1>Оформление заказа</h1>
@@ -263,12 +270,13 @@
         });
 
 
-        var currentCityRef; // Переменная для хранения текущего города
-        var currentStreetRef; // Переменная для хранения текущей улицы
+        var currentCityRef;
+        var currentStreetRef;
 
         $(document).ready(function() {
             $('#cities_menu').hide();
             $('#streets_menu').hide();
+            currentCityRef = '{{ $cityRef }}'
 
             $('#selectedCity').on('input', function() {
                 var searchValue = $(this).val().trim();
@@ -288,7 +296,6 @@
                 }
             });
 
-            // Функция для запроса городов
             function fetchCities(searchValue) {
                 $('.delivery-dropdown-item').remove();
 
@@ -314,11 +321,9 @@
                 });
             }
 
-            // Функция для запроса улиц
             function fetchStreets(searchValue) {
                 $('.delivery-dropdown-item').remove();
 
-                console.log(currentCityRef);
                 $.ajax({
                     url: 'https://api.novaposhta.ua/v2.0/json/',
                     method: 'POST',

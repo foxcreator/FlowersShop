@@ -23,7 +23,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $('.delivery-block').show();
+    $('.delivery-block').hide();
     $('.add-products').hide();
     $('.pay-block').hide();
     $('.delivery-success').hide();
