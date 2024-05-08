@@ -104,7 +104,6 @@
             }
         });
 
-        // Функция для отправки запроса к API
         function searchCities(searchValue) {
             $.ajax({
                 url: 'https://api.novaposhta.ua/v2.0/json/',
@@ -132,9 +131,9 @@
                             dropdowns.forEach(function (dropdown) {
                                 dropdown.classList.remove('open');
                             });
-                            saveCityToSession(cityName, address.Ref); // Сохраняем город в сессии
+                            saveCityToSession(cityName, address.Ref);
                         });
-                        $('.custom-header__dropdown-menu').append(listItem); // Добавляем новый элемент списка
+                        $('.custom-header__dropdown-menu').append(listItem);
                     });
                 },
                 error: function(xhr, status, error) {
