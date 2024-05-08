@@ -116,7 +116,7 @@
                 // Закрываем все dropdowns при клике вне dropdown
                 var dropdowns = document.querySelectorAll('.custom-header__dropdown.open');
                 dropdowns.forEach(function (dropdown) {
-                    dropdown.classList.remove('open');
+                    // dropdown.classList.remove('open');
                 });
             }
         });

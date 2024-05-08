@@ -73,6 +73,30 @@
     }
 
     &__delivery {
+        .input-block {
+            position: relative;
+        }
+        .delivery-dropdown-menu {
+            position: absolute;
+            list-style-type: none;
+            top: 90px;
+            z-index: 2;
+            background: rgba(248, 247, 247, 0.99);
+            border: $main-green 1px solid;
+            width: 100%;
+            font-size: 24px;
+            padding: 0;
+        }
+
+        .delivery-dropdown-item {
+            padding: 10px 15px;
+            cursor: pointer;
+
+            &:hover {
+                background: $main-green;
+                color: $main-white;
+            }
+        }
     }
 
     &__gifts {
