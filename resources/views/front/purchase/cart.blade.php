@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 @section('content')
 
-    @php $randomProducts = \App\Models\Product::take(5)->get(); @endphp
+    @php $randomProducts = App\Models\Product::orderBy('rating', 'DESC')->limit(5)->get(); @endphp
     <div class="cart container">
         @if(!$cartData->isEmpty())
             <h1>{{ __('cart.your-order') }}</h1>

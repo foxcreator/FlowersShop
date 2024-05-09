@@ -11,13 +11,14 @@ $flowers = \App\Models\Flower::all();
 
 <div class="change-flower">
     <h1>{{ __('homepage.help_change_flower') }}</h1>
-    <form action="">
+    <form action="{{ route('front.change.flower') }}" method="POST">
+        @csrf
         <div class="change-flower__select-block">
             {{--        Повод       --}}
             <div class="change-flower__select-wrapper">
-                <select name="reason" id="reason">
+                <select name="subject" id="reason">
                     @foreach($subjects as $subject)
-                        <option value="">{{ $subject->name }}</option>
+                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -33,17 +34,17 @@ $flowers = \App\Models\Flower::all();
             <div class="change-flower__select-wrapper">
                 <select name="flower" id="flower">
                     @foreach($flowers as $flower)
-                        <option value="">{{ $flower->name }}</option>
+                        <option value="{{ $flower->id }}">{{ $flower->name }}</option>
                     @endforeach
                 </select>
             </div>
             {{--        Повод       --}}
             <div class="change-flower__select-wrapper">
-                <select name="budget" id="budget">
-                    <option value="">до 1000 грн</option>
-                    <option value="">до 5000 грн</option>
-                    <option value="">до 10000 грн</option>
-                    <option value="">до 50000 грн</option>
+                <select name="max-price" id="budget">
+                    <option value="500">до 500 грн</option>
+                    <option value="1000">до 1000 грн</option>
+                    <option value="2500">до 2500 грн</option>
+                    <option value="5000">до 5000 грн</option>
                 </select>
             </div>
         </div>
