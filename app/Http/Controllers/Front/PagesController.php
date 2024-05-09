@@ -79,14 +79,17 @@ class PagesController extends Controller
 
 	public function productShow(Request $request, string $id)
 	{
-
-        $randomProducts = Product::inRandomOrder()->limit(5)->get();
-		$product = Product::find($id);
+        $product = Product::find($id);
+        $randomProducts = Product::orderBy('rating', 'DESC')->limit(5)->get();
         $cartQuantity = isset(\Cart::session(session('cart_id'))->getContent()[$id]) ?
             \Cart::session(session('cart_id'))->getContent()[$id]->quantity : 0;
 
         $comments = Comment::query()->where('product_id', $id);
         $currentPage = $request->query('page') ?: 1;
+
+        $product->rating =+ 1;
+        $product->save();
+
         if ($currentPage) {
             $count = $comments->count();
             $countPerPage = 3;
@@ -121,6 +124,23 @@ class PagesController extends Controller
             ));
         }
 	}
+
+    public function changeFlowerForm(Request $request)
+    {
+        $params = [];
+
+        $params['page'] = 1;
+        $params['category'] = 'all';
+        $params['subject'] = $request->input('subject');
+        $params['for_whom'] = $request->input('for_whom');
+        $params['flower'] = $request->input('flower');
+        $params['min-price'] = 0;
+        $params['max-price'] = $request->input('max-price');
+
+        $url = route('front.catalog') . '?' . http_build_query($params);
+
+        return redirect($url);
+    }
 
     public function delivery()
     {
