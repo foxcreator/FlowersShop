@@ -6,7 +6,61 @@
     position: absolute;
     z-index: 2;
     padding: 40px 0;
+    gap: 40px;
     color: $main-white;
+
+    &__desktop {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        .desktop-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .items.mobile {
+            display: flex;
+            align-self: end;
+            gap: 40px;
+
+            .icon {
+                stroke: $main-white;
+                width: 12px;
+                height: 12px;
+            }
+        }
+        @media (max-width: $media-sm) {
+            display: none;
+        }
+
+        @media (max-width: $media-md) {
+            flex-direction: column;
+        }
+    }
+
+    &__mobile {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        @media (max-width: $media-sm) {
+            display: flex;
+        }
+    }
+
+    @media (max-width: $media-md) {
+        max-width: 960px;
+        align-items: start;
+    }
+    @media (max-width: $media-md) {
+        max-width: 760px;
+    }
 
     &__logo {
         width: 60px;
@@ -23,18 +77,17 @@
             display: flex;
             list-style-type: none;
             padding: 0;
+            margin: 0;
             gap: 40px;
         }
     }
-
-
-
 
     &__icons-menu {
         .items {
             display: flex;
             list-style-type: none;
             padding: 0;
+            margin: 0;
             gap: 40px;
 
             .icon {
@@ -53,6 +106,10 @@
                 }
             }
         }
+        .items.mobile {
+            align-items: center;
+            justify-content: end;
+        }
     }
 
     &__dropdown {
@@ -63,7 +120,6 @@
         display: none;
         position: absolute;
         top: 30px;
-        left: 0;
         z-index: 1;
         padding: 5px;
         width: 200px;
@@ -73,6 +129,12 @@
         list-style: none;
         font-size: 16px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        @media (max-width: $media-md) {
+            right: 0;
+        }
+        @media (min-width: $media-md) {
+            left: 0;
+        }
 
         &--lang {
             display: none;
@@ -88,6 +150,9 @@
             list-style: none;
             font-size: 16px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            @media (max-width: $media-md) {
+                right: 0;
+            }
         }
 
         input {

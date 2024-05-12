@@ -12,10 +12,24 @@
         }
     }
 
-    &__products {
+    &__products.desktop {
         width: 100%;
         display: flex;
         gap: 30px;
+        @media (max-width: $media-md) {
+            display: none;
+        }
+    }
+
+    &__products.mobile {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        gap: 30px;
+
+        @media (max-width: $media-md) {
+            display: flex;
+        }
     }
 
     &__product-cards {
@@ -33,8 +47,7 @@
         transition: transform 0.3s ease;
 
         img {
-            width: 255px;
-            height: 255px;
+            max-width: 100%;
         }
 
         &:hover {
@@ -62,6 +75,10 @@
             img {
                 width: 540px;
                 height: 580px;
+                @media (max-width: $media-md) {
+                    width: 100%;
+                    height: auto;
+                }
             }
 
             .novelty__product-name {

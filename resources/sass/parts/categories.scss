@@ -14,21 +14,20 @@
 
     &__cards {
         display: flex;
-        flex-wrap: wrap;
-        gap: 30px;
+        //flex-wrap: wrap;
+        //gap: 30px;
     }
 
     &__card {
-        flex: 1;
-        width: 100%;
         flex-wrap: wrap;
         cursor: pointer;
         position: relative;
         transition: transform 0.3s ease;
+        overflow: hidden;
 
         img {
-            width: 540px;
-            height: 540px;
+            width: 100%;
+            object-fit: cover;
         }
 
         &:hover {
@@ -67,7 +66,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 540px;
     }
 
     &__link {

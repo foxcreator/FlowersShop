@@ -7,12 +7,19 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    @media (max-width: $media-md) {
+        height: 500px;
+        background-size: cover;
+    }
 
     h1 {
         width: 65%;
         font-size: 96px;
         font-weight: 100;
         color: $main-white;
+        @media (max-width: $media-md) {
+            font-size: 48px;
+        }
     }
 }
 
@@ -25,12 +32,16 @@
     justify-content: center;
     align-items: center;
 
+    @media (max-width: $media-md) {
+        background-size: cover;
+    }
+
     h1 {
-        width: 65%;
+        width: 100%;
         font-size: 64px;
         font-weight: 200;
         color: $main-white;
-        text-align: left;
+        text-align: center;
         &:last-child {
             text-align: center;
         }
@@ -38,6 +49,9 @@
 
     &__select-wrapper {
         position: relative;
+        @media (max-width: $media-md) {
+            margin-bottom: 30px;
+        }
         &::before {
             content: '';
             position: absolute;
@@ -54,8 +68,8 @@
 
     &__select-block {
         display: flex;
-        gap: 30px;
         margin-top: 64px;
+        justify-content: center;
 
         select {
             -moz-appearance: none;
@@ -68,7 +82,7 @@
             color: $main-white;
             font-size: 20px;
             padding: 30px 15px;
-            width: 255px;
+            width: 100%;
             cursor: pointer;
         }
 

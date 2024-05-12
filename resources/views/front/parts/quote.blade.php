@@ -10,12 +10,13 @@ $flowers = \App\Models\Flower::all();
 </div>
 
 <div class="change-flower">
+    <div class="container">
     <h1>{{ __('homepage.help_change_flower') }}</h1>
     <form action="{{ route('front.change.flower') }}" method="POST">
         @csrf
-        <div class="change-flower__select-block">
+        <div class="change-flower__select-block row">
             {{--        Повод       --}}
-            <div class="change-flower__select-wrapper">
+            <div class="change-flower__select-wrapper col-lg-3 col-md-6">
                 <select name="subject" id="reason">
                     @foreach($subjects as $subject)
                         <option value="{{ $subject->id }}">{{ $subject->name }}</option>
@@ -23,7 +24,7 @@ $flowers = \App\Models\Flower::all();
                 </select>
             </div>
             {{--        Для кого       --}}
-            <div class="change-flower__select-wrapper">
+            <div class="change-flower__select-wrapper col-lg-3 col-md-6">
                 <select name="for_whom" id="for_whom">
                     <option value="">Для любимой</option>
                     <option value="">Для мамы</option>
@@ -31,7 +32,7 @@ $flowers = \App\Models\Flower::all();
                 </select>
             </div>
             {{--        Повод       --}}
-            <div class="change-flower__select-wrapper">
+            <div class="change-flower__select-wrapper col-lg-3 col-md-6">
                 <select name="flower" id="flower">
                     @foreach($flowers as $flower)
                         <option value="{{ $flower->id }}">{{ $flower->name }}</option>
@@ -39,7 +40,7 @@ $flowers = \App\Models\Flower::all();
                 </select>
             </div>
             {{--        Повод       --}}
-            <div class="change-flower__select-wrapper">
+            <div class="change-flower__select-wrapper col-lg-3 col-md-6">
                 <select name="max-price" id="budget">
                     <option value="500">до 500 грн</option>
                     <option value="1000">до 1000 грн</option>
@@ -47,9 +48,12 @@ $flowers = \App\Models\Flower::all();
                     <option value="5000">до 5000 грн</option>
                 </select>
             </div>
+            <div class="col-12">
+                <button class="change-flower__btn">{{ __('homepage.change_bouquet') }}</button>
+            </div>
         </div>
-        <button class="change-flower__btn">{{ __('homepage.change_bouquet') }}</button>
     </form>
+    </div>
 </div>
 
 <div class="about">
