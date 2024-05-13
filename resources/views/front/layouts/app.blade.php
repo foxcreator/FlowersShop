@@ -150,6 +150,7 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 <script src="{{ asset('main.js') }}"></script>
+@vite(['resources/js/catalog.js'])
 
 @if(session()->has('success'))
     <script>

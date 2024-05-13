@@ -311,8 +311,26 @@
 
         .icon {
             stroke: $night-green;
-            width: 12px;
+            width: 13px;
             height: 12px;
+        }
+    }
+
+    .custom-header__burger-toggle {
+        @media (max-width: $media-sm) {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-direction: row-reverse;
+        }
+        .icon {
+            stroke: $main-green;
+        }
+    }
+
+    .burger-toggle-btn {
+        span {
+            background: $main-green;
         }
     }
 
@@ -327,6 +345,14 @@
             &:hover {
                 stroke: $main-green;
             }
+        }
+    }
+
+    .items.mobile {
+        .icon {
+            stroke: $main-green;
+            width: 12px;
+            height: 12px;
         }
     }
 }
