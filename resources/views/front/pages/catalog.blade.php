@@ -62,7 +62,7 @@
                                                        name="flower"
                                                        value="{{$flower->id}}"
                                                        id="flowers_{{ $flower->id }}"
-                                                       @if(request()->query('flower') === $flower->id) checked @endif
+                                                       @if(request()->query('flower') == $flower->id) checked @endif
                                                 >
                                                 <label class="form-check-label"
                                                        for="flowers_{{ $flower->id }}">
@@ -94,7 +94,7 @@
                                                        name="subject"
                                                        value="{{$subject->id}}"
                                                        id="subjects_{{ $subject->id }}"
-                                                       @if(request()->query('subject') === $subject->id) checked @endif
+                                                       @if(request()->query('subject') == $subject->id) checked @endif
                                                 >
                                                 <label class="form-check-label"
                                                        for="subjects_{{ $subject->id }}">

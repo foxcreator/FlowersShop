@@ -38,8 +38,8 @@
         <div class="footer__logo">
             @svg('lotus-logo')
         </div>
-        <div class="footer__info">
-            <div class="footer__about">
+        <div class="footer__info row">
+            <div class="footer__about col-lg-4 col-md-6">
                 <h3>{{ __('homepage.about_company') }}</h3>
                 <ul>
                     <li><a href="{{ route('front.about') }}">{{ __('homepage.about_us') }}</a></li>
@@ -49,7 +49,7 @@
                     <li><a href="{{ route('front.about') }}">{{ __('homepage.privacy_policy') }}</a></li>
                 </ul>
             </div>
-            <div class="footer__catalog">
+            <div class="footer__catalog col-lg-4 col-md-6">
                 <h3>{{ __('homepage.catalog') }}</h3>
                 <ul>
                     @foreach(\App\Models\Category::all() as $category)
@@ -59,7 +59,7 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="footer__contacts">
+            <div class="footer__contacts col-lg-4 col-md-6">
                 <h3>{{ __('homepage.contacts') }}</h3>
                 <ul>
                     <li>+38 (063) 787 5888</li>
@@ -69,12 +69,12 @@
                     <li>відчинено з 09:00 до 20:00 щодня</li>
                 </ul>
             </div>
-        </div>
 
-        <div class="footer__social">
-            <a href="#">@svg('instagram')</a>
-            <a href="#">@svg('facebook')</a>
-            <a href="#">@svg('telegram')</a>
+            <div class="footer__social col-lg-12 col-md-6">
+                <a href="#">@svg('instagram')</a>
+                <a href="#">@svg('facebook')</a>
+                <a href="#">@svg('telegram')</a>
+            </div>
         </div>
     </div>
 </footer>

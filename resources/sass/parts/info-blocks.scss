@@ -92,7 +92,7 @@
     }
 
     &__btn {
-        width: 540px;
+        width: 100%;
         background-color: $main-white;
         color: $main-green;
         margin-top: 32px;
@@ -110,6 +110,7 @@
 
 .about {
     background-image: url("../../../public/front/images/about.png");
+    background-size: cover;
     width: 100%;
     height: 1000px;
     display: flex;
@@ -117,18 +118,30 @@
     justify-content: center;
     align-items: start;
     padding-left: 400px;
+    @media (max-width: $media-md) {
+        height: auto;
+        padding: 100px;
+        background-position: top;
+    }
 
     h1 {
         width: 65%;
         font-size: 96px;
         font-weight: 100;
         color: $night-green;
+        @media (max-width: $media-md) {
+            font-size: 48px;
+        }
     }
 
     p {
         width: 40%;
         font-size: 24px;
         font-weight: 100;
+        @media (max-width: $media-md) {
+            width: 60%;
+            font-size: 20px;
+        }
     };
 }
 
@@ -141,12 +154,21 @@
     justify-content: center;
     align-items: end;
     padding-right: 400px;
+    @media (max-width: $media-md) {
+        height: auto;
+        padding: 100px;
+        background-position: top;
+    }
 
     h1 {
         width: 40%;
         font-size: 96px;
         font-weight: 100;
         color: $main-white;
+        @media (max-width: $media-md) {
+            width: 60%;
+            font-size: 48px;
+        }
     }
 
     p {
@@ -154,6 +176,10 @@
         font-size: 24px;
         font-weight: 100;
         color: $main-white;
+        @media (max-width: $media-md) {
+            width: 60%;
+            font-size: 20px;
+        }
     };
 }
 
@@ -166,12 +192,21 @@
     justify-content: center;
     align-items: start;
     padding-left: 400px;
+    @media (max-width: $media-md) {
+        padding: 100px;
+        height: auto;
+        background-size: cover;
+        background-position: right;
+    }
 
     h3 {
         width: 40%;
         font-size: 40px;
         font-weight: 100;
         color: $main-white;
+        @media (max-width: $media-md) {
+            width: 80%;
+        }
     }
 
     &__form {
@@ -180,6 +215,9 @@
         flex-direction: column;
         margin-top: 15px;
         gap: 20px;
+        @media (max-width: $media-md) {
+            width: 80%;
+        }
 
         input {
             width: 100%;
@@ -225,6 +263,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: $media-md) {
+        flex-direction: column;
+        gap: 40px;
+    }
 
     &__info {
         width: 540px;
