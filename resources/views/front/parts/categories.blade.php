@@ -24,7 +24,7 @@
             @endforeach
             <div class="categories__link-block col-6">
                 <a href="{{ route('front.catalog') }}" class="categories__link">
-                    <span>{{ __('homepage.catalog') }}</span>
+                    <span>{{ __('homepage.categories') }}</span>
                     @svg('arrow-circle-right')
                 </a>
             </div>
@@ -43,7 +43,7 @@
             var width = img.width;
 
             // Устанавливаем высоту изображения равной его ширине
-            img.style.height = width + 'px';
+            img.style.maxHeight = width + 'px';
         };
     });
 </script>

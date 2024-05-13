@@ -141,36 +141,135 @@
         </div>
 
         <div class="custom-header__mobile">
-            <div class="custom-header__burger-toggle">
-                <!-- Кнопка открытия бургер-меню -->
-                <button class="burger-toggle-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+            <div class="custom-header__logo">
+                <a href="{{ route('home') }}">@svg('logo-min')</a>
             </div>
+            <ul class="custom-header__burger-toggle">
+                <li>
+                    <button class="burger-toggle-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </li>
+                <li>
+                    <a class="search-toggle" href="">
+                        @svg('search')
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('front.cart') }}" class="position-relative">
+                        @svg('cart')
+                        @if(session('cart_id'))
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success cart-count">
+                            {{ \Cart::session(session('cart_id'))->getTotalQuantity() }}
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                        @endif
+                    </a>
+                </li>
+            </ul>
             <!-- Блоки, которые будут скрыты при открытом бургер-меню -->
-            <div class="custom-header__hidden-content">
-                <!-- Ссылки из custom-header__pages -->
-                <ul>
-                    <li><a href="{{ route('front.catalog') }}">{{ __('homepage.catalog') }}</a></li>
-                    <li><a href="{{ route('front.delivery') }}">{{ __('homepage.delivery') }}</a></li>
-                    <li><a href="{{ route('front.about') }}">{{ __('homepage.about_us') }}</a></li>
-                    <li><a href="{{ route('front.contacts') }}">{{ __('homepage.contacts') }}</a></li>
-                </ul>
-                <!-- Ссылки из custom-header__icons-menu -->
-                <div class="custom-header__mobile-icons-menu">
-                    <!-- Ваши иконки и ссылки -->
-                </div>
-            </div>
         </div>
     </nav>
 </div>
+<div class="custom-header__hidden-content">
+    <div class="burger-content-header">
+        <div id="close-burger" class="close-icon"></div>
+    </div>
+    <ul>
+        <li><a href="{{ route('front.catalog') }}">{{ __('homepage.catalog') }}</a></li>
+        <li><a href="{{ route('front.delivery') }}">{{ __('homepage.delivery') }}</a></li>
+        <li><a href="{{ route('front.about') }}">{{ __('homepage.about_us') }}</a></li>
+        <li><a href="{{ route('front.contacts') }}">{{ __('homepage.contacts') }}</a></li>
+        <li>
+            @auth()
+                <a href="{{ route('front.user.profile') }}">
+                    {{ __('profile.profile') }}
+                </a>
+            @else
+                <a href="{{ route('login') }}">
+                    {{ __('profile.profile') }}
+                </a>
+            @endauth
+        </li>
+        <li class="custom-header__dropdown">
+            <a href="#" class="custom-header__dropdown-toggle">
+                @if(session('locale') === 'uk' || auth()->user()->lang === 'uk')
+                    Укр
+                @else
+                    рус
+                @endif
+                @svg('arrow-down')
+            </a>
+            <ul class="custom-header__dropdown-menu--lang">
+                <li class="custom-header__dropdown-item">
+                    <a href="{{ route('locale', 'uk') }}">
+                        Укр
+                    </a>
+                </li>
+                <li class="custom-header__dropdown-item">
+                    <a href="{{ route('locale', 'ru') }}">
+                        рус
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="custom-header__dropdown">
+            <a href="#" id="selectedCity" class="custom-header__dropdown-toggle">
+                @if(auth()->user() && auth()->user()->city)
+                    {{ auth()->user()->city }}
+                @elseif(!auth()->user())
+                    {{ session('city') }}
+                @else
+                    Дніпро
+                @endif
+                @svg('arrow-down')
+            </a>
+            <ul class="custom-header__dropdown-menu">
+                <div class="custom-input">
+                    @svg('search')
+                    <input type="text" id="cityNameBurger" name="city_search">
+                </div>
+                <li class="custom-header__dropdown-item"></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
 @include('components.search')
 <script>
 
+    $(document).ready(function() {
+        $('.custom-header__hidden-content').hide();
+
+
+        $('.burger-toggle-btn').click(function(event) {
+            event.preventDefault();
+            $('.custom-header__hidden-content').show();
+            $('body').toggleClass('fix');
+            event.stopPropagation();
+        });
+
+        $('#close-burger').click(function(event) {
+            $('.custom-header__hidden-content').hide();
+            $('body').removeClass('fix');
+        });
+
+        $(document).click(function(event) {
+            if (!$(event.target).closest('.custom-header__hidden-content').length) {
+                $('.custom-header__hidden-content').hide();
+                $('body').removeClass('fix');
+            }
+        });
+    });
+
+
     $(document).ready(function () {
+
         $('#cityName').on('input', function () {
+            console.log(123)
             var searchValue = $(this).val().trim();
             if (searchValue.length > 0) {
                 searchCities(searchValue);
@@ -180,6 +279,17 @@
         });
 
         $('#cityNameMobile').on('input', function () {
+            var searchValue = $(this).val().trim();
+            if (searchValue.length > 0) {
+                searchCities(searchValue);
+            } else {
+                $('.custom-header__dropdown-item').remove();
+            }
+        });
+
+        $('#cityNameBurger').on('input', function () {
+            console.log(123)
+
             var searchValue = $(this).val().trim();
             if (searchValue.length > 0) {
                 searchCities(searchValue);
@@ -219,6 +329,7 @@
                         });
                         $('.custom-header__dropdown-menu').append(listItem);
                     });
+
                 },
                 error: function (xhr, status, error) {
                     console.error('Error:', error);
@@ -238,7 +349,7 @@
                     ref: cityRef
                 },
                 success: function (response) {
-
+                    window.location.reload()
                 },
                 error: function (xhr, status, error) {
 

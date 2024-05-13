@@ -122,25 +122,27 @@
         });
     });
 
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var dropdownToggle = document.querySelector('.search-toggle');
-        var dropdown = document.querySelector('.search');
-        var close = document.querySelector('.close-icon');
-
-        dropdownToggle.addEventListener('click', function (event) {
-            event.preventDefault(); // Предотвращаем переход по ссылке
-            dropdown.classList.toggle('open');
-            document.body.classList.toggle('fix');
-            event.stopPropagation(); // Остановить всплытие события, чтобы клик на кнопке не вызывал закрытие всех дропдаунов
+    $(document).ready(function() {
+        $('.search-toggle').click(function(event) {
+            event.preventDefault();
+            $('.search').toggleClass('open');
+            $('body').toggleClass('fix');
+            event.stopPropagation();
         });
 
-        // Обработчик события click на документе для закрытия всех дропдаунов при клике в любом месте страницы
-        close.addEventListener('click', function (event) {
-            dropdown.classList.remove('open');
-            document.body.classList.remove('fix');
+        $('.close-icon').click(function(event) {
+            $('.search').removeClass('open');
+            $('body').removeClass('fix');
+        });
+
+        $(document).click(function(event) {
+            if (!$(event.target).closest('.search').length) {
+                $('.search').removeClass('open');
+                $('body').removeClass('fix');
+            }
         });
     });
+
     //Initialize Select2 Elements
     $('.select2bs4').select2({
         theme: 'bootstrap4'
