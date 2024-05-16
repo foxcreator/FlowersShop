@@ -74,8 +74,27 @@
         position: absolute;
         top: 20px;
         right: 20px;
+        @media (max-width: $media-md) {
+            top: 20px;
+            right: 20px;
+        }
+
+        @media (max-width: $media-sm) {
+            top: 6px;
+            right: 11px;
+        }
+
         .icon {
-            stroke: $main-white;
+            stroke: $text-gray;
+            @media (max-width: $media-md) {
+                width: 24px;
+                height: 24px;
+            }
+
+            @media (max-width: $media-sm) {
+                width: 18px;
+                height: 18px;
+            }
         }
 
         &:hover {

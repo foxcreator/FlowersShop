@@ -1,0 +1,300 @@
+.order {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 125px;
+    margin-bottom: 200px;
+}
+
+.order__form {
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+}
+
+.order__tabs {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.order__order-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px 0;
+}
+
+.order__delivery .input-block {
+    position: relative;
+}
+
+.order__delivery .delivery-dropdown-menu {
+    position: absolute;
+    list-style-type: none;
+    top: 90px;
+    z-index: 2;
+    background: rgba(248, 247, 247, 0.99);
+    border: var(--main-green) 1px solid;
+    width: 100%;
+    font-size: 24px;
+    padding: 0;
+}
+
+.order__delivery .delivery-dropdown-item {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.order__delivery .delivery-dropdown-item:hover {
+    background: var(--main-green);
+    color: var(--main-white);
+}
+
+.order__gifts {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 540px;
+}
+
+.order__gifts .add-products {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 0;
+}
+
+.order__gifts .add-products .product-img {
+    cursor: pointer;
+}
+
+.order__gifts .add-products .add-product-img {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.order__gifts .add-products .gift .carousel .carousel-control-prev,
+.order__gifts .add-products .add-product-img .postcard .carousel .carousel-control-prev {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    background: var(--main-white);
+    top: 33%;
+    margin: 10px;
+}
+
+.order__gifts .add-products .gift .carousel .carousel-control-next,
+.order__gifts .add-products .add-product-img .postcard .carousel .carousel-control-next {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    background: var(--main-white);
+    top: 33%;
+    margin: 10px;
+}
+
+.order__gifts .add-products .postcard .carousel .carousel-control-prev,
+.order__gifts .add-products .postcard .carousel .carousel-control-next {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    background: var(--main-white);
+    top: 33%;
+    margin: 10px;
+}
+
+.order__gifts .add-products .gift .carousel .carousel-control-prev .icon,
+.order__gifts .add-products .add-product-img .postcard .carousel .carousel-control-prev .icon,
+.order__gifts .add-products .gift .carousel .carousel-control-next .icon,
+.order__gifts .add-products .add-product-img .postcard .carousel .carousel-control-next .icon {
+    stroke: var(--night-green);
+}
+
+.order__gifts .add-products .postcard .carousel .carousel-control-prev .icon,
+.order__gifts .add-products .postcard .carousel .carousel-control-next .icon {
+    stroke: var(--night-green);
+}
+
+.order__gifts .default-input {
+    height: 70px;
+}
+
+.order__sum {
+    background: rgba(239, 240, 240, 0.2);
+    width: 100%;
+    margin-top: 50px;
+    padding: 20px;
+    border: var(--dark-green) 1px solid;
+}
+
+.order__sum--header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--text-gray) 1px solid;
+    padding-bottom: 32px;
+    padding-top: 16px;
+}
+
+.order__sum--header h3 {
+    font-size: 24px;
+    font-weight: 100;
+    margin: 0;
+    color: var(--night-green);
+}
+
+.order__sum--header a {
+    font-size: 16px;
+    color: var(--dark-green);
+}
+
+.order__sum--cart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 32px 0;
+    border-bottom: var(--text-gray) 1px solid;
+}
+
+.order__sum--product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.order__sum--product img {
+    width: 75px;
+    height: 75px;
+}
+
+.order__sum--product p {
+    font-size: 24px;
+    color: var(--text-green);
+    font-weight: 100;
+}
+
+.order__sum--product .text-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    user-select: none;
+}
+
+.order__sum--product h4 {
+    font-size: 16px;
+    color: var(--night-green);
+    font-weight: 200;
+    font-style: italic;
+    max-width: 180px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.order__sum--product p {
+    font-size: 12px;
+    color: var(--text-green);
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.order__sum--total {
+    padding: 32px 0;
+}
+
+.order__sum--total .block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order__sum--total p {
+    color: var(--night-green);
+    font-weight: 300;
+}
+
+.order__sum--total h3 {
+    font-size: 32px;
+    color: var(--night-green);
+}
+
+.success-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 400px;
+    background-color: var(--main-white);
+    padding: 200px 110px;
+}
+
+.air-datepicker-cell.-selected- {
+    background: var(--main-green);
+    border-radius: 100%;
+}
+
+.air-datepicker-cell.-selected-.air-datepicker-cell.-current- {
+    background: var(--main-green);
+    color: var(--text-green);
+}
+
+.air-datepicker-cell.-current- {
+    color: var(--text-green);
+}
+
+.air-datepicker-body--day-name {
+    color: var(--text-gray);
+}
+
+.air-datepicker-cell.-focus- {
+    border-radius: 100%;
+    background: var(--text-green);
+    color: var(--main-white);
+}
+
+.air-datepicker {
+    border-radius: 13px;
+    width: 250px;
+}
+
+.choices {
+    width: 260px;
+    height: 80px;
+}
+
+.choices__inner {
+    height: 80px;
+}
+
+.choices__list {
+}
+
+.choices__item--selectable {
+    height: 80px;
+    font-size: 20px;
+    color: var(--night-green);
+}
+
+.choices__list--dropdown .choices__item--selectable,
+.choices__list[aria-expanded] .choices__item--selectable {
+    height: 60px;
+    font-size: 23px;
+    color: var(--night-green);
+}
+
+.choices__list--dropdown .choices__item--selectable.is-highlighted,
+.choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
+    background-color: var(--main-green);
+    color: var(--main-white);
+}
+
