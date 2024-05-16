@@ -20,7 +20,7 @@
     />    <link href="{{ asset('datepicker/air-datepicker.css') }}" rel="stylesheet">
     <script src="{{ asset('datepicker/air-datepicker.js') }}"></script>
 
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/order.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
 <div id="toast-success" class="toast-success"></div>
@@ -150,7 +150,7 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 <script src="{{ asset('main.js') }}"></script>
-@vite(['resources/js/catalog.js'])
+@vite(['resources/js/catalog.js', 'resources/js/order.js'])
 
 @if(session()->has('success'))
     <script>
