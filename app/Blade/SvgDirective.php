@@ -10,9 +10,9 @@ class SvgDirective
 	{
 
 		Blade::directive('svg', function ($expression) {
-			// Разбор аргументов
+
 			$params = self::parseExpression($expression);
-			// Генерация SVG кода
+
 			return "<svg class='{$params['class']}'>
                         <use xlink:href='{$params['sprite']}#{$params['name']}'></use>
                     </svg>";
