@@ -8,20 +8,30 @@
         width: 100%;
         border-bottom: #BEC8B5 1px solid;
         padding: 40px 0;
-
+        @media (max-width: $media-md) {
+            padding: 20px 0;
+        }
+        @media (max-width: $media-sm) {
+            padding: 20px 0;
+            align-items: start;
+        }
     }
 
     &__product {
         img {
             max-width: 130px;
+            @media (max-width: $media-md) {
+                max-width: 90px;
+            }
+
+            @media (max-width: $media-sm) {
+                max-width: 60px;
+            }
         }
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 20px;
-        width: 40%;
-        overflow: hidden;
-        text-overflow: ellipsis;
 
     }
 
@@ -32,6 +42,24 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            @media (max-width: $media-md) {
+                font-size: 20px;
+                white-space: normal;
+            }
+
+            @media (max-width: $media-sm) {
+                font-size: 15px;
+                white-space: normal;
+            }
+        }
+
+        p {
+            @media (max-width: $media-md) {
+                font-size: 12px;
+            }
+            @media (max-width: $media-md) {
+                font-size: 10px;
+            }
         }
     }
 
@@ -40,15 +68,21 @@
         align-items: center;
         gap: 30px;
 
+        @media (max-width: $media-md) {
+
+        }
+
         .quantity-input {
             display: flex;
             align-items: center;
             justify-content: center;
             border: 1px $main-green solid;
-            width: 255px;
-            height: 70px;
+            //height: 70px;
             font-size: 36px;
-
+            @media (max-width: $media-md) {
+                padding: 5px 20px;
+                font-size: 24px;
+            }
         }
 
         .quantity-field {
@@ -78,6 +112,10 @@
             cursor: pointer;
             font-weight: 200;
             font-size: 48px;
+            @media (max-width: $media-md) {
+                width: 32px;
+                height: 32px;
+            }
 
             .icon-plus {
                 stroke: $night-green;
@@ -115,6 +153,9 @@
         font-size: 48px;
         font-weight: 100;
         color: $main-green;
+        @media (max-width: $media-md) {
+            font-size: 24px;
+        }
     }
 
     &__item-delete {
@@ -138,7 +179,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 540px;
 
             p {
                font-size: 20px;
@@ -147,7 +187,7 @@
             }
 
             span {
-                font-size: 40px;
+                font-size: 36px;
                 font-weight: bold;
                 color: $night-green;
             }
@@ -155,7 +195,6 @@
     }
 
     &__btn-submit {
-        width: 540px;
         background-color: $main-green;
         color: $main-white;
         border: $main-green 1px solid;
@@ -172,7 +211,6 @@
     }
 
     &__btn-back {
-        width: 540px;
         background-color: $main-white;
         color: $main-green;
         border: $main-green 1px solid;

@@ -1,4 +1,10 @@
 .catalog {
+
+    padding-top: 200px;
+    padding-bottom: 100px;
+    @media (max-width: $media-sm) {
+        padding-top: 200px;
+    }
     &__wrapper {
 
     }
@@ -101,10 +107,33 @@
         }
     }
 
+    #desktop-filter {
+        @media (max-width: $media-sm) {
+            display: none;
+        }
+    }
+
+    #mobile-filter {
+        display: none;
+    }
+
+    .filter-mobile-btn {
+        @media (min-width: $media-sm) {
+            display: none;
+        }
+        font-size: 16px;
+
+        .icon {
+            stroke: $night-green;
+            width: 16px;
+            height: 16px;
+        }
+    }
+
     &__product-card {
         margin-top: 30px;
         width: 100%;
-        height: 350px;
+        //height: 350px;
         flex-wrap: wrap;
         cursor: pointer;
         position: relative;
@@ -112,7 +141,7 @@
 
         img {
             width: 100%;
-            height: 314px;
+            //height: 314px;
         }
 
         &:hover {
@@ -133,6 +162,9 @@
         text-overflow: ellipsis;
         overflow: hidden;
         max-width: 300px;
+        @media (max-width: $media-sm) {
+            width: 100%;
+        }
     }
 
     &__product-price {
@@ -148,6 +180,11 @@
         align-items: center;
         padding-top: 10px;
         white-space: nowrap;
+        @media (max-width: $media-sm) {
+            flex-direction: column;
+            align-items: start;
+            width: 100%;
+        }
 
         p {
             color: $night-green;
@@ -188,8 +225,28 @@
         position: absolute;
         top: 20px;
         right: 20px;
+
+        @media (max-width: $media-md) {
+            top: 20px;
+            right: 20px;
+        }
+
+        @media (max-width: $media-sm) {
+            top: 6px;
+            right: 11px;
+        }
+
         .icon {
-            stroke: $main-white;
+            stroke: $text-gray;
+            @media (max-width: $media-md) {
+                width: 24px;
+                height: 24px;
+            }
+
+            @media (max-width: $media-sm) {
+                width: 18px;
+                height: 18px;
+            }
         }
 
         &:hover {
@@ -204,6 +261,18 @@
         justify-content: center;
         width: 100%;
         margin-top: 120px;
+    }
+
+    .four-product {
+        @media (max-width: $media-md) {
+            display: none;
+        }
+    }
+
+    .two-product {
+        @media (min-width: $media-md) {
+            display: none;
+        }
     }
 }
 

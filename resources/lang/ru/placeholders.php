@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'phone' => 'Номер телефона',
+    'phone' => 'Номер телефона (0991234567)',
     'name' => 'Ваше имя и фамилия',
     'question' => 'Ваш вопрос',
     'email' => 'Ваш e-mail',
@@ -13,6 +13,7 @@ return [
     'date' => 'Дата',
     'current_password' => 'Текущий пароль',
     'password' => 'Новый пароль',
+    'login_password' => 'Введите пароль',
     'password_confirmation' => 'Подтверждение пароля',
     'save' => 'Сохранить',
 ];
