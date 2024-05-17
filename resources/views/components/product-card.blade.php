@@ -74,7 +74,8 @@ if (auth()->user()) {
                 }
             },
             error: function(xhr, status, error) {
-                console.error(error);
+                console.log(xhr.responseJSON.message)
+                showToast('toast-error', xhr.responseJSON.message);
             }
         });
     });

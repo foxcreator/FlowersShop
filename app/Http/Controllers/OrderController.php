@@ -32,12 +32,13 @@ class OrderController extends Controller
             $total = \Cart::getTotal() - $data['bonus'];
             $newBalance = auth()->user()->balance - $data['bonus'];
             auth()->user()->update(['balance' => $newBalance]);
-        }
-        if ($data['bonus'] == \Cart::getTotal()) {
-            $entityToDb['is_paid'] = true;
+
+            if ($data['bonus'] == \Cart::getTotal()) {
+                $entityToDb['is_paid'] = true;
+            }
         }
 
-        $entityToDb['user_id'] = $data['user_id'];
+        $entityToDb['user_id'] = isset($data['user_id']) ?: null;
         $entityToDb['customer_name'] = $data['customer_name'];
         $entityToDb['customer_phone'] = $data['customer_phone'];
         $entityToDb['email'] = $data['email'];
@@ -53,7 +54,7 @@ class OrderController extends Controller
         $entityToDb['comment'] = $data['comment'] ?? '';
         $entityToDb['status'] = Order::ORDER_STATUS_RECEIVED;
         $entityToDb['amount'] = $total;
-        $entityToDb['pay_with_bonus'] = $data['bonus'];
+        $entityToDb['pay_with_bonus'] = isset($data['bonus']) ?: 0;
         $entityToDb['delivery_address'] = $data['city'].', '.$data['street'].' '.$data['house'].', '.$data['flat'];
 
 

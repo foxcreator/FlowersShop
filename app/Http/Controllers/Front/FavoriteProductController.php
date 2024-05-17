@@ -18,6 +18,9 @@ class FavoriteProductController extends Controller
         $product = Product::find($request->id);
         $user = auth()->user();
 
+        if (!$user) {
+            return response()->json(['status' => 'error', 'message' => __('statuses.not_login')], 422);
+        }
         if (!isset($product)) {
             return response()->json(['status' => 'error', 'message' => 'Product not found']);
         }

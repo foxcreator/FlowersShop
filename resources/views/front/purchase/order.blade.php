@@ -10,7 +10,7 @@
     }
 
     $cityRef = '';
-    if (auth()->user()->city_ref) {
+    if (auth()->user() && auth()->user()->city_ref) {
         $cityRef = auth()->user()->city_ref;
     } elseif (session('city_ref') !== null) {
         $cityRef = session('city_ref');
