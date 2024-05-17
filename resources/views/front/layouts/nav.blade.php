@@ -44,7 +44,7 @@
                         <a href="#" id="selectedCity" class="custom-header__dropdown-toggle">
                             @if(auth()->user() && auth()->user()->city)
                                 {{ auth()->user()->city }}
-                            @elseif(!auth()->user())
+                            @elseif(!auth()->user() && session('city') !== null)
                                 {{ session('city') }}
                             @else
                                 Дніпро
