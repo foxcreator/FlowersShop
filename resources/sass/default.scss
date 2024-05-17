@@ -95,8 +95,7 @@ button {
 .toast-success {
     position: fixed;
     top: 20px;
-    right: 0;
-    transform: translateX(-50%);
+    right: 10px;
     background-color: $main-green;
     color: $main-white;
     padding: 20px 50px;
@@ -115,8 +114,7 @@ button {
 .toast-error {
     position: fixed;
     top: 20px;
-    right: 0;
-    transform: translateX(-50%);
+    right: 10px;
     background-color: #9f1313;
     color: $main-white;
     padding: 20px 50px;

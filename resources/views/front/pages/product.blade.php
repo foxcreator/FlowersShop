@@ -3,20 +3,22 @@
     @php
         $isFavorite = auth()->user()->favoriteProducts()->where('product_id', $product->id)->exists();
     @endphp
-    <section class="product-show container" style="padding-top: 150px">
+    <section class="product-show container">
 
-        <div class="product-show__top">
-            <div class="product-show__gallery">
+        <div class="product-show__top row">
+            <div class="product-show__gallery col-md-6 col-lg-5">
                 <img class="product-show__thumbnail" src="{{ $product->thumbnailUrl }}" alt="{{ $product->title_uk }}">
-                <div class="product-show__images">
-                    @foreach($product->productPhotos as $photo)
-                        <img class="product-show__preview" src="{{ $photo->fileNameUrl }}" alt="">
-                    @endforeach
-                </div>
+                @if($product->productPhotos()->count() > 0)
+                    <div class="product-show__images">
+                        @foreach($product->productPhotos as $photo)
+                            <img class="product-show__preview" src="{{ $photo->fileNameUrl }}" alt="">
+                        @endforeach
+                    </div>
+                @endif
             </div>
-            <div class="product-show__info">
+            <div class="product-show__info col-md-6">
                 <div class="product-show__text">
-                    <div class="d-flex justify-content-between align-items-center gap-3">
+                    <div class="d-flex justify-content-between align-items-start gap-3">
                         <h1>{{ $product->title }}</h1>
                         <div class="product-show__favorite @if($isFavorite) is-favorite @endif" id="favorite_{{ $product->id }}" data-product-id="{{ $product->id }}">@svg('heart')</div>
                     </div>
@@ -24,13 +26,13 @@
                 </div>
                 <form class="product-show__buy-block">
                     <div class="product-show__quantity">
-                        <div class="quantity-input">
+                        <div class="quantity-input col-6">
                             <button type="button" class="minus-btn">@svg('minus')</button>
                             <input type="number" class="quantity-field" value="1">
                             <button type="button" class="plus-btn">@svg('plus')</button>
                         </div>
 
-                        <p>₴ <span class="price">{{ intval($product->price) }}</span></p>
+                        <p class="col-6">₴ <span class="price">{{ intval($product->price) }}</span></p>
                     </div>
                     <button type="button"
                             onclick="addToCart('{{ $product->id }}')"
@@ -125,7 +127,7 @@
         }
 
         $(document).ready(function () {
-            $('.product-show__preview').click(function () {
+            $('.show__preview').click(function () {
                 var newSrc = $(this).attr('src');
                 $('.product-show__thumbnail').addClass('fade-out');
                 setTimeout(function () {
@@ -185,7 +187,7 @@
                 updateTotalPrice();
             });
 
-            $('.tab').click(function () {
+            $('.product-tab').click(function () {
                 var tabId = $(this).data('tab');
                 $(this).addClass('active').siblings().removeClass('active');
                 $('#' + tabId).addClass('active').siblings().removeClass('active');

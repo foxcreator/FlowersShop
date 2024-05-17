@@ -10,13 +10,13 @@
                 @csrf
                 <input type="text"
                        name="credential"
-                       placeholder="Номер телефона или email"
+                       placeholder="{{ __('placeholders.phone') }}"
                        @if($errors->first('credential')) class="wrong" @endif
                        value="{{ old('credential') }}"
                 >
                 <input type="password"
                        name="password"
-                       placeholder="Введите пароль"
+                       placeholder="{{ __('placeholders.login_password') }}"
                        @if($errors->first('credential')) class="wrong" @endif
                 >
                 <div>

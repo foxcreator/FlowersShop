@@ -10,7 +10,7 @@
                 @csrf
                 <input type="text"
                        name="phone"
-                       placeholder="Номер телефона"
+                       placeholder="{{ __('placeholders.phone') }}"
                        value="{{ old('phone') }}"
                 >
                 @error('phone')
@@ -18,14 +18,14 @@
                 @enderror
                 <input type="password"
                        name="password"
-                       placeholder="Введите пароль"
+                       placeholder="{{ __('placeholders.login_password') }}"
                 >
                 @error('password')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
                 <input type="password"
                        name="password_confirmation"
-                       placeholder="Введите пароль"
+                       placeholder="{{ __('placeholders.password_confirmation') }}"
                 >
                 <button type="submit" >Войти</button>
             </form>

@@ -216,10 +216,10 @@
                                 <p><span></span>Цена</p>
                                 @svg('circle-arrow')
                             </div>
-                            <div id="slider"></div>
+                            <div id="mobileSlider"></div>
                             <div class="d-flex justify-content-between mt-2 w-100">
-                                <p>₴<span id="minPrice"></span></p>
-                                <p>₴<span id="maxPrice"></span></p>
+                                <p>₴<span id="mobileMinPrice"></span></p>
+                                <p>₴<span id="mobileMaxPrice"></span></p>
                             </div>
                         </div>
 
@@ -241,10 +241,4 @@
         </div>
     </section>
 @endsection
-<script>
 
-
-
-
-
-</script>

@@ -48,7 +48,7 @@ $flowers = \App\Models\Flower::all();
                     <option value="5000">до 5000 грн</option>
                 </select>
             </div>
-            <div class="col-12">
+            <div class="col-12 col-md-6">
                 <button class="change-flower__btn">{{ __('homepage.change_bouquet') }}</button>
             </div>
         </div>

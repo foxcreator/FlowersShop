@@ -1,6 +1,7 @@
 .catalog {
 
     padding-top: 200px;
+    padding-bottom: 100px;
     @media (max-width: $media-sm) {
         padding-top: 200px;
     }
@@ -161,6 +162,9 @@
         text-overflow: ellipsis;
         overflow: hidden;
         max-width: 300px;
+        @media (max-width: $media-sm) {
+            width: 100%;
+        }
     }
 
     &__product-price {
@@ -176,6 +180,11 @@
         align-items: center;
         padding-top: 10px;
         white-space: nowrap;
+        @media (max-width: $media-sm) {
+            flex-direction: column;
+            align-items: start;
+            width: 100%;
+        }
 
         p {
             color: $night-green;
@@ -200,6 +209,10 @@
         padding: 15px;
         transition: opacity 0.4s ease, background-color 0.4s ease, color 0.4s ease;
 
+        @media (max-width: $media-sm) {
+            display: none;
+        }
+
         &:active {
             background-color: $dark-green;
             color: $main-white;
@@ -216,8 +229,22 @@
         position: absolute;
         top: 20px;
         right: 20px;
+
+        @media (max-width: $media-md) {
+            top: 20px;
+            right: 20px;
+        }
+
+        @media (max-width: $media-sm) {
+            top: 6px;
+            right: 11px;
+        }
+
         .icon {
             stroke: $main-white;
+            @media (max-width: $media-sm) {
+
+            }
         }
 
         &:hover {
@@ -255,7 +282,16 @@
 
     &:hover {
         .icon {
-            stroke: $main-white;
+            stroke: $text-gray;
+            @media (max-width: $media-md) {
+                width: 24px;
+                height: 24px;
+            }
+
+            @media (max-width: $media-sm) {
+                width: 18px;
+                height: 18px;
+            }
         }
     }
 }
