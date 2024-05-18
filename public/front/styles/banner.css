@@ -1,0 +1,97 @@
+.banner {
+    width: 100%;
+    color: var(--main-white);
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.banner img {
+    width: auto;
+    z-index: -2;
+}
+
+.banner__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    width: 1110px;
+    padding-top: 165px;
+}
+
+@media (max-width: var(--media-md)) {
+    .banner__text {
+        width: 40%;
+    }
+
+    .banner__text h1 {
+        font-size: 64px;
+    }
+}
+
+@media (max-width: var(--media-sm)) {
+    .banner__text {
+        width: 20%;
+    }
+
+    .banner__text h1 {
+        font-size: 36px;
+    }
+}
+
+.banner__text h1 {
+    font-size: 96px;
+    font-weight: 200;
+    line-height: 130%;
+}
+
+.banner__btn {
+    align-self: center;
+    font-size: 32px;
+    font-weight: 300;
+}
+
+.banner__btn .icon {
+    width: 35px;
+    height: 35px;
+    stroke: var(--main-white);
+    transition: transform 0.5s ease, margin-left 0.5s ease;
+}
+
+.banner__btn:hover .icon {
+    transform: scale(1.15);
+    margin-left: 5px;
+}
+
+.banner__social {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.banner__social a {
+    width: 24px;
+    height: 24px;
+}
+
+.banner__social .icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--main-white);
+    transition: transform 0.2s ease;
+}
+
+.banner__social .icon:hover {
+    transform: scale(1.05);
+}
+
+.carousel-item {
+    transition: transform 1.4s ease-in-out;
+    transition-delay: -0.7s;
+}
