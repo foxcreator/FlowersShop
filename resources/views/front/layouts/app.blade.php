@@ -143,6 +143,14 @@
         });
     });
 
+    $(document).ready(function() {
+        var currentPath = window.location.pathname;
+
+        if (currentPath === '/login' || currentPath === '/register' || currentPath === '/reset-password') {
+            $('body').addClass('fix');
+        }
+    });
+
     //Initialize Select2 Elements
     $('.select2bs4').select2({
         theme: 'bootstrap4'
