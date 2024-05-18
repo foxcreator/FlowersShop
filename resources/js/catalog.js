@@ -93,6 +93,7 @@ function fetchProducts(categoryId, minPrice, maxPrice, flowerId, subjectId, page
     $('#loader').show();
     $('.overflow').show();
     $('body').toggleClass('fix');
+    $('#mobile-filter').hide();
 
     let url = `/catalog?page=${page}&category=${categoryId}&flower=${flowerId}&subject=${subjectId}`;
 
