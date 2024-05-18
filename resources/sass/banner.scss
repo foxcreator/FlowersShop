@@ -23,10 +23,26 @@
         gap: 64px;
         width: 1110px;
         padding-top: 165px;
+
+        @media (max-width: $media-md) {
+            width: 40%;
+        }
+
+        @media (max-width: $media-sm) {
+            width: 20%;
+        }
         h1 {
             font-size: 96px;
             font-weight: 200;
             line-height: 130%;
+
+            @media (max-width: $media-md) {
+                font-size: 64px;
+            }
+
+            @media (max-width: $media-sm) {
+                font-size: 36px;
+            }
         }
     }
 

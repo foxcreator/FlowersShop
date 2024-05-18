@@ -7,7 +7,7 @@
             <h1>{{ __('homepage.novelty') }}</h1>
         </div>
 
-        <div class="novelty__products">
+        <div class="novelty__products desktop">
             @foreach($products as $product)
                 @if($loop->first)
                     <div class="novelty__product-card--first">
@@ -38,6 +38,39 @@
                     @endif
                 @endforeach
             </div>
+        </div>
+
+        <div class="novelty__products mobile">
+
+            <div class="novelty__product-cards row">
+                @foreach($products as $product)
+                    @if(!$loop->last)
+                        @include('components.product-card', ['product' => $product, 'style' => 'novelty'])
+                    @endif
+                @endforeach
+            </div>
+            @foreach($products as $product)
+                @if($loop->last)
+                    <div class="novelty__product-card--first">
+                        <div class="novelty__card-img">
+                            <a href="{{ route('front.product', $product->id) }}">
+                                <img src="{{ $product->thumbnailUrl }}" alt="{{ $product->title }}">
+                            </a>
+                            <div class="novelty__favorite"></div>
+                            <button type="button" class="novelty__buy-btn">
+                                {{ __('homepage.add_to_cart') }}
+                                @svg('cart')
+                            </button>
+                        </div>
+                        <a href="{{ route('admin.products.index') }}">
+                            <div class="novelty__info">
+                                <p class="novelty__product-name">{{ $product->title }}</p>
+                                <p class="novelty__product-price">₴ {{ $product->price }}</p>
+                            </div>
+                        </a>
+                    </div>
+                @endif
+            @endforeach
         </div>
 
         <div class="novelty__link-block">

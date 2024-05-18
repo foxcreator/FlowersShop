@@ -8,14 +8,14 @@
             <div class="cart__items">
                 @foreach($cartData as $product)
                     <div class="cart__item">
-                        <div class="cart__product col-6">
+                        <div class="cart__product col-8 col-md-6">
                             <img src="{{ $product->attributes->img }}" alt="{{ $product->name }}">
                             <div class="cart__product-info">
                                 <h4>{{ $product->name }}</h4>
                                 <p>{{ __('cart.package') }}: Крафт</p>
                             </div>
                         </div>
-                        <div class="cart__count col-5">
+                        <div class="cart__count col-4 col-md-5">
                             <div class="quantity-input">
                                 <button type="button" class="minus-btn">@svg('minus')</button>
                                 <input type="number" class="quantity-field" value="{{ $product->quantity }}" data-max="23" data-id="{{ $product->id }}">
@@ -35,12 +35,12 @@
                 {{--            <button type="submit"></button>--}}
             </div>
             <div class="cart__bottom">
-                <div class="total-amount col-10">
+                <div class="total-amount col-10 col-lg-7">
                     <p>{{ __('cart.total-sum') }}: </p>
                     <span class="price">₴ {{ \Cart::getTotal() }}</span>
                 </div>
-                <a href="{{ route('front.orderPage') }}" class="cart__btn-submit col-10">{{ __('cart.get-order') }}</a>
-                <a href="{{ route('front.catalog') }}" class="cart__btn-back col-10">{{ __('cart.continue-shop') }}</a>
+                <a href="{{ route('front.orderPage') }}" class="cart__btn-submit col-11 col-md-10 col-lg-7">{{ __('cart.get-order') }}</a>
+                <a href="{{ route('front.catalog') }}" class="cart__btn-back col-11 col-md-10 col-lg-7">{{ __('cart.continue-shop') }}</a>
                 @include('components.recommendation', ['randomProducts' => $randomProducts])
             </div>
         @else

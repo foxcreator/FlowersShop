@@ -18,42 +18,13 @@
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
     />    <link href="{{ asset('datepicker/air-datepicker.css') }}" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-{{--    <link href="https://cdn.jsdelivr.net/npm/nouislider@15.4.0/distribute/nouislider.min.css" rel="stylesheet">--}}
-{{--    <script src="https://cdn.jsdelivr.net/npm/nouislider@15.4.0/distribute/nouislider.min.js"></script>--}}
-
-    <link rel="stylesheet" href="{{ asset('front/styles/nouislider.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/default.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/profile.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/product.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/order.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/login.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/header.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/search.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/banner.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/addition-pages.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/cart.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/parts/novelty.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/parts/delimiter.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/parts/categories.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/parts/info-blocks.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/parts/slider.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/catalog.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/styles/pagination.css') }}">
-
-
     <script src="{{ asset('datepicker/air-datepicker.js') }}"></script>
-    {{--    <link rel="stylesheet" href="{{ asset('build/assets/app-LSg8gZFG.css') }}">--}}
-{{--        @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/order.js'])--}}
+
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-<div class="container">
-    <div id="toast-success" class="toast-success"></div>
-    <div id="toast-error" class="toast-error"></div>
-</div>
+<div id="toast-success" class="toast-success"></div>
+<div id="toast-error" class="toast-error"></div>
 
 @if(str_contains(request()->getPathInfo(), 'purchase'))
     @include('front.layouts.cart-nav')
@@ -172,6 +143,14 @@
         });
     });
 
+    $(document).ready(function() {
+        var currentPath = window.location.pathname;
+
+        if (currentPath === '/login' || currentPath === '/register' || currentPath === '/reset-password') {
+            $('body').addClass('fix');
+        }
+    });
+
     //Initialize Select2 Elements
     $('.select2bs4').select2({
         theme: 'bootstrap4'
@@ -179,11 +158,7 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 <script src="{{ asset('main.js') }}"></script>
-<script src="{{ asset('front/js/nouislider.js') }}"></script>
-<script src="{{ asset('front/js/order.js') }}"></script>
-<script src="{{ asset('front/js/slider.js') }}"></script>
-<script src="{{ asset('front/js/catalog.js') }}"></script>
-{{--@vite(['resources/js/catalog.js'])--}}
+@vite(['resources/js/catalog.js', 'resources/js/order.js'])
 
 @if(session()->has('success'))
     <script>

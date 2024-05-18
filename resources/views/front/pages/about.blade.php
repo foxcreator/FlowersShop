@@ -2,7 +2,7 @@
 @section('content')
 <div class="about-page container">
     @include('front.parts.breadcrumbs', ['pageName' => __('homepage.about_us')])
-    <div class="about-page__block">
+    <div class="about-page__block row">
         <div class="col-md-6 about-page__text-block">
             <h1>Про нас</h1>
             <p>
@@ -21,7 +21,7 @@
             <img src="{{ asset('dist/img/boxed-bg.jpg') }}" alt="">
         </div>
     </div>
-    <div class="about-page__block">
+    <div class="about-page__block row">
         <div class="col-md-6">
             <img src="{{ asset('dist/img/boxed-bg.jpg') }}" alt="">
         </div>

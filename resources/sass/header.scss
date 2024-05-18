@@ -1,12 +1,151 @@
 .custom-header {
     display: flex;
-    width: 1110px;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     position: absolute;
+    left: 0;
+    top: 24px;
     z-index: 2;
     padding: 40px 0;
+    gap: 40px;
     color: $main-white;
+
+    &__desktop {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        .desktop-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .items.mobile {
+            display: flex;
+            align-self: end;
+            gap: 40px;
+
+            .icon {
+                stroke: $main-white;
+                width: 12px;
+                height: 12px;
+            }
+        }
+        @media (max-width: $media-sm) {
+            display: none;
+        }
+
+        @media (max-width: $media-md) {
+            flex-direction: column;
+        }
+    }
+
+    &__mobile {
+        display: none;
+        justify-content: space-between;
+        align-items: start;
+        width: 100%;
+        padding: 40px;
+
+        @media (max-width: $media-sm) {
+            display: flex;
+        }
+    }
+
+    &__burger-toggle {
+        list-style-type: none;
+
+        li {
+            margin-bottom: 20px;
+        }
+
+        .burger-toggle-btn {
+            display: inline-block;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transform: rotate(180deg);
+        }
+
+        .burger-toggle-btn span {
+            display: block;
+            width: 24px;
+            height: 1px;
+            background-color: $main-gray;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+
+        /* Нижняя полоска короче */
+        .burger-toggle-btn span:first-child {
+            width: 18px;
+            margin-top: 0;
+        }
+
+        .icon {
+            stroke: $main-white;
+            width: 24px;
+            height: 24px;
+        }
+
+    }
+
+    &__hidden-content {
+        width: 100%;
+        position: absolute;
+        display: none;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        top: 0;
+        left: 0;
+        background: #415D4C;
+        padding: 50px;
+        height: 120vh;
+        z-index: 4;
+
+        .burger-content-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+        }
+
+        ul {
+            list-style-type: none;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            font-size: 16px;
+
+            .custom-header__dropdown-menu,
+            .custom-header__dropdown-menu--lang {
+                display: none;
+            }
+
+            .custom-header__dropdown-toggle {
+                .icon {
+                    stroke: $main-white;
+                    width: 12px;
+                    height: 12px;
+                }
+            }
+        }
+    }
+
+    @media (max-width: $media-md) {
+        width: 100%;
+        padding: 0 20px;
+    }
+    @media (max-width: $media-sm) {
+        width: 100%;
+    }
 
     &__logo {
         width: 60px;
@@ -23,19 +162,26 @@
             display: flex;
             list-style-type: none;
             padding: 0;
+            margin: 0;
             gap: 40px;
+
+            @media (max-width: $media-lg) {
+                gap: 30px;
+            }
         }
     }
-
-
-
 
     &__icons-menu {
         .items {
             display: flex;
             list-style-type: none;
             padding: 0;
+            margin: 0;
             gap: 40px;
+
+            @media (max-width: $media-lg) {
+                gap: 30px;
+            }
 
             .icon {
                 width: 24px;
@@ -53,6 +199,10 @@
                 }
             }
         }
+        .items.mobile {
+            align-items: center;
+            justify-content: end;
+        }
     }
 
     &__dropdown {
@@ -63,7 +213,6 @@
         display: none;
         position: absolute;
         top: 30px;
-        left: 0;
         z-index: 1;
         padding: 5px;
         width: 200px;
@@ -73,6 +222,12 @@
         list-style: none;
         font-size: 16px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        @media (max-width: $media-md) {
+            right: 0;
+        }
+        @media (min-width: $media-md) {
+            left: 0;
+        }
 
         &--lang {
             display: none;
@@ -88,6 +243,9 @@
             list-style: none;
             font-size: 16px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            @media (max-width: $media-md) {
+                right: 0;
+            }
         }
 
         input {
@@ -153,8 +311,26 @@
 
         .icon {
             stroke: $night-green;
-            width: 12px;
+            width: 13px;
             height: 12px;
+        }
+    }
+
+    .custom-header__burger-toggle {
+        @media (max-width: $media-sm) {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-direction: row-reverse;
+        }
+        .icon {
+            stroke: $main-green;
+        }
+    }
+
+    .burger-toggle-btn {
+        span {
+            background: $main-green;
         }
     }
 
@@ -171,6 +347,14 @@
             }
         }
     }
+
+    .items.mobile {
+        .icon {
+            stroke: $main-green;
+            width: 12px;
+            height: 12px;
+        }
+    }
 }
 
 .cart-nav {
@@ -179,13 +363,26 @@
     align-items: center;
     padding: 20px 0;
 
+    @media (max-width: $media-sm) {
+        justify-content: space-around;
+        padding: 10px 0;
+    }
+
     &__btn-back {
         display: flex;
         align-items: center;
         color: $dark-green;
 
+        @media (max-width: $media-sm) {
+            font-size: 10px;
+        }
+
         .icon {
             stroke: $dark-green;
+
+            @media (max-width: $media-sm) {
+                width: 20px;
+            }
         }
     }
 
@@ -194,11 +391,18 @@
             width: 60px;
             height: 85px;
             fill: $night-green;
+
+            @media (max-width: $media-sm) {
+                width: 40px;
+            }
         }
     }
 
     &__contacts {
         user-select: none;
+        @media (max-width: $media-sm) {
+            font-size: 10px;
+        }
         .number {
             color: $main-green;
             margin: 0;

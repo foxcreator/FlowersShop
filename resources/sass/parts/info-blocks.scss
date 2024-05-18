@@ -1,5 +1,5 @@
 .quote {
-    background-image: url("../../../public/front/images/block_2.png");
+    background-image: url("/public/front/images/block_2.png");
     width: 100%;
     height: 1000px;
     display: flex;
@@ -7,17 +7,32 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    @media (max-width: $media-md) {
+        height: 500px;
+        background-size: cover;
+    }
+
+    @media (max-width: $media-sm) {
+        height: 800px;
+    }
 
     h1 {
         width: 65%;
         font-size: 96px;
         font-weight: 100;
         color: $main-white;
+        @media (max-width: $media-md) {
+            font-size: 48px;
+        }
+
+        @media (max-width: $media-sm) {
+            font-size: 24px;
+        }
     }
 }
 
 .change-flower {
-    background-image: url("../../../public/front/images/change.png");
+    background-image: url("/public/front/images/change.png");
     width: 100%;
     height: 1000px;
     display: flex;
@@ -25,12 +40,26 @@
     justify-content: center;
     align-items: center;
 
+    @media (max-width: $media-md) {
+        background-size: cover;
+    }
+
+    @media (max-width: $media-sm) {
+        height: 1000px;
+        background-size: cover;
+    }
+
     h1 {
-        width: 65%;
+        width: 100%;
         font-size: 64px;
         font-weight: 200;
         color: $main-white;
-        text-align: left;
+        text-align: center;
+
+        @media (max-width: $media-sm) {
+            font-size: 24px;
+        }
+
         &:last-child {
             text-align: center;
         }
@@ -38,6 +67,9 @@
 
     &__select-wrapper {
         position: relative;
+        @media (max-width: $media-md) {
+            margin-bottom: 30px;
+        }
         &::before {
             content: '';
             position: absolute;
@@ -54,8 +86,8 @@
 
     &__select-block {
         display: flex;
-        gap: 30px;
         margin-top: 64px;
+        justify-content: center;
 
         select {
             -moz-appearance: none;
@@ -68,7 +100,7 @@
             color: $main-white;
             font-size: 20px;
             padding: 30px 15px;
-            width: 255px;
+            width: 100%;
             cursor: pointer;
         }
 
@@ -78,7 +110,7 @@
     }
 
     &__btn {
-        width: 540px;
+        width: 100%;
         background-color: $main-white;
         color: $main-green;
         margin-top: 32px;
@@ -95,7 +127,8 @@
 }
 
 .about {
-    background-image: url("../../../public/front/images/about.png");
+    background-image: url("/public/front/images/about.png");
+    background-size: cover;
     width: 100%;
     height: 1000px;
     display: flex;
@@ -103,23 +136,39 @@
     justify-content: center;
     align-items: start;
     padding-left: 400px;
+    @media (max-width: $media-md) {
+        height: auto;
+        padding: 100px;
+        background-position: top;
+    }
 
     h1 {
         width: 65%;
         font-size: 96px;
         font-weight: 100;
         color: $night-green;
+        @media (max-width: $media-md) {
+            font-size: 48px;
+        }
     }
 
     p {
         width: 40%;
         font-size: 24px;
         font-weight: 100;
+        @media (max-width: $media-md) {
+            width: 60%;
+            font-size: 20px;
+        }
+        @media (max-width: $media-sm) {
+            width: 100%;
+            font-size: 16px;
+        }
     };
 }
 
 .coffee {
-    background-image: url("../../../public/front/images/coffee.png");
+    background-image: url("/public/front/images/coffee.png");
     width: 100%;
     height: 1000px;
     display: flex;
@@ -127,12 +176,32 @@
     justify-content: center;
     align-items: end;
     padding-right: 400px;
+    @media (max-width: $media-md) {
+        height: auto;
+        padding: 100px;
+        background-position: top;
+    }
+    @media (max-width: $media-sm) {
+        height: 800px;
+        padding: 0;
+        background-position: top;
+        justify-content: flex-end;
+    }
 
     h1 {
         width: 40%;
         font-size: 96px;
         font-weight: 100;
         color: $main-white;
+        @media (max-width: $media-md) {
+            width: 60%;
+            font-size: 48px;
+        }
+        @media (max-width: $media-sm) {
+            width: 100%;
+            font-size: 48px;
+            padding: 0 20px;
+        }
     }
 
     p {
@@ -140,11 +209,20 @@
         font-size: 24px;
         font-weight: 100;
         color: $main-white;
+        @media (max-width: $media-md) {
+            width: 60%;
+            font-size: 20px;
+        }
+        @media (max-width: $media-sm) {
+            width: 100%;
+            font-size: 16px;
+            padding: 0 20px;
+        }
     };
 }
 
 .questions {
-    background-image: url("../../../public/front/images/questions.png");
+    background-image: url("/public/front/images/questions.png");
     width: 100%;
     height: 1000px;
     display: flex;
@@ -152,12 +230,30 @@
     justify-content: center;
     align-items: start;
     padding-left: 400px;
+    @media (max-width: $media-md) {
+        padding: 100px;
+        height: auto;
+        background-size: cover;
+        background-position: right;
+    }
+
+    @media (max-width: $media-sm) {
+        padding: 100px 20px;
+        height: 1000px;
+    }
 
     h3 {
         width: 40%;
         font-size: 40px;
         font-weight: 100;
         color: $main-white;
+        @media (max-width: $media-md) {
+            width: 80%;
+        }
+
+        @media (max-width: $media-sm) {
+            width: 100%;
+        }
     }
 
     &__form {
@@ -166,6 +262,13 @@
         flex-direction: column;
         margin-top: 15px;
         gap: 20px;
+        @media (max-width: $media-md) {
+            width: 80%;
+        }
+
+        @media (max-width: $media-sm) {
+            width: 100%;
+        }
 
         input {
             width: 100%;
@@ -211,6 +314,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: $media-md) {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    @media (max-width: $media-sm) {
+        padding: 20px;
+    }
 
     &__info {
         width: 540px;
@@ -219,10 +330,19 @@
         flex-direction: column;
         justify-content: space-between;
 
+        @media (max-width: $media-sm) {
+            width: 100%;
+            height: 300px;
+        }
+
         h1 {
             font-size: 96px;
             font-weight: 200;
             color: $night-green;
+
+            @media (max-width: $media-sm) {
+                font-size: 36px;
+            }
         }
 
         p {
@@ -230,6 +350,11 @@
             font-size: 24px;
             line-height: 200%;
             color: $main-green;
+
+            @media (max-width: $media-sm) {
+                font-size: 16px;
+                line-height: 100%;
+            }
         }
     }
 
@@ -249,5 +374,9 @@
     &__map {
         width: 540px;
         height: 450px;
+
+        @media (max-width: $media-sm) {
+            width: 100%;
+        }
     }
 }

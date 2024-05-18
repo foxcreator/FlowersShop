@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/js/app.js',
                 'resources/js/order.js',
+                'resources/js/catalog.js',
             ],
             refresh: true,
         }),

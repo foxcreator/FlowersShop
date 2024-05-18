@@ -1,6 +1,6 @@
 @extends('front.layouts.app')
 @section('content')
-    <div class="container profile" style="padding-top: 150px">
+    <div class="container profile">
         <h1>{{ __('profile.account') }}</h1>
 
         <div class="profile__wrapper">
@@ -17,10 +17,10 @@
                   id="profile"
                   autocomplete="off"
             >
-                <div class="profile__inner">
+                <div class="profile__inner row">
                     @csrf
 
-                    <div class="change-data">
+                    <div class="change-data col-md-9">
                         <h4>{{ __('profile.my_data') }}</h4>
                         <input type="text"
                                class="default-input {{ $errors->has('full_name') ? 'is-invalid' : '' }}"
@@ -63,7 +63,7 @@
                         @endif
                     </div>
 
-                    <div class="change-password">
+                    <div class="change-password col-md-9">
                         <h4>{{ __('profile.change_password') }}</h4>
                         <input type="password"
                                class="default-input {{ $errors->has('current_password') ? 'is-invalid' : '' }}"
@@ -95,7 +95,7 @@
                     </div>
 
                 </div>
-                <button type="submit" class="default-btn">{{ __('placeholders.save') }}</button>
+                <button type="submit" class="default-btn col-12 col-md-9">{{ __('placeholders.save') }}</button>
 
             </form>
             <div class="profile__current-tab" id="orders">
@@ -114,11 +114,11 @@
                                     @endforeach
                                 </div>
                                 <div class="col-md-4">
-                                    <p>Сумма заказа</p>
+                                    <p>Сумма:</p>
                                     <h5>₴ {{ intval($order->amount) }}</h5>
                                 </div>
                                 <div class="col-md-2">
-                                    <p>Статус</p>
+                                    <p>Статус:</p>
                                     <h5>{{ $order->statusNameMultiLang }}</h5>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
             </div>
             <div class="profile__current-tab" id="logout">
                 <h4>Вы уверены что хотите выйти из личного кабинета?</h4>
-                <a href="{{ route('logout') }}" class="default-btn logout-btn">Выйти @svg('logout')</a>
+                <a href="{{ route('logout') }}" class="default-btn logout-btn col-md-6">Выйти @svg('logout')</a>
             </div>
         </div>
     </div>

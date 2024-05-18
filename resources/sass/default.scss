@@ -14,8 +14,17 @@ html {
 }
 
 .container {
-    max-width: 1110px;
-    padding: 0;
+    position: relative;
+    @media (min-width: $media-lg) {
+        max-width: 1110px;
+        padding: 0;
+    }
+    //@media (max-width: $media-md) {
+    //    max-width: 960px;
+    //}
+    //@media (max-width: $media-sm) {
+    //    max-width: 640px;
+    //}
 }
 
 .overlay {
@@ -33,7 +42,9 @@ a {
 }
 
 .mt-200 {
-    margin-top: 200px;
+    @media (min-width: $media-md) {
+        margin-top: 200px;
+    }
 }
 
 .icon {
@@ -197,7 +208,7 @@ button {
 
 
 .default-btn {
-    width: 540px;
+    //width: 540px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -262,3 +273,19 @@ button {
 .breadcrumb-item.active {
     color: $main-green;
 }
+
+.desktop {
+    display: block; // По умолчанию для desktop
+    @media (max-width: $media-md) {
+        display: none; // Для меньших размеров экрана скрываем .desktop
+    }
+}
+
+.mobile {
+    display: none;
+    @media (max-width: $media-md) {
+        display: block; // Для меньших размеров экрана показываем .mobile
+    }
+}
+
+
