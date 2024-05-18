@@ -3,8 +3,8 @@
     <div class="login-background">
         <a href="{{ route('home') }}">@svg('close')</a>
         <div class="success-form">
-            <h1>Спасибо за заказ</h1>
-            <a href="{{ route('home') }}" class="default-btn ">Вернуться на сайт</a>
+            <h1>{{ __('order.thanks_for_order') }}</h1>
+            <a href="{{ route('home') }}" class="default-btn ">{{ __('order.back_to_site') }}</a>
         </div>
     </div>
 @endsection
