@@ -26,18 +26,37 @@
 		justify-content: center;
 		align-items: center;
 		width: 50%;
-		height: 700px;
+		max-height: 700px;
 		background-color: $main-white;
 		padding: 200px 110px;
+
+        @media (max-width: $media-md) {
+            width: 80%;
+            padding: 100px 55px;
+        }
+
+        @media (max-width: $media-sm) {
+            width: 90%;
+            padding: 60px 15px;
+            height: auto;
+        }
 
 		h1 {
 			font-size: 48px;
 			font-weight: 200;
 			color: $night-green;
+
+            @media (max-width: $media-sm) {
+                font-size: 36px;
+            }
 		}
 		p {
 			font-size: 20px;
 			color: $text-green;
+
+            @media (max-width: $media-sm) {
+                font-size: 15px;
+            }
 		}
 
 		a {
@@ -66,6 +85,14 @@
                 &::placeholder {
                     color: $text-green;
                 }
+
+                @media (max-width: $media-md) {
+                    height: 70px;
+                }
+
+                @media (max-width: $media-sm) {
+                    height: 50px;
+                }
 			}
 
 			.forgot-password {
@@ -74,6 +101,10 @@
 				width: 100%;
 				font-size: 18px;
 				font-weight: 200;
+
+                @media (max-width: $media-sm) {
+                    font-size: 15px;
+                }
 			}
 
 			button {
