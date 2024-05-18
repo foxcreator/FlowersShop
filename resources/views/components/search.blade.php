@@ -16,7 +16,7 @@
         </div>
         <div class="search__result">
             @foreach($products as $product)
-                <a href="">
+                <a href="{{ route('front.product', $product->id) }}">
                     <div class="search__card">
                         <img src="{{ $product->thumbnailUrl }}" alt="{{ $product->name }}">
                         <p>{{ $product->title }}</p>

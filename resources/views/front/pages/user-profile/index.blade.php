@@ -5,11 +5,11 @@
 
         <div class="profile__wrapper">
             <div class="profile__tabs">
-                <div class="tab active" data-tab="profile"><span>{{ __('profile.profile') }}</span></div>
-                <div class="tab" data-tab="orders"><span>{{ __('profile.orders') }}</span></div>
-                <div class="tab" data-tab="favorite"><span>{{ __('profile.favorite') }}</span></div>
-                <div class="tab" data-tab="bonus"><span>{{ __('profile.bonus') }}</span></div>
-                <div class="tab" data-tab="logout"><span>{{ __('profile.logout') }}</span></div>
+                <div class="user-tab active" data-tab="profile"><span>{{ __('profile.profile') }}</span></div>
+                <div class="user-tab" data-tab="orders"><span>{{ __('profile.orders') }}</span></div>
+                <div class="user-tab" data-tab="favorite"><span>{{ __('profile.favorite') }}</span></div>
+                <div class="user-tab" data-tab="bonus"><span>{{ __('profile.bonus') }}</span></div>
+                <div class="user-tab" data-tab="logout"><span>{{ __('profile.logout') }}</span></div>
             </div>
             <form action="{{ route('front.update.profile', auth()->user()->getAuthIdentifier()) }}"
                   method="POST"
@@ -105,7 +105,7 @@
                 @else
                     <h4>{{ __('profile.my_orders') }}</h4>
                     <div class="profile__order-inner">
-                        @foreach(auth()->user()->orders()->orderByDesc('id')->get() as $order)
+                        @foreach(auth()->user()->orders()->orderByDesc('id', 'DESC')->limit(10)->get() as $order)
                             <div class="profile__order">
                                 <div class="col-md-6">
                                     <p>№ {{ $order->id }} {{ __('profile.from') }} {{ \Carbon\Carbon::create($order->created_at)->format('d.m.y') }}</p>
@@ -145,13 +145,13 @@
     </div>
     <script>
         $(document).ready(function () {
-            $('.tab').click(function () {
+            $('.user-tab').click(function () {
                 var currentTabId = $(this).data('tab');
 
                 $('.profile__current-tab').hide();
                 $('#' + currentTabId).fadeIn();
 
-                $('.tab').removeClass('active');
+                $('.user-tab').removeClass('active');
                 $(this).addClass('active');
             });
         });

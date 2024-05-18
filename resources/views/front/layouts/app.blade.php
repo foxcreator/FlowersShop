@@ -18,13 +18,42 @@
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
     />    <link href="{{ asset('datepicker/air-datepicker.css') }}" rel="stylesheet">
-    <script src="{{ asset('datepicker/air-datepicker.js') }}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+{{--    <link href="https://cdn.jsdelivr.net/npm/nouislider@15.4.0/distribute/nouislider.min.css" rel="stylesheet">--}}
+{{--    <script src="https://cdn.jsdelivr.net/npm/nouislider@15.4.0/distribute/nouislider.min.js"></script>--}}
 
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/order.js'])
+    <link rel="stylesheet" href="{{ asset('front/styles/nouislider.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/product.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/order.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/search.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/banner.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/addition-pages.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/cart.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/parts/novelty.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/parts/delimiter.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/parts/categories.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/parts/info-blocks.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/parts/slider.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/catalog.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/styles/pagination.css') }}">
+
+
+    <script src="{{ asset('datepicker/air-datepicker.js') }}"></script>
+    {{--    <link rel="stylesheet" href="{{ asset('build/assets/app-LSg8gZFG.css') }}">--}}
+{{--        @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/order.js'])--}}
 </head>
 <body>
-<div id="toast-success" class="toast-success"></div>
-<div id="toast-error" class="toast-error"></div>
+<div class="container">
+    <div id="toast-success" class="toast-success"></div>
+    <div id="toast-error" class="toast-error"></div>
+</div>
 
 @if(str_contains(request()->getPathInfo(), 'purchase'))
     @include('front.layouts.cart-nav')
@@ -38,8 +67,8 @@
         <div class="footer__logo">
             @svg('lotus-logo')
         </div>
-        <div class="footer__info">
-            <div class="footer__about">
+        <div class="footer__info row">
+            <div class="footer__about col-lg-4 col-md-6">
                 <h3>{{ __('homepage.about_company') }}</h3>
                 <ul>
                     <li><a href="{{ route('front.about') }}">{{ __('homepage.about_us') }}</a></li>
@@ -49,7 +78,7 @@
                     <li><a href="{{ route('front.about') }}">{{ __('homepage.privacy_policy') }}</a></li>
                 </ul>
             </div>
-            <div class="footer__catalog">
+            <div class="footer__catalog col-lg-4 col-md-6">
                 <h3>{{ __('homepage.catalog') }}</h3>
                 <ul>
                     @foreach(\App\Models\Category::all() as $category)
@@ -59,7 +88,7 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="footer__contacts">
+            <div class="footer__contacts col-lg-4 col-md-6">
                 <h3>{{ __('homepage.contacts') }}</h3>
                 <ul>
                     <li>+38 (063) 787 5888</li>
@@ -69,12 +98,12 @@
                     <li>{{ __('texts.open_hours') }}</li>
                 </ul>
             </div>
-        </div>
 
-        <div class="footer__social">
-            <a href="#">@svg('instagram')</a>
-            <a href="#">@svg('facebook')</a>
-            <a href="#">@svg('telegram')</a>
+            <div class="footer__social col-lg-12 col-md-6">
+                <a href="#">@svg('instagram')</a>
+                <a href="#">@svg('facebook')</a>
+                <a href="#">@svg('telegram')</a>
+            </div>
         </div>
     </div>
 </footer>
@@ -122,25 +151,27 @@
         });
     });
 
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var dropdownToggle = document.querySelector('.search-toggle');
-        var dropdown = document.querySelector('.search');
-        var close = document.querySelector('.close-icon');
-
-        dropdownToggle.addEventListener('click', function (event) {
-            event.preventDefault(); // Предотвращаем переход по ссылке
-            dropdown.classList.toggle('open');
-            document.body.classList.toggle('fix');
-            event.stopPropagation(); // Остановить всплытие события, чтобы клик на кнопке не вызывал закрытие всех дропдаунов
+    $(document).ready(function() {
+        $('.search-toggle').click(function(event) {
+            event.preventDefault();
+            $('.search').toggleClass('open');
+            $('body').toggleClass('fix');
+            event.stopPropagation();
         });
 
-        // Обработчик события click на документе для закрытия всех дропдаунов при клике в любом месте страницы
-        close.addEventListener('click', function (event) {
-            dropdown.classList.remove('open');
-            document.body.classList.remove('fix');
+        $('.close-icon').click(function(event) {
+            $('.search').removeClass('open');
+            $('body').removeClass('fix');
+        });
+
+        $(document).click(function(event) {
+            if (!$(event.target).closest('.search').length) {
+                $('.search').removeClass('open');
+                $('body').removeClass('fix');
+            }
         });
     });
+
     //Initialize Select2 Elements
     $('.select2bs4').select2({
         theme: 'bootstrap4'
@@ -148,6 +179,11 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 <script src="{{ asset('main.js') }}"></script>
+<script src="{{ asset('front/js/nouislider.js') }}"></script>
+<script src="{{ asset('front/js/order.js') }}"></script>
+<script src="{{ asset('front/js/slider.js') }}"></script>
+<script src="{{ asset('front/js/catalog.js') }}"></script>
+{{--@vite(['resources/js/catalog.js'])--}}
 
 @if(session()->has('success'))
     <script>

@@ -35,7 +35,8 @@ class Product extends Model
         'quantity',
         'article',
         'thumbnail',
-        'badge'
+        'badge',
+        'rating'
     ];
 
     public function productPhotos():HasMany
