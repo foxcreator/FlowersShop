@@ -1,7 +1,10 @@
 @extends('front.layouts.app')
 @section('content')
     @php
+    $isFavorite = false;
+    if (auth()->user()) {
         $isFavorite = auth()->user()->favoriteProducts()->where('product_id', $product->id)->exists();
+    }
     @endphp
     <section class="product-show container">
 
@@ -127,7 +130,7 @@
         }
 
         $(document).ready(function () {
-            $('.product-show__preview').click(function () {
+            $('.show__preview').click(function () {
                 var newSrc = $(this).attr('src');
                 $('.product-show__thumbnail').addClass('fade-out');
                 setTimeout(function () {

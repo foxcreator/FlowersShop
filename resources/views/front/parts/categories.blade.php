@@ -7,12 +7,12 @@
             <h1>{{ __('homepage.categories') }}</h1>
         </div>
 
-        <div class="categories__cards">
+        <div class="categories__cards row">
             @foreach($categories as $category)
-                <div class="categories__card">
+                <div class="categories__card col-6">
                     <div class="categories__card-img">
                         <a href="{{ route('front.catalog', ['category' => $category->id]) }}">
-                            <img src="{{ asset($category->thumbnailUrl) }}" alt="">
+                            <img class="category-img" src="{{ asset($category->thumbnailUrl) }}" alt="">
                         </a>
                     </div>
                     <a href="{{ route('front.catalog', ['category' => $category->id]) }}">
@@ -22,12 +22,28 @@
                     </a>
                 </div>
             @endforeach
-            <div class="categories__link-block">
+            <div class="categories__link-block col-6">
                 <a href="{{ route('front.catalog') }}" class="categories__link">
-                    <span>{{ __('homepage.catalog') }}</span>
+                    <span>{{ __('homepage.categories') }}</span>
                     @svg('arrow-circle-right')
                 </a>
             </div>
         </div>
     </section>
 </div>
+<script>
+    // Получаем все элементы изображений с классом square-img
+    var images = document.querySelectorAll('.category-img');
+
+    // Перебираем все изображения и применяем необходимые изменения
+    images.forEach(function(img) {
+        // После загрузки изображения выполняем следующий код
+        img.onload = function() {
+            // Получаем ширину изображения
+            var width = img.width;
+
+            // Устанавливаем высоту изображения равной его ширине
+            img.style.maxHeight = width + 'px';
+        };
+    });
+</script>

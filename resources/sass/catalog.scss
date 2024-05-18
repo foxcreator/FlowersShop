@@ -209,6 +209,10 @@
         padding: 15px;
         transition: opacity 0.4s ease, background-color 0.4s ease, color 0.4s ease;
 
+        @media (max-width: $media-sm) {
+            display: none;
+        }
+
         &:active {
             background-color: $dark-green;
             color: $main-white;
@@ -237,15 +241,9 @@
         }
 
         .icon {
-            stroke: $text-gray;
-            @media (max-width: $media-md) {
-                width: 24px;
-                height: 24px;
-            }
-
+            stroke: $main-white;
             @media (max-width: $media-sm) {
-                width: 18px;
-                height: 18px;
+                width: 25px;
             }
         }
 
@@ -284,7 +282,16 @@
 
     &:hover {
         .icon {
-            stroke: $main-white;
+            stroke: $text-gray;
+            @media (max-width: $media-md) {
+                width: 24px;
+                height: 24px;
+            }
+
+            @media (max-width: $media-sm) {
+                width: 18px;
+                height: 18px;
+            }
         }
     }
 }

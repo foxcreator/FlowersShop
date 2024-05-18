@@ -5,7 +5,7 @@ if (auth()->user()) {
 }
 @endphp
 
-<div class="{{ $style }}__product-card">
+<div class="{{ $style }}__product-card col-6">
     <div class="{{ $style }}__card-img">
         <a href="{{ route('front.product', $product->id) }}">
             <img src="{{ asset($product->thumbnailUrl) }}" alt="">
@@ -74,7 +74,8 @@ if (auth()->user()) {
                 }
             },
             error: function(xhr, status, error) {
-                console.error(error);
+                console.log(xhr.responseJSON.message)
+                showToast('toast-error', xhr.responseJSON.message);
             }
         });
     });

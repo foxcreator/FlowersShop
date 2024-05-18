@@ -21,8 +21,8 @@
             <td>
                 @foreach($order->orderProducts as $product)
                     <div style="margin-bottom: 20px">
-                        <span style="font-size: 24px">{{ $product->product_name }}</span>
-                        <span style="float: right; font-size: 24px;">{{ $product->quantity }} шт</span>
+                        <span style="font-size: 20px">{{ $product->product_name }}</span>
+                        <span style="float: right; font-size: 20px;">{{ $product->quantity }} шт</span>
                     </div>
                 @endforeach
             </td>
@@ -42,7 +42,7 @@
             <td>
                 <div style="margin-bottom: 20px">
                     <span style="font-size: 20px">Доставка: </span>
-                    <span style="float: right; font-size: 24px;">
+                    <span style="float: right; font-size: 20px;">
                         @if($order->delivery_option === \App\Models\Order::DELIVERY_SELF)
                             {{ $order->deliveryOptionName }}
                         @else

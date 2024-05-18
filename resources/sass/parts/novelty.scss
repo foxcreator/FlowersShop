@@ -1,5 +1,9 @@
 .novelty {
     margin-bottom: 400px;
+    @media (max-width: $media-md) {
+        margin-bottom: 120px;
+        margin-top: 100px;
+    }
     &__header {
         width: 100%;
         margin-bottom: 64px;
@@ -9,32 +13,55 @@
             font-size: 96px;
             font-weight: 300;
             line-height: 100%;
+            @media (max-width: $media-sm) {
+                font-size: 36px;
+            }
         }
     }
 
-    &__products {
+    &__products.desktop {
         width: 100%;
         display: flex;
         gap: 30px;
+        @media (max-width: $media-md) {
+            display: none;
+        }
+    }
+
+    &__products.mobile {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        gap: 30px;
+
+        @media (max-width: $media-md) {
+            display: flex;
+        }
     }
 
     &__product-cards {
         display: flex;
+        justify-content: center;
         flex-wrap: wrap;
-        gap: 30px;
+        gap: 0;
+        @media (max-width: $media-md) {
+            gap: 0;
+        }
     }
 
     &__product-card {
-        flex: 1;
-        width: 100%;
         flex-wrap: wrap;
         cursor: pointer;
         position: relative;
+        padding: 10px;
         transition: transform 0.3s ease;
+        @media (min-width: $media-md) {
+            flex: 1;
+            width: 100%;
+        }
 
         img {
-            width: 255px;
-            height: 255px;
+            max-width: 100%;
         }
 
         &:hover {
@@ -50,9 +77,12 @@
             cursor: pointer;
             transition: transform 0.3s ease;
             position: relative;
+            width: 100%;
+            align-self: center;
+            transform: scale(0.96);
 
             &:hover {
-                transform: scale(1.05);
+                transform: scale(1.01);
 
                 button {
                     visibility: visible;
@@ -62,6 +92,10 @@
             img {
                 width: 540px;
                 height: 580px;
+                @media (max-width: $media-md) {
+                    width: 100%;
+                    height: auto;
+                }
             }
 
             .novelty__product-name {
@@ -86,14 +120,8 @@
 
         .icon {
             stroke: $text-gray;
-            @media (max-width: $media-md) {
-                width: 24px;
-                height: 24px;
-            }
-
             @media (max-width: $media-sm) {
-                width: 18px;
-                height: 18px;
+                width: 25px;
             }
         }
 
@@ -163,6 +191,10 @@
         opacity: 0;
         padding: 15px;
         transition: opacity 0.4s ease, background-color 0.4s ease, color 0.4s ease;
+
+        @media (max-width: $media-sm) {
+            display: none;
+        }
 
         &:active {
             background-color: $dark-green;

@@ -38,6 +38,6 @@ services:
             - 5173:5173
         volumes:
             - ./:/var/www/FlowersShop
-        command: "npm run dev"
-
+#        user: "502:20"
+#        command: "npm run dev"
 

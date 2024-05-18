@@ -1,12 +1,18 @@
 .about-page {
-    padding-top: 150px;
+    padding-top: 200px;
     margin-bottom: 320px;
     &__block {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 30px;
         margin-bottom: 80px;
+
+        @media (max-width: $media-sm) {
+
+            &:last-child {
+                flex-direction: column-reverse;
+            }
+        }
     }
 
     &__text-block {
@@ -15,26 +21,38 @@
         justify-content: space-between;
         align-items: start;
         gap: 30px;
+
+        @media (max-width: $media-md) {
+            gap: 10px;
+        }
     }
 
     h1 {
         font-size: 96px;
         font-weight: 300;
         color: $night-green;
+
+        @media (max-width: $media-md) {
+            font-size: 32px;
+        }
     }
 
     p {
         font-size: 20px;
         color: $night-green;
+
+        @media (max-width: $media-md) {
+            font-size: 14px;
+        }
     }
 
     img {
-        max-width: 540px;
+        width: 100%;
     }
 }
 
 .delivery-page {
-    padding-top: 150px;
+    padding-top: 200px;
     margin-bottom: 320px;
 
     &__block {
@@ -54,14 +72,34 @@
 }
 
 .contact-page {
-    padding-top: 150px;
+    padding-top: 200px;
     margin-bottom: 400px;
+    @media (max-width: $media-md) {
+        margin-bottom: 0;
+    }
 
     &__info-blocks {
         display: flex;
         align-items: start;
         justify-content: space-between;
         margin-bottom: 80px;
+        @media (max-width: $media-md) {
+            gap: 50px;
+        }
+
+        @media (max-width: $media-sm) {
+            gap: 80px;
+        }
+    }
+
+    &__phones {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        @media (max-width: $media-md) {
+            gap: 10px;
+        }
     }
 
     &__block {
@@ -69,6 +107,19 @@
         flex-direction: column;
         align-items: start;
         gap: 20px;
+
+        &:first-child {
+            @media (max-width: $media-md) {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            @media (max-width: $media-sm) {
+                flex-direction: column;
+                align-items: start;
+            }
+        }
 
         a, p {
             color: $main-green;
@@ -99,6 +150,14 @@
         display: flex;
         gap: 32px;
         margin-top: 20px;
+        @media (max-width: $media-md) {
+            flex-direction: column;
+            align-items: end;
+        }
+        @media (max-width: $media-sm) {
+            flex-direction: row;
+            align-items: start;
+        }
 
         .icon {
             fill: $night-green;

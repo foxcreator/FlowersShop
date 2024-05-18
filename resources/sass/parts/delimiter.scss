@@ -6,11 +6,19 @@
     border-top: $light-green solid 1px;
     overflow: hidden;
     position: relative;
+    @media (max-width: $media-sm) {
+        padding: 20px 40px;
+        margin-top: 100px;
+    }
 
     p {
         color: $dark-green;
         font-family: 'KyivType', serif ;
         font-size: 32px;
+        margin: 0;
+        @media (max-width: $media-sm) {
+            font-size: 16px;
+        }
     }
 
     img {
