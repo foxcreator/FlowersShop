@@ -25,6 +25,23 @@ $(document).ready(function () {
         fetchProducts(categoryId, minPriceValue, maxPriceValue, flowerId, subjectId);
     });
 
+    const mobileSlider = document.getElementById('mobileSlider');
+
+    mobileSlider.noUiSlider.on('update', function (values, handle) {
+        $('#mobileMinPrice').text(parseInt(values[0]));
+        $('#mobileMaxPrice').text(parseInt(values[1]));
+    });
+
+    mobileSlider.noUiSlider.on('change', function (values, handle) {
+        const categoryId = getSelectedCategory('category');
+        const flowerId = getSelectedCategory('flower');
+        const subjectId = getSelectedCategory('subject');
+        const minPriceValue = $('#minPrice').text();
+        const maxPriceValue = $('#maxPrice').text();
+
+        fetchProducts(categoryId, minPriceValue, maxPriceValue, flowerId, subjectId);
+    });
+
     $('input[name="category"]').change(function () {
         const categoryId = $(this).val();
         const flowerId = getSelectedCategory('flower');

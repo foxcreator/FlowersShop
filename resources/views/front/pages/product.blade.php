@@ -187,7 +187,7 @@
                 updateTotalPrice();
             });
 
-            $('.product-tab').click(function () {
+            $('.tab').click(function () {
                 var tabId = $(this).data('tab');
                 $(this).addClass('active').siblings().removeClass('active');
                 $('#' + tabId).addClass('active').siblings().removeClass('active');

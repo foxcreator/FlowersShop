@@ -18,8 +18,8 @@
     @endphp
     <div class="container">
         <h1>Оформление заказа</h1>
-        <div class="order">
-            <form action="{{ route('front.order.store') }}" method="POST" class="order__form">
+        <div class="order row">
+            <form action="{{ route('front.order.store') }}" method="POST" class="order__form col-12 col-md-6">
                 @csrf
                 <div class="order__tabs">
                     @guest
@@ -148,13 +148,14 @@
                                         <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
                                             <div class="row">
                                                 @foreach($products->slice($i, 2) as $product)
-                                                    <div class="col-md-6 position-relative">
-                                                        <img style="width: 200px; height: 200px"
-                                                             src="{{ $product->thumbnailUrl }}"
-                                                             class="d-block w-100 product-img"
+                                                    <div class="col-6 position-relative">
+                                                        <div class="position-relative">
+                                                        <img src="{{ $product->thumbnailUrl }}"
+                                                             class="d-block col-5 product-img"
                                                              alt="{{ $product->title }}"
                                                              data-product-id="{{ $product->id }}"
                                                         >
+                                                        </div>
                                                         <div class="card-info">
                                                             <p>{{ $product->title }}</p>
                                                             <p>₴ {{ (int) $product->price }}</p>
@@ -183,12 +184,14 @@
                                         <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
                                             <div class="row">
                                                 @foreach($products->slice($i, 2) as $product)
-                                                    <div class="col-md-6 position-relative">
-                                                        <img style="width: 200px; height: 200px"
-                                                             src="{{ $product->thumbnailUrl }}"
-                                                             class="d-block w-100 product-img"
-                                                             data-product-id="{{ $product->id }}"
-                                                             alt="{{ $product->title }}">
+                                                    <div class="col-6 position-relative">
+                                                        <div class="position-relative">
+                                                            <img src="{{ $product->thumbnailUrl }}"
+                                                                 class="d-block col-5 product-img"
+                                                                 alt="{{ $product->title }}"
+                                                                 data-product-id="{{ $product->id }}"
+                                                            >
+                                                        </div>
                                                         <div class="card-info">
                                                             <p>{{ $product->title }}</p>
                                                             <p>₴ {{ (int) $product->price }}</p>
@@ -257,7 +260,7 @@
                     </div>
                 </div>
             </form>
-            <div class="order__sum">
+            <div class="order__sum col-6 col-lg-5">
                 @include('front.purchase.parts.order-cart')
             </div>
         </div>

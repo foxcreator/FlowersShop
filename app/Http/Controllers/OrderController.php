@@ -38,7 +38,7 @@ class OrderController extends Controller
             }
         }
 
-        $entityToDb['user_id'] = isset($data['user_id']) ?: null;
+        $entityToDb['user_id'] = $data['user_id'] ?? null;
         $entityToDb['customer_name'] = $data['customer_name'];
         $entityToDb['customer_phone'] = $data['customer_phone'];
         $entityToDb['email'] = $data['email'];

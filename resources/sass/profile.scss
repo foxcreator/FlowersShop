@@ -1,4 +1,5 @@
 .profile {
+    padding-top: 200px;
     &__wrapper {
         padding: 30px 0 400px 0;
     }
@@ -13,6 +14,16 @@
         color: $text-green;
         text-transform: uppercase;
         max-width: 80%;
+
+        @media (max-width: $media-md) {
+            max-width: 100%;
+            font-size: 15px;
+        }
+
+        @media (max-width: $media-sm) {
+            gap: 10px;
+            font-size: 11px;
+        }
 
         .tab {
             position: relative;
@@ -38,14 +49,12 @@
         padding: 32px 0;
 
         .change-data {
-            width: 100%;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
         .change-password {
-            width: 100%;
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -53,6 +62,10 @@
 
         button {
             align-self: flex-end;
+
+            @media (max-width: $media-md) {
+                align-self: start;
+            }
         }
     }
 
@@ -75,8 +88,22 @@
         border: $dark-green 1px solid;
         padding: 32px;
 
+        @media (max-width: $media-sm) {
+            padding: 16px;
+        }
+
         p {
             color: $text-gray;
+
+            @media (max-width: $media-sm) {
+                font-size: 10px;
+            }
+        }
+
+        h5 {
+            @media (max-width: $media-sm) {
+                font-size: 11px;
+            }
         }
     }
 

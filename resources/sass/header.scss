@@ -363,13 +363,26 @@
     align-items: center;
     padding: 20px 0;
 
+    @media (max-width: $media-sm) {
+        justify-content: space-around;
+        padding: 10px 0;
+    }
+
     &__btn-back {
         display: flex;
         align-items: center;
         color: $dark-green;
 
+        @media (max-width: $media-sm) {
+            font-size: 10px;
+        }
+
         .icon {
             stroke: $dark-green;
+
+            @media (max-width: $media-sm) {
+                width: 20px;
+            }
         }
     }
 
@@ -378,11 +391,18 @@
             width: 60px;
             height: 85px;
             fill: $night-green;
+
+            @media (max-width: $media-sm) {
+                width: 40px;
+            }
         }
     }
 
     &__contacts {
         user-select: none;
+        @media (max-width: $media-sm) {
+            font-size: 10px;
+        }
         .number {
             color: $main-green;
             margin: 0;

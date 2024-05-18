@@ -120,14 +120,8 @@
 
         .icon {
             stroke: $text-gray;
-            @media (max-width: $media-md) {
-                width: 24px;
-                height: 24px;
-            }
-
             @media (max-width: $media-sm) {
-                width: 18px;
-                height: 18px;
+                width: 25px;
             }
         }
 
