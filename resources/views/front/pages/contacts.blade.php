@@ -2,21 +2,23 @@
 @section('content')
     <div class="contact-page container">
         @include('front.parts.breadcrumbs', ['pageName' => __('homepage.contacts')])
-        <div class="contact-page__info-blocks">
-        <div class="contact-page__block">
-            <h2>{{ __('homepage.contacts') }}</h2>
-            <a href="tel:0939998877">+38 (063) 787 5888</a>
-            <a href="tel:0939998877">+38 (063) 787 5888</a>
-            <a href="tel:0939998877">+38 (063) 787 5888</a>
-            <p>{{ __('texts.address') }}</p>
-            <p>{{ __('texts.open_hours') }}</p>
+        <div class="contact-page__info-blocks row">
+        <div class="contact-page__block col-lg-6">
+            <div class="contact-page__phones">
+                <h2>{{ __('homepage.contacts') }}</h2>
+                <a href="tel:0939998877">+38 (063) 787 5888</a>
+                <a href="tel:0939998877">+38 (063) 787 5888</a>
+                <a href="tel:0939998877">+38 (063) 787 5888</a>
+                <p>{{ __('texts.address') }}</p>
+                <p>{{ __('texts.open_hours') }}</p>
+            </div>
             <div class="contact-page__social">
                 <a href="#">@svg('instagram')</a>
                 <a href="#">@svg('facebook')</a>
                 <a href="#">@svg('telegram')</a>
             </div>
         </div>
-        <form class="contact-page__block">
+        <form class="contact-page__block col-lg-6 col-md-9">
             <h2>{{ __('homepage.feedback') }}</h2>
             <input type="text" class="default-input" name="name" placeholder="{{ __('placeholders.name') }}">
             <input type="text" class="default-input" name="phone" placeholder="{{ __('placeholders.phone') }}">

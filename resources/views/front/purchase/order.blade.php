@@ -10,7 +10,7 @@
     }
 
     $cityRef = '';
-    if (auth()->user()->city_ref) {
+    if (auth()->user() && auth()->user()->city_ref) {
         $cityRef = auth()->user()->city_ref;
     } elseif (session('city_ref') !== null) {
         $cityRef = session('city_ref');
@@ -18,8 +18,8 @@
     @endphp
     <div class="container">
         <h1>{{ __('order.order_placement') }}</h1>
-        <div class="order">
-            <form action="{{ route('front.order.store') }}" method="POST" class="order__form">
+        <div class="order row">
+            <form action="{{ route('front.order.store') }}" method="POST" class="order__form col-12 col-md-6">
                 @csrf
                 <div class="order__tabs">
                     @guest
@@ -149,11 +149,13 @@
                                             <div class="row">
                                                 @foreach($products->slice($i, 2) as $product)
                                                     <div class="col-6 position-relative">
-                                                        <img src="{{ $product->thumbnailUrl }}"
-                                                             class="d-block col-5 product-img"
-                                                             alt="{{ $product->title }}"
-                                                             data-product-id="{{ $product->id }}"
-                                                        >
+                                                        <div class="position-relative">
+                                                            <img src="{{ $product->thumbnailUrl }}"
+                                                                 class="d-block col-5 product-img"
+                                                                 alt="{{ $product->title }}"
+                                                                 data-product-id="{{ $product->id }}"
+                                                            >
+                                                        </div>
                                                         <div class="card-info">
                                                             <p>{{ $product->title }}</p>
                                                             <p>₴ {{ (int) $product->price }}</p>
@@ -183,10 +185,12 @@
                                             <div class="row">
                                                 @foreach($products->slice($i, 2) as $product)
                                                     <div class="col-6 position-relative">
-                                                        <img src="{{ $product->thumbnailUrl }}"
-                                                             class="d-block col-5 product-img"
-                                                             data-product-id="{{ $product->id }}"
-                                                             alt="{{ $product->title }}">
+                                                        <div class="position-relative">
+                                                            <img src="{{ $product->thumbnailUrl }}"
+                                                                 class="d-block col-5 product-img"
+                                                                 data-product-id="{{ $product->id }}"
+                                                                 alt="{{ $product->title }}">
+                                                        </div>
                                                         <div class="card-info">
                                                             <p>{{ $product->title }}</p>
                                                             <p>₴ {{ (int) $product->price }}</p>
