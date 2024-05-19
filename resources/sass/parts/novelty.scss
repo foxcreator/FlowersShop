@@ -19,6 +19,10 @@
         }
     }
 
+    &__card-img {
+        height: 80%;
+    }
+
     &__products.desktop {
         width: 100%;
         display: flex;

@@ -43,7 +43,7 @@
             var width = img.width;
 
             // Устанавливаем высоту изображения равной его ширине
-            img.style.maxHeight = width + 'px';
+            img.style.height = width + 'px';
         };
     });
 </script>

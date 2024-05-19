@@ -235,7 +235,7 @@
                                 <input class="form-check-input" type="radio" name="payment_method" value="cash"
                                        id="cash" checked>
                                 <label class="form-check-label" for="cash">
-                                    {{ __('order.pay_in_shop') }}
+                                    {{ __('order.pay_on_shop') }}
                                 </label>
                             </div>
                         </div>

@@ -49,17 +49,17 @@
 
         <div class="product-show__bottom">
             <div class="product-show__tabs">
-                <div class="product-tab active" data-tab="tab1"><span>{{ __('product_show.flower_story') }}</span></div>
-                <div class="product-tab" data-tab="tab2"><span>{{ __('product_show.delivery_payment') }}</span></div>
-                <div class="product-tab" data-tab="tab3"><span>{{ __('product_show.reviews') }}</span></div>
+                <div class="tab active" data-tab="tab1"><span>{{ __('product_show.flower_story') }}</span></div>
+                <div class="tab" data-tab="tab2"><span>{{ __('product_show.delivery_payment') }}</span></div>
+                <div class="tab" data-tab="tab3"><span>{{ __('product_show.reviews') }}</span></div>
             </div>
 
-            <div class="product-tab-content active" id="tab1">
+            <div class="tab-content active" id="tab1">
                 <img src="{{ $product->thumbnailUrl }}" alt="{{ $product->title }}">
                 <p>{{ $product->description }}</p>
             </div>
 
-            <div class="product-tab-content" id="tab2">
+            <div class="tab-content" id="tab2">
                 <div style="width: 33.333%">
                     <h3>Оплата</h3>
                     <ul>
@@ -77,7 +77,7 @@
                 </div>
             </div>
 
-            <div class="product-tab-content" id="tab3">
+            <div class="tab-content" id="tab3">
                 <div class="comments">
                     <form action="{{ route('front.comments.store') }}" method="POST">
                         @csrf
@@ -190,7 +190,7 @@
                 updateTotalPrice();
             });
 
-            $('.product-tab').click(function () {
+            $('.tab').click(function () {
                 var tabId = $(this).data('tab');
                 $(this).addClass('active').siblings().removeClass('active');
                 $('#' + tabId).addClass('active').siblings().removeClass('active');

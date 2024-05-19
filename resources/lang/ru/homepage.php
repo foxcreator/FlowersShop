@@ -12,7 +12,7 @@ return [
 	'categories' => 'Категории',
 	'help_change_flower' => 'Поможем тебе
         выбрать особенный букет',
-	'change_bouquet' => 'Обрати букет',
+	'change_bouquet' => 'Выбрать букет',
 	'coffee_shop' => 'Наша кофейня',
 	'any_questions' => 'Есть вопросы?',
 	'leave_contacts' => 'Оставь свои контакты и мы с тобой свяжемся',

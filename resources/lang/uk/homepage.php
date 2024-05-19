@@ -9,7 +9,7 @@ return [
 	'contacts' => 'Контакти',
 	'add_to_cart' => 'В кошик',
 	'novelty' => 'Новинки',
-	'all_novelty' => 'Все новинки',
+	'all_novelty' => 'Всі новинки',
 	'categories' => 'Категорії',
 	'help_change_flower' => 'Допоможемо тобі
         обрати особливий букет',
