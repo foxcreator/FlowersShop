@@ -3,20 +3,19 @@
     <div class="login-background">
         <a href="{{ route('home') }}">@svg('close')</a>
         <div class="login-form">
-            <h1>Восстановление пароля</h1>
+            <h1 class="mb-5">{{ __('auth.recover_password') }}</h1>
             <form action="{{ route('password.email') }}" method="POST">
-
                 @csrf
                 <input type="text"
                        name="email"
-                       placeholder="email"
+                       placeholder="Email"
                        value="{{ old('email') }}"
                 >
 
                 @error('email')
-                <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-                <button type="submit" >Отправить</button>
+                <button type="submit" >{{ __('auth.send') }}</button>
             </form>
         </div>
     </div>

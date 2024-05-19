@@ -4,7 +4,7 @@
     @include('front.parts.breadcrumbs', ['pageName' => __('homepage.about_us')])
     <div class="about-page__block row">
         <div class="col-md-6 about-page__text-block">
-            <h1>Про нас</h1>
+            <h1>{{ __('homepage.about_us') }}</h1>
             <p>
                 Систематичне поліпшення, оригінальні технології, розширення технічної бази
                 та робітнича майстерність забезпечили організації успіх і провідну роль на
@@ -26,7 +26,7 @@
             <img src="{{ asset('dist/img/boxed-bg.jpg') }}" alt="">
         </div>
         <div class="col-md-6 about-page__text-block">
-            <h1>Кавʼярня</h1>
+            <h1>{{ __('texts.coffee_shop') }}</h1>
             <p>
                 Систематичне поліпшення, оригінальні технології, розширення технічної бази
                 та робітнича майстерність забезпечили організації успіх і провідну роль на

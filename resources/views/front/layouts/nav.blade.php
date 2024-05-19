@@ -98,7 +98,7 @@
             <ul class="items mobile">
                 <li class="custom-header__dropdown mobile">
                     <a href="#" class="custom-header__dropdown-toggle">
-                        @if(session('locale') === 'uk' || auth()->user()->lang === 'uk')
+                        @if(session('locale') === 'uk' || auth()->user() && auth()->user()->lang === 'uk')
                             Укр
                         @else
                             рус
