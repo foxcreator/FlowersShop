@@ -11,7 +11,6 @@ $(document).ready(function() {
 
         var input = $('<input>').attr({
             type: 'text',
-            placeholder: 'Введите комментарий',
             name: 'comment',
             class: 'default-input'
         });

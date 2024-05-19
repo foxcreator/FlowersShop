@@ -5,8 +5,9 @@
     @media (max-width: $media-sm) {
         padding-top: 200px;
     }
-    &__wrapper {
 
+    &__card-img {
+        height: 80%;
     }
 
     &__filter {

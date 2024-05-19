@@ -25,6 +25,36 @@ if (auth()->user()) {
 </div>
 
 <script>
+    window.addEventListener("load", function() {
+        var images = document.querySelectorAll('.{{ $style }}__card-img');
+
+        images.forEach(function(img) {
+            function applyImageStyles() {
+                console.log('Applying styles to:', img);
+                var width = img.naturalWidth;
+                console.log('Width:', width);
+                img.style.height = width + 'px';
+            }
+
+            if (img.complete) {
+                console.log('Image already loaded:', img.src);
+                applyImageStyles();
+            } else {
+                console.log('Waiting for image to load:', img.src);
+                img.addEventListener('load', function() {
+                    console.log('Image loaded:', img.src);
+                    applyImageStyles();
+                });
+            }
+        });
+    });
+
+
+
+
+
+
+
     function addToCart(productId) {
         let cartCount = parseInt($('.cart-count').text());
 
