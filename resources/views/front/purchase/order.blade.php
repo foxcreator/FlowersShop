@@ -148,10 +148,9 @@
                                         <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
                                             <div class="row">
                                                 @foreach($products->slice($i, 2) as $product)
-                                                    <div class="col-md-6 position-relative">
-                                                        <img style="width: 200px; height: 200px"
-                                                             src="{{ $product->thumbnailUrl }}"
-                                                             class="d-block w-100 product-img"
+                                                    <div class="col-6 position-relative">
+                                                        <img src="{{ $product->thumbnailUrl }}"
+                                                             class="d-block col-5 product-img"
                                                              alt="{{ $product->title }}"
                                                              data-product-id="{{ $product->id }}"
                                                         >
@@ -183,10 +182,9 @@
                                         <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
                                             <div class="row">
                                                 @foreach($products->slice($i, 2) as $product)
-                                                    <div class="col-md-6 position-relative">
-                                                        <img style="width: 200px; height: 200px"
-                                                             src="{{ $product->thumbnailUrl }}"
-                                                             class="d-block w-100 product-img"
+                                                    <div class="col-6 position-relative">
+                                                        <img src="{{ $product->thumbnailUrl }}"
+                                                             class="d-block col-5 product-img"
                                                              data-product-id="{{ $product->id }}"
                                                              alt="{{ $product->title }}">
                                                         <div class="card-info">
@@ -257,7 +255,7 @@
                     </div>
                 </div>
             </form>
-            <div class="order__sum">
+            <div class="order__sum col-6 col-lg-5">
                 @include('front.purchase.parts.order-cart')
             </div>
         </div>

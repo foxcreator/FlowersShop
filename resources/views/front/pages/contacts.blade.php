@@ -21,7 +21,7 @@
             <input type="text" class="default-input" name="name" placeholder="{{ __('placeholders.name') }}">
             <input type="text" class="default-input" name="phone" placeholder="{{ __('placeholders.phone') }}">
             <input type="text" class="default-input" name="question" placeholder="{{ __('placeholders.question') }}">
-            <button type="submit" class="default-btn">{{ __('homepage.send') }}</button>
+            <button type="submit" class="default-btn col-12">{{ __('homepage.send') }}</button>
         </form>
         </div>
         <div class="contact-page__map">
