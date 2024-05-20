@@ -73,7 +73,8 @@ $flowers = \App\Models\Flower::all();
     <h3>{{ __('homepage.any_questions') }}</h3>
     <h3>{{ __('homepage.leave_contacts') }}</h3>
 
-    <form action="" class="questions__form">
+    <form action="{{ route('front.feedback') }}" method="POST" class="questions__form">
+        @csrf
         <input type="text" name="name" id="name" placeholder="{{ __('homepage.your_name') }}">
         <input type="text" name="phone" id="phone" placeholder="{{ __('homepage.your_phone') }}">
         <input type="text" name="question" id="question" placeholder="{{ __('homepage.your_question') }}">
