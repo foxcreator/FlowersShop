@@ -3,15 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\SearchHelper;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::query()->orderBy('created_at', 'DESC')->get();
+        if ($request->search) {
+            $orders = SearchHelper::search(Order::class, ['customer_name', 'customer_phone', 'id'], $request->search);
+        } else {
+            $orders = Order::query()->orderBy('status')->orderBy('created_at', 'DESC')->paginate(20);
+        }
         return view('admin.orders.index', compact('orders'));
     }
 
@@ -29,7 +34,7 @@ class OrdersController extends Controller
 
         if ($order->user_id && $order->status === Order::ORDER_STATUS_EXECUTED) {
             $user = User::find($order->user_id);
-            $user->balance =+ ($order->amount / 100) * 3;
+            $user->balance = +($order->amount / 100) * 3;
             $user->save();
         }
         return redirect()->back()->with(['status' => 'Статус изменен']);
