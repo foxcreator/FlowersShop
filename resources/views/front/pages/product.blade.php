@@ -126,7 +126,7 @@
         }
 
         $(document).ready(function () {
-            $('.show__preview').click(function () {
+            $('.product-show__preview').click(function () {
                 var newSrc = $(this).attr('src');
                 $('.product-show__thumbnail').addClass('fade-out');
                 setTimeout(function () {
