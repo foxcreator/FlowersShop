@@ -3,8 +3,11 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col-sm-6 d-flex align-items-center">
                     <h1 class="m-0">{{ $product->title_uk }} @if($product->badge) <span class="text-success">({{ $product->badgeName }})</span> @endif</h1>
+                    <a href="{{ route('front.product', $product->id) }}" class="ml-3" target="_blank">
+                        <i class="fas fa-eye"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -15,8 +18,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header p-2">
+                    <div class="card w-100">
+                        <div class="card-header p-2 d-flex justify-content-between w-100">
                             <ul class="nav nav-pills">
                                 <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Основная информация</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Редактирование изображений</a></li>
