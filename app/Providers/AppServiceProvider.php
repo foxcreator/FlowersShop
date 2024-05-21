@@ -25,9 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-		session(['locale' => App::getLocale()]);
+        session()->put('locale', App::getLocale());
+
         SvgDirective::register();
-		Paginator::useBootstrap();
+        Paginator::useBootstrap();
 
         $this->app['validator']->extend('password_check', function ($attribute, $value, $parameters, $validator) {
             return Hash::check($value, $parameters[0]);

@@ -16,7 +16,10 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()) {
+        if (!session('locale')) {
+            session()->put('locale', 'uk');
+        }
+        if (auth()->user() && auth()->user()->lang) {
             App::setLocale(auth()->user()->lang);
             session()->put('locale', App::getLocale());
         } else {
