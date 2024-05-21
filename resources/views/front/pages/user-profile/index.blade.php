@@ -5,11 +5,11 @@
 
         <div class="profile__wrapper">
             <div class="profile__tabs">
-                <div class="user-tab active" data-tab="profile"><span>{{ __('profile.profile') }}</span></div>
-                <div class="user-tab" data-tab="orders"><span>{{ __('profile.orders') }}</span></div>
-                <div class="user-tab" data-tab="favorite"><span>{{ __('profile.favorite') }}</span></div>
-                <div class="user-tab" data-tab="bonus"><span>{{ __('profile.bonus') }}</span></div>
-                <div class="user-tab" data-tab="logout"><span>{{ __('profile.logout') }}</span></div>
+                <div class="tab active" data-tab="profile"><span>{{ __('profile.profile') }}</span></div>
+                <div class="tab" data-tab="orders"><span>{{ __('profile.orders') }}</span></div>
+                <div class="tab" data-tab="favorite"><span>{{ __('profile.favorite') }}</span></div>
+                <div class="tab" data-tab="bonus"><span>{{ __('profile.bonus') }}</span></div>
+                <div class="tab" data-tab="logout"><span>{{ __('profile.logout') }}</span></div>
             </div>
             <form action="{{ route('front.update.profile', auth()->user()->getAuthIdentifier()) }}"
                   method="POST"
@@ -20,7 +20,7 @@
                 <div class="profile__inner row">
                     @csrf
 
-                    <div class="change-data col-md-9">
+                    <div class="change-data col-md-9 col-lg-6">
                         <h4>{{ __('profile.my_data') }}</h4>
                         <input type="text"
                                class="default-input {{ $errors->has('full_name') ? 'is-invalid' : '' }}"
@@ -63,7 +63,7 @@
                         @endif
                     </div>
 
-                    <div class="change-password col-md-9">
+                    <div class="change-password col-md-9 col-lg-5">
                         <h4>{{ __('profile.change_password') }}</h4>
                         <input type="password"
                                class="default-input {{ $errors->has('current_password') ? 'is-invalid' : '' }}"
@@ -95,7 +95,7 @@
                     </div>
 
                 </div>
-                <button type="submit" class="default-btn col-12 col-md-9">{{ __('placeholders.save') }}</button>
+                <button type="submit" class="default-btn align-self-start col-12 col-md-9 col-lg-6">{{ __('placeholders.save') }}</button>
 
             </form>
             <div class="profile__current-tab" id="orders">
@@ -145,13 +145,13 @@
     </div>
     <script>
         $(document).ready(function () {
-            $('.user-tab').click(function () {
+            $('.tab').click(function () {
                 var currentTabId = $(this).data('tab');
 
                 $('.profile__current-tab').hide();
                 $('#' + currentTabId).fadeIn();
 
-                $('.user-tab').removeClass('active');
+                $('.tab').removeClass('active');
                 $(this).addClass('active');
             });
         });
