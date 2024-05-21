@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class SearchHelper
 {
     /**
-     * Универсальный метод поиска по указанным колонкам
      *
-     * @param string $modelClass Имя класса модели
-     * @param array $columns Массив колонок для поиска
-     * @param string $searchTerm Значение поля поиска
-     * @param array $sortOptions Массив опций для сортировки (формат: ['column' => 'order'])
-     * @param int $paginate Количество элементов на странице (по умолчанию 20)
+     * @param string $modelClass
+     * @param array $columns
+     * @param string $searchTerm
+     * @param array $sortOptions
+     * @param int $paginate
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public static function search(

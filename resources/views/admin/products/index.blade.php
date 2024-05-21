@@ -42,11 +42,14 @@
                                 </form>
                             </div>
                         </div>
-                        <!-- /.card-header -->
+
                         <div id="products-table" class="card-body table-responsive p-0">
                             @include('admin.products.blocks.table')
                         </div>
-                        <!-- /.card-body -->
+
+                        <div class="mt-3 d-flex justify-content-center">
+                            {{ $products->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
