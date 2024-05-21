@@ -29,8 +29,9 @@ class ProductPhotosController extends Controller
         $data = $request->all();
         $product = Product::find($data['product']);
         $entity = $product->productPhotos()->orderBy('order', 'desc')->first();
+        $order = isset($entity->order) ? $entity->order + 1: 1;
 
-        ImagesService::attach($product, 'productPhotos', $data['images'], $entity->order + 1);
+        ImagesService::attach($product, 'productPhotos', $data['images'], $order);
 
     }
 
