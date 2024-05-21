@@ -105,22 +105,18 @@
     </section>
     <script>
         function addToCart(productId) {
-            let cartCount = parseInt($('.cart-count').text());
-
-            let quantity = parseInt($('.quantity-field').val());
-            $('.cart-count').text(cartCount += quantity);
-
             $.ajax({
                 url: "{{ route('front.addToCart') }}",
                 type: "POST",
                 data: {
                     id: productId,
-                    quantity: quantity
+                    quantity: $('.quantity-field').val()
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: (data) => {
+                    $('.cart-count').text(data.cartCount);
                     showToast('toast-success', '{{ __('statuses.cart_add') }}');
                 },
                 error: (xhr) => {

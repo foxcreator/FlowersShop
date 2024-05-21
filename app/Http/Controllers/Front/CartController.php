@@ -50,6 +50,7 @@ class CartController extends Controller
                 'data' => __('cart.add-product'),
                 'html' => view('front.purchase.parts.order-cart')->render(),
                 'productId' => $product->id,
+                'cartCount' => \Cart::getTotalQuantity()
             ]);
         }
 
