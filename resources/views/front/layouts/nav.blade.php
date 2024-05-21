@@ -76,7 +76,6 @@
                                 <span
                                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success cart-count">
                             {{ \Cart::session(session('cart_id'))->getTotalQuantity() }}
-                            <span class="visually-hidden">unread messages</span>
                         </span>
                             @endif
                         </a>
@@ -164,7 +163,6 @@
                             <span
                                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success cart-count">
                             {{ \Cart::session(session('cart_id'))->getTotalQuantity() }}
-                            <span class="visually-hidden">unread messages</span>
                         </span>
                         @endif
                     </a>

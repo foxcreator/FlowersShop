@@ -59,10 +59,6 @@ if (auth()->user()) {
 
 
     function addToCart(productId) {
-        let cartCount = parseInt($('.cart-count').text());
-
-        $('.cart-count').text(cartCount += 1);
-
         $.ajax({
             url: "{{ route('front.addToCart') }}",
             type: "POST",
@@ -74,7 +70,7 @@ if (auth()->user()) {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: (data) => {
-                console.log(data)
+                $('.cart-count').text(data.cartCount);
                 showToast('toast-success', data.data);
             },
             error: (xhr) => {

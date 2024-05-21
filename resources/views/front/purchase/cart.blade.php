@@ -108,10 +108,6 @@
 
 
     function addToCart(productId, quantity) {
-        let cartCount = parseInt($('.cart-count').text());
-
-        $('.cart-count').text(cartCount += quantity);
-
         $.ajax({
             url: "{{ route('front.addToCart') }}",
             type: "POST",
