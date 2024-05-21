@@ -10,7 +10,9 @@
                 <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ auth()->user()->name }} {{ auth()->user()->last_name }}</a>
+                <a href="{{ route('admin.users.show', auth()->user()->getAuthIdentifier()) }}" class="d-block">
+                    {{ auth()->user()->full_name }}
+                </a>
             </div>
         </div>
 

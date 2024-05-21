@@ -3,8 +3,13 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col-sm-12 d-flex justify-content-between w-100">
                     <h1 class="m-0">Категории</h1>
+                    <form action="{{ route('admin.categories.index') }}" method="GET" class="form-inline w-25">
+                        <div class="input-group input-group w-100">
+                            <input class="form-control form-control-navbar w-100" name="search" type="search" placeholder="Поиск" aria-label="Search">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -55,6 +60,9 @@
 
                                 </tbody>
                             </table>
+                            <div class="mt-3 d-flex justify-content-center">
+                                {{ $categories->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -3,8 +3,13 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col-sm-12 d-flex justify-content-between w-100">
                     <h1 class="m-0">Пользователи</h1>
+                    <form action="{{ route('admin.users.index') }}" method="GET" class="form-inline w-25">
+                        <div class="input-group input-group w-100">
+                            <input class="form-control form-control-navbar w-100" name="search" type="search" placeholder="Поиск" aria-label="Search">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -15,19 +20,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
                                 <thead>
@@ -44,7 +36,7 @@
                                     <tr>
                                         <td>{{ $user->name }} {{ $user->last_name }}</td>
                                         <td>{{ $user->phone }}</td>
-                                        <td>10</td>
+                                        <td>{{ \App\Models\Order::query()->where('user_id', $user->id)->count() }}</td>
 
                                         <td class="text-right">
                                             <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-secondary btn-xs">Информация</a>
@@ -54,6 +46,10 @@
 
                                 </tbody>
                             </table>
+
+                            <div class="mt-3 d-flex justify-content-center">
+                                {{ $users->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>

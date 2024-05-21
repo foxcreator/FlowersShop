@@ -31,33 +31,25 @@
                                     </select>
                                 </div>
 
-                                <div class="input-group input-group-sm mr-3">
-                                    <select class="form-control"
-                                            id="count_on_page"
-                                            name="count_on_page"
-                                    >
-                                        <option value="10">10</option>
-                                        <option value="20">20</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                </div>
-                                <div class="input-group input-group-sm">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                <form action="{{ route('admin.products.index') }}" class="input-group input-group-sm">
+                                    <input type="text" name="search" class="form-control float-right" placeholder="Поиск">
 
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default">
                                             <i class="fas fa-search"></i>
                                         </button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
-                        <!-- /.card-header -->
+
                         <div id="products-table" class="card-body table-responsive p-0">
                             @include('admin.products.blocks.table')
                         </div>
-                        <!-- /.card-body -->
+
+                        <div class="mt-3 d-flex justify-content-center">
+                            {{ $products->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -141,7 +141,7 @@
                         </span>
                         @enderror
                     </div>
-
+                    <input type="hidden" name="is_active" value="0">
                     <div class="icheck-success d-inline">
                         <input type="checkbox"
                                id="is_active"

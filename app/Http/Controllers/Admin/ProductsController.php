@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\SearchHelper;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Services\FileStorageService;
@@ -18,12 +19,23 @@ class ProductsController extends Controller
 {
     public function index(Request $request)
     {
-        $sortBy = $request->get('sort');
-        if ($sortBy) {
-            $products = Product::where('quantity', 0)->get();
+        if ($request->search) {
+            $products = SearchHelper::search(
+                Product::class,
+                ['title_ru', 'title_uk', 'article'],
+                $request->search,
+                ['created_at' => 'asc'],
+                10
+            );
         } else {
-            $products = Product::where(null, null)->paginate(10);
+            $sortBy = $request->get('sort');
+            if ($sortBy) {
+                $products = Product::where('quantity', 0)->orderBy('created_at')->paginate(20);
+            } else {
+                $products = Product::where(null, null)->orderBy('created_at')->paginate(20);
+            }
         }
+
         return view('admin.products.index', compact('products'));
     }
 

@@ -3,14 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\SearchHelper;
 use App\Models\Flower;
 use Illuminate\Http\Request;
 
 class FlowersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-		$flowers = Flower::all();
+        if ($request->search) {
+            $flowers = SearchHelper::search(
+                Flower::class,
+                ['name_ru', 'name_uk',],
+                $request->search,
+                ['name_uk' => 'asc'],
+            );
+        } else {
+            $flowers = Flower::query()->orderBy('name_uk')->paginate(20);
+        }
         return view('admin.categories.flowers.index', compact('flowers'));
     }
 

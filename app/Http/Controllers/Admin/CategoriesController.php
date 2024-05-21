@@ -3,18 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\SearchHelper;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Services\FileStorageService;
 use App\Models\Category;
-use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
+        if ($request->search) {
+            $categories = SearchHelper::search(
+                Category::class,
+                ['title_ru', 'title_uk',],
+                $request->search,
+                ['title_uk' => 'asc'],
+                10
+            );
+        } else {
+            $categories = Category::query()->orderBy('title_uk')->paginate(10);
+        }
         return view('admin.categories.index', compact('categories'));
     }
 
