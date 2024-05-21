@@ -54,6 +54,8 @@ Route::middleware(['set_locale'])->group(function () {
         Route::post('/user/update-profile/{id}', [\App\Http\Controllers\Front\UserController::class, 'update'])->name('update.profile')->middleware('auth');
         Route::post('/bonus-pay', [\App\Http\Controllers\OrderController::class, 'payWithBonuses'])->name('order.bonus')->middleware('auth');
 
+        Route::post('/feedback/store', [\App\Http\Controllers\FeedbackController::class, 'store'])->name('feedback');
+
 	});
 });
 

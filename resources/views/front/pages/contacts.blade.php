@@ -18,12 +18,27 @@
                     <a href="#">@svg('telegram')</a>
                 </div>
             </div>
-            <form class="contact-page__block col-lg-6 col-md-9">
+            <form action="{{ route('front.feedback') }}" method="POST" class="contact-page__block col-lg-6 col-md-9">
+                @csrf
                 <h2>{{ __('homepage.feedback') }}</h2>
-                <input type="text" class="default-input" name="name" placeholder="{{ __('placeholders.name') }}">
-                <input type="text" class="default-input" name="phone" placeholder="{{ __('placeholders.phone') }}">
-                <input type="text" class="default-input" name="question"
-                       placeholder="{{ __('placeholders.question') }}">
+                <input type="text"
+                       class="default-input"
+                       name="name"
+                       placeholder="{{ __('placeholders.name') }}"
+                       value="{{ old('name') }}"
+                >
+                <input type="text"
+                       class="default-input"
+                       name="phone"
+                       placeholder="{{ __('placeholders.phone') }}"
+                       value="{{ old('phone') }}"
+                >
+                <input type="text"
+                       class="default-input"
+                       name="question"
+                       placeholder="{{ __('placeholders.question') }}"
+                       value="{{ old('question') }}"
+                >
                 <button type="submit" class="default-btn col-12">{{ __('homepage.send') }}</button>
             </form>
         </div>
