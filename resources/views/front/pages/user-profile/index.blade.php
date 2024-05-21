@@ -100,10 +100,10 @@
             </form>
             <div class="profile__current-tab" id="orders">
                 @if(auth()->user()->orders->isEmpty())
-                    <h4>У вас еще не было офрмлено ни одного заказа</h4>
-                    <a href="{{ route('front.catalog') }}" class="default-btn">Просмотр товаров</a>
+                    <h4>{{ __('profile.not_order_history') }}</h4>
+                    <a href="{{ route('front.catalog') }}" class="default-btn">{{ __('profile.show_products') }}</a>
                 @else
-                    <h4>Мои заказы</h4>
+                    <h4>{{ __('profile.my_orders') }}</h4>
                     <div class="profile__order-inner">
                         @foreach(auth()->user()->orders()->orderByDesc('id', 'DESC')->limit(10)->get() as $order)
                             <div class="profile__order">
@@ -114,11 +114,11 @@
                                     @endforeach
                                 </div>
                                 <div class="col-md-4">
-                                    <p>Сумма:</p>
+                                    <p>{{ __('profile.order_amount') }}</p>
                                     <h5>₴ {{ intval($order->amount) }}</h5>
                                 </div>
                                 <div class="col-md-2">
-                                    <p>Статус:</p>
+                                    <p>{{ __('profile.status') }}</p>
                                     <h5>{{ $order->statusNameMultiLang }}</h5>
                                 </div>
                             </div>
@@ -129,17 +129,17 @@
             <div class="profile__current-tab" id="favorite">
                 @include('front.pages.favorites.parts.favorites', ['products' => auth()->user()->favoriteProducts()->get()])
 
-                <a href="{{ route('front.catalog') }}" class="default-btn">Просмотр товаров</a>
+                <a href="{{ route('front.catalog') }}" class="default-btn col-md-6">{{ __('profile.show_products') }}</a>
             </div>
             <div class="profile__current-tab" id="bonus">
-                <h4>Мои бонусы</h4>
+                <h4>{{ __('profile.my_bonuses') }}</h4>
                 <div class="profile__inner">
                     <h1 class="profile__balance">₴ {{ auth()->user()->balance }}</h1>
                 </div>
             </div>
             <div class="profile__current-tab" id="logout">
-                <h4>Вы уверены что хотите выйти из личного кабинета?</h4>
-                <a href="{{ route('logout') }}" class="default-btn logout-btn col-md-6">Выйти @svg('logout')</a>
+                <h4>{{ __('profile.exit_from_your_account') }}</h4>
+                <a href="{{ route('logout') }}" class="default-btn logout-btn col-md-6">{{ __('profile.logout') }} @svg('logout')</a>
             </div>
         </div>
     </div>

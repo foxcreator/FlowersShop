@@ -1,7 +1,7 @@
 @if(!$comments->count())
     <div class="nothing">
         <p>{{ __('product_show.not_reviews') }}</p>
-        <p>Оставте свой отзыв и вы будете первым</p>
+        <p>{{ __('product_show.make_first_review') }}</p>
     </div>
 @else
     @foreach($comments as $comment)
