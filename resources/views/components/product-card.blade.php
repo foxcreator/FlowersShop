@@ -59,8 +59,6 @@ if (auth()->user()) {
 
 
     function addToCart(productId) {
-        $('.cart-count').text('{{ \Cart::session(session('cart_id'))->getTotalQuantity() }}');
-
         $.ajax({
             url: "{{ route('front.addToCart') }}",
             type: "POST",
