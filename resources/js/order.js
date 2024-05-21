@@ -31,8 +31,9 @@ $(document).ready(function() {
     $('.submit-user').on('click', function() {
         var phone = $('[name="customer_phone"]').val();
         var name = $('[name="customer_name"]').val();
+        var email = $('[name="email"]').val();
 
-        if (phone && name) {
+        if (phone && name && email) {
             $('.order__order-form-group').hide();
             $('.user-success').show();
             $('.delivery-success').hide();

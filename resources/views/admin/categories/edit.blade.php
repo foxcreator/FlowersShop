@@ -115,6 +115,7 @@
                                    id="checkboxPrimary1"
                                    name="is_show_on_homepage"
                                    @if($category->is_show_on_homepage) checked @endif
+                                   value="1"
                                    @if($countShowCategory >= 3 && !$category->is_show_on_homepage) disabled @endif
                             >
                             <label for="checkboxPrimary1">Отображать категорию на главной странице</label>
