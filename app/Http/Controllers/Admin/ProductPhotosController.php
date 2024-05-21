@@ -21,7 +21,7 @@ class ProductPhotosController extends Controller
             $entity->save();
             $order++;
         }
-        return response()->status();
+        return response()->json();
     }
 
     public function uploadPhotos(Request $request)
