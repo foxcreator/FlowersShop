@@ -10,6 +10,9 @@ if (auth()->user()) {
         <a href="{{ route('front.product', $product->id) }}">
             <img src="{{ asset($product->thumbnailUrl) }}" alt="">
         </a>
+        @if($product->badge)
+            <div class="product-badge">{{ $product->badgeName }}</div>
+        @endif
         <div class="{{ $style }}__favorite @if($isFavorite) is-favorite @endif" id="favorite_{{ $product->id }}" data-product-id="{{ $product->id }}">@svg('heart')</div>
         <button id="add-to-cart_{{ $product->id }}" type="button" class="{{ $style }}__buy-btn" onclick="addToCart('{{ $product->id }}')">
             {{ __('homepage.add_to_cart') }}
