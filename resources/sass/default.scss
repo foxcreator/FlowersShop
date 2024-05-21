@@ -288,4 +288,18 @@ button {
     }
 }
 
+.product-badge {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    background: $main-green;
+    width: 35%;
+    height: 12%;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: $main-white;
+}
+
 
