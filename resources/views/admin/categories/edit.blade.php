@@ -107,17 +107,19 @@
                         <img class="img-thumbnail" src="{{ $category->thumbnailUrl }}" alt="">
                     </div>
 
+                    <input type="hidden" name="is_show_on_homepage" value="0">
+
                     <div class="form-group mt-4">
                         <div class="icheck-success d-inline">
                             <input type="checkbox"
                                    id="checkboxPrimary1"
                                    name="is_show_on_homepage"
-                                   value="{{ old('is_show_on_homepage', true) }}"
-                                   @if($countShowCategory >= 3) disabled @endif
+                                   @if($category->is_show_on_homepage) checked @endif
+                                   @if($countShowCategory >= 3 && !$category->is_show_on_homepage) disabled @endif
                             >
                             <label for="checkboxPrimary1">Отображать категорию на главной странице</label>
                         </div>
-                        @if($countShowCategory >= 3)
+                        @if($countShowCategory >= 3 && !$category->is_show_on_homepage)
                             <p class="text-info">Количество категорий на главной странице равно 3, если хотите добавить новую, отключите уже сущесвующую</p>
                         @endif
                     </div>
