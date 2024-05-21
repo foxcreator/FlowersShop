@@ -13,7 +13,12 @@ class OrdersController extends Controller
     public function index(Request $request)
     {
         if ($request->search) {
-            $orders = SearchHelper::search(Order::class, ['customer_name', 'customer_phone', 'id'], $request->search);
+            $orders = SearchHelper::search(
+                Order::class,
+                ['customer_name', 'customer_phone', 'id'],
+                $request->search,
+                ['status' => 'asc', 'created_at' => 'desc']
+            );
         } else {
             $orders = Order::query()->orderBy('status')->orderBy('created_at', 'DESC')->paginate(20);
         }

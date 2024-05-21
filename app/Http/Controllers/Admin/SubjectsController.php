@@ -3,17 +3,27 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\SearchHelper;
 use App\Models\Flower;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class SubjectsController extends Controller
 {
-	public function index()
-	{
-		$subjects = Subject::all();
-		return view('admin.categories.subjects.index', compact('subjects'));
-	}
+    public function index(Request $request)
+    {
+        if ($request->search) {
+            $subjects = SearchHelper::search(
+                Subject::class,
+                ['name_ru', 'name_uk',],
+                $request->search,
+                ['name_uk' => 'asc'],
+            );
+        } else {
+            $subjects = Subject::query()->orderBy('name_uk')->paginate(20);
+        }
+        return view('admin.categories.subjects.index', compact('subjects'));
+    }
 
 	public function create()
 	{

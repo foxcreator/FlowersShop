@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\SearchHelper;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,9 +12,18 @@ use Illuminate\Testing\Fluent\Concerns\Has;
 
 class UsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        if ($request->search) {
+            $users = SearchHelper::search(
+                User::class,
+                ['id', 'full_name', 'email', 'phone',],
+                $request->search,
+                ['full_name' => 'asc'],
+            );
+        } else {
+            $users = User::query()->orderBy('full_name')->paginate(20);
+        }
         return view('admin.users.index', compact('users'));
     }
 
