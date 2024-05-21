@@ -25,6 +25,13 @@ class Product extends Model
         self::BADGE_NEW => 'Новинка',
     ];
 
+    const BADGES_UA = [
+        self::BADGE_HIT => 'Хіт',
+        self::BADGE_SALE => 'Знижка',
+        self::BADGE_NEW_PRICE => 'Нова ціна',
+        self::BADGE_NEW => 'Новинка',
+    ];
+
     protected $fillable = [
         'category_id',
         'title_uk',
@@ -95,5 +102,14 @@ class Product extends Model
     public function getBadgeNameAttribute(): string
     {
         return self::BADGES[$this->attributes['badge']] ?? '';
+    }
+
+    public function getBadgeNameMultiLangAttribute(): string
+    {
+        if (App::getLocale() === 'ru') {
+            return self::BADGES[$this->attributes['badge']] ?? '';
+        }
+        return self::BADGES_UA[$this->attributes['badge']] ?? '';
+
     }
 }
