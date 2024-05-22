@@ -13,7 +13,7 @@ if (auth()->user()) {
         @if($product->badge)
             <div class="product-badge">{{ $product->badgeNameMultilang }}</div>
         @endif
-        <div class="{{ $style }}__favorite @if($isFavorite) is-favorite @endif" id="favorite_{{ $product->id }}" data-product-id="{{ $product->id }}">@svg('heart')</div>
+        <div class="{{ $style }}__favorite @if($isFavorite) is-favorite @endif" id="card-favorite_{{ $product->id }}" data-product-id="{{ $product->id }}">@svg('heart')</div>
         <button id="add-to-cart_{{ $product->id }}" type="button" class="{{ $style }}__buy-btn" onclick="addToCart('{{ $product->id }}')">
             {{ __('homepage.add_to_cart') }}
             @svg('cart')
@@ -50,7 +50,7 @@ if (auth()->user()) {
         })
     }
 
-    $('#favorite_{{ $product->id }}').on('click', function() {
+    $('#card-favorite_{{ $product->id }}').on('click', function() {
         var productId = $(this).data('product-id');
         var $button = $(this);
 
