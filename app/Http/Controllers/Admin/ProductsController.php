@@ -139,9 +139,14 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
         $name = $product->title_uk;
-        $product->delete();
-        return redirect()->route('admin.products.index')
-            ->with(['status' => "Товар {$name} успешно удален!"]);
+        if ($product->orders()->count() === 0) {
+            $product->delete();
+            return redirect()->route('admin.products.index')
+                ->with(['status' => "Товар {$name} успешно удален!"]);
+        } else {
+            return redirect()->back()
+                ->with(['error' => "Товар {$name} невозможно удалить!"]);
+        }
     }
 
     public function getArticle()

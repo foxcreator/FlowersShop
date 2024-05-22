@@ -147,7 +147,7 @@
                 timer: 4000
             });
             Toast.fire({
-                icon: 'success',
+                icon: 'error',
                 title: "{{ session('error') }}"
             });
         });

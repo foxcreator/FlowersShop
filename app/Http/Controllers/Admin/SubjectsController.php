@@ -77,7 +77,7 @@ class SubjectsController extends Controller
 
 	public function destroy(string $id)
 	{
-		$subject = Subject::finOrFail($id);
+		$subject = Subject::findOrFail($id);
 		$subject->delete();
 	}
 }
