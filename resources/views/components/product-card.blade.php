@@ -64,10 +64,13 @@ if (auth()->user()) {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
+                console.log(response)
                 if (response.status === 'add') {
+                    console.log('add')
                     $button.addClass('is-favorite');
                     showToast('toast-success', '{{ __('statuses.favorite_add') }}');
                 } else if (response.status === 'delete') {
+                    console.log('delete')
                     $button.removeClass('is-favorite');
                     showToast('toast-success', '{{ __('statuses.favorite_delete') }}');
                 }
