@@ -19,4 +19,7 @@ export default defineConfig({
             svgoConfig: {}, // Опционально: настройки оптимизации SVG
         }),
     ],
+    build: {
+        outDir: 'public/build',
+    },
 });
