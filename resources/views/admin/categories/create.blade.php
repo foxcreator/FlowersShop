@@ -57,9 +57,7 @@
                                   class="form-control @error('description_uk') is-invalid @enderror"
                                   rows="10"
                                   required
-                        >
-                            {{ old('description_uk') }}
-                        </textarea>
+                        >{{ old('description_uk') ? trim(old('description_uk')) : '' }}</textarea>
                         @error('description')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -73,9 +71,7 @@
                                   name="description_ru"
                                   class="form-control @error('description_ru') is-invalid @enderror"
                                   rows="10"
-                        >
-                            {{ old('description_ru') }}
-                        </textarea>
+                        >{{ old('description_ru') ? trim(old('description_ru')) : '' }}</textarea>
                         @error('description_ru')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
