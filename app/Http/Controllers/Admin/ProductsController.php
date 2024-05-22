@@ -28,12 +28,7 @@ class ProductsController extends Controller
                 10
             );
         } else {
-            $sortBy = $request->get('sort');
-            if ($sortBy) {
-                $products = Product::where('quantity', 0)->orderBy('created_at')->paginate(20);
-            } else {
-                $products = Product::where(null, null)->orderBy('created_at')->paginate(20);
-            }
+            $products = Product::paginate(30);
         }
 
         return view('admin.products.index', compact('products'));
@@ -164,12 +159,19 @@ class ProductsController extends Controller
     public function fetchData(Request $request)
     {
         $sort = $request->input('sort');
-        $count = $request->input('count');
-        if($sort === 'all') {
-            $products = Product::paginate($count);
-        } else {
-            $products = Product::where('quantity', 0)->paginate($count);
+        $filter = $request->input('filter');
+
+        $query = Product::query();
+        if($filter === 'out_in_stock') {
+            $query->where('quantity', 0);
         }
+
+        if ($sort) {
+            list($sortField, $sortOrder) = explode(":", $sort);
+            $query->orderBy($sortField, $sortOrder);
+        }
+
+        $products = $query->paginate(30);
 
         return view('admin.products.blocks.table', compact('products'))->render();
     }

@@ -16,23 +16,39 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('admin.products.create') }}" class="btn btn-info btn-sm">Добавить товар</a>
+                            <a href="{{ route('admin.products.create') }}" class="btn btn-info btn-sm">Добавить
+                                товар</a>
 
 
                             {{--                                    <a href="{{ route('admin.products.index', ['sort' => 'outInStock']) }}" class="btn btn-secondary btn-sm">Нет в наличии</a>--}}
                             <div class="card-tools d-flex">
                                 <div class="input-group input-group-sm mr-3">
                                     <select class="form-control"
-                                            id="sort"
-                                            name="sort"
+                                            id="filter"
+                                            name="filter"
                                     >
                                         <option value="all">Весь товар</option>
                                         <option value="out_in_stock">Нет в наличии</option>
                                     </select>
                                 </div>
 
+                                <div class="input-group input-group-sm mr-3">
+                                    <select class="form-control"
+                                            id="sort"
+                                            name="sort"
+                                    >
+                                        <option value="title_uk:asc">По наименованию</option>
+                                        <option value="price:asc">По цене (возрастание)</option>
+                                        <option value="price:desc">По цене (убывание)</option>
+                                        <option value="article:asc">По артиклю</option>
+                                        <option value="quantity:asc">По количеству (возрастание)</option>
+                                        <option value="quantity:desc">По количеству (убывание)</option>
+                                    </select>
+                                </div>
+
                                 <form action="{{ route('admin.products.index') }}" class="input-group input-group-sm">
-                                    <input type="text" name="search" class="form-control float-right" placeholder="Поиск">
+                                    <input type="text" name="search" class="form-control float-right"
+                                           placeholder="Поиск">
 
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default">
@@ -57,32 +73,38 @@
         </div>
     </section>
     <script>
-        $('#sort').on('change', function() {
+        $('#sort').on('change', function () {
             fetchData();
         });
-
-        // Событие изменения селектора для количества на странице
-        $('#count_on_page').on('change', function() {
+        $('#filter').on('change', function () {
             fetchData();
         });
 
         function fetchData() {
             var sort = $('#sort').val();
-            var countOnPage = $('#count_on_page').val();
+            var filter = $('#filter').val();
+            console.log(sort)
+            console.log(filter)
 
-            // Отправляем AJAX запрос на сервер
-                $.ajax({
-                    url: '{{ route('admin.products.fetch') }}',
-                    type: 'GET',
-                    data: { sort: sort, count: countOnPage },
-                    success: function(response) {
-                        // Обновляем данные на странице с помощью полученного ответа
-                        $('#products-table').html(response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            }
+            $.ajax({
+                url: '{{ route('admin.products.fetch') }}',
+                type: 'GET',
+                data: {sort: sort, filter: filter},
+                success: function (response) {
+                    // Обновляем данные на странице с помощью полученного ответа
+                    $('#products-table').html(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
+        $(document).on('click', '.pagination a', function(e) {
+            e.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            fetchData(page);
+        });
+
     </script>
 @endsection
