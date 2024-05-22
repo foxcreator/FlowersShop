@@ -50,7 +50,7 @@ if (auth()->user()) {
         })
     }
 
-    $('#card-favorite_{{ $product->id }}').on('click', function() {
+    $('#card-favorite_{{ $product->id }}').off('click').on('click', function() {
         var productId = $(this).data('product-id');
         var $button = $(this);
 
@@ -64,23 +64,21 @@ if (auth()->user()) {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
-                console.log(response)
                 if (response.status === 'add') {
-                    console.log('add')
                     $button.addClass('is-favorite');
                     showToast('toast-success', '{{ __('statuses.favorite_add') }}');
                 } else if (response.status === 'delete') {
-                    console.log('delete')
                     $button.removeClass('is-favorite');
                     showToast('toast-success', '{{ __('statuses.favorite_delete') }}');
                 }
             },
             error: function(xhr, status, error) {
-                console.log(xhr.responseJSON.message)
                 showToast('toast-error', xhr.responseJSON.message);
             }
         });
     });
+
+
 
 
 
