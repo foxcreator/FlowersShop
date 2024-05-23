@@ -19,21 +19,27 @@ class ProductsController extends Controller
 {
     public function index(Request $request)
     {
+        $query = Product::query();
+
+        if ($request->filter === 'out_in_stock') {
+            $query->where('quantity', 0);
+        }
+
+        if ($request->sort) {
+            list($sortField, $sortOrder) = explode(':', $request->sort);
+            $query->orderBy($sortField, $sortOrder);
+        }
+
         if ($request->search) {
             $products = SearchHelper::search(
                 Product::class,
                 ['title_ru', 'title_uk', 'article'],
                 $request->search,
-                ['created_at' => 'asc'],
-                10
+                [$sortField => $sortOrder],
+                30
             );
         } else {
-            $sortBy = $request->get('sort');
-            if ($sortBy) {
-                $products = Product::where('quantity', 0)->orderBy('created_at')->paginate(20);
-            } else {
-                $products = Product::where(null, null)->orderBy('created_at')->paginate(20);
-            }
+            $products = $query->paginate(30);
         }
 
         return view('admin.products.index', compact('products'));
@@ -159,18 +165,5 @@ class ProductsController extends Controller
         }
 
         return '0000001';
-    }
-
-    public function fetchData(Request $request)
-    {
-        $sort = $request->input('sort');
-        $count = $request->input('count');
-        if($sort === 'all') {
-            $products = Product::paginate($count);
-        } else {
-            $products = Product::where('quantity', 0)->paginate($count);
-        }
-
-        return view('admin.products.blocks.table', compact('products'))->render();
     }
 }

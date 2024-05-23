@@ -16,23 +16,37 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('admin.products.create') }}" class="btn btn-info btn-sm">Добавить товар</a>
+                            <a href="{{ route('admin.products.create') }}" class="btn btn-info btn-sm">Добавить
+                                товар</a>
 
 
                             {{--                                    <a href="{{ route('admin.products.index', ['sort' => 'outInStock']) }}" class="btn btn-secondary btn-sm">Нет в наличии</a>--}}
-                            <div class="card-tools d-flex">
-                                <div class="input-group input-group-sm mr-3">
-                                    <select class="form-control"
-                                            id="sort"
-                                            name="sort"
-                                    >
-                                        <option value="all">Весь товар</option>
-                                        <option value="out_in_stock">Нет в наличии</option>
-                                    </select>
-                                </div>
+                            <div class="card-tools d-flex col-6">
+                                <form id="filter-sort-form" method="GET" action="{{ route('admin.products.index') }}" class="d-flex col-6">
+                                    <div class="input-group input-group-sm col-6">
+                                        <select class="form-control" id="filter" name="filter" onchange="this.form.submit()">
+                                            <option value="all" {{ request('filter') == 'all' ? 'selected' : '' }}>Весь товар</option>
+                                            <option value="out_in_stock" {{ request('filter') == 'out_in_stock' ? 'selected' : '' }}>Нет в наличии</option>
+                                        </select>
+                                    </div>
 
-                                <form action="{{ route('admin.products.index') }}" class="input-group input-group-sm">
-                                    <input type="text" name="search" class="form-control float-right" placeholder="Поиск">
+                                    <div class="input-group input-group-sm col-6">
+                                        <select class="form-control" id="sort" name="sort" onchange="this.form.submit()">
+                                            <option value="title_uk:asc" {{ request('sort') == 'title_uk:asc' ? 'selected' : '' }}>По наименованию</option>
+                                            <option value="price:asc" {{ request('sort') == 'price:asc' ? 'selected' : '' }}>По цене (возрастание)</option>
+                                            <option value="price:desc" {{ request('sort') == 'price:desc' ? 'selected' : '' }}>По цене (убывание)</option>
+                                            <option value="article:asc" {{ request('sort') == 'article:asc' ? 'selected' : '' }}>По артиклю (возрастание)</option>
+                                            <option value="article:desc" {{ request('sort') == 'article:desc' ? 'selected' : '' }}>По артиклю (убывание)</option>
+                                            <option value="quantity:asc" {{ request('sort') == 'quantity:asc' ? 'selected' : '' }}>По количеству (возрастание)</option>
+                                            <option value="quantity:desc" {{ request('sort') == 'quantity:desc' ? 'selected' : '' }}>По количеству (убывание)</option>
+                                        </select>
+                                    </div>
+                                </form>
+
+
+                                <form action="{{ route('admin.products.index') }}" class="input-group input-group-sm col-6">
+                                    <input type="text" name="search" class="form-control float-right"
+                                           placeholder="Поиск">
 
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default">
@@ -48,7 +62,7 @@
                         </div>
 
                         <div class="mt-3 d-flex justify-content-center">
-                            {{ $products->links() }}
+                            {{ $products->appends(request()->query())->links() }}
                         </div>
                     </div>
                 </div>
@@ -56,33 +70,4 @@
 
         </div>
     </section>
-    <script>
-        $('#sort').on('change', function() {
-            fetchData();
-        });
-
-        // Событие изменения селектора для количества на странице
-        $('#count_on_page').on('change', function() {
-            fetchData();
-        });
-
-        function fetchData() {
-            var sort = $('#sort').val();
-            var countOnPage = $('#count_on_page').val();
-
-            // Отправляем AJAX запрос на сервер
-                $.ajax({
-                    url: '{{ route('admin.products.fetch') }}',
-                    type: 'GET',
-                    data: { sort: sort, count: countOnPage },
-                    success: function(response) {
-                        // Обновляем данные на странице с помощью полученного ответа
-                        $('#products-table').html(response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            }
-    </script>
 @endsection

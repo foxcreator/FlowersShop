@@ -72,7 +72,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
    Route::post('/change-role', [\App\Http\Controllers\Admin\UsersController::class, 'changeRole'])->name('users.change-role');
    Route::post('/update-password', [\App\Http\Controllers\Admin\UsersController::class, 'updatePassword'])->name('users.update.password');
 
-    Route::get('/fetch-product-data', [\App\Http\Controllers\Admin\ProductsController::class, 'fetchData'])->name('products.fetch');
    Route::post('/sort-product-images', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'sortPhoto'])->name('sort.photo');
    Route::post('/delete-image', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'delete'])->name('delete.photo');
    Route::post('/upload-image', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'uploadPhotos'])->name('upload.photo');

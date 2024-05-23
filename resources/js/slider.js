@@ -4,22 +4,22 @@ const slider = document.getElementById('slider');
 const mobileSlider = document.getElementById('mobileSlider');
 
 noUiSlider.create(slider, {
-    start: [0, 5000],
-    step: 20,
+    start: [0, 50000],
+    step: 100,
     connect: true,
     range: {
         'min': 0,
-        'max': 5000
+        'max': 50000
     }
 });
 
 noUiSlider.create(mobileSlider, {
-    start: [0, 5000],
-    step: 20,
+    start: [0, 50000],
+    step: 100,
     connect: true,
     range: {
         'min': 0,
-        'max': 5000
+        'max': 50000
     }
 });
 

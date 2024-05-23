@@ -218,8 +218,8 @@
                             </div>
                             <div id="mobileSlider"></div>
                             <div class="d-flex justify-content-between mt-2 w-100">
-                                <p>₴<span id="mobileMinPrice"></span></p>
-                                <p>₴<span id="mobileMaxPrice"></span></p>
+                                <p>₴<span id="mobileMinPrice">0</span></p>
+                                <p>₴<span id="mobileMaxPrice">50000</span></p>
                             </div>
                         </div>
 
