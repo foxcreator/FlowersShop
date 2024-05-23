@@ -17,7 +17,9 @@
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
-    />    <link href="{{ asset('datepicker/air-datepicker.css') }}" rel="stylesheet">
+    />
+    <link rel="icon" href="{{ asset('front/favicon.png') }}" type="image/png">
+    <link href="{{ asset('datepicker/air-datepicker.css') }}" rel="stylesheet">
     <script src="{{ asset('datepicker/air-datepicker.js') }}"></script>
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
