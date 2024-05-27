@@ -40,7 +40,6 @@
 
         <script>
             $(document).ready(function() {
-                // Инициализируем сортировку изображений
                 $("#sortable-novelty").sortable({
                     cursor: "move",
                     distance: 50,
@@ -69,39 +68,6 @@
                         });
                     }
                 });
-            });
-
-            $(document).ready(function() {
-
-
-                {{--$('#imageInput').on('change', function() {--}}
-                {{--    var formData = new FormData();--}}
-                {{--    var files = $(this)[0].files;--}}
-
-                {{--    for (var i = 0; i < files.length; i++) {--}}
-                {{--        formData.append('images[]', files[i]);--}}
-                {{--    }--}}
-
-                {{--    formData.append('product', {{ $product->id }});--}}
-
-                {{--    console.log(formData);--}}
-                {{--    $.ajax({--}}
-                {{--        url: "{{ route('admin.upload.photo') }}",--}}
-                {{--        type: 'POST',--}}
-                {{--        headers: {--}}
-                {{--            'X-CSRF-Token': "{{ csrf_token() }}"--}}
-                {{--        },--}}
-                {{--        data: formData,--}}
-                {{--        contentType: false,--}}
-                {{--        processData: false,--}}
-                {{--        success: function(response) {--}}
-                {{--            location.reload();--}}
-                {{--        },--}}
-                {{--        error: function(xhr, status, error) {--}}
-                {{--            console.error('Ошибка при загрузке изображений:', error);--}}
-                {{--        }--}}
-                {{--    });--}}
-                {{--});--}}
             });
         </script>
 @endsection
