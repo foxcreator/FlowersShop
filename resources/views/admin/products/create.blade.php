@@ -237,6 +237,20 @@
                             <option value="{{ $key }}">{{ $badge }}</option>
                         @endforeach
                     </select>
+                    <div class="form-group mt-4">
+                        <div class="icheck-success d-inline">
+                            <input type="checkbox"
+                                   id="checkboxPrimary1"
+                                   name="is_novelty"
+                                   value="{{ old('is_novelty', true) }}"
+                                   @if($countNoveltyProduct >= 5) disabled @endif
+                            >
+                            <label for="checkboxPrimary1">Отображать товар в новинках на главной странице</label>
+                        </div>
+                        @if($countNoveltyProduct >= 5)
+                            <p class="text-info">Количество новинок на главной странице равно 5, если хотите добавить новую, отключите уже сущесвующую</p>
+                        @endif
+                    </div>
                 </div>
 
                 <div class="card-footer d-flex justify-content-between gap-2">

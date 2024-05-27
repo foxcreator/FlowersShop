@@ -2,7 +2,7 @@
     <div class="delimiter__wrapper">
         @for($i = 1; $i < 20; $i++ )
             <p class="running-text" id="running-line">
-                <img src="{{ asset('front/icons/lotus-icon.png') }}" alt="lotus icon" width="25" height="26">
+                @svg('logo-min')
                 <span>The Lotus</span>
             </p>
         @endfor

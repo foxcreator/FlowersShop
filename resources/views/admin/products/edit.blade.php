@@ -25,7 +25,6 @@
                             @endforeach
                         </select>
                     </div>
-{{--                    @dd($product->flowers()->pluck('flowers.id'))--}}
 
                     <div class="form-group">
                         <label for="flowers">Цветок (можно несколько)</label>
@@ -37,7 +36,6 @@
                         >
 
                         @foreach($flowers as $flower)
-{{--                                @dd($product->flowers->contains($flower->id))--}}
                                 <option value="{{ $flower->id }}" {{ $product->flowers->contains($flower->id) ? 'selected' : '' }}>
                                     {{ $flower->name_uk }}
                                 </option>
@@ -215,6 +213,22 @@
                                 <option value="{{ $key }}" @if($product->badge == $key) selected @endif>{{ $badge }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group mt-4">
+                        <input type="hidden" value="0" name="is_novelty">
+                        <div class="icheck-success d-inline">
+                            <input type="checkbox"
+                                   id="checkboxPrimary1"
+                                   name="is_novelty"
+                                   value="{{ old('is_novelty', true) }}"
+                                   @if($product->is_novelty) checked @endif
+                                   @if($countNoveltyProduct >= 5) disabled @endif
+                            >
+                            <label for="checkboxPrimary1">Отображать товар в новинках на главной странице</label>
+                        </div>
+                        @if($countNoveltyProduct >= 5)
+                            <p class="text-info">Количество новинок на главной странице равно 5, если хотите добавить новую, отключите уже сущесвующую</p>
+                        @endif
                     </div>
                 </div>
 

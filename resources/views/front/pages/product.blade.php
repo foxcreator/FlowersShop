@@ -63,7 +63,7 @@
                 <div style="width: 33.333%">
                     <h3>Оплата</h3>
                     <ul>
-                        <li>Fondy</li>
+{{--                        <li>Fondy</li>--}}
 {{--                        <li>{{ __('product_show.checking_account') }}</li>--}}
                         <li>{{ __('product_show.on_receiving') }}</li>
                     </ul>
