@@ -61,7 +61,9 @@ Route::middleware(['set_locale'])->group(function () {
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
    Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-   Route::resource('products', \App\Http\Controllers\Admin\ProductsController::class);
+    Route::get('products/sort-novelty', [\App\Http\Controllers\Admin\ProductsController::class, 'sortNovelty'])->name('products.sort-novelty');
+    Route::post('products/sort-novelty-update', [\App\Http\Controllers\Admin\ProductsController::class, 'sortNoveltyUpdate'])->name('products.sort-novelty.update');
+    Route::resource('products', \App\Http\Controllers\Admin\ProductsController::class);
    Route::resource('categories', \App\Http\Controllers\Admin\CategoriesController::class);
    Route::resource('flowers', \App\Http\Controllers\Admin\FlowersController::class);
    Route::resource('subjects', \App\Http\Controllers\Admin\SubjectsController::class);

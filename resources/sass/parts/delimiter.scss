@@ -34,8 +34,17 @@
 }
 
 .running-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     white-space: nowrap;
     width: 20%;
+
+    .icon-logo-min {
+        fill: $main-green;
+        width: 24px;
+        height: 24px;
+    }
 }
 
 

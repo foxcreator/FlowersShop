@@ -21,7 +21,7 @@
                             <img id="banner-image-{{ $index }}" src="{{ $banner->imageUrl }}" alt="{{ $banner->title }}">
                         </div>
                         <div class="banner__text container">
-                            <h1 id="banner-heading-{{ $index }}" class="text-uppercase user-select-none">{{ $banner->title }}</h1>
+                            <h1 id="banner-heading-{{ $index }}" class="text-uppercase user-select-none">{!! $banner->title !!}</h1>
                             <a id="banner-btn-{{ $index }}" href="{{ url($banner->link) }}" class="banner__btn">
                                 <span>{{ $banner->btnText }}</span>
                                 @svg('arrow-circle-right')

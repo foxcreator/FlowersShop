@@ -39,6 +39,7 @@ class UpdateProductRequest extends FormRequest
             'thumbnail' => 'nullable|image:jpeg,png,jpg',
             'badge' => 'nullable',
             'product_photos' => 'nullable',
+            'is_novelty' => 'nullable'
         ];
     }
 

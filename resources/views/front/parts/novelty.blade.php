@@ -1,5 +1,5 @@
 @php
-    $products = \App\Models\Product::all()->take(5);
+    $products = \App\Models\Product::where('is_novelty', true)->orderBy('order', 'asc')->get();
 @endphp
 <div class="container mt-200">
     <section class="novelty">

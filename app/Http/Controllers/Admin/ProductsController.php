@@ -35,7 +35,7 @@ class ProductsController extends Controller
                 Product::class,
                 ['title_ru', 'title_uk', 'article'],
                 $request->search,
-                [$sortField => $sortOrder],
+                isset($sortField) ? [$sortField => $sortOrder] : [],
                 30
             );
         } else {
@@ -47,6 +47,7 @@ class ProductsController extends Controller
 
     public function create()
     {
+        $countNoveltyProduct = Product::query()->where('is_novelty', true)->count();
         $categories = Category::all();
         $flowers = Flower::all();
         $subjects = Subject::all();
@@ -55,7 +56,8 @@ class ProductsController extends Controller
 			'categories',
 			'article',
 			'subjects',
-			'flowers'
+			'flowers',
+            'countNoveltyProduct'
 		));
     }
 
@@ -88,6 +90,7 @@ class ProductsController extends Controller
 
     public function edit(string $id)
     {
+        $countNoveltyProduct = Product::query()->where('is_novelty', true)->count();
 		$subjects = Subject::all();
 		$flowers = Flower::all();
         $product = Product::find($id);
@@ -96,7 +99,8 @@ class ProductsController extends Controller
 			'product',
 			'categories',
 			'flowers',
-			'subjects'
+			'subjects',
+            'countNoveltyProduct'
 		));
     }
 
@@ -165,5 +169,24 @@ class ProductsController extends Controller
         }
 
         return '0000001';
+    }
+
+    public function sortNovelty()
+    {
+        $novelty = Product::query()->where('is_novelty', true)->orderBy('order')->get();
+        return view('admin.products.novelty-sort', compact('novelty'));
+    }
+
+    public function sortNoveltyUpdate(Request $request)
+    {
+        $data = $request->all();
+        $order = 1;
+        foreach ($data['photoIds'] as $photoId) {
+            $entity = Product::find($photoId);
+            $entity->order = $order;
+            $entity->save();
+            $order++;
+        }
+        return response()->json();
     }
 }
