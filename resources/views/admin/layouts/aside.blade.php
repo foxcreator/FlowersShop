@@ -41,7 +41,7 @@
                 <li class="nav-item">
                     <a href="{{ route('admin.products.sort-novelty') }}" class="nav-link">
                         <i class="nav-icon fas fa-shopping-cart"></i>
-                        <p>Новинки</p>
+                        <p>Новинки (сортировка)</p>
 
                     </a>
                 </li>

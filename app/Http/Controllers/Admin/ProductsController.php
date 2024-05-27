@@ -173,7 +173,20 @@ class ProductsController extends Controller
 
     public function sortNovelty()
     {
-        $novelty = Product::query()->where('is_novelty', true)->get();
+        $novelty = Product::query()->where('is_novelty', true)->orderBy('order')->get();
         return view('admin.products.novelty-sort', compact('novelty'));
+    }
+
+    public function sortNoveltyUpdate(Request $request)
+    {
+        $data = $request->all();
+        $order = 1;
+        foreach ($data['photoIds'] as $photoId) {
+            $entity = Product::find($photoId);
+            $entity->order = $order;
+            $entity->save();
+            $order++;
+        }
+        return response()->json();
     }
 }
