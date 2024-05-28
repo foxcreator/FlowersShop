@@ -1,5 +1,8 @@
 @php
     $products = \App\Models\Product::where('is_novelty', true)->orderBy('order', 'asc')->get();
+    if ($products->count() === 0) {
+        $products = \App\Models\Product::query()->orderBy('article', 'desc')->take(5)->get();
+    }
 @endphp
 <div class="container mt-200">
     <section class="novelty">
