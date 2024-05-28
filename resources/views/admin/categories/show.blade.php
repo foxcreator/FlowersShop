@@ -45,6 +45,15 @@
                                                 <p>Наименование RU</p>
                                                 <h5 class="text-gray-dark">{{ $category->title_ru }}</h5>
                                             </div>
+                                            <div class="d-flex justify-content-between mb-3" style="border-bottom: 1px solid #4a5568">
+                                                <p>Подкатегории</p>
+                                                <div>
+                                                    @foreach($category->subcategories as $subcategory)
+                                                        <h5 class="text-gray-dark border-bottom pb-2">{{ $subcategory->name_ru }}</h5>
+                                                    @endforeach
+
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-6 mt-5">
                                             <h5>Описание UA</h5>

@@ -84,9 +84,12 @@ $(document).ready(function () {
     });
 
 
-    $('.filter-mobile-btn').click(function () {
-        $('#mobile-filter').toggle();
-    });
+
+});
+
+$('.filter-mobile-btn').click(function () {
+    console.log(12)
+    $('#desktop-filter').toggle();
 });
 
 function fetchProducts(categoryId, minPrice, maxPrice, flowerId, subjectId, page = 1) {

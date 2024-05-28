@@ -70,6 +70,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
    Route::resource('users', \App\Http\Controllers\Admin\UsersController::class);
    Route::resource('banners', \App\Http\Controllers\Admin\BannersController::class);
    Route::resource('orders', \App\Http\Controllers\Admin\OrdersController::class);
+   Route::resource('subcategories', \App\Http\Controllers\Admin\SubcategoriesController::class);
    Route::post('/change-order-status/{id}', [\App\Http\Controllers\Admin\OrdersController::class, 'changeStatus'])->name('orders.update.status');
    Route::post('/change-role', [\App\Http\Controllers\Admin\UsersController::class, 'changeRole'])->name('users.change-role');
    Route::post('/update-password', [\App\Http\Controllers\Admin\UsersController::class, 'updatePassword'])->name('users.update.password');
