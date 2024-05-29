@@ -32,7 +32,7 @@ $(document).ready(function () {
         const categoryId = $(this).val();
         const flowerId = getSelectedCategory('flower');
         const subjectId = getSelectedCategory('subject');
-        const subcategoryId = getSelectedCategory('subcategory');
+        const subcategoryId = 'all';
         const minPriceValue = $('#minPrice').text();
         const maxPriceValue = $('#maxPrice').text();
 

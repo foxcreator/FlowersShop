@@ -28,7 +28,7 @@ class PagesController extends Controller
             $products->where('category_id', $request->query('category'));
         }
 
-        if ($request->query('subcategory') && $request->query('subcategory') != 'undefined') {
+        if ($request->query('subcategory') && $request->query('subcategory') != 'all') {
             $products->where('subcategory_id', $request->query('subcategory'));
         }
 		if ($request->has('flower') && $request->flower != 'all') {

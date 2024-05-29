@@ -38,6 +38,13 @@
                                                 {{ $category->title }}
                                             </label>
                                             <div id="subcategories_{{ $category->id }}" class="subcategories">
+                                                <div class="form-check">
+                                                    <input class="form-check-input subcategories-input" type="radio" name="subcategory" value="all"
+                                                           id="subcategories_all" checked>
+                                                    <label class="form-check-label" for="subcategories_all">
+                                                        {{ __('homepage.all') }}
+                                                    </label>
+                                                </div>
                                                 @foreach($category->subcategories as $subcategory)
                                                     <div class="form-check">
 
