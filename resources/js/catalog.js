@@ -18,19 +18,23 @@ $(document).ready(function () {
     slider.noUiSlider.on('change', function (values, handle) {
         const categoryId = getSelectedCategory('category');
         const subcategoryId = getSelectedCategory('subcategory');
-        const flowerId = getSelectedCategory('flower');
+        const selectedFlowers = $('input[name="flowers[]"]:checked').map(function() {
+            return $(this).val();
+        }).get();
         const subjectId = getSelectedCategory('subject');
         const minPriceValue = $('#minPrice').text();
         const maxPriceValue = $('#maxPrice').text();
 
-        fetchProducts(categoryId, minPriceValue, maxPriceValue, flowerId, subjectId, subcategoryId);
+        fetchProducts(categoryId, minPriceValue, maxPriceValue, selectedFlowers, subjectId, subcategoryId);
     });
 
     $('input[name="category"]').change(function () {
         $('.subcategories').hide()
 
         const categoryId = $(this).val();
-        const flowerId = getSelectedCategory('flower');
+        const selectedFlowers = $('input[name="flowers[]"]:checked').map(function() {
+            return $(this).val();
+        }).get();
         const subjectId = getSelectedCategory('subject');
         const subcategoryId = 'all';
         const minPriceValue = $('#minPrice').text();
@@ -38,52 +42,60 @@ $(document).ready(function () {
 
         $('#subcategories_'+categoryId).show()
 
-        fetchProducts(categoryId, minPriceValue, maxPriceValue, flowerId, subjectId, subcategoryId);
+        fetchProducts(categoryId, minPriceValue, maxPriceValue, selectedFlowers, subjectId, subcategoryId);
     });
 
     $('input[name="subcategory"]').change(function () {
         const subcategoryId = $(this).val();
-        const flowerId = getSelectedCategory('flower');
+        const selectedFlowers = $('input[name="flowers[]"]:checked').map(function() {
+            return $(this).val();
+        }).get();
         const categoryId = getSelectedCategory('category');
         const subjectId = getSelectedCategory('subject');
         const minPriceValue = $('#minPrice').text();
         const maxPriceValue = $('#maxPrice').text();
 
-        fetchProducts(categoryId, minPriceValue, maxPriceValue, flowerId, subjectId, subcategoryId);
+        fetchProducts(categoryId, minPriceValue, maxPriceValue, selectedFlowers, subjectId, subcategoryId);
     });
 
-    $('input[name="flower"]').change(function () {
-        const flowerId = $(this).val();
+    $('input[name="flowers[]"]').change(function () {
+        const selectedFlowers = $('input[name="flowers[]"]:checked').map(function() {
+            return $(this).val();
+        }).get();
         const categoryId = getSelectedCategory('category');
         const subjectId = getSelectedCategory('subject');
         const subcategoryId = getSelectedCategory('subcategory');
         const minPriceValue = $('#minPrice').text();
         const maxPriceValue = $('#maxPrice').text();
 
-        fetchProducts(categoryId, minPriceValue, maxPriceValue, flowerId, subjectId, subcategoryId);
+        fetchProducts(categoryId, minPriceValue, maxPriceValue, selectedFlowers, subjectId, subcategoryId);
     });
 
     $('input[name="subject"]').change(function () {
         const categoryId = getSelectedCategory('category');
         const subcategoryId = getSelectedCategory('subcategory');
-        const flowerId = getSelectedCategory('flower');
+        const selectedFlowers = $('input[name="flowers[]"]:checked').map(function() {
+            return $(this).val();
+        }).get();
         const subjectId = $(this).val();
         const minPriceValue = $('#minPrice').text();
         const maxPriceValue = $('#maxPrice').text();
 
-        fetchProducts(categoryId, minPriceValue, maxPriceValue, flowerId, subjectId, subcategoryId);
+        fetchProducts(categoryId, minPriceValue, maxPriceValue, selectedFlowers, subjectId, subcategoryId);
     });
 
     $(document).on('click', '.custom-pagination__page-link', function(event) {
         event.preventDefault();
         const page = $(this).text();
         const categoryId = getSelectedCategory('category');
-        const flowerId = getSelectedCategory('flower');
+        const selectedFlowers = $('input[name="flowers[]"]:checked').map(function() {
+            return $(this).val();
+        }).get();
         const subcategoryId = getSelectedCategory('subcategory');
         const subjectId = getSelectedCategory('subject');
         const minPrice = $('#minPrice').text();
         const maxPrice = $('#maxPrice').text();
-        fetchProducts(categoryId, minPrice, maxPrice, flowerId, subjectId, subcategoryId, page);
+        fetchProducts(categoryId, minPrice, maxPrice, selectedFlowers, subjectId, subcategoryId, page);
     });
 
 
@@ -95,18 +107,22 @@ $('.filter-mobile-btn').click(function () {
     $('#desktop-filter').toggle();
 });
 
-function fetchProducts(categoryId, minPrice, maxPrice, flowerId, subjectId, subcategoryId, page = 1) {
+function fetchProducts(categoryId, minPrice, maxPrice, flowerIds, subjectId, subcategoryId, page = 1) {
     $('#loader').show();
     $('.overflow').show();
     $('body').toggleClass('fix');
     $('#mobile-filter').hide();
 
-    let url = `/catalog?page=${page}&category=${categoryId}&flower=${flowerId}&subject=${subjectId}&subcategory=${subcategoryId}`;
+    let url = `/catalog?page=${page}&category=${categoryId}&subject=${subjectId}&subcategory=${subcategoryId}`;
 
     if (minPrice && maxPrice) {
         url += `&min-price=${minPrice}&max-price=${maxPrice}`;
     }
 
+    if (flowerIds.length > 0) {
+        url += `&flowers=${flowerIds.join(',')}`;
+    }
+    console.log(123)
     $.ajax({
         url: url,
         method: 'GET',

@@ -71,21 +71,15 @@
                                         @svg('circle-arrow')
                                     </div>
                                     <div class="accordion-content">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flower" value="all"
-                                                   id="flowers_all" checked>
-                                            <label class="form-check-label" for="flowers_all">
-                                                {{ __('homepage.all') }}
-                                            </label>
-                                        </div>
                                         @foreach($flowers as $flower)
                                             <div class="form-check">
                                                 <input class="form-check-input"
-                                                       type="radio"
-                                                       name="flower"
+                                                       type="checkbox"
+                                                       name="flowers[]"
                                                        value="{{$flower->id}}"
                                                        id="flowers_{{ $flower->id }}"
-                                                       @if(request()->query('flower') == $flower->id) checked @endif
+                                                       @if(is_array(request()->query('flowers')) &&
+                                                       in_array($flower->id, request()->query('flowers'))) checked @endif
                                                 >
                                                 <label class="form-check-label"
                                                        for="flowers_{{ $flower->id }}">
