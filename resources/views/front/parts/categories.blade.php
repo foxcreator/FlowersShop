@@ -24,7 +24,7 @@
             @endforeach
             <div class="categories__link-block col-6">
                 <a href="{{ route('front.catalog') }}" class="categories__link">
-                    <span>{{ __('homepage.categories') }}</span>
+                    <span>{{ __('homepage.all_categories') }}</span>
                     @svg('arrow-circle-right')
                 </a>
             </div>

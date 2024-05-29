@@ -44,7 +44,7 @@ $flowers = \App\Models\Flower::all();
                     <option value="500">до 500 грн</option>
                     <option value="1000">до 1000 грн</option>
                     <option value="2500">до 2500 грн</option>
-                    <option value="5000">до 5000 грн</option>
+                    <option value="5000">від 5000 грн</option>
                 </select>
             </div>
             <div class="col-12 col-md-6">

@@ -39,14 +39,13 @@
 
                     <div class="form-group">
                         <label for="title_uk">Наименование UA*</label>
-                        <input type="text"
+                        <textarea type="text"
                                class="form-control @error('title_uk') is-invalid @enderror"
                                id="title_uk"
                                name="title_uk"
-                               value="{{ old('title_uk', $banner->title_uk) }}"
                                placeholder="Введите наименование"
                                required
-                        >
+                        >{{ old('title_uk', $banner->title_uk) }}</textarea>
                         @error('title_uk')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -56,13 +55,12 @@
 
                     <div class="form-group">
                         <label for="title_ru">Наименование RU*</label>
-                        <input type="text"
+                        <textarea type="text"
                                class="form-control @error('title_ru') is-invalid @enderror"
                                id="title_ru"
                                name="title_ru"
-                               value="{{ old('title_ru', $banner->title_ru) }}"
                                placeholder="Введите наименование"
-                        >
+                        >{{ old('title_ru', $banner->title_ru) }}</textarea>
                         @error('title_ru')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
