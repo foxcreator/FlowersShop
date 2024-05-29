@@ -85,4 +85,10 @@ class CategoriesController extends Controller
 
         return redirect()->route('admin.categories.index')->with(['success' => 'Категория удалена!']);
     }
+
+    public function getSubcategories($id)
+    {
+        $subcategories = Category::find($id)->subcategories;
+        return response()->json($subcategories);
+    }
 }

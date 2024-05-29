@@ -51,7 +51,6 @@
                                                     @foreach($category->subcategories as $subcategory)
                                                         <h5 class="text-gray-dark border-bottom pb-2">{{ $subcategory->name_ru }}</h5>
                                                     @endforeach
-
                                                 </div>
                                             </div>
                                         </div>

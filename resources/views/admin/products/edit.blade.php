@@ -19,11 +19,30 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="category_id">Категория</label>
-                        <select class="form-control select2bs4" name="category_id" id="category_id" style="width: 100%;">
+                        <select class="form-control select2bs4" name="category_id" id="category_id" style="width: 100%;"
+                                onchange="fetchSubcategories(this.value)"
+                        >
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" @if($product->category_id == $category->id) selected @endif>{{ $category->title_uk }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subcategory_id">Подкатегория</label>
+                        <select class="form-control select2bs4 @error('subcategory') is-invalid @enderror"
+                                id="subcategory_id"
+                                name="subcategory_id"
+                                style="width: 100%;"
+                                data-selected-subcategory="{{ old('subcategory_id', $product->subcategory_id ?? '') }}"
+                        >
+                        </select>
+
+                        @error('subcategory_id')
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -261,6 +280,37 @@
             };
 
             reader.readAsDataURL(file);
+        });
+
+        function fetchSubcategories(categoryId, selectedSubcategoryId = null) {
+            if (categoryId) {
+                $('#subcategory_id').empty();
+                $.ajax({
+                    url: '/admin/categories/' + categoryId + '/subcategories',
+                    type: 'GET',
+                    success: function (subcategories) {
+                        // $('#subcategory_id').empty().append('<option value="" selected>------</option>');
+
+                        $.each(subcategories, function (key, subcategory) {
+                            var isSelected = subcategory.id == selectedSubcategoryId ? ' selected' : '';
+                            $('#subcategory_id').append('<option value="' + subcategory.id + '"' + isSelected + '>' + subcategory.name_ru + '</option>');
+                        });
+                    },
+                    error: function () {
+                        alert('Failed to fetch subcategories. Please try again.');
+                    }
+                });
+            } else {
+                $('#subcategory_id').empty().append('<option value="" selected>------</option>');
+            }
+        }
+
+        $(document).ready(function() {
+            var selectedCategoryId = $('#category_id').val();
+            var selectedSubcategoryId = $('#subcategory_id').data('selected-subcategory');
+            if (selectedCategoryId) {
+                fetchSubcategories(selectedCategoryId, selectedSubcategoryId);
+            }
         });
     </script>
 @endsection

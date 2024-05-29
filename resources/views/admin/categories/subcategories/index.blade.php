@@ -30,6 +30,7 @@
                                 <tr>
                                     <th>Название UA</th>
                                     <th>Название RU</th>
+                                    <th>Основная категория</th>
                                     <th class="text-right">Действия</th>
                                 </tr>
                                 </thead>
@@ -38,6 +39,7 @@
                                     <tr>
                                         <td>{{ $subcategory->name_uk }}</td>
                                         <td>{{ $subcategory->name_ru }}</td>
+                                        <td>{{ $subcategory->category->title_ru }}</td>
 
                                         <td class="text-right d-flex justify-content-end align-content-center">
                                             <div class="mr-2">

@@ -61,17 +61,18 @@ Route::middleware(['set_locale'])->group(function () {
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
    Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/categories/{id}/subcategories', [\App\Http\Controllers\Admin\CategoriesController::class, 'getSubcategories']);
     Route::get('products/sort-novelty', [\App\Http\Controllers\Admin\ProductsController::class, 'sortNovelty'])->name('products.sort-novelty');
     Route::post('products/sort-novelty-update', [\App\Http\Controllers\Admin\ProductsController::class, 'sortNoveltyUpdate'])->name('products.sort-novelty.update');
     Route::resource('products', \App\Http\Controllers\Admin\ProductsController::class);
-   Route::resource('categories', \App\Http\Controllers\Admin\CategoriesController::class);
-   Route::resource('flowers', \App\Http\Controllers\Admin\FlowersController::class);
-   Route::resource('subjects', \App\Http\Controllers\Admin\SubjectsController::class);
-   Route::resource('users', \App\Http\Controllers\Admin\UsersController::class);
-   Route::resource('banners', \App\Http\Controllers\Admin\BannersController::class);
-   Route::resource('orders', \App\Http\Controllers\Admin\OrdersController::class);
-   Route::resource('subcategories', \App\Http\Controllers\Admin\SubcategoriesController::class);
-   Route::post('/change-order-status/{id}', [\App\Http\Controllers\Admin\OrdersController::class, 'changeStatus'])->name('orders.update.status');
+    Route::resource('categories', \App\Http\Controllers\Admin\CategoriesController::class);
+    Route::resource('flowers', \App\Http\Controllers\Admin\FlowersController::class);
+    Route::resource('subjects', \App\Http\Controllers\Admin\SubjectsController::class);
+    Route::resource('users', \App\Http\Controllers\Admin\UsersController::class);
+    Route::resource('banners', \App\Http\Controllers\Admin\BannersController::class);
+    Route::resource('orders', \App\Http\Controllers\Admin\OrdersController::class);
+    Route::resource('subcategories', \App\Http\Controllers\Admin\SubcategoriesController::class);
+    Route::post('/change-order-status/{id}', [\App\Http\Controllers\Admin\OrdersController::class, 'changeStatus'])->name('orders.update.status');
    Route::post('/change-role', [\App\Http\Controllers\Admin\UsersController::class, 'changeRole'])->name('users.change-role');
    Route::post('/update-password', [\App\Http\Controllers\Admin\UsersController::class, 'updatePassword'])->name('users.update.password');
 
