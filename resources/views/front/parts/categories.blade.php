@@ -4,7 +4,7 @@
 <div class="container mt-200">
     <section class="categories">
         <div class="categories__header">
-            <h1>{{ __('homepage.categories') }}</h1>
+            <h1>{{ __('homepage.popular_categories') }}</h1>
         </div>
 
         <div class="categories__cards row">
@@ -24,7 +24,7 @@
             @endforeach
             <div class="categories__link-block col-6">
                 <a href="{{ route('front.catalog') }}" class="categories__link">
-                    <span>{{ __('homepage.categories') }}</span>
+                    <span>{{ __('homepage.all_categories') }}</span>
                     @svg('arrow-circle-right')
                 </a>
             </div>
@@ -32,17 +32,11 @@
     </section>
 </div>
 <script>
-    // Получаем все элементы изображений с классом square-img
     var images = document.querySelectorAll('.category-img');
 
-    // Перебираем все изображения и применяем необходимые изменения
     images.forEach(function(img) {
-        // После загрузки изображения выполняем следующий код
         img.onload = function() {
-            // Получаем ширину изображения
             var width = img.width;
-
-            // Устанавливаем высоту изображения равной его ширине
             img.style.height = width + 'px';
         };
     });

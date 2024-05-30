@@ -20,18 +20,23 @@ class PagesController extends Controller
     public function catalog(Request $request)
     {
         $categories = Category::all();
-		$flowers = Flower::all();
+		$flowers = Flower::orderBy('name_uk')->get();
 		$subjects = Subject::all();
         $products = Product::query();
 
         if ($request->query('category') && $request->query('category') != 'all') {
             $products->where('category_id', $request->query('category'));
         }
-		if ($request->has('flower') && $request->flower != 'all') {
-			$products->whereHas('flowers', function ($query) use ($request) {
-				$query->where('flower_id', $request->query('flower'));
-			});
-		}
+
+        if ($request->query('subcategory') && $request->query('subcategory') != 'all') {
+            $products->where('subcategory_id', $request->query('subcategory'));
+        }
+        if ($request->has('flowers')) {
+            $flowerIds = explode(',', $request->query('flowers'));
+            $products->whereHas('flowers', function ($query) use ($flowerIds) {
+                $query->whereIn('flower_id', $flowerIds);
+            });
+        }
 		if ($request->has('subject') && $request->subject != 'all') {
 			$products->whereHas('subjects', function ($query) use ($request) {
 				$query->where('subject_id', $request->query('subject'));
@@ -130,9 +135,9 @@ class PagesController extends Controller
         $params = [];
 
         $params['page'] = 1;
-        $params['category'] = 'all';
+        $params['category'] = 1;
         $params['subject'] = $request->input('subject');
-        $params['for_whom'] = $request->input('for_whom');
+        $params['subcategory'] = $request->input('for_whom');
         $params['flower'] = $request->input('flower');
         $params['min-price'] = 0;
         $params['max-price'] = $request->input('max-price');

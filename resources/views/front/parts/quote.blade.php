@@ -1,6 +1,7 @@
 @php
 $subjects = \App\Models\Subject::all();
 $flowers = \App\Models\Flower::all();
+$subcategories = \App\Models\Subcategory::where('category_id', 1)->get();
 @endphp
 
 
@@ -25,9 +26,9 @@ $flowers = \App\Models\Flower::all();
             {{--        Для кого       --}}
             <div class="change-flower__select-wrapper col-lg-3 col-md-6">
                 <select name="for_whom" id="for_whom">
-                    <option value="">Для любимой</option>
-                    <option value="">Для мамы</option>
-                    <option value="">Для сестры</option>
+                    @foreach($subcategories as $subcategory)
+                        <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                    @endforeach
                 </select>
             </div>
             {{--        Повод       --}}
@@ -44,7 +45,7 @@ $flowers = \App\Models\Flower::all();
                     <option value="500">до 500 грн</option>
                     <option value="1000">до 1000 грн</option>
                     <option value="2500">до 2500 грн</option>
-                    <option value="5000">до 5000 грн</option>
+                    <option value="50000">від 5000 грн</option>
                 </select>
             </div>
             <div class="col-12 col-md-6">

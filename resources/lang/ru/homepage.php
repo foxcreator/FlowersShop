@@ -8,8 +8,10 @@ return [
 	'contacts' => 'Контакты',
 	'add_to_cart' => 'В корзину',
 	'novelty' => 'Новинки',
-	'all_novelty' => 'Всі новинки',
+	'all_novelty' => 'Все новинки',
+	'popular_categories' => 'Популярные категории',
 	'categories' => 'Категории',
+    'all_categories' => 'Смотреть все',
 	'help_change_flower' => 'Поможем тебе
         выбрать особенный букет',
 	'change_bouquet' => 'Выбрать букет',

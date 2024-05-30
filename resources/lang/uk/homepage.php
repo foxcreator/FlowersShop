@@ -10,7 +10,9 @@ return [
 	'add_to_cart' => 'В кошик',
 	'novelty' => 'Новинки',
 	'all_novelty' => 'Всі новинки',
+	'popular_categories' => 'Популярні категорії',
 	'categories' => 'Категорії',
+	'all_categories' => 'Дивитись всі',
 	'help_change_flower' => 'Допоможемо тобі
         обрати особливий букет',
 	'change_bouquet' => 'Обрати букет',

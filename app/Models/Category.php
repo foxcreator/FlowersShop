@@ -24,6 +24,12 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function subcategories()
+    {
+        return $this->hasMany(Subcategory::class);
+    }
+
     public function thumbnailUrl(): Attribute
     {
         return new Attribute(

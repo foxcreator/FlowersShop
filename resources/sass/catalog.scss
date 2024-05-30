@@ -98,6 +98,18 @@
                 border: $main-green 3px solid;
                 outline: none;
             }
+
+            .subcategories-input {
+                border-color: $main-green;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .subcategories-input:checked {
+                background: $main-green;
+                border: $main-green 3px solid;
+                outline: none;
+            }
         }
 
         .accordion-item.active .accordion-content {
@@ -114,9 +126,6 @@
         }
     }
 
-    #mobile-filter {
-        display: none;
-    }
 
     .filter-mobile-btn {
         @media (min-width: $media-sm) {
@@ -272,6 +281,11 @@
         @media (min-width: $media-md) {
             display: none;
         }
+    }
+
+
+    .subcategories {
+        display: none;
     }
 }
 

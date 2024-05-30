@@ -21,6 +21,7 @@
                                 id="category_id"
                                 name="category_id"
                                 style="width: 100%;"
+                                onchange="fetchSubcategories(this.value)"
                         >
                             <option value="" selected>------</option>
                             @foreach($categories as $category)
@@ -32,6 +33,23 @@
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subcategory_id">Подкатегория</label>
+                        <select class="form-control select2bs4 @error('subcategory') is-invalid @enderror"
+                                id="subcategory_id"
+                                name="subcategory_id"
+                                style="width: 100%;"
+                        >
+                            <option value="" selected>------</option>
+                        </select>
+
+                        @error('subcategory_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
 
@@ -315,5 +333,26 @@
 
             reader.readAsDataURL(file);
         });
+
+
+        function fetchSubcategories(categoryId) {
+            if (categoryId) {
+                $.ajax({
+                    url: '/admin/categories/' + categoryId + '/subcategories',
+                    type: 'GET',
+                    success: function (subcategories) {
+                        $('#subcategory_id').empty().append('<option value="" selected>------</option>');
+                        $.each(subcategories, function (key, subcategory) {
+                            $('#subcategory_id').append('<option value="' + subcategory.id + '">' + subcategory.name_ru + '</option>');
+                        });
+                    },
+                    error: function () {
+                        alert('Failed to fetch subcategories. Please try again.');
+                    }
+                });
+            } else {
+                $('#subcategory_id').empty().append('<option value="" selected>------</option>');
+            }
+        }
     </script>
 @endsection

@@ -34,6 +34,7 @@ class Product extends Model
 
     protected $fillable = [
         'category_id',
+        'subcategory_id',
         'title_uk',
         'title_ru',
         'price',
@@ -55,6 +56,11 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function subcategory()
+    {
+        return $this->belongsTo(Subcategory::class);
     }
 
     public function orders()

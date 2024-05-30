@@ -25,6 +25,7 @@ class UpdateProductRequest extends FormRequest
 
         return [
             'category_id' => 'required',
+            'subcategory_id' => 'required',
 			'subjects' => 'nullable|array',
 			'subjects.*' => 'integer',
 			'flowers' => 'nullable|array',
@@ -47,6 +48,7 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'category_id' => 'Поле категории обязательно для заполнения.',
+            'subcategory_id' => 'Поле категории обязательно для заполнения.',
             'title_uk.required' => 'Поле заголовка обязательно для заполнения.',
             'title_uk.min' => 'Заголовок должен содержать минимум :min символов.',
             'title_uk.max' => 'Заголовок должен содержать не более :max символов.',

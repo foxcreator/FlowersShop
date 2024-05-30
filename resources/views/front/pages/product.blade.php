@@ -56,7 +56,8 @@
 
             <div class="tab-content active" id="tab1">
                 <img src="{{ $product->thumbnailUrl }}" alt="{{ $product->title }}">
-                <p>{{ $product->description }}</p>
+
+                <div>{!! $product->description !!} </div>
             </div>
 
             <div class="tab-content" id="tab2">
