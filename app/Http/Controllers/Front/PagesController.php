@@ -135,9 +135,9 @@ class PagesController extends Controller
         $params = [];
 
         $params['page'] = 1;
-        $params['category'] = 'all';
+        $params['category'] = 1;
         $params['subject'] = $request->input('subject');
-        $params['for_whom'] = $request->input('for_whom');
+        $params['subcategory'] = $request->input('for_whom');
         $params['flower'] = $request->input('flower');
         $params['min-price'] = 0;
         $params['max-price'] = $request->input('max-price');
