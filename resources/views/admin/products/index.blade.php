@@ -19,8 +19,6 @@
                             <a href="{{ route('admin.products.create') }}" class="btn btn-info btn-sm">Добавить
                                 товар</a>
 
-
-                            {{--                                    <a href="{{ route('admin.products.index', ['sort' => 'outInStock']) }}" class="btn btn-secondary btn-sm">Нет в наличии</a>--}}
                             <div class="card-tools d-flex col-6">
                                 <form id="filter-sort-form" method="GET" action="{{ route('admin.products.index') }}" class="d-flex col-6">
                                     <div class="input-group input-group-sm col-6">

@@ -36,7 +36,7 @@
                                         <td class="table-image">
                                             <img class="img-thumbnail" src="{{ $banner->imageUrl }}" alt="" style="width: 120px;">
                                         </td>
-                                        <td class="custom-text-overflow">{{ $banner->title_uk }}</td>
+                                        <td class="custom-text-overflow">{!! $banner->title_uk  !!}</td>
                                         <td>
                                             <a target="_blank" class="list-link" href="
                                             @if($banner->product_id)

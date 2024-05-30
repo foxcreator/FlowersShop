@@ -7,6 +7,8 @@
         <th>Название RU</th>
         <th>Цена</th>
         <th>Количество</th>
+        <th>Бейдж</th>
+        <th>Новинка</th>
         <th class="text-right">Действия</th>
     </tr>
     </thead>
@@ -21,6 +23,14 @@
             <td class="custom-text-overflow">{{ $product->title_ru }}</td>
             <td>{{ $product->price }}</td>
             <td>{{ $product->quantity }}</td>
+            <td>{{ $product->badgeName }}</td>
+            <td class="text-center">
+                @if($product->is_novelty)
+                    <i class="fas fa-check-square text-success"></i>
+                @else
+                    <i class="fas fa-window-close text-danger"></i>
+                @endif
+            </td>
 
             <td class="text-right">
                 <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-secondary btn-xs">Информация</a>
