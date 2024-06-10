@@ -30,7 +30,7 @@ class SubcategoriesController extends Controller
     {
         $subcategory = Subcategory::create($request->validated());
         if ($subcategory) {
-            return redirect()->route('admin.subcategories.index')->with('success', 'Подкатегория успешно добавлена');
+            return redirect()->route('admin.subcategories.index')->with('status', 'Подкатегория успешно добавлена');
         }
 
         return redirect()->back()->with('error', 'Smth gone wrong');
@@ -47,7 +47,7 @@ class SubcategoriesController extends Controller
     {
         $subcategory = Subcategory::find($id);
         if ($subcategory->update($request->validated())) {
-            return redirect()->route('admin.subcategories.index')->with('success', 'Подкатегория успешно обновлена');
+            return redirect()->route('admin.subcategories.index')->with('status', 'Подкатегория успешно обновлена');
         }
 
         return redirect()->back()->with('error', 'Smth gone wrong');
@@ -57,7 +57,7 @@ class SubcategoriesController extends Controller
     {
         $subcategory = Subcategory::find($id);
         if ($subcategory->delete()) {
-            return redirect()->route('admin.subcategories.index')->with('success', 'Подкатегория успешно удалена');
+            return redirect()->route('admin.subcategories.index')->with('status', 'Подкатегория успешно удалена');
         }
 
         return redirect()->back()->with('error', 'Smth gone wrong');
