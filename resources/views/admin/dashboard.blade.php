@@ -73,6 +73,21 @@
                             <a href="{{ route('admin.orders.index') }}" class="small-box-footer">Детальнее <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>
+                                    {{ $cost }} грн
+                                </h3>
+                                <p>Прибыль за все время</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="{{ route('admin.orders.index') }}" class="small-box-footer">Детальнее <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
 

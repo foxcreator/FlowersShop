@@ -21,6 +21,7 @@ class Order extends Model
         'delivery_time',
         'payment_method',
         'amount',
+        'opt_amount',
         'pay_with_bonus',
         'is_paid',
         'status',

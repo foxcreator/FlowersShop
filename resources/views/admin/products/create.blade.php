@@ -38,7 +38,7 @@
 
                     <div class="form-group">
                         <label for="subcategory_id">Подкатегория</label>
-                        <select class="form-control select2bs4 @error('subcategory') is-invalid @enderror"
+                        <select class="form-control select2bs4 @error('subcategory_id') is-invalid @enderror"
                                 id="subcategory_id"
                                 name="subcategory_id"
                                 style="width: 100%;"
@@ -147,7 +147,6 @@
                                   name="description_uk"
                                   class="form-control @error('description_uk') is-invalid @enderror"
                                   rows="10"
-                                  required
                         >{{ old('description_uk') ? trim(old('description_uk')) : '' }}</textarea>
                         @error('description_uk')
                         <span class="invalid-feedback" role="alert">
@@ -171,13 +170,30 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="price">Цена</label>
+                        <label for="opt_price">Оптовая цена</label>
+                        <input type="text"
+                               class="form-control @error('opt_price') is-invalid @enderror"
+                               id="opt_price"
+                               name="opt_price"
+                               value="{{ old('opt_price') }}"
+                               placeholder="Введите оптовую цену на товар"
+                               required
+                        >
+                        @error('opt_price')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">Розничная цена</label>
                         <input type="text"
                                class="form-control @error('price') is-invalid @enderror"
                                id="price"
                                name="price"
                                value="{{ old('price') }}"
-                               placeholder="Введите цену на товар"
+                               placeholder="Введите розничную цену на товар"
                                required
                         >
                         @error('price')
@@ -269,6 +285,36 @@
                             <p class="text-info">Количество новинок на главной странице равно 5, если хотите добавить новую, отключите уже сущесвующую</p>
                         @endif
                     </div>
+
+                    <div class="form-group mt-4">
+                        <input type="hidden" name="type" value="{{ \App\Models\Product::TYPE_FLOWER }}">
+                        <div class="icheck-success d-inline">
+                            <input type="checkbox" id="bouquet" name="type" value="{{ \App\Models\Product::TYPE_BOUQUET }}">
+                            <label for="bouquet">Букет</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4" id="product-selection" style="display: none;">
+                        <label for="products">Определите состав букета:</label>
+                        <div id="products">
+                            <div class="product-item d-flex justify-content-between">
+                                <select class="form-control select2bs4"
+                                        id="bouquet_flowers_0"
+                                        name="products[0][id]"
+                                        style="width: 75%;"
+                                >
+                                    <option value="">Выберите цветок</option>
+
+                                    @foreach($products as $product)
+                                        <option value="{{ $product->id }}">{{ $product->title_uk }}</option>
+                                    @endforeach
+                                </select>
+                                <input type="number" class="form-control" name="products[0][quantity]" min="1" placeholder="Количество" style="width: 20%">
+                            </div>
+                        </div>
+                        <button type="button" id="add-product" class="btn btn-xs btn-info mt-2">Добавить продукт</button>
+                    </div>
+
                 </div>
 
                 <div class="card-footer d-flex justify-content-between gap-2">
@@ -279,6 +325,7 @@
                         <button type="submit" class="btn btn-success w-100">Сохранить</button>
                     </div>
                 </div>
+
             </form>
 
         </div>
@@ -354,5 +401,45 @@
                 $('#subcategory_id').empty().append('<option value="" selected>------</option>');
             }
         }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const bouquetCheckbox = document.getElementById('bouquet');
+            const productSelection = document.getElementById('product-selection');
+            const addProductButton = document.getElementById('add-product');
+            const productsContainer = document.getElementById('products');
+            let productCount = 1; // Начальный счетчик для продуктов
+
+            // Показать/скрыть выбор продуктов при нажатии на чекбокс
+            bouquetCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    productSelection.style.display = 'block';
+                } else {
+                    productSelection.style.display = 'none';
+                }
+            });
+
+            // Добавление нового продукта
+            addProductButton.addEventListener('click', function() {
+                const newProduct = document.createElement('div');
+                newProduct.className = 'product-item d-flex mt-2 justify-content-between';
+                newProduct.innerHTML = `
+            <select class="form-control select2bs4" id="bouquet_flowers" name="products[${productCount}][id]" style="width: 75%;">
+                <option value="">Выберите цветок</option>
+                @foreach($products as $product)
+                    <option value="{{ $product->id }}">{{ $product->title_uk }}</option>
+                @endforeach
+            </select>
+            <input type="number" class="form-control" name="products[${productCount}][quantity]" min="1" placeholder="Количество" style="width: 20%">
+`;
+                productsContainer.appendChild(newProduct);
+                $(newProduct).find('select').select2({
+                    theme: 'bootstrap4'
+                });
+                productCount++;
+            });
+        });
+
+
     </script>
 @endsection

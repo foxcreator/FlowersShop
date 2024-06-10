@@ -17,6 +17,8 @@ class Product extends Model
     const BADGE_NEW_PRICE = 'newPrice';
     const BADGE_HIT = 'hit';
     const BADGE_NEW = 'new';
+    const TYPE_BOUQUET = 'bouquet';
+    const TYPE_FLOWER = 'flower';
 
     const BADGES = [
         self::BADGE_HIT => 'Хит',
@@ -45,7 +47,14 @@ class Product extends Model
         'thumbnail',
         'badge',
         'rating',
-        'is_novelty'
+        'is_novelty',
+        'type',
+        'products_quantities',
+        'opt_price'
+    ];
+
+    protected $casts = [
+        'products_quantities' => 'array',
     ];
 
     public function productPhotos():HasMany
@@ -118,5 +127,29 @@ class Product extends Model
         }
         return self::BADGES_UA[$this->attributes['badge']] ?? '';
 
+    }
+
+    public function scopeBouquets($query)
+    {
+        return $query->where('type', 'bouquet');
+    }
+
+    public function scopeProducts($query)
+    {
+        return $query->where('type', 'flower');
+    }
+
+    public function getProducts()
+    {
+        $products = collect();
+        if($this->products_quantities) {
+            foreach ($this->products_quantities as $productId => $quantity) {
+                $product = self::find($productId);
+                if ($product) {
+                    $products->push(['product' => $product, 'quantity' => $quantity]);
+                }
+            }
+        }
+        return $products;
     }
 }

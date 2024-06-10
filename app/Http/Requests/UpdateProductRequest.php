@@ -33,6 +33,7 @@ class UpdateProductRequest extends FormRequest
             'title_uk' => 'required|min:8|max:255|unique:products,title_uk,' . $productId,
             'title_ru' => 'nullable|min:8|max:255|unique:products,title_ru,' . $productId,
             'price' => 'required|numeric',
+            'opt_price' => 'required|numeric',
             'description_uk' => 'required|min:20|max:65535',
             'description_ru' => 'nullable|min:20|max:65535',
             'quantity' => 'required|numeric',
@@ -40,7 +41,9 @@ class UpdateProductRequest extends FormRequest
             'thumbnail' => 'nullable|image:jpeg,png,jpg',
             'badge' => 'nullable',
             'product_photos' => 'nullable',
-            'is_novelty' => 'nullable'
+            'is_novelty' => 'nullable',
+            'type' => 'in:bouquet,flower',
+            'products' => 'nullable',
         ];
     }
 
@@ -57,6 +60,8 @@ class UpdateProductRequest extends FormRequest
             'title_ru.max' => 'Заголовок должен содержать не более :max символов.',
             'price.required' => 'Поле цены обязательно для заполнения.',
             'price.numeric' => 'Цена должна быть числом.',
+            'opt_price.required' => 'Поле цены обязательно для заполнения.',
+            'opt_price.numeric' => 'Цена должна быть числом.',
             'description_uk.required' => 'Поле описания обязательно для заполнения.',
             'description_uk.min' => 'Описание должно содержать минимум :min символов.',
             'description_uk.max' => 'Описание должно содержать не более :max символов.',

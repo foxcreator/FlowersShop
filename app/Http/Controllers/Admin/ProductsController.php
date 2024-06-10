@@ -53,18 +53,30 @@ class ProductsController extends Controller
         $flowers = Flower::all();
         $subjects = Subject::all();
         $article = $this->getArticle();
+        $products = Product::products()->get();
         return view('admin.products.create', compact(
 			'categories',
 			'article',
 			'subjects',
 			'flowers',
-            'countNoveltyProduct'
+            'countNoveltyProduct',
+            'products'
 		));
     }
 
     public function store(CreateProductRequest $request)
     {
         $data = $request->validated();
+
+        $products_quantities = [];
+        foreach ($data['products'] as $product) {
+            if ($product['id']) {
+                $products_quantities[$product['id']] = $product['quantity'];
+            }
+        }
+
+        $data['products_quantities'] = $products_quantities;
+        unset($data['products']);
 
         $thumbnail = FileStorageService::upload($data['thumbnail']);
         $images = $data['product_photos'] ?? [];
@@ -96,18 +108,32 @@ class ProductsController extends Controller
 		$flowers = Flower::all();
         $product = Product::find($id);
         $categories = Category::all();
+        $products = Product::products()->get();
+
         return view('admin.products.edit', compact(
 			'product',
 			'categories',
 			'flowers',
 			'subjects',
-            'countNoveltyProduct'
+            'countNoveltyProduct',
+            'products'
 		));
     }
 
     public function update(UpdateProductRequest $request, string $id)
     {
 		$data = $request->validated();
+
+        $products_quantities = [];
+        foreach ($data['products'] as $product) {
+            if ($product['id']) {
+                $products_quantities[$product['id']] = $product['quantity'];
+            }
+        }
+
+        $data['products_quantities'] = $products_quantities;
+        unset($data['products']);
+
 		$product = Product::find($id);
 		$flowers = $data['flowers'] ?? [];
 		$currentFlowers = $product->flowers()->pluck('flowers.id')->toArray();
