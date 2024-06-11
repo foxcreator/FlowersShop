@@ -41,7 +41,7 @@ class OrderController extends Controller
         $opt_amount = '';
 
         foreach ($cart as $product) {
-            $opt_amount = $opt_amount + $product['price'] * $product['quantity'];
+            $opt_amount = (intval($opt_amount) + intval($product->attributes->opt_price)) * $product['quantity'];
         }
 
         $entityToDb['user_id'] = $data['user_id'] ?? null;
@@ -77,8 +77,11 @@ class OrderController extends Controller
             ]);
 
             $productRating = Product::find($product->id);
-            $productRating->rating += 1;
-            $productRating->save();
+            if ($product->quantity <= $productRating->quantity) {
+                $productRating->rating += 1;
+                $productRating->quantity -= $product->quantity;
+                $productRating->save();
+            }
         }
 
         DB::commit();

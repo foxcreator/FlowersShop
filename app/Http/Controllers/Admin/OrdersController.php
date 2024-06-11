@@ -35,13 +35,15 @@ class OrdersController extends Controller
     {
         $order = Order::find($id);
         $order->status = $request->status;
-        $order->save();
 
         if ($order->user_id && $order->status === Order::ORDER_STATUS_EXECUTED) {
             $user = User::find($order->user_id);
             $user->balance =+ ($order->amount / 100) * 1;
+            $order->is_paid = true;
             $user->save();
         }
+        $order->save();
+
         return redirect()->back()->with(['status' => 'Статус изменен']);
     }
 }
