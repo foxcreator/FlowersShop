@@ -56,7 +56,6 @@
                                   name="description_uk"
                                   class="form-control @error('description_uk') is-invalid @enderror"
                                   rows="10"
-                                  required
                         >{{ old('description_uk') ? trim(old('description_uk')) : '' }}</textarea>
                         @error('description')
                         <span class="invalid-feedback" role="alert">

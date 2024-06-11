@@ -146,7 +146,6 @@
                                   name="description_uk"
                                   class="form-control @error('description_uk') is-invalid @enderror"
                                   rows="10"
-                                  required
                         >
                             {{ old('description_uk', $product->description_uk) }}
                         </textarea>
