@@ -44,6 +44,7 @@ class UpdateProductRequest extends FormRequest
             'is_novelty' => 'nullable',
             'type' => 'in:bouquet,flower',
             'products' => 'nullable',
+            'update_count' => 'nullable'
         ];
     }
 
