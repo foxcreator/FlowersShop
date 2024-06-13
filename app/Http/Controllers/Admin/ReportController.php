@@ -13,10 +13,15 @@ class ReportController extends Controller
     public function dailyReport()
     {
         $products = OrderProduct::whereDate('created_at', Carbon::now())->get();
-        $totalSales = OrderProduct::whereDate('created_at', Carbon::now())->sum('price');
+        $totalSales = 0;
         $todayExpenses = 0;
-        $totalOptSales = OrderProduct::whereDate('created_at', '2024-04-07')->sum('opt_price');
+        $totalOptSales = 0;
         $combinedProducts = $this->_getCombinedProducts($products);
+
+        foreach ($combinedProducts as $product) {
+            $totalSales += $product->total_sales_price;
+            $totalOptSales += $product->total_opt_price;
+        }
 
         return view('admin.reports.index', compact([
             'todayExpenses',

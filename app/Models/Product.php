@@ -152,4 +152,23 @@ class Product extends Model
         }
         return $products;
     }
+
+    public function removeFromCart()
+    {
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$this->id])) {
+            if ($cart[$this->id]['quantity'] > 1) {
+                $cart[$this->id]['quantity']--;
+            } else {
+                unset($cart[$this->id]);
+            }
+
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('status', "$this->title_uk удален из чека");
+        }
+
+        return redirect()->back()->with('error', 'Товар не найден в чеке');
+    }
 }

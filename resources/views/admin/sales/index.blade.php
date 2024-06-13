@@ -25,14 +25,63 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="card col-2">
-                        <img src="{{ asset('dist/img/boxed-bg.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Букет Красные глазки</h5>
-                            <p class="card-text">Цена: <span class="text-success">100</span> грн</p>
-                            <a href="#" class="btn btn-primary">В чек</a>
+                    @foreach($products as $product)
+                        <div class="card col-4 bg-light d-flex flex-fill">
+                            <div class="card-header text-muted border-bottom-0">
+                                {{ $product->category?->title_uk }}
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2 class=""><b>{{ $product->title_uk }}</b></h2>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="description-block">
+                                            <p class="text-muted text-sm text-left"><b>Артикул: </b> {{ $product->article }} </p>
+                                        </div>
+                                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                                            <li class="small">
+                                                <h5>
+                                                    <span class="fa-li"><i class="fas fa-warehouse text-info"></i></span>Остаток:
+                                                    {{ $product->quantity }}
+                                                </h5>
+                                            </li>
+                                            <li class="small">
+                                                <h5>
+                                                    <span class="fa-li"><i class="fas fa-money-bill-alt text-success"></i></span>
+                                                    {{ $product->price }}грн/шт
+                                                </h5>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-5 text-center m-auto">
+                                        @if($product->thumbnailUrl !== '/storage/')
+                                            <img src="{{ $product->thumbnailUrl }}" class="img-circle img-fluid" alt="...">
+                                        @else
+                                            <img src="{{ asset('assets/img/NoImage.png') }}" alt="user-avatar"
+                                                 class="img-circle img-fluid">
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <form class="d-flex justify-content-between m-auto" action="{{ route('sales.cart.add', $product) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <input type="hidden" name="name" value="{{ $product->name }}">
+                                    <input type="hidden" name="price" value="{{ $product->price }}">
+                                    @if($product->quantity > 0)
+                                        <input type="text" class="col-md-4" name="quantity" value="1"
+                                               min="0" max="{{ $product->quantity }}">
+                                        <!-- Поле для выбора количества продукта -->
+                                        <button type="submit" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-shopping-basket"></i> Добавить в чек
+                                        </button>
+                                    @endif
+                                </form>
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
