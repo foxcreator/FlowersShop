@@ -22,6 +22,14 @@
                     <a href="{{ route('admin.dashboard') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
+                            Продажа
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
                             Главная
                         </p>
                     </a>
@@ -42,7 +50,6 @@
                     <a href="{{ route('admin.products.sort-novelty') }}" class="nav-link">
                         <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>Новинки (сортировка)</p>
-
                     </a>
                 </li>
                 <li class="nav-item">

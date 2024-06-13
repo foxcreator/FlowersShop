@@ -59,6 +59,8 @@ Route::middleware(['set_locale'])->group(function () {
 	});
 });
 
+Route::get('/sales', [\App\Http\Controllers\Admin\SalesController::class, 'index'])->name('sales.index');
+
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
    Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/categories/{id}/subcategories', [\App\Http\Controllers\Admin\CategoriesController::class, 'getSubcategories']);
