@@ -30,7 +30,7 @@ $orderText = $ordersCount == 1 ? 'новый заказ' : ($ordersCount > 1 && 
                 <span class="dropdown-item dropdown-header">{{ $notificationCount }} Уведомлений</span>
                 @if($outProductCount >= 1)
                 <div class="dropdown-divider"></div>
-                <a href="{{ route('admin.products.index', ['sort' => 'outInStock']) }}" class="dropdown-item">
+                <a href="{{ route('admin.products.index', ['filter' => 'out_in_stock']) }}" class="dropdown-item">
                     <i class="fas fa-users mr-2"></i> {{ $outProductCount }} {{ $productText }}
                 </a>
                 @endif
