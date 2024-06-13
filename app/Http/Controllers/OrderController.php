@@ -73,7 +73,9 @@ class OrderController extends Controller
                 'order_id' => $order->id,
                 'product_id' => $product->id,
                 'product_name' => $product->name,
-                'quantity' => $product->quantity
+                'quantity' => $product->quantity,
+                'price' => $product->price,
+                'opt_price' => $product->opt_price
             ]);
 
             $productRating = Product::find($product->id);

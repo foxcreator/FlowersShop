@@ -62,7 +62,7 @@ Route::middleware(['set_locale'])->group(function () {
 Route::get('/sales', [\App\Http\Controllers\Admin\SalesController::class, 'index'])->name('sales.index');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
-   Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/categories/{id}/subcategories', [\App\Http\Controllers\Admin\CategoriesController::class, 'getSubcategories']);
     Route::get('products/sort-novelty', [\App\Http\Controllers\Admin\ProductsController::class, 'sortNovelty'])->name('products.sort-novelty');
     Route::post('products/sort-novelty-update', [\App\Http\Controllers\Admin\ProductsController::class, 'sortNoveltyUpdate'])->name('products.sort-novelty.update');
@@ -75,10 +75,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('orders', \App\Http\Controllers\Admin\OrdersController::class);
     Route::resource('subcategories', \App\Http\Controllers\Admin\SubcategoriesController::class);
     Route::post('/change-order-status/{id}', [\App\Http\Controllers\Admin\OrdersController::class, 'changeStatus'])->name('orders.update.status');
-   Route::post('/change-role', [\App\Http\Controllers\Admin\UsersController::class, 'changeRole'])->name('users.change-role');
-   Route::post('/update-password', [\App\Http\Controllers\Admin\UsersController::class, 'updatePassword'])->name('users.update.password');
+    Route::post('/change-role', [\App\Http\Controllers\Admin\UsersController::class, 'changeRole'])->name('users.change-role');
+    Route::post('/update-password', [\App\Http\Controllers\Admin\UsersController::class, 'updatePassword'])->name('users.update.password');
+    Route::get('/reports/daily', [\App\Http\Controllers\Admin\ReportController::class, 'dailyReport'])->name('reports.daily');
+    Route::get('/reports/monthly', [\App\Http\Controllers\Admin\ReportController::class, 'monthlyReport'])->name('reports.monthly');
+    Route::get('/admin/sales-report/download', [\App\Http\Controllers\Admin\ReportController::class, 'downloadSalesReport'])->name('reports.download');
 
-   Route::post('/sort-product-images', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'sortPhoto'])->name('sort.photo');
-   Route::post('/delete-image', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'delete'])->name('delete.photo');
-   Route::post('/upload-image', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'uploadPhotos'])->name('upload.photo');
+
+    Route::post('/sort-product-images', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'sortPhoto'])->name('sort.photo');
+    Route::post('/delete-image', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'delete'])->name('delete.photo');
+    Route::post('/upload-image', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'uploadPhotos'])->name('upload.photo');
 });

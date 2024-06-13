@@ -95,6 +95,30 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Отчеты
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.reports.daily') }}" class="nav-link">
+                                <i class="nav-icon fas fa-calendar-day"></i>
+                                <p>Дневной</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.reports.monthly') }}" class="nav-link">
+                                <i class="nav-icon far fa-calendar"></i>
+                                <p>По датам</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('admin.users.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-user-friends"></i>
                         <p>Пользователи</p>

@@ -78,6 +78,25 @@ class ProductsController extends Controller
         $data['products_quantities'] = $products_quantities;
         unset($data['products']);
 
+        if ($data['type'] === Product::TYPE_BOUQUET) {
+            if (!$products_quantities) {
+                return redirect()->back()->withInput()->with([
+                    'error' => "В букет необходимо добавить хотя бы один цветок"
+                ]);
+            }
+            foreach ($products_quantities as $index => $quantity) {
+                $flower = Product::find($index);
+                if ($flower->quantity >= $quantity) {
+                    $flower->quantity -= $quantity * $data['quantity'];
+                    $flower->save();
+                } else {
+                    return redirect()->back()->withInput()->with([
+                        'error' => "Превышено количество цветка '$flower->title_ru' для списания! Доступно на складе $flower->quantity"
+                    ]);
+                }
+            }
+        }
+
         $thumbnail = FileStorageService::upload($data['thumbnail']);
         $images = $data['product_photos'] ?? [];
         $data['thumbnail'] = $thumbnail;
@@ -122,20 +141,35 @@ class ProductsController extends Controller
 
     public function update(UpdateProductRequest $request, string $id)
     {
-		$data = $request->validated();
+        $data = $request->validated();
+        $product = Product::find($id);
 
         $products_quantities = [];
-        foreach ($data['products'] as $product) {
-            if ($product['id']) {
-                $products_quantities[$product['id']] = $product['quantity'];
+        foreach ($data['products'] as $prod) {
+            if ($prod['id']) {
+                $products_quantities[$prod['id']] = $prod['quantity'];
             }
         }
 
         $data['products_quantities'] = $products_quantities;
         unset($data['products']);
 
-		$product = Product::find($id);
-		$flowers = $data['flowers'] ?? [];
+        if (intval($data['quantity']) > intval($product->quantity) || $data['update_count']) {
+            $quantityDiff = intval($data['quantity']) - intval($product->quantity);
+            foreach ($products_quantities as $index => $quantity) {
+                $flower = Product::find($index);
+                if ($flower->quantity >= $quantity) {
+                    $flower->quantity -= $quantity * $quantityDiff;
+                    $flower->save();
+                } else {
+                    return redirect()->back()->withInput()->with([
+                        'error' => "Превышено количество цветка '$flower->title_ru' для списания! Доступно на складе $flower->quantity"
+                    ]);
+                }
+            }
+        }
+
+        $flowers = $data['flowers'] ?? [];
 		$currentFlowers = $product->flowers()->pluck('flowers.id')->toArray();
 		$flowersToRemove = array_diff($currentFlowers, $flowers);
 
