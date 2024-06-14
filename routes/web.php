@@ -59,14 +59,17 @@ Route::middleware(['set_locale'])->group(function () {
 	});
 });
 
-Route::get('/sales', [\App\Http\Controllers\Admin\SalesController::class, 'index'])->name('sales.index');
-Route::get('/sales/cart', [\App\Http\Controllers\Admin\CartController::class, 'index'])->name('sales.cart');
-Route::post('/sales/cart/add/{product}', [\App\Http\Controllers\Admin\CartController::class, 'add'])->name('sales.cart.add');
-Route::post('/sales/cart/remove/{product}', [\App\Http\Controllers\Admin\CartController::class, 'remove'])->name('cart.remove');
-Route::post('/sales/cart/checkout', [\App\Http\Controllers\Admin\CartController::class, 'checkout'])->name('cart.checkout');
-Route::post('/sales/cart/checkout-temporary/{checkId}', [\App\Http\Controllers\Admin\CartController::class, 'checkoutTemporary'])->name('cart.checkout.temporary');
-Route::post('/sales/cart/clear-cart', [\App\Http\Controllers\Admin\CartController::class, 'clear'])->name('cart.clear');
-Route::get('/sales/cart/{checkId}', [\App\Http\Controllers\Admin\CartController::class, 'indexDelayed'])->name('cart.indexDelayed');
+
+Route::middleware(['auth', 'manager'])->group(function () {
+    Route::get('/sales', [\App\Http\Controllers\Admin\SalesController::class, 'index'])->name('sales.index');
+    Route::get('/sales/cart', [\App\Http\Controllers\Admin\CartController::class, 'index'])->name('sales.cart');
+    Route::post('/sales/cart/add/{product}', [\App\Http\Controllers\Admin\CartController::class, 'add'])->name('sales.cart.add');
+    Route::post('/sales/cart/remove/{product}', [\App\Http\Controllers\Admin\CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/sales/cart/checkout', [\App\Http\Controllers\Admin\CartController::class, 'checkout'])->name('cart.checkout');
+    Route::post('/sales/cart/checkout-temporary/{checkId}', [\App\Http\Controllers\Admin\CartController::class, 'checkoutTemporary'])->name('cart.checkout.temporary');
+    Route::post('/sales/cart/clear-cart', [\App\Http\Controllers\Admin\CartController::class, 'clear'])->name('cart.clear');
+    Route::get('/sales/cart/{checkId}', [\App\Http\Controllers\Admin\CartController::class, 'indexDelayed'])->name('cart.indexDelayed');
+});
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');

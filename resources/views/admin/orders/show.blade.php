@@ -50,6 +50,9 @@
                                                             id="status"
                                                             name="status"
                                                             style="width: 100%;"
+                                                            @if($order->status === \App\Models\Order::ORDER_STATUS_EXECUTED)
+                                                                disabled
+                                                            @endif
                                                     >
                                                         @foreach(\App\Models\Order::ORDER_STATUSES as $key => $status)
                                                             <option value="{{ $key }}"
@@ -58,7 +61,14 @@
                                                     </select>
                                                 </div>
 
-                                                <button type="submit" class="btn btn-success btn-sm">Сохранить</button>
+                                                <button type="submit"
+                                                        class="btn btn-success btn-sm"
+                                                        @if($order->status === \App\Models\Order::ORDER_STATUS_EXECUTED)
+                                                            disabled
+                                                        @endif
+                                                >
+                                                    Сохранить
+                                                </button>
                                             </form>
                                         </div>
                                         <div class="post col-md-9" style="border: none">

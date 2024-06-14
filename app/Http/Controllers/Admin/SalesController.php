@@ -9,7 +9,7 @@ class SalesController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(10);
+        $products = Product::orderBy('quantity', 'desc')->orderBy('article')->paginate(9);
         return view('admin.sales.index', compact('products'));
     }
 }

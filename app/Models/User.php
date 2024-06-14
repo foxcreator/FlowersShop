@@ -13,12 +13,14 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ROLE_MANAGER = 2;
     const ROLE_ADMIN = 1;
     const ROLE_USER = 0;
 
     const ROLES = [
         self::ROLE_ADMIN => 'Администратор',
         self::ROLE_USER => 'Пользователь',
+        self::ROLE_MANAGER => 'Менеджер'
     ];
 
     protected $fillable = [
@@ -30,7 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'balance',
         'password',
-        'is_admin'
+        'role'
     ];
 
     /**
@@ -55,11 +57,25 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin()
     {
-        if ($this->is_admin) {
+        if ($this->role === self::ROLE_ADMIN) {
             return true;
         }
 
         return false;
+    }
+
+    public function isManager()
+    {
+        if ($this->role === self::ROLE_MANAGER) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getRoleNameAttribute(): string
+    {
+        return self::ROLES[$this->attributes['role']] ?? '';
     }
 
     public function orders()
