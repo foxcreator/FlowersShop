@@ -19,6 +19,7 @@ class Product extends Model
     const BADGE_NEW = 'new';
     const TYPE_BOUQUET = 'bouquet';
     const TYPE_FLOWER = 'flower';
+    const TYPE_DEFAULT = 'default';
 
     const BADGES = [
         self::BADGE_HIT => 'Хит',
@@ -32,6 +33,11 @@ class Product extends Model
         self::BADGE_SALE => 'Знижка',
         self::BADGE_NEW_PRICE => 'Нова ціна',
         self::BADGE_NEW => 'Новинка',
+    ];
+    const TYPES = [
+        self::TYPE_FLOWER => 'Цветок',
+        self::TYPE_BOUQUET => 'Букет',
+        self::TYPE_DEFAULT => 'Другое'
     ];
 
     protected $fillable = [
@@ -118,6 +124,11 @@ class Product extends Model
     public function getBadgeNameAttribute(): string
     {
         return self::BADGES[$this->attributes['badge']] ?? '';
+    }
+
+    public function getTypeNameAttribute(): string
+    {
+        return self::TYPES[$this->attributes['type']] ?? '';
     }
 
     public function getBadgeNameMultiLangAttribute(): string

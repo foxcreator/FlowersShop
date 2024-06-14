@@ -272,7 +272,7 @@
                                    id="bouquet"
                                    name="type"
                                    value="{{ \App\Models\Product::TYPE_BOUQUET }}"
-                                   @if($product->type === \App\Models\Product::TYPE_BOUQUET) checked @endif
+                                   @if($product->type === \App\Models\Product::TYPE_BOUQUET) checked disabled @endif
                             >
                             <label for="bouquet">Букет</label>
                         </div>

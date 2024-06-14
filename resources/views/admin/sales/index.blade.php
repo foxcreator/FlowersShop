@@ -4,12 +4,12 @@
             <div class="container-fluid">
                 <div class="row mb-2 d-flex justify-content-between">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Обзор</h1>
+                        <h1 class="m-0">Продажа</h1>
                     </div>
                     <div class="col-sm-4">
                         <form action="{{ route('sales.index') }}" class="input-group input-group-sm">
                             <input type="text" name="search" class="form-control float-right"
-                                   placeholder="Поиск">
+                                   placeholder="Поиск (По категории, артикулу или наименованию)">
 
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default">
@@ -43,7 +43,11 @@
                                             <li class="small">
                                                 <h5>
                                                     <span class="fa-li"><i class="fas fa-warehouse text-info"></i></span>Остаток:
-                                                    {{ $product->quantity }}
+                                                    @if(!empty($cart) && isset($cart[$product->id]))
+                                                        {{ $product->quantity - $cart[$product->id]['quantity'] }}
+                                                    @else
+                                                        {{ $product->quantity }} шт
+                                                    @endif
                                                 </h5>
                                             </li>
                                             <li class="small">
@@ -64,22 +68,22 @@
                                     </div>
                                 </div>
                             </div>
+                            @if($product->quantity > 0)
                             <div class="card-footer">
                                 <form class="d-flex justify-content-between m-auto" action="{{ route('sales.cart.add', $product) }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $product->id }}">
                                     <input type="hidden" name="name" value="{{ $product->name }}">
                                     <input type="hidden" name="price" value="{{ $product->price }}">
-                                    @if($product->quantity > 0)
                                         <input type="text" class="col-md-4" name="quantity" value="1"
                                                min="0" max="{{ $product->quantity }}">
                                         <!-- Поле для выбора количества продукта -->
                                         <button type="submit" class="btn btn-sm btn-primary">
                                             <i class="fas fa-shopping-basket"></i> Добавить в чек
                                         </button>
-                                    @endif
                                 </form>
                             </div>
+                            @endif
                         </div>
                     @endforeach
                 </div>

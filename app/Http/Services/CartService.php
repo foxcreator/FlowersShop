@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Http\Services\Checkbox\CheckboxService;
 use App\Models\Cart;
 use App\Models\DeliveryProduct;
 use App\Models\Order;
@@ -9,20 +10,27 @@ use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\TemporaryCheckout;
 use Carbon\Carbon;
+use igorbunov\Checkbox\CheckboxJsonApi;
+use igorbunov\Checkbox\Errors\EmptyResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Spatie\FlareClient\FlareMiddleware\CensorRequestBodyFields;
 
 class CartService
 {
+    public function __construct(CheckboxService $checkboxService)
+    {
+        $this->checkboxService = $checkboxService;
+    }
     public function addProductToCart(Product $product, $quantity)
     {
         // Получаем товары из открытого чека в сессии
         $cart = session()->get('cart', []);
 
-        $totalQuantity = 0;
+        $totalQuantity = isset($cart[$product->id]) ? $cart[$product->id]['quantity'] : 0;
 
         // Вычисляем доступное количество товара на складе
         $availableQuantity = $product->quantity - $totalQuantity;
@@ -56,45 +64,60 @@ class CartService
     /**
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
+     * @throws EmptyResponse
      */
-    public function checkoutProductToDb()
+    public function checkoutProductToDb($paymentMethod)
     {
         $cart = session()->get('cart', []);
 
-        $order = Order::create([
-            'user_id' => \auth()->user()->id,
-            'email' => 'thelotus@gmail.com',
-            'customer_name' => \auth()->user()->full_name ? \auth()->user()->full_name : 'Сотрудник',
-            'customer_phone' => \auth()->user()->phone,
-            'recipient_name' => '',
-            'recipient_phone' => '',
-            'delivery_option' => Order::DELIVERY_SELF,
-            'delivery_address' => '',
-            'delivery_date' => Carbon::now()->format('Y-m-d'),
-            'delivery_time' => Carbon::now()->format('H:i'),
-            'payment_method' => Order::PAYMENT_METHOD_CASH,
-            'is_paid' => true,
-            'amount' => $this->getTotal(),
-            'opt_amount' => $this->getTotalOptPrice(),
-            'status' => Order::ORDER_STATUS_EXECUTED,
-        ]);
+        try {
+            DB::beginTransaction();
 
-
-        foreach ($cart as $item) {
-//            dd($item);
-            OrderProduct::create([
-                'order_id' => $order->id,
-                'product_id' => $item['product_id'],
-                'product_name' => $item['name'],
-                'quantity' => $item['quantity'],
-                'price' => $item['price'],
-                'opt_price' => $item['opt_price']
+            $order = Order::create([
+                'user_id' => \auth()->user()->id,
+                'email' => 'thelotus.boutiqe@gmail.com',
+                'customer_name' => \auth()->user()->full_name ? \auth()->user()->full_name : 'Сотрудник',
+                'customer_phone' => \auth()->user()->phone,
+                'recipient_name' => '',
+                'recipient_phone' => '',
+                'delivery_option' => Order::DELIVERY_SELF,
+                'delivery_address' => '',
+                'delivery_date' => Carbon::now()->format('Y-m-d'),
+                'delivery_time' => Carbon::now()->format('H:i'),
+                'payment_method' => $paymentMethod,
+                'is_paid' => true,
+                'amount' => $this->getTotal(),
+                'opt_amount' => $this->getTotalOptPrice(),
+                'status' => Order::ORDER_STATUS_EXECUTED,
             ]);
 
 
-            $product = Product::findOrFail($item['product_id']);
-            $product->quantity -= intval($item['quantity']);
-            $product->save();
+            foreach ($cart as $item) {
+                OrderProduct::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item['product_id'],
+                    'product_name' => $item['name'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['price'],
+                    'opt_price' => $item['opt_price']
+                ]);
+
+
+                $product = Product::findOrFail($item['product_id']);
+                $product->quantity -= intval($item['quantity']);
+                $product->save();
+            }
+
+            $this->checkboxService->signInCashier();
+            $this->checkboxService->receipt(
+                'The Lotus',
+                $order->orderProducts,
+                $order->email,
+                $order->amount,
+                $order->payment_method
+            );
+        } catch (\Exception $exception) {
+            throw new \Exception($exception);
         }
 
         session()->forget('cart');

@@ -287,10 +287,17 @@
                     </div>
 
                     <div class="form-group mt-4">
-                        <input type="hidden" name="type" value="{{ \App\Models\Product::TYPE_FLOWER }}">
                         <div class="icheck-success d-inline">
-                            <input type="checkbox" id="bouquet" name="type" value="{{ \App\Models\Product::TYPE_BOUQUET }}">
+                            <input type="radio" name="type" id="default" checked value="{{ \App\Models\Product::TYPE_DEFAULT }}">
+                            <label for="default">Другое</label>
+                        </div>
+                        <div class="icheck-success d-inline">
+                            <input type="radio" id="bouquet" name="type" value="{{ \App\Models\Product::TYPE_BOUQUET }}">
                             <label for="bouquet">Букет</label>
+                        </div>
+                        <div class="icheck-success d-inline">
+                            <input type="radio" name="type" id="flower" value="{{ \App\Models\Product::TYPE_FLOWER }}">
+                            <label for="flower">Цветок</label>
                         </div>
                     </div>
 
@@ -405,6 +412,8 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             const bouquetCheckbox = document.getElementById('bouquet');
+            const flowerCheckbox = document.getElementById('flower');
+            const defaultCheckbox = document.getElementById('default');
             const productSelection = document.getElementById('product-selection');
             const addProductButton = document.getElementById('add-product');
             const productsContainer = document.getElementById('products');
@@ -416,6 +425,18 @@
                     productSelection.style.display = 'block';
                 } else {
                     productSelection.style.display = 'none';
+                }
+            });
+
+            flowerCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    productSelection.style.display = 'none'; // Скрыть блок при выборе другого типа
+                }
+            });
+
+            defaultCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    productSelection.style.display = 'none'; // Скрыть блок при выборе другого типа
                 }
             });
 

@@ -146,21 +146,19 @@
 
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    @if(isset($idCheck))
-                        <form action="{{ route('cart.checkout.temporary', $idCheck) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="check_id" value="{{ $idCheck }}">
-                            <button class="btn btn-success" type="submit">Оплата</button>
-                        </form>
-                    @else
-                        <form action="{{ route('cart.checkout') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="isDelayed" value="0">
-                            <button class="btn btn-success" type="submit">Оплата</button>
-                        </form>
-                    @endif
+                <div class="modal-footer justify-content-between">
+                    <form action="{{ route('cart.checkout') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="payment_method" value="{{ \App\Models\Order::PAYMENT_METHOD_BANK }}">
+                        <button class="btn btn-info" type="submit">Оплата банковской картой</button>
+                    </form>
+
+                    <form action="{{ route('cart.checkout') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="payment_method" value="{{ \App\Models\Order::PAYMENT_METHOD_CASH }}">
+                        <button class="btn btn-success" type="submit">Оплата наличными</button>
+                    </form>
+                    <button type="button" class="btn btn-secondary col-12" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
         </div>
