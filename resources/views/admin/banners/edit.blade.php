@@ -44,7 +44,6 @@
                                id="title_uk"
                                name="title_uk"
                                placeholder="Введите наименование"
-                               required
                         >{{ old('title_uk', $banner->title_uk) }}</textarea>
                         @error('title_uk')
                         <span class="invalid-feedback" role="alert">

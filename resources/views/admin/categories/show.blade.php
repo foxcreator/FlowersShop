@@ -56,11 +56,11 @@
                                         </div>
                                         <div class="col-md-6 mt-5">
                                             <h5>Описание UA</h5>
-                                            <p>{{ $category->description_uk }}</p>
+                                            <p>{!! $category->description_uk !!}</p>
                                         </div>
                                         <div class="col-md-6 mt-5">
                                             <h5>Описание RU</h5>
-                                            <p>{{ $category->description_ru }}</p>
+                                            <p>{!! $category->description_ru !!}</p>
                                         </div>
                                     </div>
                                 </div>

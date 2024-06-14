@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1 class="m-0">Редактирование тематики - {{ $subcategory->name_uk }}</h1>
+                    <h1 class="m-0">Редактирование подкатегории - {{ $subcategory->name_uk }}</h1>
                 </div>
             </div>
         </div>
