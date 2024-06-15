@@ -25,12 +25,12 @@ DROP TABLE IF EXISTS `banners`;
 CREATE TABLE `banners` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `product_id` bigint unsigned DEFAULT NULL,
-  `title_uk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title_ru` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `btn_text_uk` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `btn_text_ru` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title_uk` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title_ru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `btn_text_uk` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `btn_text_ru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -58,11 +58,11 @@ DROP TABLE IF EXISTS `categories`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categories` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `title_uk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title_ru` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description_uk` text COLLATE utf8mb4_unicode_ci,
-  `description_ru` text COLLATE utf8mb4_unicode_ci,
-  `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title_uk` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title_ru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description_uk` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `description_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `thumbnail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_show_on_homepage` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -90,8 +90,8 @@ DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `product_id` bigint unsigned NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -118,11 +118,11 @@ DROP TABLE IF EXISTS `failed_jobs`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `failed_jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
@@ -147,9 +147,9 @@ DROP TABLE IF EXISTS `feedback`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `feedback` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `question` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -183,7 +183,7 @@ CREATE TABLE `flower_product` (
   KEY `flower_product_flower_id_foreign` (`flower_id`),
   CONSTRAINT `flower_product_flower_id_foreign` FOREIGN KEY (`flower_id`) REFERENCES `flowers` (`id`) ON DELETE SET NULL,
   CONSTRAINT `flower_product_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +192,7 @@ CREATE TABLE `flower_product` (
 
 LOCK TABLES `flower_product` WRITE;
 /*!40000 ALTER TABLE `flower_product` DISABLE KEYS */;
-INSERT INTO `flower_product` VALUES (1,100,1,NULL,NULL);
+INSERT INTO `flower_product` VALUES (1,100,1,NULL,NULL),(2,100,1,NULL,NULL),(3,108,1,NULL,NULL);
 /*!40000 ALTER TABLE `flower_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,8 +205,8 @@ DROP TABLE IF EXISTS `flowers`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `flowers` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name_uk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name_ru` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_uk` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_ru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -232,7 +232,7 @@ DROP TABLE IF EXISTS `migrations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -259,7 +259,7 @@ CREATE TABLE `order_products` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `order_id` bigint unsigned NOT NULL,
   `product_id` bigint unsigned NOT NULL,
-  `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `quantity` int NOT NULL,
   `price` decimal(8,2) NOT NULL DEFAULT '0.00',
   `opt_price` decimal(8,2) NOT NULL DEFAULT '0.00',
@@ -293,27 +293,27 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint unsigned DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `anonymously` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `customer_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `customer_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `recipient_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `recipient_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `delivery_option` enum('courier','self') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `text_postcard` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `delivery_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `anonymously` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `customer_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `customer_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `recipient_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `recipient_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `delivery_option` enum('courier','self') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text_postcard` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `delivery_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `delivery_date` date NOT NULL,
-  `delivery_time` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `payment_method` enum('cash','bank') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `delivery_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_method` enum('cash','bank') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_paid` tinyint(1) NOT NULL DEFAULT '0',
   `amount` decimal(8,2) NOT NULL,
   `opt_amount` decimal(8,2) NOT NULL DEFAULT '0.00',
   `pay_with_bonus` decimal(8,2) DEFAULT NULL,
-  `status` enum('received','progress','awaiting','executed','decline') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'received',
-  `comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('received','progress','awaiting','executed','decline') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'received',
+  `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `call` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `call` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -336,8 +336,8 @@ DROP TABLE IF EXISTS `password_reset_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -361,11 +361,11 @@ DROP TABLE IF EXISTS `personal_access_tokens`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `personal_access_tokens` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -396,7 +396,7 @@ CREATE TABLE `product_photos` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `product_id` bigint unsigned NOT NULL,
   `order` int NOT NULL,
-  `file_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -433,7 +433,7 @@ CREATE TABLE `product_subject` (
   KEY `product_subject_subject_id_foreign` (`subject_id`),
   CONSTRAINT `product_subject_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE SET NULL,
   CONSTRAINT `product_subject_subject_id_foreign` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -442,7 +442,7 @@ CREATE TABLE `product_subject` (
 
 LOCK TABLES `product_subject` WRITE;
 /*!40000 ALTER TABLE `product_subject` DISABLE KEYS */;
-INSERT INTO `product_subject` VALUES (1,100,1,NULL,NULL);
+INSERT INTO `product_subject` VALUES (1,100,1,NULL,NULL),(2,100,1,NULL,NULL),(3,108,1,NULL,NULL);
 /*!40000 ALTER TABLE `product_subject` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -456,22 +456,22 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `category_id` bigint unsigned DEFAULT NULL,
-  `title_uk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title_ru` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title_uk` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title_ru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `price` decimal(8,2) NOT NULL,
-  `description_uk` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description_ru` text COLLATE utf8mb4_unicode_ci,
+  `description_uk` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description_ru` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `quantity` double(8,2) NOT NULL,
-  `article` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `badge` enum('sale','newPrice','hit','new') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `article` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thumbnail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `badge` enum('sale','newPrice','hit','new') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `rating` bigint unsigned NOT NULL DEFAULT '0',
   `is_novelty` tinyint(1) NOT NULL DEFAULT '0',
   `order` bigint unsigned DEFAULT NULL,
   `subcategory_id` bigint unsigned DEFAULT NULL,
-  `type` enum('flower','bouquet') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'flower',
+  `type` enum('flower','bouquet') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'flower',
   `products_quantities` json DEFAULT NULL,
   `opt_price` decimal(8,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id`),
@@ -488,7 +488,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (100,1,'Букет красивый 1','Букет красивый 1',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',0.00,'0000001','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 19:56:58',0,1,NULL,1,'flower','[]',50.00),(101,1,'Букет красивый 2','Букет красивый 2',120.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',0.00,'0000002','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 19:56:58',0,1,NULL,1,'flower','[]',50.00),(102,1,'Букет красивый 3','Букет красивый 3',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',0.00,'0000003','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 19:56:58',0,1,NULL,1,'flower','[]',50.00),(103,1,'Букет красивый 4','Букет красивый 4',90.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',0.00,'0000004','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 20:02:23',0,1,NULL,1,'flower','[]',50.00),(104,1,'Букет красивый 5','Букет красивый 5',60.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',5.00,'0000005','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 20:31:31',0,1,NULL,1,'flower','[]',50.00),(105,1,'Букет красивый 6','Букет красивый 6',90.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',7.00,'0000006','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 20:31:31',0,0,NULL,1,'flower','[]',50.00),(106,1,'Букет красивый 7','Букет красивый 7',130.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000007','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 16:34:28',0,0,NULL,1,'flower','[]',50.00),(107,1,'Букет красивый 8','Букет красивый 8',75.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000008','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 16:34:28',0,0,NULL,1,'flower','[]',50.00),(108,1,'Букет красивый 9','Букет красивый 9',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000009','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 16:34:28',0,0,NULL,1,'flower','[]',50.00),(109,1,'Букет красивый 10','Букет красивый 10',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000010','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 16:34:28',0,0,NULL,1,'flower','[]',50.00),(110,1,'Букет красивый 11','Букет красивый 11',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000011','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 16:34:28',0,0,NULL,1,'flower','[]',50.00),(111,1,'Букет красивый 12','Букет красивый 12',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000012','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 16:34:28',0,0,NULL,1,'flower','[]',50.00),(112,1,'Букет красивый 13','Букет красивый 13',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000013','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 16:34:28',0,0,NULL,1,'flower','[]',50.00),(113,1,'Букет красивый 14','Букет красивый 14',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000014','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 16:34:28',0,0,NULL,1,'flower','[]',50.00),(114,1,'Букет красивый 15','Букет красивый 15',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000015','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 16:34:28',0,0,NULL,1,'flower','[]',50.00),(115,1,'Букет красивый 16','Букет красивый 16',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000016','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 16:34:28',0,0,NULL,1,'flower','[]',50.00),(116,1,'Букет красивый 17','Букет красивый 17',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000017','public/wolhtcJUjxG16GMb_1718296468.jpg',NULL,'2024-06-13 16:34:28','2024-06-13 16:34:28',0,0,NULL,1,'flower','[]',50.00);
+INSERT INTO `products` VALUES (100,1,'Букет красивый 1','Букет красивый 1',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',0.00,'0000001','public/z9zxnR25HIFy0fa5_1718440487.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:34:47',0,0,NULL,1,'flower','[]',50.00),(101,1,'Букет красивый 2','Букет красивый 2',120.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',0.00,'0000002','public/loFm9HEPtJQSQG79_1718440499.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:34:59',0,1,NULL,1,'flower','[]',50.00),(102,1,'Букет красивый 3','Букет красивый 3',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',0.00,'0000003','public/B4FhvQkxmyxFMbeL_1718440509.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:35:09',0,1,NULL,1,'flower','[]',50.00),(103,1,'Букет красивый 4','Букет красивый 4',90.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',0.00,'0000004','public/l4zm5M4qgACL1j05_1718440520.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:35:20',0,1,NULL,1,'flower','[]',50.00),(104,1,'Букет красивый 5','Букет красивый 5',60.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',5.00,'0000005','public/WTEycFKC7mjYhCPJ_1718440530.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:35:30',0,1,NULL,1,'flower','[]',50.00),(105,1,'Букет красивый 6','Букет красивый 6',90.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',7.00,'0000006','public/VE9PdpP6tvC95fuv_1718440543.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:35:43',0,0,NULL,1,'flower','[]',50.00),(106,1,'Букет красивый 7','Букет красивый 7',130.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000007','public/Ek3DVBMinFvyKcjv_1718440554.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:35:54',0,0,NULL,1,'flower','[]',50.00),(107,1,'Букет красивый 8','Букет красивый 8',75.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000008','public/h637T7ceeV1esqtP_1718440567.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:36:07',0,0,NULL,1,'flower','[]',50.00),(108,1,'Свеча красивая','Свеча красивая',100.00,'<p>Свеча красивая</p>','<p>Свеча красивая</p>',10.00,'0000009','public/0AxHCRETdZXJsKkc_1718440624.jpeg',NULL,'2024-06-13 16:34:28','2024-06-15 08:37:04',0,0,NULL,1,'flower','[]',50.00),(109,1,'Букет красивый 10','Букет красивый 10',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000010','public/uFcjA6eUw0kK42Ur_1718440646.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:37:26',0,0,NULL,1,'flower','[]',50.00),(110,1,'Букет красивый 11','Букет красивый 11',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000011','public/G4lastFqa4W8duIx_1718440658.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:37:38',0,0,NULL,1,'flower','[]',50.00),(111,1,'Букет красивый 12','Букет красивый 12',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000012','public/hDMZE5oXGZARPHaC_1718440671.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:37:51',0,0,NULL,1,'flower','[]',50.00),(112,1,'Букет красивый 13','Букет красивый 13',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000013','public/vjo9MvQhqQm2kJ8h_1718440683.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:38:03',0,0,NULL,1,'flower','[]',50.00),(113,1,'Букет красивый 14','Букет красивый 14',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000014','public/MAumOUlysOUWu79F_1718440702.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:38:22',0,0,NULL,1,'flower','[]',50.00),(114,1,'Букет красивый 15','Букет красивый 15',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000015','public/VCphjmttdG3XVaRx_1718440712.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:38:32',0,0,NULL,1,'flower','[]',50.00),(115,1,'Букет красивый 16','Букет красивый 16',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000016','public/RzXHa6OWxYlEWYkp_1718440724.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:38:44',0,0,NULL,1,'flower','[]',50.00),(116,1,'Букет красивый 17','Букет красивый 17',100.00,'<p>Букет 1Букет 1Букет 1Букет 1</p>','<p>Букет 1Букет 1Букет 1Букет 1</p>',10.00,'0000017','public/aXlH6uGIpoyUER7q_1718440735.jpg',NULL,'2024-06-13 16:34:28','2024-06-15 08:38:55',0,0,NULL,1,'flower','[]',50.00);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -502,8 +502,8 @@ DROP TABLE IF EXISTS `subcategories`;
 CREATE TABLE `subcategories` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `category_id` bigint unsigned NOT NULL,
-  `name_uk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name_ru` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_uk` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_ru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -531,8 +531,8 @@ DROP TABLE IF EXISTS `subjects`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `subjects` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name_uk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name_ru` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_uk` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_ru` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -588,18 +588,18 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `full_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city_ref` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lang` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `full_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city_ref` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `balance` decimal(8,2) NOT NULL DEFAULT '0.00',
-  `google_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `google_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role` smallint NOT NULL DEFAULT '0',
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -614,7 +614,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (6245,NULL,NULL,NULL,NULL,'0935464969',0.00,NULL,NULL,NULL,'$2y$12$Zn20hrC7fgleLykhjeKjJemFXfvvaLqBWMAAaHLehLoKCTgDxsQcy',2,NULL,'2024-06-13 16:26:46','2024-06-13 16:26:46');
+INSERT INTO `users` VALUES (6245,NULL,NULL,NULL,NULL,'0935464969',0.00,NULL,NULL,NULL,'$2y$12$Zn20hrC7fgleLykhjeKjJemFXfvvaLqBWMAAaHLehLoKCTgDxsQcy',1,NULL,'2024-06-13 16:26:46','2024-06-13 16:26:46');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -627,4 +627,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-15  7:53:14
+-- Dump completed on 2024-06-15  8:39:53

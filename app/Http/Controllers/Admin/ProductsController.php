@@ -145,6 +145,35 @@ class ProductsController extends Controller
         $product = Product::find($id);
 
         $products_quantities = [];
+        foreach ($data['products'] as $product) {
+            if ($product['id']) {
+                $products_quantities[$product['id']] = $product['quantity'];
+            }
+        }
+
+        $data['products_quantities'] = $products_quantities;
+        unset($data['products']);
+
+        if ($data['type'] === Product::TYPE_BOUQUET) {
+            if (!$products_quantities) {
+                return redirect()->back()->withInput()->with([
+                    'error' => "В букет необходимо добавить хотя бы один цветок"
+                ]);
+            }
+            foreach ($products_quantities as $index => $quantity) {
+                $flower = Product::find($index);
+                if ($flower->quantity >= $quantity) {
+                    $flower->quantity -= $quantity * $data['quantity'];
+                    $flower->save();
+                } else {
+                    return redirect()->back()->withInput()->with([
+                        'error' => "Превышено количество цветка '$flower->title_ru' для списания! Доступно на складе $flower->quantity"
+                    ]);
+                }
+            }
+        }
+
+        $products_quantities = [];
         foreach ($data['products'] as $prod) {
             if ($prod['id']) {
                 $products_quantities[$prod['id']] = $prod['quantity'];
