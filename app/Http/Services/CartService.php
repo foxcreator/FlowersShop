@@ -3,21 +3,14 @@
 namespace App\Http\Services;
 
 use App\Http\Services\Checkbox\CheckboxService;
-use App\Models\Cart;
-use App\Models\DeliveryProduct;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
-use App\Models\TemporaryCheckout;
 use Carbon\Carbon;
-use igorbunov\Checkbox\CheckboxJsonApi;
 use igorbunov\Checkbox\Errors\EmptyResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Spatie\FlareClient\FlareMiddleware\CensorRequestBodyFields;
 
 class CartService
 {

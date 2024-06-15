@@ -281,8 +281,7 @@
                                    id="bouquet"
                                    name="type"
                                    value="{{ \App\Models\Product::TYPE_BOUQUET }}"
-                                   @if($product->type === \App\Models\Product::TYPE_BOUQUET ) checked @endif
-                                   @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
+                                   @if($product->type === \App\Models\Product::TYPE_BOUQUET ) checked disabled @endif
                             >
                             <label for="bouquet">Букет</label>
                         </div>
@@ -309,13 +308,22 @@
                                                 id="bouquet_flowers_{{ $id }}"
                                                 name="products[{{ $id }}][id]"
                                                 style="width: 75%;"
+                                                @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
                                         >
                                             <option value="">Выберите цветок</option>
                                             @foreach($products as $prod)
                                                 <option value="{{ $prod->id }}" @if($id === $prod->id) selected @endif>{{ $prod->title_uk }}</option>
                                             @endforeach
                                         </select>
-                                        <input type="number" class="form-control" name="products[{{ $id }}][quantity]" min="1" value="{{ $quantity }}" placeholder="Количество" style="width: 20%">
+                                        <input type="number"
+                                               class="form-control"
+                                               name="products[{{ $id }}][quantity]"
+                                               min="1" value="{{ $quantity }}"
+                                               placeholder="Количество"
+                                               style="width: 20%"
+                                               @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
+
+                                        >
                                     </div>
                                 @endforeach
                             @else
@@ -324,17 +332,33 @@
                                             id="bouquet_flowers_0"
                                             name="products[0][id]"
                                             style="width: 75%;"
+                                            @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
                                     >
                                         <option value="">Выберите цветок</option>
                                         @foreach($products as $prod)
                                             <option value="{{ $prod->id }}">{{ $prod->title_uk }}</option>
                                         @endforeach
                                     </select>
-                                    <input type="number" class="form-control" name="products[0][quantity]" min="1" value="1" placeholder="Количество" style="width: 20%">
+                                    <input type="number"
+                                           class="form-control"
+                                           name="products[0][quantity]"
+                                           min="1"
+                                           value="1"
+                                           placeholder="Количество"
+                                           style="width: 20%"
+                                           @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
+                                    >
                                 </div>
                             @endif
                         </div>
-                        <button type="button" id="add-product" class="btn btn-xs btn-info mt-2">Добавить продукт</button>
+                        <button type="button"
+                                id="add-product"
+                                class="btn btn-xs btn-info mt-2"
+                                @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
+
+                        >
+                            Добавить продукт
+                        </button>
 
                         <div class="form-group mt-4">
                             <input type="hidden" name="update_count" value="{{ false }}">

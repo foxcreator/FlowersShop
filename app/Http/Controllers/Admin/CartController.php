@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateOrderRequest;
 use App\Http\Services\CartService;
-use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use function redirect;

@@ -42,9 +42,10 @@ class UpdateProductRequest extends FormRequest
             'badge' => 'nullable',
             'product_photos' => 'nullable',
             'is_novelty' => 'nullable',
-            'type' => 'in:bouquet,flower',
+            'type' => 'in:bouquet,flower,default',
             'products' => 'nullable',
-            'update_count' => 'nullable'
+            'update_count' => 'nullable',
+            'products_quantities' => 'nullable',
         ];
     }
 

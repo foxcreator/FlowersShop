@@ -36,6 +36,8 @@ class LoginController extends Controller
             }
             if (\auth()->user()->isAdmin()) {
                 return redirect()->route('admin.dashboard');
+            }elseif (\auth()->user()->isManager()) {
+                return redirect()->route('sales.index');
             } else {
                 return redirect()->route('home');
             }

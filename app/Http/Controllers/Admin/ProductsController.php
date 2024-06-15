@@ -145,46 +145,32 @@ class ProductsController extends Controller
         $product = Product::find($id);
 
         $products_quantities = [];
-        foreach ($data['products'] as $product) {
-            if ($product['id']) {
-                $products_quantities[$product['id']] = $product['quantity'];
-            }
-        }
 
-        $data['products_quantities'] = $products_quantities;
-        unset($data['products']);
-
-        if ($data['type'] === Product::TYPE_BOUQUET) {
-            if (!$products_quantities) {
-                return redirect()->back()->withInput()->with([
-                    'error' => "В букет необходимо добавить хотя бы один цветок"
-                ]);
-            }
-            foreach ($products_quantities as $index => $quantity) {
-                $flower = Product::find($index);
-                if ($flower->quantity >= $quantity) {
-                    $flower->quantity -= $quantity * $data['quantity'];
-                    $flower->save();
-                } else {
-                    return redirect()->back()->withInput()->with([
-                        'error' => "Превышено количество цветка '$flower->title_ru' для списания! Доступно на складе $flower->quantity"
-                    ]);
+        if (isset($data['products'])) {
+            foreach ($data['products'] as $prod) {
+                if ($prod['id']) {
+                    $products_quantities[$prod['id']] = $prod['quantity'];
                 }
             }
         }
 
-        $products_quantities = [];
-        foreach ($data['products'] as $prod) {
-            if ($prod['id']) {
-                $products_quantities[$prod['id']] = $prod['quantity'];
-            }
-        }
-
         $data['products_quantities'] = $products_quantities;
         unset($data['products']);
 
-        if (intval($data['quantity']) > intval($product->quantity) || $data['update_count']) {
-            $quantityDiff = intval($data['quantity']) - intval($product->quantity);
+//        if (isset($data['type']) && $data['type'] === Product::TYPE_BOUQUET) {
+//            if (!$products_quantities) {
+//                return redirect()->back()->withInput()->with([
+//                    'error' => "В букет необходимо добавить хотя бы один цветок"
+//                ]);
+//            }
+//        }
+
+        if (intval($data['quantity']) > intval($product->quantity) || $data['update_count'] && (isset($data['type']) && $data['type'] === Product::TYPE_BOUQUET)) {
+            if ($data['update_count']) {
+                $quantityDiff = intval($data['quantity']);
+            } else {
+                $quantityDiff = intval($data['quantity']) - intval($product->quantity);
+            }
             foreach ($products_quantities as $index => $quantity) {
                 $flower = Product::find($index);
                 if ($flower->quantity >= $quantity) {
