@@ -39,7 +39,7 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
-        if ($order = $this->cartService->checkoutProductToDb($request->payment_method)) {
+        if ($order = $this->cartService->checkoutProductToDb($request->payment_method, $request->email)) {
             return redirect()->route('sales.index')->with('success', "Чек #$order->id закрыт");
         }
 

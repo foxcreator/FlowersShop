@@ -66,7 +66,7 @@ class CartService
      * @throws NotFoundExceptionInterface
      * @throws EmptyResponse
      */
-    public function checkoutProductToDb($paymentMethod)
+    public function checkoutProductToDb($paymentMethod, $customerMail = 'thelotus.boutiqe@gmail.com')
     {
         $cart = session()->get('cart', []);
 
@@ -75,7 +75,7 @@ class CartService
 
             $order = Order::create([
                 'user_id' => \auth()->user()->id,
-                'email' => 'thelotus.boutiqe@gmail.com',
+                'email' => $customerMail,
                 'customer_name' => \auth()->user()->full_name ? \auth()->user()->full_name : 'Сотрудник',
                 'customer_phone' => \auth()->user()->phone,
                 'recipient_name' => '',
@@ -117,7 +117,7 @@ class CartService
                 $order->payment_method
             );
         } catch (\Exception $exception) {
-            throw new \Exception($exception);
+            throw new \Exception($exception->getMessage());
         }
 
         session()->forget('cart');
