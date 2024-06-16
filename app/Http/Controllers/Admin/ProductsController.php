@@ -53,18 +53,49 @@ class ProductsController extends Controller
         $flowers = Flower::all();
         $subjects = Subject::all();
         $article = $this->getArticle();
+        $products = Product::products()->get();
         return view('admin.products.create', compact(
 			'categories',
 			'article',
 			'subjects',
 			'flowers',
-            'countNoveltyProduct'
+            'countNoveltyProduct',
+            'products'
 		));
     }
 
     public function store(CreateProductRequest $request)
     {
         $data = $request->validated();
+
+        $products_quantities = [];
+        foreach ($data['products'] as $product) {
+            if ($product['id']) {
+                $products_quantities[$product['id']] = $product['quantity'];
+            }
+        }
+
+        $data['products_quantities'] = $products_quantities;
+        unset($data['products']);
+
+        if ($data['type'] === Product::TYPE_BOUQUET) {
+            if (!$products_quantities) {
+                return redirect()->back()->withInput()->with([
+                    'error' => "В букет необходимо добавить хотя бы один цветок"
+                ]);
+            }
+            foreach ($products_quantities as $index => $quantity) {
+                $flower = Product::find($index);
+                if ($flower->quantity >= $quantity) {
+                    $flower->quantity -= $quantity * $data['quantity'];
+                    $flower->save();
+                } else {
+                    return redirect()->back()->withInput()->with([
+                        'error' => "Превышено количество цветка '$flower->title_ru' для списания! Доступно на складе $flower->quantity"
+                    ]);
+                }
+            }
+        }
 
         $thumbnail = FileStorageService::upload($data['thumbnail']);
         $images = $data['product_photos'] ?? [];
@@ -96,20 +127,64 @@ class ProductsController extends Controller
 		$flowers = Flower::all();
         $product = Product::find($id);
         $categories = Category::all();
+        $products = Product::products()->get();
+
         return view('admin.products.edit', compact(
 			'product',
 			'categories',
 			'flowers',
 			'subjects',
-            'countNoveltyProduct'
+            'countNoveltyProduct',
+            'products'
 		));
     }
 
     public function update(UpdateProductRequest $request, string $id)
     {
-		$data = $request->validated();
-		$product = Product::find($id);
-		$flowers = $data['flowers'] ?? [];
+        $data = $request->validated();
+        $product = Product::find($id);
+
+        $products_quantities = [];
+
+        if (isset($data['products'])) {
+            foreach ($data['products'] as $prod) {
+                if ($prod['id']) {
+                    $products_quantities[$prod['id']] = $prod['quantity'];
+                }
+            }
+        }
+
+        $data['products_quantities'] = $products_quantities;
+        unset($data['products']);
+
+//        if (isset($data['type']) && $data['type'] === Product::TYPE_BOUQUET) {
+//            if (!$products_quantities) {
+//                return redirect()->back()->withInput()->with([
+//                    'error' => "В букет необходимо добавить хотя бы один цветок"
+//                ]);
+//            }
+//        }
+
+        if (intval($data['quantity']) > intval($product->quantity) || $data['update_count'] && (isset($data['type']) && $data['type'] === Product::TYPE_BOUQUET)) {
+            if ($data['update_count']) {
+                $quantityDiff = intval($data['quantity']);
+            } else {
+                $quantityDiff = intval($data['quantity']) - intval($product->quantity);
+            }
+            foreach ($products_quantities as $index => $quantity) {
+                $flower = Product::find($index);
+                if ($flower->quantity >= $quantity) {
+                    $flower->quantity -= $quantity * $quantityDiff;
+                    $flower->save();
+                } else {
+                    return redirect()->back()->withInput()->with([
+                        'error' => "Превышено количество цветка '$flower->title_ru' для списания! Доступно на складе $flower->quantity"
+                    ]);
+                }
+            }
+        }
+
+        $flowers = $data['flowers'] ?? [];
 		$currentFlowers = $product->flowers()->pluck('flowers.id')->toArray();
 		$flowersToRemove = array_diff($currentFlowers, $flowers);
 

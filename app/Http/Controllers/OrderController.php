@@ -38,6 +38,12 @@ class OrderController extends Controller
             }
         }
 
+        $opt_amount = '';
+
+        foreach ($cart as $product) {
+            $opt_amount = (intval($opt_amount) + intval($product->attributes->opt_price)) * $product['quantity'];
+        }
+
         $entityToDb['user_id'] = $data['user_id'] ?? null;
         $entityToDb['customer_name'] = $data['customer_name'];
         $entityToDb['customer_phone'] = $data['customer_phone'];
@@ -54,25 +60,34 @@ class OrderController extends Controller
         $entityToDb['comment'] = $data['comment'] ?? '';
         $entityToDb['status'] = Order::ORDER_STATUS_RECEIVED;
         $entityToDb['amount'] = $total;
+        $entityToDb['opt_amount'] = $opt_amount;
         $entityToDb['pay_with_bonus'] = isset($data['bonus']) ?: 0;
         $entityToDb['delivery_address'] = $data['city'].', '.$data['street'].' '.$data['house'].', '.$data['flat'];
 
 
         DB::beginTransaction();
+
         $order = Order::create($entityToDb);
         foreach ($cart as $product) {
             OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $product->id,
                 'product_name' => $product->name,
-                'quantity' => $product->quantity
+                'quantity' => $product->quantity,
+                'price' => $product->price,
+                'opt_price' => $product->opt_price
             ]);
 
             $productRating = Product::find($product->id);
-            $productRating->rating += 1;
-            $productRating->save();
+            if ($product->quantity <= $productRating->quantity) {
+                $productRating->rating += 1;
+                $productRating->quantity -= $product->quantity;
+                $productRating->save();
+            }
         }
+
         DB::commit();
+
         if ($order) {
             Mail::to($entityToDb['email'])->send(new OrderConfirmationNotification($order));
             Notification::route('telegram', -4219102586)

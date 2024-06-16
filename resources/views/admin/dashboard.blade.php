@@ -73,6 +73,65 @@
                             <a href="{{ route('admin.orders.index') }}" class="small-box-footer">Детальнее <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-gradient-green">
+                            <div class="inner">
+                                <h3>
+                                    {{ $todayProfit }} грн
+                                </h3>
+                                <p>Прибыль за сегодня</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="{{ route('admin.reports.daily') }}" class="small-box-footer">Детальнее <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-gradient-info">
+                            <div class="inner">
+                                <h3>
+                                    {{ $todayCash }} грн
+                                </h3>
+                                <p>Касса за сегодня</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="{{ route('admin.reports.daily') }}" class="small-box-footer">Детальнее <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-gradient-blue">
+                            <div class="inner">
+                                <h3>
+                                    {{ $bouquetsSale }} шт
+                                </h3>
+                                <p>Продано букетов</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="{{ route('admin.orders.index') }}" class="small-box-footer">Детальнее <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-gradient-indigo">
+                            <div class="inner">
+                                <h3>
+                                    {{ $flowersSale }} шт
+                                </h3>
+                                <p>Продано цветов</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="{{ route('admin.orders.index') }}" class="small-box-footer">Детальнее <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
 

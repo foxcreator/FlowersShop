@@ -5,6 +5,7 @@
         <th>Артикул</th>
         <th>Название UA</th>
         <th>Название RU</th>
+        <th>Тип</th>
         <th>Цена</th>
         <th>Количество</th>
         <th>Бейдж</th>
@@ -21,6 +22,7 @@
             <td>{{ $product->article }}</td>
             <td class="custom-text-overflow">{{ $product->title_uk }}</td>
             <td class="custom-text-overflow">{{ $product->title_ru }}</td>
+            <td>{{ $product->typeName }}</td>
             <td>{{ $product->price }}</td>
             <td>{{ $product->quantity }}</td>
             <td>{{ $product->badgeName }}</td>

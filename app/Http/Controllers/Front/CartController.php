@@ -43,6 +43,7 @@ class CartController extends Controller
             'quantity' => (int) $request->quantity,
             'attributes' => [
                 'img' => $product->thumbnailUrl,
+                'opt_price' => $product->opt_price
             ],
         ]);
         if (\Cart::get($product->id)) {

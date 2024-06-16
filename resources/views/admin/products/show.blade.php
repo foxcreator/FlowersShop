@@ -1,3 +1,10 @@
+@php
+if ($product->type === \App\Models\Product::TYPE_BOUQUET) {
+    $productIds = array_keys($product->products_quantities);
+    $products = App\Models\Product::whereIn('id', $productIds)->get();
+}
+@endphp
+
 @extends('admin.layouts.admin')
 @section('content')
     <div class="content-header">
@@ -66,6 +73,14 @@
                                                 <h5 class="text-gray-dark">{{ $product->category->title_uk }}</h5>
                                             </div>
                                         </div>
+                                        @if($product->type === \App\Models\Product::TYPE_BOUQUET)
+                                            <div class="col-12 mt-5">
+                                                <h5>Состав букета</h5>
+                                                @foreach($products as $prod)
+                                                    <p><a href="{{ route('admin.products.show', $prod->id) }}">{{ $prod->title_uk }}</a> - <span>{{ $product->products_quantities[$prod->id] }} шт</span></p>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                         <div class="col-md-6 mt-5">
                                             <h5>Описание UA</h5>
                                             <p>{!! $product->description_uk !!}</p>

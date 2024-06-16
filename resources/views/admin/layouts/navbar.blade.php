@@ -16,6 +16,15 @@ $orderText = $ordersCount == 1 ? 'новый заказ' : ($ordersCount > 1 && 
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ route('home') }}" class="nav-link" target="_blank">Магазин</a>
         </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ route('sales.cart') }}" class="nav-link">
+                Открытый чек
+                <i class="fas fa-receipt"></i>
+                @if(session()->get('cart', []))
+                    <span class="badge badge-warning navbar-badge">{{ count(session()->get('cart')) }}</span>
+                @endif
+            </a>
+        </li>
     </ul>
 
     <ul class="navbar-nav ml-auto">
