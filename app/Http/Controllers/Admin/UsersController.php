@@ -36,7 +36,7 @@ class UsersController extends Controller
     public function changeRole(Request $request)
     {
         $user = User::find($request->id);
-        $user->is_admin = $request->role;
+        $user->role = $request->role;
         $user->save();
         return redirect()->back();
     }
