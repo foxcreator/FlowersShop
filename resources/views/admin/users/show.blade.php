@@ -32,7 +32,7 @@
                                                     <label for="role">Роль пользователя</label>
                                                     <select class="form-control custom-select" name="role" id="role">
                                                         @foreach(\App\Models\User::ROLES as $key => $role)
-                                                            <option value="{{ $key }}" @if($key == $user->is_admin) selected @endif>{{ $role }}</option>
+                                                            <option value="{{ $key }}" @if($key == $user->role) selected @endif>{{ $role }}</option>
                                                         @endforeach
                                                     </select>
                                                     <input type="hidden" value="{{ $user->id }}" name="id">
