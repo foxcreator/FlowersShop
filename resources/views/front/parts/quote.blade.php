@@ -63,12 +63,12 @@ $subcategories = \App\Models\Subcategory::where('category_id', 1)->get();
     </p>
 </div>
 
-<div class="coffee">
-    <h1>{{ __('homepage.coffee_shop') }}</h1>
-    <p>
-        {{ __('texts.our_coffee_shop') }}
-    </p>
-</div>
+{{--<div class="coffee">--}}
+{{--    <h1>{{ __('homepage.coffee_shop') }}</h1>--}}
+{{--    <p>--}}
+{{--        {{ __('texts.our_coffee_shop') }}--}}
+{{--    </p>--}}
+{{--</div>--}}
 
 <div class="questions">
     <h3>{{ __('homepage.any_questions') }}</h3>
@@ -99,6 +99,6 @@ $subcategories = \App\Models\Subcategory::where('category_id', 1)->get();
         </div>
     </div>
     <div class="contacts__map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d978.5342879053192!2d35.03462432637196!3d48.460711208622655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1z0JHQpiDQkNGA0LXQvdCw!5e0!3m2!1sru!2sua!4v1713203733638!5m2!1sru!2sua" height="450" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2645.930566996194!2d35.04832811248104!3d48.45786172868895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dbe2d916d55317%3A0xf916d0420635a754!2z0L_QtdGALiDQqNC10LLRh9C10L3QutC-LCA5LCDQlNC90LXQv9GALCDQlNC90LXQv9GA0L7Qv9C10YLRgNC-0LLRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwgNDkwMDA!5e0!3m2!1sru!2sua!4v1718526505036!5m2!1sru!2sua" height="450" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 </div>
