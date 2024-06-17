@@ -33,6 +33,7 @@ Route::middleware(['set_locale'])->group(function () {
     Route::name('front.')->group(function () {
 		Route::get('/catalog', [\App\Http\Controllers\Front\PagesController::class, 'catalog'])->name('catalog');
 		Route::get('/delivery', [\App\Http\Controllers\Front\PagesController::class, 'delivery'])->name('delivery');
+		Route::get('/payment', [\App\Http\Controllers\Front\PagesController::class, 'payment'])->name('payment');
 		Route::get('/about', [\App\Http\Controllers\Front\PagesController::class, 'about'])->name('about');
 		Route::get('/contacts', [\App\Http\Controllers\Front\PagesController::class, 'contacts'])->name('contacts');
 		Route::get('/product/{id}', [\App\Http\Controllers\Front\PagesController::class, 'productShow'])->name('product');

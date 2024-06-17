@@ -161,4 +161,9 @@ class PagesController extends Controller
     {
         return view('front.pages.contacts');
     }
+
+    public function payment()
+    {
+        return view('front.pages.payment');
+    }
 }

@@ -31,6 +31,8 @@ return [
 	'about_company' => 'Про компанію',
 	'services' => 'Послуги',
 	'feedback' => 'Зворотній зв\'язок',
-	'privacy_policy' => 'Політика конфіденційності'
+	'privacy_policy' => 'Політика конфіденційності',
+    'offer' => 'Оферта',
+    'payment' => 'Оплата'
 
 ];

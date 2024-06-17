@@ -30,5 +30,7 @@ return [
 	'about_company' => 'Про компанию',
 	'services' => 'Услуги',
 	'feedback' => 'Обратная связь',
-	'privacy_policy' => 'Политика конфиденциальности'
+	'privacy_policy' => 'Политика конфиденциальности',
+    'offer' => 'Оферта',
+    'payment' => 'Оплата'
 ];
