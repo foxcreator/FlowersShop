@@ -61,7 +61,7 @@
             <div class="footer__contacts col-lg-4 col-md-6">
                 <h3>{{ __('homepage.contacts') }}</h3>
                 <ul>
-                    <li><a href="{{ route('front.about') }}">{{ __('homepage.delivery') }}</a></li>
+                    <li><a href="{{ route('front.delivery') }}">{{ __('homepage.delivery') }}</a></li>
                     <li><a href="{{ route('front.payment') }}">{{ __('homepage.payment') }}</a></li>
                     <li><a href="{{ route('front.contacts') }}">{{ __('homepage.feedback') }}</a></li>
                     <li><a download="Policy"  href="{{ asset('public-contract.pdf') }}">{{ __('homepage.privacy_policy') }}</a></li>
