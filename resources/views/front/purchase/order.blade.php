@@ -106,10 +106,12 @@
                             <div class="input-block">
                                 <input id="datepicker" class="default-input input-min" type="text" name="date" placeholder="{{ __('placeholders.date') }}">
                                 <select class="choices input-min" name="time" id="time">
-                                    <option value="9:00 - 12:00">9:00 - 12:00</option>
-                                    <option value="12:00 - 15:00">12:00 - 15:00</option>
-                                    <option value="15:00 - 18:00">15:00 - 18:00</option>
-                                    <option value="18:00 - 21:00">18:00 - 21:00</option>
+                                    <option value="9:00 - 11:00">9:00 - 11:00</option>
+                                    <option value="11:00 - 13:00">11:00 - 13:00</option>
+                                    <option value="13:00 - 15:00">13:00 - 15:00</option>
+                                    <option value="15:00 - 17:00">15:00 - 17:00</option>
+                                    <option value="17:00 - 19:00">17:00 - 19:00</option>
+                                    <option value="19:00 - 21:00">19:00 - 21:00</option>
                                 </select>
                             </div>
                             <input type="hidden" id="delivery_option" name="delivery_option" value="courier">
