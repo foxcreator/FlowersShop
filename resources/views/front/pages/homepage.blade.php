@@ -27,9 +27,9 @@
                                 @svg('arrow-circle-right')
                             </a>
                             <div class="banner__social">
-                                <a href="">@svg('instagram')</a>
-                                <a href="">@svg('facebook')</a>
-                                <a href="">@svg('telegram')</a>
+                                <a href="https://www.instagram.com/thelotusfb/">@svg('instagram')</a>
+                                <a href="https://www.facebook.com/profile.php?id=61560592424284">@svg('facebook')</a>
+                                <a href="https://t.me/thelts_flowers">@svg('telegram')</a>
                             </div>
                         </div>
                     </div>
