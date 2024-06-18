@@ -64,8 +64,8 @@
                     <li><a href="{{ route('front.delivery') }}">{{ __('homepage.delivery') }}</a></li>
                     <li><a href="{{ route('front.payment') }}">{{ __('homepage.payment') }}</a></li>
                     <li><a href="{{ route('front.contacts') }}">{{ __('homepage.feedback') }}</a></li>
-                    <li><a download="Policy"  href="{{ asset('public-contract.pdf') }}">{{ __('homepage.privacy_policy') }}</a></li>
-                    <li><a download="Offer" href="{{ asset('policy.pdf') }}">{{ __('homepage.offer') }}</a></li>
+                    <li><a download="Policy"  href="{{ asset('policy.pdf') }}">{{ __('homepage.privacy_policy') }}</a></li>
+                    <li><a download="Offer" href="{{ asset('public-contract.pdf') }}">{{ __('homepage.offer') }}</a></li>
                 </ul>
             </div>
 
