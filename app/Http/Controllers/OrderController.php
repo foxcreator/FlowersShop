@@ -144,12 +144,13 @@ class OrderController extends Controller
         if ($data['status'] === 'success') {
             $order = Order::where('invoice_id', $data['invoiceId'])->first();
             $order->is_paid = true;
-
-            Mail::to($order->email)->send(new OrderConfirmationNotification($order));
-            Notification::route('telegram', -4219102586)
-                ->notify(new TelegramOrderNotification($order));
+            $order->save();
 
             \Cart::clear();
+            Notification::route('telegram', -4219102586)
+                ->notify(new TelegramOrderNotification($order));
+//            Mail::to($order->email)->send(new OrderConfirmationNotification($order));
+
         }
 
     }
