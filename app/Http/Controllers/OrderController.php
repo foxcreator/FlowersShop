@@ -150,5 +150,7 @@ class OrderController extends Controller
 
             \Cart::clear();
         }
+
+        Log::info($data);
     }
 }

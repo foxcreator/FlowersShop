@@ -17,7 +17,7 @@ class MonoPay
                 ->post(self::API_URL, [
                     'amount' => intval($amount * 100),
                     'redirectUrl' => url('/purchase/order-success'),
-                    'webHookUrl' => url('/purchase/webhook')
+                    'webHookUrl' => url('api/purchase/webhook')
                 ]);
 
             if ($response->successful()) {
