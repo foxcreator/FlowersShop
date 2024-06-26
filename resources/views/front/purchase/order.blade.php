@@ -226,13 +226,13 @@
                     <div class="pay-block">
                         <h4>4. {{ __('order.payment') }}</h4>
                         <div class="payment">
-{{--                            <div class="form-check">--}}
-{{--                                <input class="form-check-input" type="radio" name="payment_method" value="bank"--}}
-{{--                                       id="bank" checked>--}}
-{{--                                <label class="form-check-label" for="bank">--}}
-{{--                                    Fondy--}}
-{{--                                </label>--}}
-{{--                            </div>--}}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method" value="bank"
+                                       id="bank" checked>
+                                <label class="form-check-label" for="bank">
+                                    Онлайн-оплата карткою, Google Pay або Apple Pay
+                                </label>
+                            </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="payment_method" value="cash"
                                        id="cash" checked>

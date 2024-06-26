@@ -38,15 +38,19 @@ Route::middleware(['set_locale'])->group(function () {
 		Route::get('/contacts', [\App\Http\Controllers\Front\PagesController::class, 'contacts'])->name('contacts');
 		Route::get('/product/{id}', [\App\Http\Controllers\Front\PagesController::class, 'productShow'])->name('product');
 		Route::post('/change-flowers', [\App\Http\Controllers\Front\PagesController::class, 'changeFlowerForm'])->name('change.flower');
+
 		Route::get('/purchase/order-page', [\App\Http\Controllers\OrderController::class, 'index'])->name('orderPage');
 		Route::post('/purchase/order-store', [\App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
 		Route::get('/purchase/order-success', [\App\Http\Controllers\OrderController::class, 'orderSuccess'])->name('order.success');
+
 		Route::post('/comments/create', [\App\Http\Controllers\Front\CommentsController::class, 'store'])->name('comments.store');
 		Route::get('/search', [\App\Http\Controllers\Front\SearchController::class, 'search'])->name('search');
+
         Route::get('/purchase/cart', [\App\Http\Controllers\Front\CartController::class, 'index'])->name('cart');
         Route::post('/add-to-cart', [\App\Http\Controllers\Front\CartController::class, 'addToCart'])->name('addToCart');
         Route::post('/remove-from-cart/{id}', [\App\Http\Controllers\Front\CartController::class, 'removeItem'])->name('removeItem');
         Route::post('/update-cart-quantity', [\App\Http\Controllers\Front\CartController::class, 'updateQuantity'])->name('updateQuantity');
+
         Route::post('/toggle-favorite', [\App\Http\Controllers\Front\FavoriteProductController::class, 'toggleFavorite']);
         Route::get('/favorites', [\App\Http\Controllers\Front\FavoriteProductController::class, 'index'])->name('favorites')->middleware('auth');
         Route::post('/save-city', [\App\Http\Controllers\Front\UserController::class, 'saveCity'])->name('save-city');

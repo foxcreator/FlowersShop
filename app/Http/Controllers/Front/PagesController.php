@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\Processing\MonoPay;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Flower;
@@ -154,6 +155,7 @@ class PagesController extends Controller
 
     public function about()
     {
+        MonoPay::create(100);
         return view('front.pages.about');
     }
 
