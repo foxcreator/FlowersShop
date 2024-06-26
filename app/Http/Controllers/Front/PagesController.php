@@ -155,7 +155,6 @@ class PagesController extends Controller
 
     public function about()
     {
-        MonoPay::create(100);
         return view('front.pages.about');
     }
 

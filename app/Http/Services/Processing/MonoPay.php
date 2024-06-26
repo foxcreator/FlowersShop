@@ -29,9 +29,4 @@ class MonoPay
 
         return false;
     }
-
-    public static function webhook($data)
-    {
-        dd($data);
-    }
 }
