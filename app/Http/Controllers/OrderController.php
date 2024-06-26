@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\Processing\MonoPay;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
@@ -10,6 +11,7 @@ use App\Notifications\TelegramOrderNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 
@@ -121,5 +123,12 @@ class OrderController extends Controller
     public function orderSuccess()
     {
         return view('front.purchase.order-success');
+    }
+
+    public function webhook(Request $request)
+    {
+        Log::info($request->all());
+
+        MonoPay::webhook();
     }
 }
