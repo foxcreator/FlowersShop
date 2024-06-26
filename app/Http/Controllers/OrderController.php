@@ -94,6 +94,7 @@ class OrderController extends Controller
                 $order->invoice_id = $response['invoiceId'];
                 $order->save();
                 DB::commit();
+                \Cart::clear();
                 return redirect($response['pageUrl']);
             }
             DB::rollBack();
@@ -146,7 +147,6 @@ class OrderController extends Controller
             $order->is_paid = true;
             $order->save();
 
-            \Cart::clear();
             Notification::route('telegram', -4219102586)
                 ->notify(new TelegramOrderNotification($order));
 //            Mail::to($order->email)->send(new OrderConfirmationNotification($order));
