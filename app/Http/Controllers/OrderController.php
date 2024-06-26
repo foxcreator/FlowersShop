@@ -90,16 +90,15 @@ class OrderController extends Controller
 
         if ($order->payment_method === Order::PAYMENT_METHOD_BANK) {
             $response = MonoPay::create($order->amount);
-            try {
-                if (isset($response['pageUrl'])) {
-                    $order->invoice_id = $response['invoiceId'];
-                    $order->save();
-                    DB::commit();
-                    \Cart::clear();
-                    return redirect($response['pageUrl']);
-                }
-            } catch (\Exception $e) {
-                Log::error($e->getMessage());
+
+            if (isset($response['pageUrl'])) {
+                $order->invoice_id = $response['invoiceId'];
+                $order->save();
+                DB::commit();
+                \Cart::clear();
+                return redirect($response['pageUrl']);
+            } else {
+                Log::info($response);
                 DB::rollBack();
                 return redirect()->back()->with('error', 'Виникла помилка, спробуйте ще раз');
             }
