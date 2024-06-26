@@ -140,6 +140,7 @@ class OrderController extends Controller
     public function webhook(Request $request)
     {
         $data = $request->all();
+        Log::info('Request:', $data);
         if ($data['status'] === 'success') {
             $order = Order::where('invoice_id', $data['invoiceId'])->first();
             $order->is_paid = true;
@@ -151,6 +152,5 @@ class OrderController extends Controller
             \Cart::clear();
         }
 
-        Log::info($data);
     }
 }
