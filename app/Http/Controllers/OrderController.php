@@ -77,7 +77,7 @@ class OrderController extends Controller
                 'product_name' => $product->name,
                 'quantity' => $product->quantity,
                 'price' => $product->price,
-                'opt_price' => $product->opt_price
+                'opt_price' => $product->attributes->opt_price
             ]);
 
             $productRating = Product::find($product->id);
@@ -86,6 +86,18 @@ class OrderController extends Controller
                 $productRating->quantity -= $product->quantity;
                 $productRating->save();
             }
+        }
+
+        if ($order->payment_method === Order::PAYMENT_METHOD_BANK) {
+            $response = MonoPay::create($order->amount);
+            if (isset($response['pageUrl'])) {
+                $order->invoice_id = $response['invoiceId'];
+                $order->save();
+                DB::commit();
+                return redirect($response['pageUrl']);
+            }
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Виникла помилка, спробуйте ще раз');
         }
 
         DB::commit();
@@ -127,8 +139,10 @@ class OrderController extends Controller
 
     public function webhook(Request $request)
     {
-        Log::info($request->all());
-
-        MonoPay::webhook();
+        $data = $request->all();
+        if ($data['status'] === 'success') {
+            $order = Order::where('invoice_id', $data['invoiceId'])->first();
+            $order->is_paid = true;
+        }
     }
 }
