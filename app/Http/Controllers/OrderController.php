@@ -40,7 +40,7 @@ class OrderController extends Controller
             }
         }
 
-        $opt_amount = '';
+        $opt_amount = 0;
 
         foreach ($cart as $product) {
             $opt_amount = (intval($opt_amount) + intval($product->attributes->opt_price)) * $product['quantity'];

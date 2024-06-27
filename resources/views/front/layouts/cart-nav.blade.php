@@ -7,7 +7,9 @@
         @svg('logo-min')
     </div>
     <div class="cart-nav__contacts">
-        <a href="tel:0637875888" class="number">+38 (063) 787 5888</a>
-        <p class="worktime">{{ __('cart.work_time') }}</p>
+        <a href="tel:0679776075" class="number">+38 067 977 60 75</a>
+        <a href="tel:0732163409" class="number">+38 073 216 34 09</a>
+        <p class="worktime">пн-пт 8:30 – 20:00 <br>
+            сб-нд 9:00 – 20:00</p>
     </div>
 </div>
