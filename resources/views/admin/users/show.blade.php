@@ -38,6 +38,55 @@
                                                     <input type="hidden" value="{{ $user->id }}" name="id">
                                                     <button type="submit" class="btn btn-success btn-sm w-100 mt-3">Изменить роль</button>
                                                 </form>
+                                                @if($user->isManager())
+                                                    <h3 for="" class="mt-5">Данные кассира для Checkbox</h3>
+                                                    <form action="">
+                                                        <div class="form-group">
+                                                            <label for="article">Логин</label>
+                                                            <input type="text"
+                                                                   class="form-control @error('login') is-invalid @enderror"
+                                                                   id="login"
+                                                                   name="login"
+                                                                   value="{{ old('login') }}"
+                                                                   placeholder="Введите login"
+                                                                   required
+                                                            >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="article">Пин код</label>
+                                                            <input type="text"
+                                                                   class="form-control @error('article') is-invalid @enderror"
+                                                                   id="pincode"
+                                                                   name="pincode"
+                                                                   value="{{ old('pincode') }}"
+                                                                   placeholder="Введите pincode"
+                                                                   required
+                                                            >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="article">Идентификатор ключа</label>
+                                                            <input type="text"
+                                                                   class="form-control @error('key_id') is-invalid @enderror"
+                                                                   id="key_id"
+                                                                   name="key_id"
+                                                                   value="{{ old('key_id') }}"
+                                                                   placeholder="Введите ключ"
+                                                                   required
+                                                            >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="article">Пароль</label>
+                                                            <input type="text"
+                                                                   class="form-control @error('password') is-invalid @enderror"
+                                                                   id="password"
+                                                                   name="password"
+                                                                   value="{{ old('password') }}"
+                                                                   placeholder="Введите пароль"
+                                                                   required
+                                                            >
+                                                        </div>
+                                                    </form>
+                                                @endif
                                             @endif
 
                                             @if($user->id === auth()->user()->id)
