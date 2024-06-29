@@ -32,7 +32,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'balance',
         'password',
-        'role'
+        'role',
+        'checkbox_login',
+        'checkbox_pincode',
+        'checkbox_key_id',
+        'checkbox_password',
     ];
 
     /**

@@ -102,8 +102,12 @@ class CartService
             }
 
             $this->checkboxService->signInCashier();
+
+            if (!$this->checkboxService->getCashierShift()) {
+                $this->checkboxService->createShift();
+            }
             $this->checkboxService->receipt(
-                'The Lotus',
+                auth()->user()->full_name ?? 'The Lotus',
                 $order->orderProducts,
                 $order->email,
                 $order->amount,

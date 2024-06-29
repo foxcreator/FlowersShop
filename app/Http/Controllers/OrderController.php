@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\Checkbox\CheckboxService;
 use App\Http\Services\Processing\MonoPay;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -144,11 +145,21 @@ class OrderController extends Controller
     public function webhook(Request $request)
     {
         $data = $request->all();
-        Log::info('Request:', $data);
+
         if ($data['status'] === 'success') {
             $order = Order::where('invoice_id', $data['invoiceId'])->first();
             $order->is_paid = true;
             $order->save();
+
+            $checkboxService = new CheckboxService();
+            $checkboxService->signInCashier();
+            $checkboxService->receipt(
+                'The Lotus',
+                $order->orderProducts,
+                $order->email,
+                $order->amount,
+                $order->payment_method
+            );
 
             Notification::route('telegram', -4219102586)
                 ->notify(new TelegramOrderNotification($order));
