@@ -40,4 +40,19 @@ class UserController extends Controller
 
         return response()->json(['success' => __('statuses.save-success')]);
     }
+
+    public function checkboxCredentialsUpdate(Request $request, User $user)
+    {
+        try {
+            $data = $request->all();
+            unset($data['_token']);
+            $user->update($data);
+            $user->save();
+
+            return redirect()->back()->with(['success' => 'Данные кассира успешно сохранены']);
+        } catch (\Exception $exception) {
+            return redirect()->back()->with(['error' => $exception->getMessage()]);
+        }
+
+    }
 }

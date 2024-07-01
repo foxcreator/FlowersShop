@@ -23,12 +23,14 @@ class CheckboxService
 
     public function __construct()
     {
+        $user = auth()->user();
+
         $this->config = new Config([
-            Config::API_URL => config('checkbox.api_url'),
-            Config::LOGIN => config('checkbox.login'),
-            Config::PASSWORD => config('checkbox.password'),
-            Config::PINCODE => config('checkbox.pincode'),
-            Config::LICENSE_KEY => config('checkbox.license_key'),
+            Config::API_URL => $user->checkbox_login ?? config('checkbox.api_url'),
+            Config::LOGIN => $user->checkbox_login ?? config('checkbox.login'),
+            Config::PASSWORD => $user->checkbox_password ?? config('checkbox.password'),
+            Config::PINCODE => $user->checkbox_pincode ?? config('checkbox.pincode'),
+            Config::LICENSE_KEY => $user->checkbox_key_id ?? config('checkbox.license_key'),
         ]);
 
         $this->api = new CheckboxJsonApi($this->config);
@@ -79,5 +81,20 @@ class CheckboxService
         }
 
         return $goods;
+    }
+
+    public function getCashierShift()
+    {
+        return $this->api->getCashierShift();
+    }
+
+    public function createShift()
+    {
+        return $this->api->createShift();
+    }
+
+    public function closeShift()
+    {
+        return $this->api->closeShift();
     }
 }
