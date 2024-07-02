@@ -25,7 +25,7 @@ class CreateProductRequest extends FormRequest
         return [
             'category_id' => 'required',
             'subcategory_id' => 'required',
-			'subjects' => 'nullable|array',
+			'subjects' => 'required|array',
 			'subjects.*' => 'integer',
 			'flowers' => 'nullable|array',
 			'flowers.*' => 'integer',
@@ -37,7 +37,7 @@ class CreateProductRequest extends FormRequest
             'description_ru' => 'nullable|min:20|max:65535',
             'quantity' => 'required|numeric',
             'article' => 'required|numeric|digits:7|unique:products,article',
-            'thumbnail' => 'nullable|image:jpeg,png,jpg',
+            'thumbnail' => 'required|image:jpeg,png,jpg',
             'badge' => 'nullable',
             'product_photos' => 'nullable',
             'is_novelty' => 'nullable',
@@ -73,9 +73,10 @@ class CreateProductRequest extends FormRequest
             'article.required' => 'Поле артикула обязательно для заполнения.',
             'article.numeric' => 'Артикул должен быть числом.',
             'article.digits' => 'Артикул должен содержать :digits символов.',
-            'thumbnail.nullable' => 'Поле изображения может быть пустым.',
+            'thumbnail.required' => 'Поле изображения не может быть пустым.',
             'badge.nullable' => 'Поле бейджа может быть пустым.',
-            'product_photos.*' => 'Неверный формат'
+            'product_photos.*' => 'Неверный формат',
+            'subjects.required' => 'Поле тематика обязательно для заполнения'
         ];
     }
 }

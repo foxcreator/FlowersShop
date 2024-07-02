@@ -103,7 +103,9 @@ class ProductsController extends Controller
         $product = Product::create($data);
 		ImagesService::attach($product, 'productPhotos', $images, 1);
 		$product->subjects()->attach($data['subjects']);
-		$product->flowers()->attach($data['flowers']);
+        if (isset($data['flowers'])) {
+            $product->flowers()->attach($data['flowers']);
+        }
 		if ($product) {
 
 			return redirect()->route('admin.products.index')
