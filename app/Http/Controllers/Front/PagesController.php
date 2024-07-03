@@ -58,7 +58,7 @@ class PagesController extends Controller
 			$products->take($countPerPage);
 		}
 
-        $products = $products->get();
+        $products = $products->orderByRaw('quantity = 0, quantity ASC')->get();
 
         if ($request->ajax()) {
 			$firstBlock = view('front.pages.catalog.parts.first-products-block', compact('products'))->render();
