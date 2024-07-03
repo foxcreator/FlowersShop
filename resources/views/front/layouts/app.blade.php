@@ -70,9 +70,9 @@
             </div>
 
             <div class="footer__social col-lg-12 col-md-6">
-                <a href="#">@svg('instagram')</a>
-                <a href="#">@svg('facebook')</a>
-                <a href="#">@svg('telegram')</a>
+                <a href="https://www.instagram.com/thelotusfb/" target="_blank">@svg('instagram')</a>
+                <a href="https://www.facebook.com/profile.php?id=61560592424284" target="_blank">@svg('facebook')</a>
+                <a href="https://t.me/thelts_flowers" target="_blank">@svg('telegram')</a>
             </div>
         </div>
     </div>
