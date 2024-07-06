@@ -23,7 +23,7 @@ class CreateBannerRequest extends FormRequest
     {
         return [
             'product_id' => 'nullable|exists:products,id|required_without_all:link',
-            'title_uk' => 'required|string|max:255',
+            'title_uk' => 'nullable|string|max:255',
             'title_ru' => 'nullable|string|max:255',
             'image' => 'required',
             'btn_text_uk' => 'nullable|string|max:255',
