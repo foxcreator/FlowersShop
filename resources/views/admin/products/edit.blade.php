@@ -256,7 +256,7 @@
                                    name="is_novelty"
                                    value="{{ old('is_novelty', true) }}"
                                    @if($product->is_novelty) checked @endif
-                                   @if($countNoveltyProduct >= 5) disabled @endif
+                                   @if($countNoveltyProduct >= 5 && !$product->is_novelty) disabled @endif
                             >
                             <label for="checkboxPrimary1">Отображать товар в новинках на главной странице</label>
                         </div>
