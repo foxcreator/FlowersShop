@@ -228,6 +228,13 @@ class ProductsController extends Controller
         $product = Product::find($id);
         $name = $product->title_uk;
         if ($product->orders()->count() === 0) {
+            if ($product->type === Product::TYPE_BOUQUET) {
+                foreach ($product->products_quantities as $id => $quantity) {
+                    $prod = Product::find($id);
+                    $prod->quantity += $quantity;
+                    $prod->save();
+                }
+            }
             $product->delete();
             return redirect()->route('admin.products.index')
                 ->with(['status' => "Товар {$name} успешно удален!"]);

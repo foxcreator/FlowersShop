@@ -147,7 +147,7 @@ class Product extends Model
 
     public function scopeProducts($query)
     {
-        return $query->where('type', 'flower');
+        return $query->where('type', 'flower')->where('quantity', '>', 0);
     }
 
     public function getProducts()

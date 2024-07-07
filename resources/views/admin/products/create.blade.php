@@ -316,7 +316,7 @@
                                         <option value="{{ $product->id }}">{{ $product->title_uk }}</option>
                                     @endforeach
                                 </select>
-                                <input type="number" class="form-control" name="products[0][quantity]" min="1" placeholder="Количество" style="width: 20%">
+                                <input type="number" class="form-control" name="products[0][quantity]" min="1" placeholder="Количество" style="width: 20%" value="1">
                             </div>
                         </div>
                         <button type="button" id="add-product" class="btn btn-xs btn-info mt-2">Добавить продукт</button>
@@ -451,7 +451,7 @@
                     <option value="{{ $product->id }}">{{ $product->title_uk }}</option>
                 @endforeach
             </select>
-            <input type="number" class="form-control" name="products[${productCount}][quantity]" min="1" placeholder="Количество" style="width: 20%">
+            <input type="number" class="form-control" name="products[${productCount}][quantity]" min="1" placeholder="Количество" style="width: 20%" value="1">
 `;
                 productsContainer.appendChild(newProduct);
                 $(newProduct).find('select').select2({
