@@ -29,6 +29,9 @@ class BannersController extends Controller
         $data = $request->validated();
         $image = FileStorageService::upload($data['image']);
         $data['image'] = $image;
+        if ($data['product_id']) {
+            $data['link'] = 'product/'.$data['product_id'];
+        }
         $banner = Banner::create($data);
         if ($banner) {
             return redirect()->route('admin.banners.index')->with(['status' => 'Постер успешно создан!']);
@@ -53,6 +56,10 @@ class BannersController extends Controller
     {
         $data = $request->validated();
         $banner = Banner::find($id);
+        if ($data['product_id']) {
+            $data['link'] = 'product/'.$data['product_id'];
+        }
+
         if (isset($data['image'])) {
             FileStorageService::remove($banner->image);
             $image = FileStorageService::upload($data['image']);
