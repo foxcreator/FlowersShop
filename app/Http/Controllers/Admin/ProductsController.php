@@ -231,7 +231,7 @@ class ProductsController extends Controller
             if ($product->type === Product::TYPE_BOUQUET) {
                 foreach ($product->products_quantities as $id => $quantity) {
                     $prod = Product::find($id);
-                    $prod->quantity += $quantity;
+                    $prod->quantity += $quantity * $product->quantity;
                     $prod->save();
                 }
             }
