@@ -40,7 +40,7 @@
                                                 </form>
 
 
-                                                @if($user->isManager())
+                                                @if($user->isManager() || $user->isAdmin())
                                                     <h3 for="" class="mt-5">Данные кассира для Checkbox</h3>
                                                     <form action="{{ route('admin.checkbox.credentials', $user) }}" method="POST">
                                                         @csrf
