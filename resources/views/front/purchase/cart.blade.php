@@ -159,3 +159,9 @@
         })
     }
 </script>
+<script>
+    gtag('event', 'page_view', {
+        'page_title' : 'Cart',
+        'page_path': window.location.pathname
+    });
+</script>

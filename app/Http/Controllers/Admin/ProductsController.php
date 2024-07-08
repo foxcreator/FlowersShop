@@ -22,7 +22,6 @@ class ProductsController extends Controller
 {
     public function index(Request $request)
     {
-        dd(Analytics::fetchVisitorsAndPageViews(Period::days(7)));
         $query = Product::query();
 
         if ($request->filter === 'out_in_stock') {

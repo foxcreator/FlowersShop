@@ -9,7 +9,7 @@
             <div class="desktop-inner">
                 <div class="custom-header__pages">
                     <ul>
-                        <li><a href="{{ route('front.catalog') }}">{{ __('homepage.catalog') }}</a></li>
+                        <li><a href="{{ route('front.catalog') }}" >{{ __('homepage.catalog') }}</a></li>
                         <li><a href="{{ route('front.delivery') }}">{{ __('homepage.delivery') }}</a></li>
                         <li><a href="{{ route('front.about') }}">{{ __('homepage.about_us') }}</a></li>
                         <li><a href="{{ route('front.contacts') }}">{{ __('homepage.contacts') }}</a></li>
