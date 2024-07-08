@@ -15,11 +15,14 @@ use App\Models\Subcategory;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\Period;
 
 class ProductsController extends Controller
 {
     public function index(Request $request)
     {
+        dd(Analytics::fetchVisitorsAndPageViews(Period::days(7)));
         $query = Product::query();
 
         if ($request->filter === 'out_in_stock') {
