@@ -299,7 +299,7 @@
                     </div>
 
                     <div class="form-group mt-4" id="product-selection" @if($product->type === \App\Models\Product::TYPE_BOUQUET) style="display: block" @else style="display: none" @endif>
-                        <label for="products">Определите состав букета:</label>
+                        <label for="products">Состав букета:</label>
                         <div id="products">
                             @if($product->products_quantities)
                                 @foreach($product->products_quantities as $id => $quantity)
