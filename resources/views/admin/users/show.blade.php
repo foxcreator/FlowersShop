@@ -39,8 +39,7 @@
                                                     <button type="submit" class="btn btn-success btn-sm w-100 mt-3">Изменить роль</button>
                                                 </form>
 
-
-                                                @if($user->isManager() || $user->isAdmin())
+                                                @if($user->isManager())
                                                     <h3 for="" class="mt-5">Данные кассира для Checkbox</h3>
                                                     <form action="{{ route('admin.checkbox.credentials', $user) }}" method="POST">
                                                         @csrf
@@ -168,6 +167,78 @@
                                                         Изменить пароль
                                                     </button>
                                                 </form>
+                                                    @if($user->isAdmin())
+                                                        <h3 for="" class="mt-5">Данные кассира для Checkbox</h3>
+                                                        <form action="{{ route('admin.checkbox.credentials', $user) }}" method="POST">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label for="checkbox_login">Логин</label>
+                                                                <input type="text"
+                                                                       class="form-control @error('checkbox_login') is-invalid @enderror"
+                                                                       id="checkbox_login"
+                                                                       name="checkbox_login"
+                                                                       value="{{ old('checkbox_login', $user->checkbox_login) }}"
+                                                                       placeholder="Введите логин кассира"
+                                                                       required
+                                                                >
+                                                                @error('checkbox_login')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="checkbox_pincode">Пин-код</label>
+                                                                <input type="text"
+                                                                       class="form-control @error('checkbox_pincode') is-invalid @enderror"
+                                                                       id="checkbox_pincode"
+                                                                       name="checkbox_pincode"
+                                                                       value="{{ old('checkbox_pincode', $user->checkbox_pincode) }}"
+                                                                       placeholder="Введите пин-код"
+                                                                       required
+                                                                >
+                                                                @error('checkbox_pincode')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="checkbox_key_id">Идентификатор ключа</label>
+                                                                <input type="text"
+                                                                       class="form-control @error('checkbox_key_id') is-invalid @enderror"
+                                                                       id="checkbox_key_id"
+                                                                       name="checkbox_key_id"
+                                                                       value="{{ old('checkbox_key_id', $user->checkbox_key_id) }}"
+                                                                       placeholder="Введите ключ"
+                                                                       required
+                                                                >
+                                                                @error('checkbox_key_id')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="checkbox_password">Пароль</label>
+                                                                <input type="text"
+                                                                       class="form-control @error('checkbox_password') is-invalid @enderror"
+                                                                       id="checkbox_password"
+                                                                       name="checkbox_password"
+                                                                       value="{{ old('checkbox_password', $user->checkbox_password) }}"
+                                                                       placeholder="Введите пароль"
+                                                                       required
+                                                                >
+                                                                @error('checkbox_password')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                                @enderror
+                                                            </div>
+
+                                                            <button type="submit" class="btn btn-success btn-sm w-100 mt-3">Сохранить</button>
+                                                        </form>
+                                                    @endif
                                             @endif
                                         </div>
                                         <div class="post col-md-8" style="border: none">
