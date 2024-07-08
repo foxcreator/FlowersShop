@@ -15,6 +15,8 @@ use App\Models\Subcategory;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\Period;
 
 class ProductsController extends Controller
 {
