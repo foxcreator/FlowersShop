@@ -204,7 +204,7 @@
                                                                 @enderror
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="checkbox_key_id">Идентификатор ключа</label>
+                                                                <label for="checkbox_key_id">Ключ лицензии кассы</label>
                                                                 <input type="text"
                                                                        class="form-control @error('checkbox_key_id') is-invalid @enderror"
                                                                        id="checkbox_key_id"
