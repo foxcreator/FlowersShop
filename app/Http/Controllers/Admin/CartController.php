@@ -40,7 +40,7 @@ class CartController extends Controller
         $email = $request->email ? $request->email : env('DEFAULT_EMAIL');
 
         if ($order = $this->cartService->checkoutProductToDb($request->payment_method, $email)) {
-            return redirect()->route('sales.index')->with('success', "Чек #$order->id закрыт");
+            return redirect()->route('sales.index')->with('status', "Чек #$order->id закрыт");
         }
 
         return redirect()->back()->with('error', "Чек #$order->id закрыт");

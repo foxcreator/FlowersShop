@@ -101,6 +101,7 @@ class CartService
                 $product->save();
             }
 
+            $this->checkboxService->setUser(auth()->user());
             $this->checkboxService->signInCashier();
 
             if (!$this->checkboxService->getCashierShift()) {
