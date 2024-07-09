@@ -6,7 +6,7 @@
         <th>Название UA</th>
         <th>Тип</th>
         <th>Цена</th>
-        <th>Количество</th>
+        <th>Кол-во</th>
         <th>Бейдж</th>
         <th>Новинка</th>
         <th class="text-right">Действия</th>
