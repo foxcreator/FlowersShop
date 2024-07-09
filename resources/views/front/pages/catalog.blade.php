@@ -135,9 +135,9 @@
 
                     </div>
                     <div class="col-lg-8 col-md-6">
-                        <div class="row first-block">
-                            @include('front.pages.catalog.parts.first-products-block', ['products' => $products])
-                        </div>
+                            <div class="row first-block">
+                                @include('front.pages.catalog.parts.first-products-block', ['products' => $products])
+                            </div>
                     </div>
                 </div>
                 <div class="row second-block">

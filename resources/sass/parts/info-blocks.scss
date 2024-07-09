@@ -1,5 +1,7 @@
 .quote {
     background-image: url("/public/front/images/block_2.png");
+    background-repeat: no-repeat;
+    background-position: center;
     width: 100%;
     height: 1000px;
     display: flex;
@@ -17,7 +19,7 @@
     }
 
     h1 {
-        width: 65%;
+        width: 100%;
         font-size: 96px;
         font-weight: 100;
         color: $main-white;
@@ -33,6 +35,8 @@
 
 .change-flower {
     background-image: url("/public/front/images/change.png");
+    background-repeat: no-repeat;
+    background-position: center;
     width: 100%;
     height: 1000px;
     display: flex;
@@ -127,14 +131,14 @@
 
 .about {
     background-image: url("/public/front/images/about.png");
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     width: 100%;
     height: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    padding-left: 400px;
     @media (max-width: $media-md) {
         height: auto;
         padding: 100px;
@@ -168,6 +172,8 @@
 
 .coffee {
     background-image: url("/public/front/images/coffee.png");
+    background-repeat: no-repeat;
+    background-position: center;
     width: 100%;
     height: 1000px;
     display: flex;
@@ -222,17 +228,18 @@
 
 .questions {
     background-image: url("/public/front/images/questions.png");
+    background-repeat: no-repeat;
+    background-position: center;
     width: 100%;
     height: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    padding-left: 400px;
     @media (max-width: $media-md) {
         padding: 100px;
         height: auto;
-        background-size: cover;
+        background-repeat: no-repeat;
         background-position: right;
     }
 

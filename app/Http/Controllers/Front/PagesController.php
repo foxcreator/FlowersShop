@@ -47,6 +47,10 @@ class PagesController extends Controller
             $products->whereBetween('price', [$request->query('min-price'), $request->query('max-price')]);
         }
 
+        $changedPrice = [
+            'min_price' => $request->query('min-price'),
+            'max_price' => $request->query('max-price'),
+        ];
 		$currentPage = $request->query('page') ?: 1;
 		if ($currentPage) {
 			$count = $products->count();
@@ -61,7 +65,7 @@ class PagesController extends Controller
         $products = $products->orderByRaw('quantity = 0, quantity ASC')->get();
 
         if ($request->ajax()) {
-			$firstBlock = view('front.pages.catalog.parts.first-products-block', compact('products'))->render();
+			$firstBlock = view('front.pages.catalog.parts.first-products-block', compact('products', 'changedPrice'))->render();
 			$secondBlock = view('front.pages.catalog.parts.second-products-block', compact('products'))->render();
 			$paginate = view('components.pagination', compact('currentPage', 'countPages'))->render();
             return response()->json([
@@ -78,7 +82,8 @@ class PagesController extends Controller
 				'currentPage',
 				'countPages',
 				'subjects',
-				'flowers'
+				'flowers',
+                'changedPrice'
 			));
         }
     }

@@ -16,7 +16,7 @@
             <div class="carousel-inner">
                 @foreach($banners as $index => $banner)
                     <div class="carousel-item position-relative {{ $index === 0 ? ' active' : '' }}" data-bs-interval="7000">
-                        <div class="position-relative">
+                        <div class="position-relative banner__img-block">
                             <div class="overlay"></div>
                             <img id="banner-image-{{ $index }}" src="{{ $banner->imageUrl }}" alt="{{ $banner->title }}">
                         </div>

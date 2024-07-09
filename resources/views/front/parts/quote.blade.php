@@ -6,7 +6,9 @@ $subcategories = \App\Models\Subcategory::where('category_id', 1)->get();
 
 
 <div class="quote">
+    <div class="container">
     {!! __('texts.flowers_beautiful_start') !!}
+    </div>
 </div>
 
 <div class="change-flower">
@@ -57,10 +59,12 @@ $subcategories = \App\Models\Subcategory::where('category_id', 1)->get();
 </div>
 
 <div class="about">
+    <div class="container">
     <h1>{{ __('homepage.about_us') }}</h1>
     <p>
         {{ __('texts.about_us') }}
     </p>
+    </div>
 </div>
 
 {{--<div class="coffee">--}}
@@ -71,6 +75,7 @@ $subcategories = \App\Models\Subcategory::where('category_id', 1)->get();
 {{--</div>--}}
 
 <div class="questions">
+    <div class="container">
     <h3>{{ __('homepage.any_questions') }}</h3>
     <h3>{{ __('homepage.leave_contacts') }}</h3>
 
@@ -82,6 +87,7 @@ $subcategories = \App\Models\Subcategory::where('category_id', 1)->get();
 
         <button type="submit" class="questions__btn">{{ __('homepage.send') }}</button>
     </form>
+    </div>
 </div>
 
 <div class="contacts">
