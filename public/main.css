@@ -15,7 +15,7 @@
 }
 
 .custom-text-overflow {
-    max-width: 150px;
+    max-width: 220px;
     max-height: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
