@@ -22,15 +22,15 @@ class CheckboxService
     protected $api;
     protected $user;
 
-    public function setUser($user)
+    public function setUser($user = null)
     {
         $this->user = $user;
         $this->config = new Config([
             Config::API_URL => config('checkbox.api_url'),
-            Config::LOGIN => $user->checkbox_login,
-            Config::PASSWORD => $user->checkbox_password,
-            Config::PINCODE => $user->checkbox_pincode,
-            Config::LICENSE_KEY => $user->checkbox_key_id,
+            Config::LOGIN => $user->checkbox_login ?? config('checkbox.login'),
+            Config::PASSWORD => $user->checkbox_password ?? config('checkbox.password'),
+            Config::PINCODE => $user->checkbox_pincode ?? config('checkbox.pincode'),
+            Config::LICENSE_KEY => $user->checkbox_key_id ?? config('checkbox.license_key'),
         ]);
 
         $this->api = new CheckboxJsonApi($this->config);

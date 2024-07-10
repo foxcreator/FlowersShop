@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\CartService;
+use App\Http\Services\Checkbox\CheckboxService;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use function redirect;
@@ -67,7 +68,17 @@ class CartController extends Controller
         return view('checkout', compact('total', 'cart'));
     }
 
+    public function closeShift()
+    {
+        $checkboxService = new CheckboxService();
+        $checkboxService->setUser(auth()->user());
+        $checkboxService->signInCashier();
+        if ($checkboxService->getCashierShift()) {
+            $checkboxService->closeShift();
+            return redirect()->back()->with(['status' => 'Смена успешно закрыта']);
+        }
 
-
+        return redirect()->back()->with(['error' => 'Смена еще не отрыта! Начните продажи для открытия смены']);
+    }
 }
 

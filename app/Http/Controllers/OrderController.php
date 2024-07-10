@@ -152,6 +152,7 @@ class OrderController extends Controller
             $order->save();
 
             $checkboxService = new CheckboxService();
+            $checkboxService->setUser();
             $checkboxService->signInCashier();
             $checkboxService->receipt(
                 'The Lotus',

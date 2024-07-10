@@ -1,10 +1,10 @@
 @php
-$ordersCount = \App\Models\Order::where('status', 'received')->count();
-$outProductCount = \App\Models\Product::where('quantity', 0)->count();
-$notificationCount = $ordersCount + $outProductCount;
+    $ordersCount = \App\Models\Order::where('status', 'received')->count();
+    $outProductCount = \App\Models\Product::where('quantity', 0)->count();
+    $notificationCount = $ordersCount + $outProductCount;
 
-$productText = $outProductCount == 1 ? 'товар закончился' : ($outProductCount > 1 && $outProductCount < 5 ? 'товара закончилось' : 'товаров закончилось');
-$orderText = $ordersCount == 1 ? 'новый заказ' : ($ordersCount > 1 && $ordersCount < 5 ? 'новых заказа' : 'новых заказов');
+    $productText = $outProductCount == 1 ? 'товар закончился' : ($outProductCount > 1 && $outProductCount < 5 ? 'товара закончилось' : 'товаров закончилось');
+    $orderText = $ordersCount == 1 ? 'новый заказ' : ($ordersCount > 1 && $ordersCount < 5 ? 'новых заказа' : 'новых заказов');
 
 @endphp
 
@@ -28,29 +28,34 @@ $orderText = $ordersCount == 1 ? 'новый заказ' : ($ordersCount > 1 && 
     </ul>
 
     <ul class="navbar-nav ml-auto">
-
-        <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge">{{ $notificationCount ?: '' }}</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-item dropdown-header">{{ $notificationCount }} Уведомлений</span>
-                @if($outProductCount >= 1)
-                <div class="dropdown-divider"></div>
-                <a href="{{ route('admin.products.index', ['filter' => 'out_in_stock']) }}" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> {{ $outProductCount }} {{ $productText }}
-                </a>
-                @endif
-                @if($ordersCount >= 1)
-                <div class="dropdown-divider"></div>
-                <a href="{{ route('admin.orders.index') }}" class="dropdown-item">
-                    <i class="fas fa-file mr-3"></i> {{ $ordersCount }} {{ $orderText }}
-                </a>
-                @endif
-                <div class="dropdown-divider"></div>
-            </div>
+        <li>
+            <a href="{{ route('sales.close.shift') }}" class="nav-link">Закрыть смену</a>
         </li>
+        @if(auth()->user()->isAdmin())
+            <!-- Notifications Dropdown Menu -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="far fa-bell"></i>
+                    <span class="badge badge-warning navbar-badge">{{ $notificationCount ?: '' }}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">{{ $notificationCount }} Уведомлений</span>
+                    @if($outProductCount >= 1)
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('admin.products.index', ['filter' => 'out_in_stock']) }}"
+                           class="dropdown-item">
+                            <i class="fas fa-users mr-2"></i> {{ $outProductCount }} {{ $productText }}
+                        </a>
+                    @endif
+                    @if($ordersCount >= 1)
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('admin.orders.index') }}" class="dropdown-item">
+                            <i class="fas fa-file mr-3"></i> {{ $ordersCount }} {{ $orderText }}
+                        </a>
+                    @endif
+                    <div class="dropdown-divider"></div>
+                </div>
+            </li>
+        @endif
     </ul>
 </nav>

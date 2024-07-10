@@ -27,6 +27,7 @@ class CloseCashRegister extends Command
     public function handle()
     {
         $checkboxService = new CheckboxService();
+        $checkboxService->setUser();
         $checkboxService->signInCashier();
         if ($checkboxService->getCashierShift()) {
             $checkboxService->closeShift();
