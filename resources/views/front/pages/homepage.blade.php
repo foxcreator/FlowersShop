@@ -25,14 +25,18 @@
                                 class="text-uppercase user-select-none"
                                 @if(!$banner->title) style="margin-top: 250px" @endif
                             >{!! $banner->title !!}</h1>
-                            <a id="banner-btn-{{ $index }}" href="{{ url($banner->link) }}" class="banner__btn">
-                                <span>{{ $banner->btnText }}</span>
-                                @svg('arrow-circle-right')
-                            </a>
+
+                            <div class="d-flex justify-content-between w-50 mb-5">
                             <div class="banner__social">
                                 <a href="https://www.instagram.com/thelotusfb/">@svg('instagram')</a>
                                 <a href="https://www.facebook.com/profile.php?id=61560592424284">@svg('facebook')</a>
                                 <a href="https://t.me/thelts_flowers">@svg('telegram')</a>
+                            </div>
+
+                            <a id="banner-btn-{{ $index }}" href="{{ url($banner->link) }}" class="banner__btn">
+                                <span>{{ $banner->btnText }}</span>
+                                @svg('arrow-circle-right')
+                            </a>
                             </div>
                         </div>
                     </div>
@@ -41,7 +45,6 @@
         </div>
     </section>
 
-    @include('front.parts.delimiter')
     @include('front.parts.novelty')
     @include('front.parts.categories')
     @include('front.parts.quote')

@@ -23,7 +23,7 @@ class PagesController extends Controller
         $categories = Category::all();
 		$flowers = Flower::orderBy('name_uk')->get();
 		$subjects = Subject::all();
-        $products = Product::query();
+        $products = Product::query()->where('type', '!=', Product::TYPE_FLOWER);
 
         if ($request->query('category') && $request->query('category') != 'all') {
             $products->where('category_id', $request->query('category'));

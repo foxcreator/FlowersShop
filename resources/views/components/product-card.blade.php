@@ -5,7 +5,7 @@ if (auth()->user()) {
 }
 @endphp
 
-<div class="{{ $style }}__product-card col-6">
+<div class="{{ $style }}__product-card col-lg-3 col-6">
     <div class="{{ $style }}__card-img">
         <a href="{{ route('front.product', $product->id) }}">
             <img src="{{ asset($product->thumbnailUrl) }}" alt="">

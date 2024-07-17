@@ -3,9 +3,7 @@
     <nav class="custom-header @if (request()->route()->getName() !== 'home') white-theme @endif">
 
         <div class="custom-header__desktop">
-            <div class="custom-header__logo">
-                <a href="{{ route('home') }}">@svg('logo-min')</a>
-            </div>
+
             <div class="desktop-inner">
                 <div class="custom-header__pages">
                     <ul>
@@ -14,6 +12,9 @@
                         <li><a href="{{ route('front.about') }}">{{ __('homepage.about_us') }}</a></li>
                         <li><a href="{{ route('front.contacts') }}">{{ __('homepage.contacts') }}</a></li>
                     </ul>
+                </div>
+                <div class="custom-header__logo">
+                    <a href="{{ route('home') }}">@svg('logo-min')</a>
                 </div>
                 <div class="custom-header__icons-menu">
                 <ul class="items">

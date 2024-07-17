@@ -13,8 +13,8 @@
         display: flex;
         justify-content: center;
         .icon {
-            width: 200px;
-            height: 183px;
+            width: 140px;
+            height: 128px;
             fill: $main-white;
         }
     }
@@ -34,20 +34,24 @@
             }
         }
 
-        li {
-            font-size: 20px;
-            font-weight: lighter;
-            padding: 10px;
-            @media (max-width: $media-md) {
+        ul {
+            padding-left: 1rem;
+
+            li {
+                font-size: 20px;
+                font-weight: lighter;
                 padding: 3px;
-            }
+                @media (max-width: $media-md) {
+                    padding: 3px;
+                }
 
-            &::marker {
-                font-size: 16px;
-            }
+                &::marker {
+                    font-size: 16px;
+                }
 
-            & a:hover {
-                color: $light-green;
+                & a:hover {
+                    color: $light-green;
+                }
             }
         }
 
@@ -65,9 +69,7 @@
 
     &__contacts {
         ul {
-            list-style: none;
-            padding: 0;
-
+            padding-left: 1rem;
             li {
                 padding-left: 0;
             }
@@ -80,7 +82,7 @@
         justify-content: center;
         gap: 45px;
         padding-top: 24px;
-        padding-bottom: 120px;
+        padding-bottom: 20px;
         @media (max-width: $media-md) {
             padding-top: 100px;
         }

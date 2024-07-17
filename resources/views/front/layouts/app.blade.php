@@ -59,14 +59,14 @@
             @svg('lotus-logo')
         </div>
         <div class="footer__info row">
-            <div class="footer__about col-lg-4 col-md-6">
+            <div class="footer__about col-lg-3 col-md-6">
                 <h3>{{ __('homepage.about_company') }}</h3>
                 <ul>
                     <li><a href="{{ route('front.about') }}">{{ __('homepage.about_us') }}</a></li>
                     <li><a href="{{ route('front.contacts') }}">{{ __('homepage.contacts') }}</a></li>
                 </ul>
             </div>
-            <div class="footer__catalog col-lg-4 col-md-6">
+            <div class="footer__catalog col-lg-3 col-md-6">
                 <h3>{{ __('homepage.catalog') }}</h3>
                 <ul>
                     @foreach(\App\Models\Category::all() as $category)

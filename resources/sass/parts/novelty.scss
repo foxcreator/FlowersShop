@@ -1,5 +1,6 @@
 .novelty {
-    margin-bottom: 400px;
+    margin-bottom: 100px;
+    margin-top: 50px;
     @media (max-width: $media-md) {
         margin-bottom: 120px;
         margin-top: 100px;
@@ -12,11 +13,11 @@
 
     &__header {
         width: 100%;
-        margin-bottom: 64px;
+        margin-bottom: 32px;
 
         h1 {
             color: $night-green;
-            font-size: 96px;
+            font-size: 62px;
             font-weight: 300;
             line-height: 100%;
             @media (max-width: $media-sm) {
@@ -51,7 +52,7 @@
 
     &__product-cards {
         display: flex;
-        justify-content: center;
+        justify-content: start;
         flex-wrap: wrap;
         gap: 0;
         @media (max-width: $media-md) {
@@ -65,10 +66,6 @@
         position: relative;
         padding: 10px;
         transition: transform 0.3s ease;
-        @media (min-width: $media-md) {
-            flex: 1;
-            width: 100%;
-        }
 
         img {
             max-width: 100%;
@@ -221,16 +218,15 @@
     &__link-block {
         display: flex;
         justify-content: flex-end;
-        margin-top: 20px;
         width: 100%;
         color: $dark-green;
     }
 
     &__link {
-        font-size: 36px;
+        font-size: 32px;
         font-weight: 300;
         color: $dark-green;
-        margin-top: 50px;
+        margin-top: 10px;
 
         .icon {
             transition: transform 0.4s ease, margin-left 0.4s ease;
