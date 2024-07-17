@@ -5,7 +5,16 @@
         <div class="custom-header__desktop">
 
             <div class="desktop-inner">
-                <div class="custom-header__pages">
+                <ul class="custom-header__burger-toggle mobile">
+                    <li>
+                        <button class="burger-toggle-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </li>
+                </ul>
+                <div class="custom-header__pages desktop">
                     <ul>
                         <li><a href="{{ route('front.catalog') }}" >{{ __('homepage.catalog') }}</a></li>
                         <li><a href="{{ route('front.delivery') }}">{{ __('homepage.delivery') }}</a></li>

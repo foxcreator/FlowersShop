@@ -25,6 +25,7 @@
                                         <select class="form-control" id="filter" name="filter" onchange="this.form.submit()">
                                             <option value="all" {{ request('filter') == 'all' ? 'selected' : '' }}>Весь товар</option>
                                             <option value="out_in_stock" {{ request('filter') == 'out_in_stock' ? 'selected' : '' }}>Нет в наличии</option>
+                                            <option value="flower" {{ request('filter') == 'flower' ? 'selected' : '' }}>Цветы</option>
                                         </select>
                                     </div>
 
