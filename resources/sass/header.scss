@@ -23,17 +23,31 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
+
+            @media (max-width: $media-md) {
+                ul {
+                    margin: 0;
+                    padding: 0;
+                    width: 186px;
+
+                    li {
+                        margin: 0;
+                    }
+                }
+            }
         }
 
-        .items.mobile {
-            display: flex;
-            align-self: end;
-            gap: 40px;
+        @media (max-width: $media-md) {
+            .items.mobile {
+                display: flex;
+                align-self: end;
+                gap: 40px;
 
-            .icon {
-                stroke: $main-white;
-                width: 12px;
-                height: 12px;
+                .icon {
+                    stroke: $main-white;
+                    width: 12px;
+                    height: 12px;
+                }
             }
         }
         @media (max-width: $media-sm) {
@@ -69,7 +83,9 @@
             background: none;
             border: none;
             cursor: pointer;
-            transform: rotate(180deg);
+            @media (max-width: $media-sm) {
+                transform: rotate(180deg);
+            }
         }
 
         .burger-toggle-btn span {
@@ -81,10 +97,19 @@
             border-radius: 3px;
         }
 
-        /* Нижняя полоска короче */
-        .burger-toggle-btn span:first-child {
-            width: 18px;
-            margin-top: 0;
+        @media (min-width: $media-sm) {
+            .burger-toggle-btn span:last-child {
+                width: 18px;
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: $media-sm) {
+            /* Нижняя полоска короче */
+            .burger-toggle-btn span:first-child {
+                width: 18px;
+                margin-top: 0;
+            }
         }
 
         .icon {
@@ -199,9 +224,12 @@
                 }
             }
         }
-        .items.mobile {
-            align-items: center;
-            justify-content: end;
+        @media (min-width: $media-sm) {
+            .items.mobile {
+                align-items: center;
+                justify-content: end;
+                display: none;
+            }
         }
     }
 

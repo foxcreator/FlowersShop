@@ -115,12 +115,12 @@
                                    name="is_show_on_homepage"
                                    @if($category->is_show_on_homepage) checked @endif
                                    value="1"
-                                   @if($countShowCategory >= 3 && !$category->is_show_on_homepage) disabled @endif
+                                   @if($countShowCategory >= 6 && !$category->is_show_on_homepage) disabled @endif
                             >
                             <label for="checkboxPrimary1">Отображать категорию на главной странице</label>
                         </div>
-                        @if($countShowCategory >= 3 && !$category->is_show_on_homepage)
-                            <p class="text-info">Количество категорий на главной странице равно 3, если хотите добавить новую, отключите уже сущесвующую</p>
+                        @if($countShowCategory >= 6 && !$category->is_show_on_homepage)
+                            <p class="text-info">Количество категорий на главной странице равно 6, если хотите добавить новую, отключите уже сущесвующую</p>
                         @endif
                     </div>
                 </div>

@@ -106,12 +106,12 @@
                                    id="checkboxPrimary1"
                                    name="is_show_on_homepage"
                                    value="{{ old('is_show_on_homepage', true) }}"
-                                   @if($countShowCategory >= 3) disabled @endif
+                                   @if($countShowCategory >= 6) disabled @endif
                             >
                             <label for="checkboxPrimary1">Отображать категорию на главной странице</label>
                         </div>
-                        @if($countShowCategory >= 3)
-                            <p class="text-info">Количество категорий на главной странице равно 3, если хотите добавить новую, отключите уже сущесвующую</p>
+                        @if($countShowCategory >= 6)
+                            <p class="text-info">Количество категорий на главной странице равно 6, если хотите добавить новую, отключите уже сущесвующую</p>
                         @endif
                     </div>
                 </div>

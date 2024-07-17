@@ -277,12 +277,12 @@
                                    id="checkboxPrimary1"
                                    name="is_novelty"
                                    value="{{ old('is_novelty', true) }}"
-                                   @if($countNoveltyProduct >= 5) disabled @endif
+                                   @if($countNoveltyProduct >= 8) disabled @endif
                             >
                             <label for="checkboxPrimary1">Отображать товар в новинках на главной странице</label>
                         </div>
-                        @if($countNoveltyProduct >= 5)
-                            <p class="text-info">Количество новинок на главной странице равно 5, если хотите добавить новую, отключите уже сущесвующую</p>
+                        @if($countNoveltyProduct >= 8)
+                            <p class="text-info">Количество новинок на главной странице равно 8, если хотите добавить новую, отключите уже сущесвующую</p>
                         @endif
                     </div>
 
