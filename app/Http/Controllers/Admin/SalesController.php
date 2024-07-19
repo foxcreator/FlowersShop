@@ -12,7 +12,7 @@ class SalesController extends Controller
     public function index(Request $request)
     {
         $cart = session()->get('cart', []);
-        $productsQuery = Product::query();
+        $productsQuery = Product::query()->where('type', '!=', Product::TYPE_FLOWER);
         if ($request->search) {
             $search = $request->search;
             $productsQuery->where(function ($query) use ($search) {
