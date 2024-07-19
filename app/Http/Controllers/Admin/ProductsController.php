@@ -28,6 +28,10 @@ class ProductsController extends Controller
             $query->where('quantity', 0);
         }
 
+        if ($request->filter === 'flower') {
+            $query->where('type', Product::TYPE_FLOWER);
+        }
+
         if ($request->sort) {
             list($sortField, $sortOrder) = explode(':', $request->sort);
             $query->orderBy($sortField, $sortOrder);
@@ -42,7 +46,9 @@ class ProductsController extends Controller
                 30
             );
         } else {
-            $products = $query->paginate(30);
+            $products = $request->filter === 'flower'
+                ? $query->paginate(30)
+                : $query->where('type', '!=',Product::TYPE_FLOWER)->paginate(30);
         }
 
         return view('admin.products.index', compact('products'));

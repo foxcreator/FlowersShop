@@ -1,7 +1,7 @@
 @php
     $categories = \App\Models\Category::where('is_show_on_homepage', true)->get();
 @endphp
-<div class="container mt-200">
+<div class="container">
     <section class="categories">
         <div class="categories__header">
             <h1>{{ __('homepage.popular_categories') }}</h1>
@@ -9,7 +9,7 @@
 
         <div class="categories__cards row">
             @foreach($categories as $category)
-                <div class="categories__card col-6">
+                <div class="categories__card col-lg-4 col-6">
                     <div class="categories__card-img">
                         <a href="{{ route('front.catalog', ['category' => $category->id]) }}">
                             <img class="category-img" src="{{ asset($category->thumbnailUrl) }}" alt="">
@@ -22,7 +22,7 @@
                     </a>
                 </div>
             @endforeach
-            <div class="categories__link-block col-6">
+            <div class="categories__link-block col-12">
                 <a href="{{ route('front.catalog') }}" class="categories__link">
                     <span>{{ __('homepage.all_categories') }}</span>
                     @svg('arrow-circle-right')
