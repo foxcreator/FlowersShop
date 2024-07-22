@@ -164,8 +164,7 @@ class OrderController extends Controller
 
             Notification::route('telegram', -4219102586)
                 ->notify(new TelegramOrderNotification($order));
-//            Mail::to($order->email)->send(new OrderConfirmationNotification($order));
-
+            Mail::to($order->email)->send(new OrderConfirmationNotification($order));
         }
 
     }
