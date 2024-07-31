@@ -103,7 +103,6 @@ $(document).ready(function () {
 });
 
 $('.filter-mobile-btn').click(function () {
-    console.log(12)
     $('#desktop-filter').toggle();
 });
 
@@ -146,6 +145,7 @@ function updateProductList(data) {
     $('.first-block').html(data.html.first);
     $('.second-block').html(data.html.second);
     $('.catalog__paginate').html(data.html.paginate);
+    $('.category-header').html(data.html.header);
 }
 
 function getSelectedCategory(filter) {

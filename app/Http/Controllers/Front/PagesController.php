@@ -24,8 +24,10 @@ class PagesController extends Controller
 		$flowers = Flower::orderBy('name_uk')->get();
 		$subjects = Subject::all();
         $products = Product::query()->where('type', '!=', Product::TYPE_FLOWER);
+        $category = null;
 
         if ($request->query('category') && $request->query('category') != 'all') {
+            $category = Category::find($request->query('category'));
             $products->where('category_id', $request->query('category'));
         }
 
@@ -67,12 +69,14 @@ class PagesController extends Controller
         if ($request->ajax()) {
 			$firstBlock = view('front.pages.catalog.parts.first-products-block', compact('products', 'changedPrice'))->render();
 			$secondBlock = view('front.pages.catalog.parts.second-products-block', compact('products'))->render();
-			$paginate = view('components.pagination', compact('currentPage', 'countPages'))->render();
+            $categoryBlock = view('front.pages.catalog.parts.header', compact('category'))->render();
+            $paginate = view('components.pagination', compact('currentPage', 'countPages'))->render();
             return response()->json([
 				'html' => [
 					'first' => $firstBlock,
 					'second' => $secondBlock,
-					'paginate' => $paginate
+					'paginate' => $paginate,
+                    'header' => $categoryBlock
 				]
 			], 200)->header('Content-Type', 'text/html');
         } else {
@@ -83,7 +87,8 @@ class PagesController extends Controller
 				'countPages',
 				'subjects',
 				'flowers',
-                'changedPrice'
+                'changedPrice',
+                'category'
 			));
         }
     }

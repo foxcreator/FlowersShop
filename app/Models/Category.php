@@ -44,4 +44,12 @@ class Category extends Model
             get: fn() => $this->attributes['title_'.$locale] ?? $this->attributes['title_uk']
         );
     }
+
+    public function description(): Attribute
+    {
+		$locale = session('locale');
+        return new Attribute(
+            get: fn() => $this->attributes['description_'.$locale] ?? $this->attributes['description_uk']
+        );
+    }
 }

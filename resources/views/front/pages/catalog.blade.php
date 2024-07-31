@@ -2,7 +2,9 @@
 @section('content')
     <section class="catalog">
         <div class="container">
-            <h1>Каталог</h1>
+            <div class="category-header">
+                @include('front.pages.catalog.parts.header')
+            </div>
             <div class="catalog__wrapper">
                 <div class="overflow"></div>
                 <div id="loader" class="spinner-border text-grey" role="status">
