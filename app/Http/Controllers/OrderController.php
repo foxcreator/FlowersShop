@@ -55,7 +55,7 @@ class OrderController extends Controller
         $entityToDb['call'] = isset($data['call']);
         $entityToDb['delivery_date'] = Carbon::create($data['date'])->format('Y-m-d');
         $entityToDb['delivery_time'] = $data['time'];
-        $entityToDb['delivery_option'] = $data['delivery_option'];
+        $entityToDb['delivery_option'] = $data['delivery_option'] ?? Order::DELIVERY_COURIER;
         $entityToDb['recipient_name'] = $data['name'] ?: $data['customer_name'];
         $entityToDb['recipient_phone'] = $data['phone'] ?: $data['customer_phone'];
         $entityToDb['text_postcard'] = $data['text_postcard'];
