@@ -95,7 +95,10 @@ if ($product->type === \App\Models\Product::TYPE_BOUQUET) {
                                     <div class="form-group">
                                         <button type="button" class="btn btn-success btn-sm mb-5" id="uploadImageBtn">Загрузить изображения</button>
                                         <input type="file" id="imageInput" style="display: none;" accept="image/*" multiple>
+                                        <button type="button" class="btn btn-secondary btn-sm mb-5" id="uploadVideoBtn">Загрузить видео</button>
+                                        <input type="file" id="videoInput" style="display: none;">
                                     </div>
+
                                     <div id="sortable-images" class="d-flex row">
                                         @foreach($productPhotos as $photo)
                                             <div class="image-container col-3" data-photo-id="{{ $photo->id }}">
@@ -206,7 +209,6 @@ if ($product->type === \App\Models\Product::TYPE_BOUQUET) {
 
                 formData.append('product', {{ $product->id }});
 
-                console.log(formData);
                 $.ajax({
                     url: "{{ route('admin.upload.photo') }}",
                     type: 'POST',
@@ -221,6 +223,41 @@ if ($product->type === \App\Models\Product::TYPE_BOUQUET) {
                     },
                     error: function(xhr, status, error) {
                         console.error('Ошибка при загрузке изображений:', error);
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            $('#uploadVideoBtn').on('click', function() {
+                $('#videoInput').click(); // Симулируем клик по скрытому input для выбора файлов
+            });
+
+            $('#videoInput').on('change', function() {
+                var formData = new FormData();
+                var files = $(this)[0].files;
+
+                for (var i = 0; i < files.length; i++) {
+                    formData.append('images[]', files[i]);
+                }
+
+                formData.append('product', {{ $product->id }});
+
+                console.log(formData);
+                $.ajax({
+                    url: "{{ route('admin.upload.video') }}",
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-Token': "{{ csrf_token() }}"
+                    },
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Ошибка при загрузке видео:', error);
                     }
                 });
             });

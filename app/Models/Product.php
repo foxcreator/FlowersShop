@@ -98,6 +98,11 @@ class Product extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function videos()
+    {
+        return $this->hasMany(ProductVideo::class);
+    }
+
     public function thumbnailUrl(): Attribute
     {
         return new Attribute(
