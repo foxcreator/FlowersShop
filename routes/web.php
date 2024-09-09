@@ -97,6 +97,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/reports/monthly', [\App\Http\Controllers\Admin\ReportController::class, 'monthlyReport'])->name('reports.monthly');
     Route::get('/admin/sales-report/download', [\App\Http\Controllers\Admin\ReportController::class, 'downloadSalesReport'])->name('reports.download');
     Route::post('checkbox-credentials/update/{user}', [\App\Http\Controllers\Front\UserController::class, 'checkboxCredentialsUpdate'])->name('checkbox.credentials');
+    Route::post('/upload-video', [\App\Http\Controllers\Admin\ProductsController::class, 'uploadVideo'])->name('upload.video');
+    Route::post('/delete-video/{id}', [\App\Http\Controllers\Admin\ProductsController::class, 'deleteVideo'])->name('delete.video');
 
 
     Route::post('/sort-product-images', [\App\Http\Controllers\Admin\ProductPhotosController::class, 'sortPhoto'])->name('sort.photo');

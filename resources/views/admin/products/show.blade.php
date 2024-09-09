@@ -37,7 +37,16 @@ if ($product->type === \App\Models\Product::TYPE_BOUQUET) {
                                 <div class="active tab-pane" id="activity">
                                     <div class="row">
                                         <div class="col-md-3 d-flex flex-column">
-                                            <img src="{{ $product->thumbnailUrl }}" alt="">
+                                            @if($product->video)
+                                                <div class="product-video" style="width: 100%">
+                                                    <video controls style="width: 100%">
+                                                        <source src="{{ asset('storage/' . $product->video->file_path) }}" type="video/mp4">
+                                                        Ваш браузер не поддерживает встроенные видео.
+                                                    </video>
+                                                </div>
+                                            @else
+                                                <img src="{{ $product->thumbnailUrl }}" alt="">
+                                            @endif
                                             <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-info btn-sm mt-2">Редактировать</a>
                                             <button type="button"
                                                     class="btn btn-danger btn-sm mt-2"
@@ -46,6 +55,15 @@ if ($product->type === \App\Models\Product::TYPE_BOUQUET) {
                                             >
                                                 Удалить товар
                                             </button>
+                                            @if($product->video)
+                                                <button type="button"
+                                                        class="btn btn-danger btn-sm mt-2"
+                                                        data-toggle="modal"
+                                                        data-target="#modal-default-video"
+                                                >
+                                                    Удалить видео
+                                                </button>
+                                            @endif
                                         </div>
                                         <div class="post col-md-9" style="border: none">
                                             <div class="d-flex justify-content-between mb-3" style="border-bottom: 1px solid #4a5568">
@@ -95,7 +113,10 @@ if ($product->type === \App\Models\Product::TYPE_BOUQUET) {
                                     <div class="form-group">
                                         <button type="button" class="btn btn-success btn-sm mb-5" id="uploadImageBtn">Загрузить изображения</button>
                                         <input type="file" id="imageInput" style="display: none;" accept="image/*" multiple>
+                                        <button type="button" class="btn btn-secondary btn-sm mb-5" id="uploadVideoBtn">Загрузить видео</button>
+                                        <input type="file" id="videoInput" style="display: none;">
                                     </div>
+
                                     <div id="sortable-images" class="d-flex row">
                                         @foreach($productPhotos as $photo)
                                             <div class="image-container col-3" data-photo-id="{{ $photo->id }}">
@@ -131,6 +152,27 @@ if ($product->type === \App\Models\Product::TYPE_BOUQUET) {
             </div>
             <!-- /.modal-dialog -->
         </div>
+
+        @if($product->video()->exists())
+        <div class="modal fade" id="modal-default-video">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <h5>Удалить видео товара?</h5>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Вернуться</button>
+                        <form action="{{ route('admin.delete.video', $product->video->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm">Удалить навсегда</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        @endif
 
     <script>
         $(document).ready(function() {
@@ -206,7 +248,6 @@ if ($product->type === \App\Models\Product::TYPE_BOUQUET) {
 
                 formData.append('product', {{ $product->id }});
 
-                console.log(formData);
                 $.ajax({
                     url: "{{ route('admin.upload.photo') }}",
                     type: 'POST',
@@ -225,6 +266,43 @@ if ($product->type === \App\Models\Product::TYPE_BOUQUET) {
                 });
             });
         });
+
+        $(document).ready(function() {
+            $('#uploadVideoBtn').on('click', function() {
+                $('#videoInput').click();
+            });
+
+            $('#videoInput').on('change', function() {
+                var formData = new FormData();
+                var file = $(this)[0].files[0];
+
+                formData.append('video', file);
+                formData.append('product', "{{ $product->id }}");
+
+                $('#uploadVideoBtn').prop('disabled', true).text('Загрузка файла...');
+
+                $.ajax({
+                    url: "{{ route('admin.upload.video') }}",
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-Token': "{{ csrf_token() }}"
+                    },
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        $('#uploadVideoBtn').prop('disabled', false).text('Загрузить видео');
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        // Возвращаем кнопку в исходное состояние в случае ошибки
+                        $('#uploadVideoBtn').prop('disabled', false).text('Загрузить видео');
+                        console.error('Ошибка при загрузке видео:', error);
+                    }
+                });
+            });
+        });
+
     </script>
 @endsection
 

@@ -11,10 +11,12 @@ use App\Http\Services\ImagesService;
 use App\Models\Category;
 use App\Models\Flower;
 use App\Models\Product;
+use App\Models\ProductVideo;
 use App\Models\Subcategory;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Analytics\Facades\Analytics;
 use Spatie\Analytics\Period;
 
@@ -154,46 +156,6 @@ class ProductsController extends Controller
         $data = $request->validated();
         $product = Product::find($id);
 
-        $products_quantities = [];
-
-        if (isset($data['products'])) {
-            foreach ($data['products'] as $prod) {
-                if ($prod['id']) {
-                    $products_quantities[$prod['id']] = $prod['quantity'];
-                }
-            }
-        }
-
-        $data['products_quantities'] = $products_quantities;
-        unset($data['products']);
-
-//        if (isset($data['type']) && $data['type'] === Product::TYPE_BOUQUET) {
-//            if (!$products_quantities) {
-//                return redirect()->back()->withInput()->with([
-//                    'error' => "В букет необходимо добавить хотя бы один цветок"
-//                ]);
-//            }
-//        }
-
-        if (intval($data['quantity']) > intval($product->quantity) || $data['update_count'] && (isset($data['type']) && $data['type'] === Product::TYPE_BOUQUET)) {
-            if ($data['update_count']) {
-                $quantityDiff = intval($data['quantity']);
-            } else {
-                $quantityDiff = intval($data['quantity']) - intval($product->quantity);
-            }
-            foreach ($products_quantities as $index => $quantity) {
-                $flower = Product::find($index);
-                if ($flower->quantity >= $quantity) {
-                    $flower->quantity -= $quantity * $quantityDiff;
-                    $flower->save();
-                } else {
-                    return redirect()->back()->withInput()->with([
-                        'error' => "Превышено количество цветка '$flower->title_ru' для списания! Доступно на складе $flower->quantity"
-                    ]);
-                }
-            }
-        }
-
         $flowers = $data['flowers'] ?? [];
 		$currentFlowers = $product->flowers()->pluck('flowers.id')->toArray();
 		$flowersToRemove = array_diff($currentFlowers, $flowers);
@@ -281,5 +243,51 @@ class ProductsController extends Controller
             $order++;
         }
         return response()->json();
+    }
+
+    public function uploadVideo(Request $request)
+    {
+        // Валидация входных данных
+        $request->validate([
+            'video' => 'required|file|max:2048200', // Проверка формата и размера файла
+        ]);
+
+        // Поиск продукта по ID
+        $product = Product::findOrFail($request->input('product'));
+
+        // Проверка существующего видео и его удаление
+        if ($product->video) {
+            $existingVideo = $product->video;
+
+            // Удаление файла с сервера
+            if (Storage::disk('public')->exists($existingVideo->file_path)) {
+                Storage::disk('public')->delete($existingVideo->file_path);
+            }
+
+            // Удаление записи из базы данных
+            $existingVideo->delete();
+        }
+
+        // Загрузка нового видео
+        $path = $request->file('video')->store('videos', 'public');
+
+        // Создание новой записи о видео в базе данных
+        $product->video()->create([
+            'file_path' => $path,
+        ]);
+
+        return response()->json(['message' => 'Видео загружено!']);
+    }
+
+    public function deleteVideo($id)
+    {
+        $video = ProductVideo::find($id);
+        if (Storage::disk('public')->exists($video->file_path)) {
+            Storage::disk('public')->delete($video->file_path);
+        }
+
+        $video->delete();
+
+        return redirect()->back()->with(['success' => 'Видео удалено']);
     }
 }

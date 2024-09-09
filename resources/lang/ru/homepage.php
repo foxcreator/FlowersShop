@@ -7,6 +7,7 @@ return [
 	'about_us' => 'О нас',
 	'contacts' => 'Контакты',
 	'add_to_cart' => 'В корзину',
+    'subscribe' => 'Оформить подписку',
 	'novelty' => 'Новинки',
 	'all_novelty' => 'Все новинки',
 	'popular_categories' => 'Популярные категории',
