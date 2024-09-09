@@ -266,113 +266,18 @@
                     </div>
 
                     <div class="form-group mt-4">
-                        <div class="icheck-success d-inline">
+                        @foreach(\App\Models\Product::TYPES as $type => $label)
+                        <div class="icheck-success d-inline mr-3">
                             <input type="radio"
                                    name="type"
-                                   id="default"
-                                   value="{{ \App\Models\Product::TYPE_DEFAULT }}"
-                                   @if($product->type === \App\Models\Product::TYPE_DEFAULT ) checked @endif
-                                   @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
+                                   id="{{ $type }}"
+                                   value="{{ $type }}"
+                                   @if($product->type === $type ) checked @endif
                             >
-                            <label for="default">Другое</label>
+                            <label for="{{ $type }}">{{ $label }}</label>
                         </div>
-                        <div class="icheck-success d-inline">
-                            <input type="radio"
-                                   id="bouquet"
-                                   name="type"
-                                   value="{{ \App\Models\Product::TYPE_BOUQUET }}"
-                                   @if($product->type === \App\Models\Product::TYPE_BOUQUET ) checked disabled @endif
-                            >
-                            <label for="bouquet">Букет</label>
-                        </div>
-                        <div class="icheck-success d-inline">
-                            <input type="radio"
-                                   name="type"
-                                   id="flower"
-                                   value="{{ \App\Models\Product::TYPE_FLOWER }}"
-                                   @if($product->type === \App\Models\Product::TYPE_FLOWER ) checked @endif
-                                   @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
-
-                            >
-                            <label for="flower">Цветок</label>
-                        </div>
+                        @endforeach
                     </div>
-
-                    <div class="form-group mt-4" id="product-selection" @if($product->type === \App\Models\Product::TYPE_BOUQUET) style="display: block" @else style="display: none" @endif>
-                        <label for="products">Состав букета:</label>
-                        <div id="products">
-                            @if($product->products_quantities)
-                                @foreach($product->products_quantities as $id => $quantity)
-                                    <div class="product-item d-flex justify-content-between mt-2">
-                                        <select class="form-control select2bs4"
-                                                id="bouquet_flowers_{{ $id }}"
-                                                name="products[{{ $id }}][id]"
-                                                style="width: 75%;"
-                                                @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
-                                        >
-                                            <option value="">Выберите цветок</option>
-                                            @foreach($products as $prod)
-                                                <option value="{{ $prod->id }}" @if($id === $prod->id) selected @endif>{{ $prod->title_uk }}</option>
-                                            @endforeach
-                                        </select>
-                                        <input type="number"
-                                               class="form-control"
-                                               name="products[{{ $id }}][quantity]"
-                                               min="1" value="{{ $quantity }}"
-                                               placeholder="Количество"
-                                               style="width: 20%"
-                                               @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
-
-                                        >
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="product-item d-flex justify-content-between">
-                                    <select class="form-control select2bs4"
-                                            id="bouquet_flowers_0"
-                                            name="products[0][id]"
-                                            style="width: 75%;"
-                                            @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
-                                    >
-                                        <option value="">Выберите цветок</option>
-                                        @foreach($products as $prod)
-                                            <option value="{{ $prod->id }}">{{ $prod->title_uk }}</option>
-                                        @endforeach
-                                    </select>
-                                    <input type="number"
-                                           class="form-control"
-                                           name="products[0][quantity]"
-                                           min="1"
-                                           value="1"
-                                           placeholder="Количество"
-                                           style="width: 20%"
-                                           @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
-                                    >
-                                </div>
-                            @endif
-                        </div>
-                        <button type="button"
-                                id="add-product"
-                                class="btn btn-xs btn-info mt-2"
-                                @if($product->type === \App\Models\Product::TYPE_BOUQUET ) disabled @endif
-
-                        >
-                            Добавить продукт
-                        </button>
-
-                        <div class="form-group mt-4">
-                            <input type="hidden" name="update_count" value="{{ false }}">
-                            <div class="icheck-success d-inline">
-                                <input type="checkbox"
-                                       id="update_count"
-                                       name="update_count"
-                                       value="{{ true }}"
-                                >
-                                <label for="update_count">Списать цветы в букет</label>
-                            </div>
-                        </div>
-                    </div>
-
 
                     <div class="card-footer d-flex justify-content-between gap-2">
                     <div class="col-md-6">
@@ -434,59 +339,6 @@
             if (selectedCategoryId) {
                 fetchSubcategories(selectedCategoryId, selectedSubcategoryId);
             }
-        });
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const bouquetCheckbox = document.getElementById('bouquet');
-            const flowerCheckbox = document.getElementById('flower');
-            const defaultCheckbox = document.getElementById('default');
-            const productSelection = document.getElementById('product-selection');
-            const addProductButton = document.getElementById('add-product');
-            const productsContainer = document.getElementById('products');
-            let productCount = 1; // Начальный счетчик для продуктов
-
-            // Показать/скрыть выбор продуктов при нажатии на чекбокс
-            bouquetCheckbox.addEventListener('change', function() {
-                if (this.checked) {
-                    console.log(123)
-                    productSelection.style.display = 'block';
-                } else {
-                    productSelection.style.display = 'none';
-                }
-            });
-
-            flowerCheckbox.addEventListener('change', function() {
-                if (this.checked) {
-                    productSelection.style.display = 'none'; // Скрыть блок при выборе другого типа
-                }
-            });
-
-            defaultCheckbox.addEventListener('change', function() {
-                if (this.checked) {
-                    productSelection.style.display = 'none'; // Скрыть блок при выборе другого типа
-                }
-            });
-
-            // Добавление нового продукта
-            addProductButton.addEventListener('click', function() {
-                const newProduct = document.createElement('div');
-                newProduct.className = 'product-item d-flex mt-2 justify-content-between';
-                newProduct.innerHTML = `
-            <select class="form-control select2bs4" id="bouquet_flowers" name="products[${productCount}][id]" style="width: 75%;">
-                <option value="">Выберите цветок</option>
-                @foreach($products as $product)
-                <option value="{{ $product->id }}">{{ $product->title_uk }}</option>
-                @endforeach
-                </select>
-                <input type="number" class="form-control" name="products[${productCount}][quantity]" min="1" placeholder="Количество" style="width: 20%">
-`;
-                productsContainer.appendChild(newProduct);
-                $(newProduct).find('select').select2({
-                    theme: 'bootstrap4'
-                });
-                productCount++;
-            });
         });
     </script>
 @endsection

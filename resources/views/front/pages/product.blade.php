@@ -1,16 +1,28 @@
 @extends('front.layouts.app')
 @section('content')
     @php
-    $isFavorite = false;
-    if (auth()->user()) {
-        $isFavorite = auth()->user()->favoriteProducts()->where('product_id', $product->id)->exists();
-    }
+        /** @var $product \App\Models\Product */
+        $isFavorite = false;
+        if (auth()->user()) {
+            $isFavorite = auth()->user()->favoriteProducts()->where('product_id', $product->id)->exists();
+        }
     @endphp
     <section class="product-show container">
 
         <div class="product-show__top row">
             <div class="product-show__gallery col-md-6 col-lg-5">
-                <img class="product-show__thumbnail" src="{{ $product->thumbnailUrl }}" alt="{{ $product->title_uk }}">
+                <div class="position-relative">
+                    <img class="product-show__thumbnail" src="{{ $product->thumbnailUrl }}"
+                         alt="{{ $product->title_uk }}">
+                    @if($product->video)
+                        <!-- Иконка Play -->
+                        <div id="playIcon" class="play-icon"
+                             style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: pointer;">
+                            <img src="{{ asset('front/images/play.png') }}" alt="Play"
+                                 style="width: 50px; height: 50px;">
+                        </div>
+                    @endif
+                </div>
                 @if($product->productPhotos()->count() > 0)
                     <div class="product-show__images">
                         @foreach($product->productPhotos as $photo)
@@ -23,27 +35,47 @@
                 <div class="product-show__text">
                     <div class="d-flex justify-content-between align-items-start gap-3">
                         <h1>{{ $product->title }}</h1>
-                        <div class="product-show__favorite @if($isFavorite) is-favorite @endif" id="favorite_{{ $product->id }}" data-product-id="{{ $product->id }}">@svg('heart')</div>
+                        <div class="product-show__favorite @if($isFavorite) is-favorite @endif"
+                             id="favorite_{{ $product->id }}" data-product-id="{{ $product->id }}">@svg('heart')
+                        </div>
                     </div>
                     <p class="article">Артикул {{ $product->article }}</p>
                 </div>
-                <form class="product-show__buy-block">
-                    <div class="product-show__quantity">
-                        <div class="quantity-input col-6">
-                            <button type="button" class="minus-btn">@svg('minus')</button>
-                            <input type="number" class="quantity-field" value="1">
-                            <button type="button" class="plus-btn">@svg('plus')</button>
-                        </div>
+                @if($product->type === \App\Models\Product::TYPE_SUBSCRIBE)
+                    <div class="product-show__buy-block">
+                        <div class="product-show__quantity">
+                            <div class="d-flex justify-content-start col-6">
+                                <p class="text-left">Ціна від:</p>
+                            </div>
 
-                        <p class="col-6">₴ <span class="price">{{ intval($product->price) }}</span></p>
+                            <p class="col-6">₴ <span class="price">{{ intval($product->price) }}</span></p>
+                        </div>
+                        <div class="w-100 d-flex justify-content-center">
+                            <a href="tel:0679776075" class="product-show__btn col-12 text-center">
+                                {{ __('homepage.subscribe') }}
+                            </a>
+                        </div>
                     </div>
-                    <button type="button"
-                            onclick="addToCart('{{ $product->id }}')"
-                            class="product-show__btn"
-                    >
-                        {{ __('product_show.add_to_cart') }}
-                    </button>
-                </form>
+                @else
+                    <form class="product-show__buy-block">
+                        <div class="product-show__quantity">
+                            <div class="quantity-input col-6">
+                                <button type="button" class="minus-btn">@svg('minus')</button>
+                                <input type="number" class="quantity-field" value="1">
+                                <button type="button" class="plus-btn">@svg('plus')</button>
+                            </div>
+
+                            <p class="col-6">₴ <span class="price">{{ intval($product->price) }}</span></p>
+                        </div>
+                        <button type="button"
+                                onclick="addToCart('{{ $product->id }}')"
+                                class="product-show__btn"
+                        >
+                            {{ __('product_show.add_to_cart') }}
+                        </button>
+                    </form>
+                @endif
+
             </div>
         </div>
 
@@ -103,6 +135,22 @@
         </div>
 
         @include('components.recommendation', ['randomProducts' => $randomProducts])
+
+        @if($product->video)
+            <div class="modal" id="videoModal" style="display: none">
+                <div class="modal-dialog modal-dialog-centered d-flex justify-content-center"
+                     style="max-width: 100%; background: rgb(0,0,0, 0.5)">
+                    <div class="modal-content" style="background: rgb(0,0,0, 0.5); width: 90%">
+                        <div class="modal-body d-flex justify-content-center">
+                            <video controls style="width: 100%">
+                                <source src="{{ asset('storage/' . $product->video->file_path) }}" type="video/mp4">
+                                Ваш браузер не підтримує відео.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
     </section>
     <script>
         function addToCart(productId) {
@@ -225,7 +273,7 @@
             }
         });
 
-        $('#favorite_{{ $product->id }}').on('click', function() {
+        $('#favorite_{{ $product->id }}').on('click', function () {
             var productId = $(this).data('product-id');
             var $button = $(this);
 
@@ -238,7 +286,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(response) {
+                success: function (response) {
                     if (response.status === 'add') {
                         $button.addClass('is-favorite');
                         showToast('toast-success', '{{ __('statuses.favorite_add') }}');
@@ -247,10 +295,30 @@
                         showToast('toast-success', '{{ __('statuses.favorite_delete') }}');
                     }
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error(error);
                 }
             });
         });
+
+        $(document).ready(function () {
+            // Открытие модального окна при клике на иконку Play
+            $('#playIcon').on('click', function () {
+                $('#videoModal').show();
+            });
+
+            // Закрытие модального окна при клике на кнопку закрытия
+            $('.close').on('click', function () {
+                $('#videoModal').hide();
+            });
+
+            // Закрытие модального окна при клике вне его области
+            $(window).on('click', function (event) {
+                if ($(event.target).is('#videoModal')) {
+                    $('#videoModal').hide();
+                }
+            });
+        });
+
     </script>
 @endsection

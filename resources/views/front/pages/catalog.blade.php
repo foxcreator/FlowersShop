@@ -66,32 +66,6 @@
                                     @endforeach
                                 </div>
                             </div>
-{{--                            <div class="accordion-item">--}}
-{{--                                <div class="accordion-item">--}}
-{{--                                    <div class="accordion-header">--}}
-{{--                                        <p><span></span>{{ __('homepage.flower') }}</p>--}}
-{{--                                        @svg('circle-arrow')--}}
-{{--                                    </div>--}}
-{{--                                    <div class="accordion-content">--}}
-{{--                                        @foreach($flowers as $flower)--}}
-{{--                                            <div class="form-check">--}}
-{{--                                                <input class="form-check-input"--}}
-{{--                                                       type="checkbox"--}}
-{{--                                                       name="flowers[]"--}}
-{{--                                                       value="{{$flower->id}}"--}}
-{{--                                                       id="flowers_{{ $flower->id }}"--}}
-{{--                                                       @if(is_array(request()->query('flowers')) &&--}}
-{{--                                                       in_array($flower->id, request()->query('flowers'))) checked @endif--}}
-{{--                                                >--}}
-{{--                                                <label class="form-check-label"--}}
-{{--                                                       for="flowers_{{ $flower->id }}">--}}
-{{--                                                    {{ $flower->name }}--}}
-{{--                                                </label>--}}
-{{--                                            </div>--}}
-{{--                                        @endforeach--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                             <div class="accordion-item">
                                 <div class="accordion-item">
                                     <div class="accordion-header">

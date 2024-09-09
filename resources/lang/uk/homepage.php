@@ -8,6 +8,7 @@ return [
 	'about_us' => 'Про нас',
 	'contacts' => 'Контакти',
 	'add_to_cart' => 'В кошик',
+    'subscribe' => 'Оформити підписку',
 	'novelty' => 'Новинки',
 	'all_novelty' => 'Всі новинки',
 	'popular_categories' => 'Популярні категорії',

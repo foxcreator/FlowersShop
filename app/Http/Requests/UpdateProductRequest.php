@@ -42,10 +42,9 @@ class UpdateProductRequest extends FormRequest
             'badge' => 'nullable',
             'product_photos' => 'nullable',
             'is_novelty' => 'nullable',
-            'type' => 'in:bouquet,flower,default',
+            'type' => 'in:bouquet,flower,default,subscribe',
             'products' => 'nullable',
             'update_count' => 'nullable',
-            'products_quantities' => 'nullable',
         ];
     }
 
@@ -77,7 +76,7 @@ class UpdateProductRequest extends FormRequest
             'article.digits' => 'Артикул должен содержать :digits символов.',
             'thumbnail.nullable' => 'Поле изображения может быть пустым.',
             'badge.nullable' => 'Поле бейджа может быть пустым.',
-            'product_photos.*' => 'Неверный формат'
+            'product_photos.*' => 'Неверный формат',
         ];
     }
 }

@@ -1,8 +1,10 @@
 @php
-$isFavorite = false;
-if (auth()->user()) {
-    $isFavorite = auth()->user()->favoriteProducts()->where('product_id', $product->id)->exists();
-}
+
+    /** @var \App\Models\Product $product */
+    $isFavorite = false;
+    if (auth()->user()) {
+        $isFavorite = auth()->user()->favoriteProducts()->where('product_id', $product->id)->exists();
+    }
 @endphp
 
 <div class="{{ $style }}__product-card col-lg-3 col-6">
@@ -13,11 +15,21 @@ if (auth()->user()) {
         @if($product->badge)
             <div class="product-badge">{{ $product->badgeNameMultilang }}</div>
         @endif
-        <div class="{{ $style }}__favorite @if($isFavorite) is-favorite @endif" id="card-favorite_{{ $product->id }}" data-product-id="{{ $product->id }}">@svg('heart')</div>
-        <button id="add-to-cart_{{ $product->id }}" type="button" class="{{ $style }}__buy-btn" onclick="addToCart('{{ $product->id }}')">
-            {{ __('homepage.add_to_cart') }}
-            @svg('cart')
-        </button>
+        <div class="{{ $style }}__favorite @if($isFavorite) is-favorite @endif" id="card-favorite_{{ $product->id }}"
+             data-product-id="{{ $product->id }}">@svg('heart')
+        </div>
+        @if($product->type === \App\Models\Product::TYPE_SUBSCRIBE)
+            <a href="tel:0679776075" id="add-to-cart_{{ $product->id }}" class="{{ $style }}__buy-btn">
+                {{ __('homepage.subscribe') }}
+                @svg('cart')
+            </a>
+        @else
+            <button id="add-to-cart_{{ $product->id }}" type="button" class="{{ $style }}__buy-btn"
+                    onclick="addToCart('{{ $product->id }}')">
+                {{ __('homepage.add_to_cart') }}
+                @svg('cart')
+            </button>
+        @endif
     </div>
     <a href="{{ route('front.product', $product->id) }}">
         <div class="{{ $style }}__info">
@@ -50,7 +62,7 @@ if (auth()->user()) {
         })
     }
 
-    $('#card-favorite_{{ $product->id }}').off('click').on('click', function() {
+    $('#card-favorite_{{ $product->id }}').off('click').on('click', function () {
         var productId = $(this).data('product-id');
         var $button = $(this);
 
@@ -63,7 +75,7 @@ if (auth()->user()) {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            success: function(response) {
+            success: function (response) {
                 if (response.status === 'add') {
                     $button.addClass('is-favorite');
                     showToast('toast-success', '{{ __('statuses.favorite_add') }}');
@@ -72,14 +84,11 @@ if (auth()->user()) {
                     showToast('toast-success', '{{ __('statuses.favorite_delete') }}');
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 showToast('toast-error', xhr.responseJSON.message);
             }
         });
     });
-
-
-
 
 
 </script>

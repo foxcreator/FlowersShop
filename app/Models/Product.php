@@ -20,6 +20,7 @@ class Product extends Model
     const TYPE_BOUQUET = 'bouquet';
     const TYPE_FLOWER = 'flower';
     const TYPE_DEFAULT = 'default';
+    const TYPE_SUBSCRIBE = 'subscribe';
 
     const BADGES = [
         self::BADGE_HIT => 'Хит',
@@ -37,7 +38,8 @@ class Product extends Model
     const TYPES = [
         self::TYPE_FLOWER => 'Цветок',
         self::TYPE_BOUQUET => 'Букет',
-        self::TYPE_DEFAULT => 'Другое'
+        self::TYPE_DEFAULT => 'Другое',
+        self::TYPE_SUBSCRIBE => 'Подписка',
     ];
 
     protected $fillable = [
@@ -98,9 +100,9 @@ class Product extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function videos()
+    public function video()
     {
-        return $this->hasMany(ProductVideo::class);
+        return $this->hasOne(ProductVideo::class);
     }
 
     public function thumbnailUrl(): Attribute
