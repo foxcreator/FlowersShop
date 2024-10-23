@@ -96,8 +96,8 @@ $subcategories = \App\Models\Subcategory::where('category_id', 1)->get();
         <p>+38 067 977 60 75</p>
         <p>+38 073 216 34 09</p>
         <p>{{ __('texts.address') }}</p>
-        <p>пн-пт 8:30 – 20:00</p>
-        <p>сб-нд 9:00 – 20:00</p>
+        <p>пн-нд 10:00 – 19:00</p>
+        <p>Без вихідних</p>
         <div class="contacts__social">
             <a href="https://www.instagram.com/thelotusfb/">@svg('instagram')</a>
             <a href="https://www.facebook.com/profile.php?id=61560592424284">@svg('facebook')</a>

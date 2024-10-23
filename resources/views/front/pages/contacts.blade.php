@@ -11,8 +11,8 @@
                     <p>{{ __('texts.address') }}</p>
                     <p>
                         {{ __('texts.open_hours') }} <br>
-                        пн-пт 8:30 – 20:00 <br>
-                        сб-нд 9:00 – 20:00
+                        пн-нд 10:00 – 19:00 <br>
+                        Без вихідних
                     </p>
                 </div>
                 <div class="contact-page__social">
