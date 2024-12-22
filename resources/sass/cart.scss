@@ -79,7 +79,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px $main-green solid;
+            border: 1px $main-choco solid;
             font-size: 36px;
 
             @media (max-width: $media-md) {
@@ -163,14 +163,14 @@
 
         .plus-btn:hover,
         .minus-btn:hover {
-            color: $main-green;
+            color: $main-choco;
         }
     }
 
     &__sum {
         font-size: 48px;
         font-weight: 100;
-        color: $main-green;
+        color: $main-choco;
         @media (max-width: $media-md) {
             font-size: 24px;
         }
@@ -204,7 +204,7 @@
             p {
                 font-size: 20px;
                 font-weight: 100;
-                color: $main-green;
+                color: $main-choco;
                 margin: 0;
 
 
@@ -227,9 +227,9 @@
 
     &__btn-submit {
         text-align: center;
-        background-color: $main-green;
+        background-color: $main-choco;
         color: $main-white;
-        border: $main-green 1px solid;
+        border: $main-choco 1px solid;
         margin-top: 32px;
         padding: 25px;
         font-size: 20px;
@@ -237,7 +237,7 @@
 
         &:hover {
             background-color: $main-white;
-            color: $main-green;
+            color: $main-choco;
             transform: scale(1.03);
         }
     }
@@ -245,15 +245,15 @@
     &__btn-back {
         text-align: center;
         background-color: $main-white;
-        color: $main-green;
-        border: $main-green 1px solid;
+        color: $main-choco;
+        border: $main-choco 1px solid;
         margin-top: 32px;
         padding: 25px;
         font-size: 20px;
         transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease;
 
         &:hover {
-            background-color: $main-green;
+            background-color: $main-choco;
             color: $main-white;
             transform: scale(1.03);
         }

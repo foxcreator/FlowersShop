@@ -12,12 +12,12 @@
         width: 40px;
         height: 40px;
         border-radius: 100%;
-        color: $main-green;
+        color: $main-choco;
         cursor: pointer;
     }
 
     &__page-item.active {
-        background: $main-green;
+        background: $main-choco;
         color: $main-white;
     }
 

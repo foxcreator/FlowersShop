@@ -96,15 +96,19 @@ $subcategories = \App\Models\Subcategory::where('category_id', 1)->get();
         <p>+38 067 977 60 75</p>
         <p>+38 073 216 34 09</p>
         <p>{{ __('texts.address') }}</p>
-        <p>пн-нд 10:00 – 19:00</p>
+        <p>пн-нд 8:00 – 21:00</p>
         <p>Без вихідних</p>
         <div class="contacts__social">
-            <a href="https://www.instagram.com/thelotusfb/">@svg('instagram')</a>
-            <a href="https://www.facebook.com/profile.php?id=61560592424284">@svg('facebook')</a>
-            <a href="https://t.me/thelts_flowers">@svg('telegram')</a>
+            <a href="https://www.instagram.com/bright_flowers_dnipro/" target="_blank">@svg('instagram')</a>
+            <a href="https://www.facebook.com/profile.php?id=61560592424284" target="_blank">@svg('facebook')</a>
+            <a href="https://t.me/brightflowers_dnipro" target="_blank">@svg('telegram')</a>
         </div>
     </div>
     <div class="contacts__map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2806.501751754408!2d35.04610432045896!3d48.457945177530036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dbe30366a61123%3A0x727bf3cebeea6580!2z0LzQsNCz0LDQt9C40L0g0LrQstGW0YLRltCyINGC0LAg0LTQtdC60L7RgNGDIFRoZUxvdHVzIGJvdXRpcXVl!5e0!3m2!1sru!2sua!4v1721643895218!5m2!1sru!2sua" height="400" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d555.8679172944234!2d35.06633116092968!3d48.46236226971332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dbe30366a61123%3A0x727bf3cebeea6580!2z0LzQsNCz0LDQt9C40L0g0YbQstC10YLQvtCyINC4INC00LXQutC-0YDQsCBCUklHSFQgRkxPV0VSUw!5e0!3m2!1sru!2sua!4v1734872574680!5m2!1sru!2sua"
+                width="100%"
+                style="border:0;" allowfullscreen=""
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
     </div>
 </div>

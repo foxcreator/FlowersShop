@@ -36,7 +36,7 @@
         }
 
         .icon-lotus-logo {
-            fill: #fffffc;
+            /*fill: #fffffc;*/
             width: 120px;
             height: 120px;
         }

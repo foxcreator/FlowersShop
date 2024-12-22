@@ -28,9 +28,9 @@
 
                             <div class="d-flex justify-content-between w-50 mb-5">
                             <div class="banner__social">
-                                <a href="https://www.instagram.com/thelotusfb/">@svg('instagram')</a>
+                                <a href="https://www.instagram.com/bright_flowers_dnipro/">@svg('instagram')</a>
                                 <a href="https://www.facebook.com/profile.php?id=61560592424284">@svg('facebook')</a>
-                                <a href="https://t.me/thelts_flowers">@svg('telegram')</a>
+                                <a href="https://t.me/brightflowers_dnipro">@svg('telegram')</a>
                             </div>
 
                             <a id="banner-btn-{{ $index }}" href="{{ url($banner->link) }}" class="banner__btn">
