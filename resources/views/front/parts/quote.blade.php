@@ -107,6 +107,7 @@ $subcategories = \App\Models\Subcategory::where('category_id', 1)->get();
     <div class="contacts__map">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d555.8679172944234!2d35.06633116092968!3d48.46236226971332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dbe30366a61123%3A0x727bf3cebeea6580!2z0LzQsNCz0LDQt9C40L0g0YbQstC10YLQvtCyINC4INC00LXQutC-0YDQsCBCUklHSFQgRkxPV0VSUw!5e0!3m2!1sru!2sua!4v1734872574680!5m2!1sru!2sua"
                 width="100%"
+                height="400"
                 style="border:0;" allowfullscreen=""
                 loading="lazy" referrerpolicy="no-referrer-when-downgrade"
         ></iframe>
