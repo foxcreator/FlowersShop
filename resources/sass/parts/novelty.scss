@@ -16,7 +16,7 @@
         margin-bottom: 32px;
 
         h1 {
-            color: $night-green;
+            color: $main-choco;
             font-size: 62px;
             font-weight: 300;
             line-height: 100%;
@@ -134,14 +134,14 @@
 
         &:hover {
             .icon {
-                stroke: $main-green;
+                stroke: $main-choco;
             }
         }
     }
 
     .is-favorite {
         .icon {
-            fill: $main-green;
+            fill: $main-choco;
             stroke: none;
         }
 
@@ -177,7 +177,7 @@
         white-space: nowrap;
 
         p {
-            color: $night-green;
+            color: $main-choco;
         }
     }
 
@@ -192,7 +192,7 @@
         transform: translate(-50%, -50%);
         width: 80%;
         background-color: $main-white;
-        color: $night-green;
+        color: $main-choco;
         font-size: 20px;
         gap: 12px;
         opacity: 0;
@@ -204,12 +204,12 @@
         }
 
         &:active {
-            background-color: $dark-green;
+            background-color: $dark-choco;
             color: $main-white;
         }
 
         .icon {
-            stroke: $night-green;
+            stroke: $main-choco;
             width: 20px;
             height: 20px;
         }
@@ -219,18 +219,18 @@
         display: flex;
         justify-content: flex-end;
         width: 100%;
-        color: $dark-green;
+        color: $dark-choco;
     }
 
     &__link {
         font-size: 32px;
         font-weight: 300;
-        color: $dark-green;
+        color: $dark-choco;
         margin-top: 10px;
 
         .icon {
             transition: transform 0.4s ease, margin-left 0.4s ease;
-            stroke: $dark-green;
+            stroke: $dark-choco;
             width: 46px;
         }
 

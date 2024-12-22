@@ -67,7 +67,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px $main-green solid;
+            border: 1px $main-choco solid;
             //width: 255px;
             height: 70px;
             font-size: 36px;
@@ -102,7 +102,7 @@
             font-size: 48px;
 
             .icon-plus {
-                stroke: $night-green;
+                stroke: $main-choco;
                 width: 44px;
                 height: 44px;
             }
@@ -110,7 +110,7 @@
 
 
             .icon-minus {
-                stroke: $night-green;
+                stroke: $main-choco;
                 width: 44px;
                 height: 44px;
             }
@@ -129,7 +129,7 @@
 
         .plus-btn:hover,
         .minus-btn:hover {
-            color: $main-green;
+            color: $main-choco;
         }
     }
 
@@ -151,7 +151,7 @@
         }
 
         .icon-heart {
-            stroke: $main-green;
+            stroke: $main-choco;
         }
     }
 
@@ -173,7 +173,7 @@
 
     &__btn {
         width: 100%;
-        background-color: $main-green;
+        background-color: $main-choco;
         color: $main-white;
         margin-top: 32px;
         padding: 25px;
@@ -182,7 +182,7 @@
 
         &:hover {
             background-color: $light-green;
-            color: $main-green;
+            color: $main-choco;
             transform: scale(1.03);
         }
     }
@@ -222,7 +222,7 @@
     }
 
     .tab.active {
-        background: $dark-green;
+        background: $dark-choco;
         span {
             color: $main-white;
         }
@@ -299,7 +299,7 @@
 
             button {
                 width: 100%;
-                background-color: $dark-green;
+                background-color: $dark-choco;
                 color: $main-white;
                 margin-top: 32px;
                 padding: 25px;
@@ -308,13 +308,13 @@
 
                 &:hover {
                     background-color: $light-green;
-                    color: $dark-green;
+                    color: $dark-choco;
                     transform: scale(1.03);
                 }
             }
 
             .nothing {
-                color: $dark-green;
+                color: $dark-choco;
                 p {
                     margin: 0;
                 }
@@ -369,7 +369,7 @@
         }
 
         p {
-            color: $dark-green;
+            color: $dark-choco;
         }
 
         .custom-overlay {
@@ -384,7 +384,7 @@
         .loader {
             position: absolute;
             display: none;
-            color: $dark-green;
+            color: $dark-choco;
             top: 35%;
             left: 40%;
         }
@@ -394,7 +394,7 @@
         display: flex;
         justify-content: space-between;
         margin-top: 30px;
-        color: $main-green;
+        color: $main-choco;
 
 
     }

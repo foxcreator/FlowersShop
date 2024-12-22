@@ -56,7 +56,7 @@
 <footer class="footer">
     <div class="container">
         <div class="footer__logo">
-            @svg('lotus-logo')
+            <img class="logo" src="{{ asset('front/images/logo.png') }}" alt="brightflowers">
         </div>
         <div class="footer__info row">
             <div class="footer__about col-lg-3 col-md-6">
@@ -88,9 +88,9 @@
             </div>
 
             <div class="footer__social col-lg-12 col-md-6">
-                <a href="https://www.instagram.com/thelotusfb/" target="_blank">@svg('instagram')</a>
+                <a href="https://www.instagram.com/bright_flowers_dnipro/" target="_blank">@svg('instagram')</a>
                 <a href="https://www.facebook.com/profile.php?id=61560592424284" target="_blank">@svg('facebook')</a>
-                <a href="https://t.me/thelts_flowers" target="_blank">@svg('telegram')</a>
+                <a href="https://t.me/brightflowers_dnipro" target="_blank">@svg('telegram')</a>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 .footer {
-    background-color: $main-green;
+    background-color: $main-choco;
     .container {
         display: flex;
         flex-direction: column;
@@ -12,10 +12,8 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        .icon {
+        .logo {
             width: 140px;
-            height: 128px;
-            fill: $main-white;
         }
     }
 

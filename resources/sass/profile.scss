@@ -34,12 +34,12 @@
             text-align: center;
 
             &:hover {
-                color: $main-green;
+                color: $main-choco;
             }
         }
 
         .tab.active {
-            border-bottom: $dark-green 1px solid;
+            border-bottom: $dark-choco 1px solid;
         }
     }
 
@@ -85,7 +85,7 @@
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        border: $dark-green 1px solid;
+        border: $dark-choco 1px solid;
         padding: 32px;
 
         @media (max-width: $media-sm) {
@@ -109,7 +109,7 @@
 
     &__balance {
         font-size: 64px;
-        color: $main-green;
+        color: $main-choco;
     }
 
     &__current-tab.active {

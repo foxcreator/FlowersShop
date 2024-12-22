@@ -115,14 +115,14 @@
     &__btn {
         width: 100%;
         background-color: $main-white;
-        color: $main-green;
+        color: $main-choco;
         margin-top: 32px;
         padding: 25px;
         font-size: 20px;
         transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease;
 
         &:hover {
-            background-color: $main-green;
+            background-color: $main-choco;
             color: $main-white;
             transform: scale(1.03);
         }
@@ -149,7 +149,7 @@
         width: 65%;
         font-size: 96px;
         font-weight: 100;
-        color: $night-green;
+        color: $main-choco;
         @media (max-width: $media-md) {
             font-size: 48px;
         }
@@ -299,14 +299,14 @@
         button {
             width: 100%;
             background-color: $main-white;
-            color: $main-green;
+            color: $main-choco;
             margin-top: 32px;
             padding: 25px;
             font-size: 20px;
             transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease;
 
             &:hover {
-                background-color: $main-green;
+                background-color: $main-choco;
                 color: $main-white;
                 transform: scale(1.03);
             }
@@ -349,7 +349,7 @@
         h1 {
             font-size: 62px;
             font-weight: 200;
-            color: $night-green;
+            color: $main-choco;
 
             @media (max-width: $media-sm) {
                 font-size: 36px;
@@ -360,7 +360,7 @@
             margin: 0;
             font-size: 22px;
             line-height: 150%;
-            color: $main-green;
+            color: $main-choco;
 
             @media (max-width: $media-sm) {
                 font-size: 16px;
@@ -378,7 +378,7 @@
         .icon {
             width: 40px;
             height: 40px;
-            fill: $main-green;
+            fill: $main-choco;
         }
     }
 

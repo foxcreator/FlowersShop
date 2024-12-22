@@ -41,7 +41,7 @@
             @endif
         </div>
         <div class="col-md-6">
-            <img src="{{ asset('dist/img/boxed-bg.jpg') }}" alt="">
+            <img src="{{ asset('front/images/aboutpage.jpg') }}" alt="">
         </div>
     </div>
 {{--    <div class="about-page__block row">--}}

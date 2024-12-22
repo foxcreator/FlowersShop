@@ -12,14 +12,24 @@ $media-md: 992px;
 $media-lg: 1250px;
 
 $main-white: #FAFAFA;
-$main-green: #415D4C;
+$main-choco: #410A08;
+$dark-choco: #320706;
 $main-gray: #DEDEDE;
 $main-danger: #AA0F0F;
-$dark-green: #648371;
 $light-green: #E5E9E1;
 $night-green: #19221D;
 $text-gray: #8A8B8A;
 $disabled: #D0D1D0;
-$text-green: #98A88F;
+$text-green: #320706;
 $edit-btn: #0D4E42;
-$border-tabs: #BEC8B5;
+$border-tabs: #410A08;
+
+$gold-gradient: linear-gradient(
+        90deg,
+        #AA7E35 17%,
+        #FEF7C7 29%,
+        #AA7E35 57%,
+        #FEF7C7 74%,
+        #AA7E35 81%,
+        #FEF7C7 100%
+);

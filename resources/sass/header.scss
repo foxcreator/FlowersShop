@@ -214,7 +214,7 @@
                 stroke: $main-white;
                 transition: fill 0.2s ease;
                 &:hover {
-                    stroke: $main-green;
+                    stroke: $main-choco;
                 }
             }
             .custom-header__dropdown-toggle {
@@ -246,7 +246,7 @@
         width: 200px;
         text-align: center;
         background-color: $main-white;
-        color: $night-green;
+        color: $main-choco;
         list-style: none;
         font-size: 16px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -267,7 +267,7 @@
             width: 60px;
             text-align: center;
             background-color: $main-white;
-            color: $night-green;
+            color: $main-choco;
             list-style: none;
             font-size: 16px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -278,7 +278,7 @@
 
         input {
             width: 100%;
-            border: $dark-green solid 1px;
+            border: $dark-choco solid 1px;
             outline: none;
             position: relative;
             padding-left: 25px;
@@ -291,7 +291,7 @@
             top: 12px;
             width: 16px;
             height: 16px;
-            stroke: $dark-green;
+            stroke: $dark-choco;
         }
 
         li {
@@ -302,10 +302,10 @@
     &__dropdown-item {
         cursor: pointer;
         a {
-            color: $dark-green;
+            color: $dark-choco;
         }
         &:hover {
-            background-color: $dark-green;
+            background-color: $dark-choco;
             a {
                 color: $main-white;
             }
@@ -331,14 +331,14 @@
     }
     .custom-header__logo {
         .icon {
-            fill: $night-green;
+            fill: $main-choco;
         }
     }
     .custom-header__dropdown-toggle {
-        color: $night-green;
+        color: $main-choco;
 
         .icon {
-            stroke: $night-green;
+            stroke: $main-choco;
             width: 13px;
             height: 12px;
         }
@@ -352,33 +352,33 @@
             flex-direction: row-reverse;
         }
         .icon {
-            stroke: $main-green;
+            stroke: $main-choco;
         }
     }
 
     .burger-toggle-btn {
         span {
-            background: $main-green;
+            background: $main-choco;
         }
     }
 
     .custom-header__pages a {
-        color: $night-green;
+        color: $main-choco;
     }
 
     .items {
         .icon {
-            stroke: $night-green;
+            stroke: $main-choco;
             transition: stroke 0.2s ease;
             &:hover {
-                stroke: $main-green;
+                stroke: $main-choco;
             }
         }
     }
 
     .items.mobile {
         .icon {
-            stroke: $main-green;
+            stroke: $main-choco;
             width: 12px;
             height: 12px;
         }
@@ -399,14 +399,14 @@
     &__btn-back {
         display: flex;
         align-items: center;
-        color: $dark-green;
+        color: $dark-choco;
 
         @media (max-width: $media-sm) {
             font-size: 10px;
         }
 
         .icon {
-            stroke: $dark-green;
+            stroke: $dark-choco;
 
             @media (max-width: $media-sm) {
                 width: 20px;
@@ -418,7 +418,7 @@
         .icon {
             width: 60px;
             height: 85px;
-            fill: $night-green;
+            fill: $main-choco;
 
             @media (max-width: $media-sm) {
                 width: 40px;
@@ -435,7 +435,7 @@
             font-size: 10px;
         }
         .number {
-            color: $main-green;
+            color: $main-choco;
             margin: 0;
         }
 
