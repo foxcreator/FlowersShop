@@ -18,7 +18,7 @@
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
     />
-    <link rel="icon" href="{{ asset('front/favicon.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('front/logo.png') }}" type="image/png">
     <link href="{{ asset('datepicker/air-datepicker.css') }}" rel="stylesheet">
     <script src="{{ asset('datepicker/air-datepicker.js') }}"></script>
 

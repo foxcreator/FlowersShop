@@ -23,7 +23,9 @@
                     </ul>
                 </div>
                 <div class="custom-header__logo">
-                    <a href="{{ route('home') }}">@svg('logo-min')</a>
+                    <a href="{{ route('home') }}">
+                        <img src="{{ asset('front/images/logo.png') }}" alt="">
+                    </a>
                 </div>
                 <div class="custom-header__icons-menu">
                 <ul class="items">

@@ -175,6 +175,10 @@
     &__logo {
         width: 60px;
 
+        img {
+            width: 100%;
+        }
+
         .icon {
             fill: $main-white;
             width: 60px;
