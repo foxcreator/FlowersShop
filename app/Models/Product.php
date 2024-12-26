@@ -58,7 +58,8 @@ class Product extends Model
         'is_novelty',
         'type',
         'products_quantities',
-        'opt_price'
+        'opt_price',
+        'is_active'
     ];
 
     protected $casts = [

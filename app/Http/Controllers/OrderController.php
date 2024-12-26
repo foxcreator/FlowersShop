@@ -78,7 +78,7 @@ class OrderController extends Controller
                 'product_name' => $product->name,
                 'quantity' => $product->quantity,
                 'price' => $product->price,
-                'opt_price' => $product->attributes->opt_price
+                'opt_price' => $product->attributes->opt_price ?: 0
             ]);
 
             $productRating = Product::find($product->id);
@@ -90,7 +90,11 @@ class OrderController extends Controller
         }
 
         if ($order->payment_method === Order::PAYMENT_METHOD_BANK) {
-            $response = MonoPay::create($order->amount);
+            $total = $order->amount;
+            if ($order->amount < 2500 && $order->delivery_option !== Order::DELIVERY_COURIER) {
+                $total += 250;
+            }
+            $response = MonoPay::create($total);
 
             if (isset($response['pageUrl'])) {
                 $order->invoice_id = $response['invoiceId'];

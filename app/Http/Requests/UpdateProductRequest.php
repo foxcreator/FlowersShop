@@ -42,6 +42,7 @@ class UpdateProductRequest extends FormRequest
             'badge' => 'nullable',
             'product_photos' => 'nullable',
             'is_novelty' => 'nullable',
+            'is_active' => 'nullable',
             'type' => 'in:bouquet,flower,default,subscribe',
             'products' => 'nullable',
             'update_count' => 'nullable',

@@ -285,6 +285,16 @@
                             <p class="text-info">Количество новинок на главной странице равно 8, если хотите добавить новую, отключите уже сущесвующую</p>
                         @endif
                     </div>
+                    <div class="form-group mt-4">
+                        <div class="icheck-success d-inline">
+                            <input type="checkbox"
+                                   id="is_active"
+                                   name="is_active"
+                                   value="{{ old('is_active', true) }}"
+                            >
+                            <label for="is_active">Активный товар</label>
+                        </div>
+                    </div>
 
                     <div class="form-group mt-4">
                         <div class="icheck-success d-inline">

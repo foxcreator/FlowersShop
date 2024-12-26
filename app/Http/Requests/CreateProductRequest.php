@@ -41,6 +41,7 @@ class CreateProductRequest extends FormRequest
             'badge' => 'nullable',
             'product_photos' => 'nullable',
             'is_novelty' => 'nullable',
+            'is_active' => 'nullable',
             'type' => 'in:bouquet,flower,default',
             'products' => 'nullable',
             'products_quantities' => 'nullable',
