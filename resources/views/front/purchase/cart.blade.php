@@ -12,7 +12,6 @@
                             <img src="{{ $product->attributes->img }}" alt="{{ $product->name }}">
                             <div class="cart__product-info">
                                 <h4>{{ $product->name }}</h4>
-                                <p>{{ __('cart.package') }}: Крафт</p>
                             </div>
                         </div>
                         <div class="cart__count col-4 col-md-5">

@@ -4,7 +4,7 @@
         <span>{{ __('cart.continue_buying') }}</span>
     </a>
     <div class="cart-nav__logo">
-        @svg('logo-min')
+        <img src="{{ asset('front/images/logo.png') }}" alt="">
     </div>
     <div class="cart-nav__contacts">
         <a href="tel:0679776075" class="number">+38 067 977 60 75</a>

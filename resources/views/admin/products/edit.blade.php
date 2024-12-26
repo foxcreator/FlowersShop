@@ -266,6 +266,19 @@
                     </div>
 
                     <div class="form-group mt-4">
+                        <input type="hidden" value="0" name="is_active">
+                        <div class="icheck-success d-inline">
+                            <input type="checkbox"
+                                   id="is_active"
+                                   name="is_active"
+                                   value="{{ old('is_active', true) }}"
+                                   @if($product->is_active) checked @endif
+                            >
+                            <label for="is_active">Активный товар</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4">
                         @foreach(\App\Models\Product::TYPES as $type => $label)
                         <div class="icheck-success d-inline mr-3">
                             <input type="radio"

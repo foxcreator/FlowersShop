@@ -419,10 +419,8 @@
     }
 
     &__logo {
-        .icon {
+        img {
             width: 60px;
-            height: 85px;
-            fill: $main-choco;
 
             @media (max-width: $media-sm) {
                 width: 40px;

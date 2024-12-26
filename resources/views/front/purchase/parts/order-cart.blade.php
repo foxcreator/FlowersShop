@@ -1,3 +1,9 @@
+@php
+    $delivery = 0;
+    if (\Cart::session(session('cart_id'))->getTotal() < 2500) {
+        $delivery = 250;
+    }
+@endphp
 <div class="order__sum--header">
     <h3>{{ __('order.your_order') }}</h3>
     <a href="{{ route('front.cart') }}">{{ __('order.edit') }}</a>
@@ -20,10 +26,14 @@
 <div class="order__sum--total">
     <div class="block">
         <p>{{ __('order.delivery') }}:</p>
-        <p>{{ __('order.free') }}</p>
+        @if($delivery !== 0)
+            <p>₴ {{ $delivery }}</p>
+        @else
+            <p>{{ __('order.free') }}</p>
+        @endif
     </div>
     <div class="block">
         <p>{{ __('order.total') }}:</p>
-        <h3>₴ <span id="total">{{ \Cart::session(session('cart_id'))->getTotal() }}</span></h3>
+        <h3>₴ <span id="total">{{ \Cart::session(session('cart_id'))->getTotal() + $delivery }}</span></h3>
     </div>
 </div>

@@ -63,7 +63,7 @@ class ProductsController extends Controller
         $flowers = Flower::all();
         $subjects = Subject::all();
         $article = $this->getArticle();
-        $products = Product::products()->where('quantity', '>', 0)->get();
+        $products = Product::products()->where('is_active', true)->get();
         return view('admin.products.create', compact(
 			'categories',
 			'article',

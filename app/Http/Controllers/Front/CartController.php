@@ -28,14 +28,6 @@ class CartController extends Controller
 
         \Cart::session($cartId);
 
-        $cartContent = \Cart::getContent();
-        foreach ($cartContent as $cartItem) {
-            if ((int) $cartItem->id === (int) $request->id) {
-                if (($cartItem->quantity + $request->quantity) > $product->quantity)
-                return response()->json(['error' => __('cart.max-quantity')], 422);
-            }
-        }
-
         \Cart::add([
             'id' => $product->id,
             'name' => $product->title,
@@ -46,6 +38,7 @@ class CartController extends Controller
                 'opt_price' => $product->opt_price
             ],
         ]);
+
         if (\Cart::get($product->id)) {
             return response()->json([
                 'data' => __('cart.add-product'),
@@ -54,6 +47,7 @@ class CartController extends Controller
                 'cartCount' => \Cart::getTotalQuantity()
             ]);
         }
+
 
         return \response()->json(['error' => 'Smth went wrong'], 422);
     }
@@ -70,11 +64,6 @@ class CartController extends Controller
         $cartItem = \Cart::get($request->id);
         $product = Product::find($request->id);
 
-
-        if (($cartItem->quantity + $request->quantity) > $product->quantity) {
-            return response()->json(['error' => __('cart.max-quantity')], 422);
-        }
-
         if ($cartItem) {
             \Cart::remove($request->id);
         }
@@ -90,5 +79,25 @@ class CartController extends Controller
         ]);
 
         return response()->json(['data' => __('cart.change-quantity')]);
+    }
+
+    public function delivery($total)
+    {
+        \Cart::session(session('cart_id'));
+        if ($total < 2500) {
+            \Cart::add([
+                'id' => 0,
+                'name' => 'Delivery',
+                'price' => (int) 250,
+                'quantity' => (int) 1,
+                'attributes' => [
+                    'img' => 'public/front/images/logo.png',
+                ],
+            ]);
+        } else {
+            if (\Cart::get(0) !== null) {
+                \Cart::remove(0);
+            }
+        }
     }
 }

@@ -9,6 +9,7 @@
         <th>Кол-во</th>
         <th>Бейдж</th>
         <th>Новинка</th>
+        <th>Активный</th>
         <th class="text-right">Действия</th>
     </tr>
     </thead>
@@ -31,6 +32,14 @@
                     <i class="fas fa-window-close text-danger"></i>
                 @endif
             </td>
+            <td class="text-center">
+                @if($product->is_active)
+                    <i class="fas fa-check-square text-success"></i>
+                @else
+                    <i class="fas fa-window-close text-danger"></i>
+                @endif
+            </td>
+
 
             <td class="text-right">
                 <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-secondary btn-xs">Информация</a>
