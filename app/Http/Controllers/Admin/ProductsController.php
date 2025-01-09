@@ -48,9 +48,7 @@ class ProductsController extends Controller
                 30
             );
         } else {
-            $products = $request->filter === 'flower'
-                ? $query->paginate(30)
-                : $query->where('type', '!=',Product::TYPE_FLOWER)->paginate(30);
+            $products = $query->paginate(30);
         }
 
         return view('admin.products.index', compact('products'));
