@@ -24,7 +24,7 @@ class PagesController extends Controller
 		$flowers = Flower::orderBy('name_uk')->get();
 		$subjects = Subject::all();
         $products = Product::query()->where('is_active', true)
-            ->orderBy('quantity', 'desk')
+            ->orderBy('quantity', 'desc')
             ->orderBy('id', 'desc');
         $category = null;
 
