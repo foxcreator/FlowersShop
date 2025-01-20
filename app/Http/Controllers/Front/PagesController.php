@@ -23,7 +23,9 @@ class PagesController extends Controller
         $categories = Category::all();
 		$flowers = Flower::orderBy('name_uk')->get();
 		$subjects = Subject::all();
-        $products = Product::query()->where('is_active', true)->orderBy('id', 'desc');
+        $products = Product::query()->where('is_active', true)
+            ->orderBy('quantity', 'desk')
+            ->orderBy('id', 'desc');
         $category = null;
 
         if ($request->query('category') && $request->query('category') != 'all') {
