@@ -41,7 +41,7 @@ class TelegramOrderNotification extends Notification
         }
 
         $message .= "\n Сумма заказа *{$this->order->amount}грн*";
-        $url = 'https://346e-141-170-246-15.ngrok-free.app/admin/orders/' . $this->order->id;
+        $url = 'https://www.brightflowers.com.ua/admin/orders/' . $this->order->id;
         return TelegramMessage::create()
             ->content($message)
             ->button('Просмотреть заказ', $url);
