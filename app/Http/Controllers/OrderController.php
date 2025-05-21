@@ -113,7 +113,7 @@ class OrderController extends Controller
 
         if ($order) {
             Mail::to($entityToDb['email'])->send(new OrderConfirmationNotification($order));
-            Notification::route('telegram', -4219102586)
+            Notification::route('telegram', -1002156815446)
                 ->notify(new TelegramOrderNotification($order));
 
             \Cart::clear();
